@@ -12,20 +12,20 @@ namespace craft {
 	/**
 	 * Pixel scaling.
 	 */
-	enum PixelScale {
-		pixelScale_1x1 = 0,
-		pixelScale_2x2 = 1,
-		pixelScale_4x4 = 2,
-		pixelScale_8x8 = 3
+	enum class PixelScale {
+		Scale1x1 = 0,
+		Scale2x2 = 1,
+		Scale4x4 = 2,
+		Scale8x8 = 3,
 	};
 
 	/**
 	 * Display size
 	 */
-	enum DisplaySize {
-		displaySize_128x128,
-		displaySize_320x240,
-		displaySize_135x240,
+	enum class DisplaySize {
+		Size128x128,
+		Size320x240,
+		Size135x240,
 	};
 
 	/**

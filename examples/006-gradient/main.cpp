@@ -36,11 +36,11 @@ void setup() {
 	// Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
 	// Use a single-line line buffer for low memory consumption
 	app = new App(
-		new DisplayILI9341( displaySize_320x240, 10, 15, 4, 11, 13, 12, 6, pixelScale_2x2 ),
+		new DisplayILI9341( DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, PixelScale::Scale2x2 ),
 		LineBufferHeight::singleLine
 	);
 	// Set background color
-	app->stage->backgroundColor( ARGB8888_SaddleBrown );
+	app->stage->backgroundColor( ARGB8888::SaddleBrown );
 
 	// Create a box
 	box = Box::Create();
@@ -54,12 +54,12 @@ void setup() {
 	// Create a gradient and add 6 stops for a rainbox effect. The 
 	// gradient is applied to the box.
 	gradient = LinearGradient::Create( 6 );
-	gradient->stop( 0, ARGB8888_Red, 1.0, 0.0 )
-		->stop( 1, ARGB8888_Orange, 1.0, 0.2 )
-		->stop( 2, ARGB8888_Yellow, 1.0, 0.4 )
-		->stop( 3, ARGB8888_Green, 1.0, 0.6 )
-		->stop( 4, ARGB8888_Indigo, 1.0, 0.8 )
-		->stop( 5, ARGB8888_Violet, 1.0, 1.0 );
+	gradient->stop( 0, ARGB8888::Red, 1.0, 0.0 )
+		->stop( 1, ARGB8888::Orange, 1.0, 0.2 )
+		->stop( 2, ARGB8888::Yellow, 1.0, 0.4 )
+		->stop( 3, ARGB8888::Green, 1.0, 0.6 )
+		->stop( 4, ARGB8888::Indigo, 1.0, 0.8 )
+		->stop( 5, ARGB8888::Violet, 1.0, 1.0 );
 	gradient->position( 70, 10, 70, 90 );
 	box->gradient = gradient;
 

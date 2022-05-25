@@ -11,11 +11,11 @@ void setup() {
 	// Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
 	// Use a single-line line buffer for low memory consumption
 	app = new App(
-		new DisplayILI9341( displaySize_320x240, 10, 15, 4, 11, 13, 12, 6, pixelScale_2x2 ),
+		new DisplayILI9341( DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, PixelScale::Scale2x2 ),
 		LineBufferHeight::singleLine
 	);
 	// Set background color
-	app->stage->backgroundColor( ARGB8888_SaddleBrown );
+	app->stage->backgroundColor( ARGB8888::SaddleBrown );
 
 	// Create a text object usiing the "Pixel6" font
 	text = Text::Create( (packedbdf_t*)&PixelSix008 );
@@ -23,7 +23,7 @@ void setup() {
 	text->width( 80 );
 	text->x( 40 );
 	text->y( 10 );
-	text->color( ARGB8888_White );
+	text->color( ARGB8888::White );
 	// Add the text to the stage so that it can be rendered
 	app->stage->addChild( text );
 }

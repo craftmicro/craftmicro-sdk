@@ -17,11 +17,11 @@ void setup() {
 	// Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
 	// Use a single-line line buffer for low memory consumption
 	app = new App(
-		new DisplayILI9341( displaySize_320x240, 10, 15, 4, 11, 13, 12, 6, pixelScale_2x2 ),
+		new DisplayILI9341( DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, PixelScale::Scale2x2 ),
 		LineBufferHeight::singleLine
 	);
 	// Set background color
-	app->stage->backgroundColor( ARGB8888_White );
+	app->stage->backgroundColor( ARGB8888::White );
 
 	uint16_t w = floor( app->stage->width() / 2 ) - 10;
 	uint16_t h = floor( app->stage->height() ) - 20;
@@ -32,7 +32,7 @@ void setup() {
 	box = Box::Create();
 	box->set( 10, 10, w, h );
 	app->stage->addChild( box );
-	box->color = ARGB8888_Orange;
+	box->color = ARGB8888::Orange;
 	box->id = 1;
 
 	asterixSprite = Sprite::Create( (TilemapData*)&asterix, 0 );
@@ -49,7 +49,7 @@ void setup() {
 	box2 = Box::Create();
 	box2->set( w + 10, 10, w, h );
 	app->stage->addChild( box2 );
-	box2->color = ARGB8888_IndianRed;
+	box2->color = ARGB8888::IndianRed;
 	box2->id = 2;
 
 	obelixSprite = Sprite::Create( (TilemapData*)&obelix, 0 );
