@@ -15,20 +15,20 @@ namespace craft {
 	/**
 	 * Pixel formats
 	 **/
-	typedef enum {
-		PF_UNKNOWN = 0,
-		PF_565 = 1,	//  RGB 565		5 bits red, 6 bits green, 5 bits blue
-		PF_4444 = 2,	// ARGB 4444	4 bits alpha, 4 bits each color channel (16 bits total)
-		PF_6666 = 3,	// ARGB 6666	6 bits alpha, 6 bits each color channel (24 bits total)
-		PF_8565 = 4,	// ARGB 8565	565 with leading 8-bit alpha (24 bits total)
-		PF_888 = 5,	//  RGB 888		24-bit color, no alpha
-		PF_8888 = 6,	// ARGB 8888	32-bit color with leading b-bit alpha
-		PF_INDEXED = 7,	// 				Indexed color (0-255)
-		PF_MONO = 8,	// 				Mono (on/off) color
-		PF_GRAYSCALE8 = 9,	// 				256 levels of gray (intensity)
-		PF_GRAYSCALE4 = 10,	//				16 levels of gray (intensity)
-		PF_GRAYSCALE2 = 11	//				4 levels of gray (intensity)
-	} PixelFormat;
+	enum class PixelFormat {
+		Unknown = 0,
+		RGB565 = 1,			// 5 bits red, 6 bits green, 5 bits blue
+		ARGB4444 = 2,		// 4 bits alpha, 4 bits each color channel (16 bits total)
+		ARGB6666 = 3,		// 6 bits alpha, 6 bits each color channel (24 bits total)
+		ARGB8565 = 4,		// 565 with leading 8-bit alpha (24 bits total)
+		RGB888 = 5,			// 24-bit color, no alpha
+		ARGB8888 = 6,		// 32-bit color with leading b-bit alpha
+		Indexed = 7,		// Indexed color (0-255)
+		Mono = 8,			// Mono (on/off) color
+		Grayscale8 = 9,		// 256 levels of gray (intensity)
+		Grayscale4 = 10,	// 16 levels of gray (intensity)
+		Grayscale2 = 11		// 4 levels of gray (intensity)
+	};
 
 	/**
 	 * Check whether a pixel format includes an alpha channel or not

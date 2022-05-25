@@ -168,12 +168,12 @@ namespace craft {
 		/**
 		 * Pixel format
 		 */
-		PixelFormat _pf = PixelFormat::PF_UNKNOWN;
+		PixelFormat _pf = PixelFormat::Unknown;
 
 		/**
 		 * Pixel scale
 		 */
-		PixelScale _px = PixelScale::pixelScale_1x1;
+		PixelScale _px = PixelScale::Scale1x1;
 
 		/**
 		 * Actual hardware width and height of the display

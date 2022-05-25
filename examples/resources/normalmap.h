@@ -92,7 +92,7 @@ __attribute__( ( aligned( 4 ) ) ) static const uint8_t normalmap3_data[] = {
 ,0x7f,0x7f,0xff,0x7f,0x7f,0xff,0x7f,0x7f,0xff,0x7f,0x7f,0xff };
 
 const craft::TilemapData normalmap = {
-	.pixelFormat = craft::PF_888,
+	.pixelFormat = PixelFormat::RGB888,
 	.transparentColor = 0x000000,
 	.dataSize = 3072,
 	.data = normalmap3_data,

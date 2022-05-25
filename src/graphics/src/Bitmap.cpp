@@ -9,10 +9,10 @@ namespace craft {
 	 */
 	boolean pixelFormatHasAlpha( PixelFormat pixelFormat ) {
 		switch ( pixelFormat ) {
-			case craft::PF_4444: return true;
-			case craft::PF_6666: return true;
-			case craft::PF_8565: return true;
-			case craft::PF_8888: return true;
+			case PixelFormat::ARGB4444: return true;
+			case PixelFormat::ARGB6666: return true;
+			case PixelFormat::ARGB8565: return true;
+			case PixelFormat::ARGB8888: return true;
 			default: return false;
 		}
 	}
@@ -24,18 +24,18 @@ namespace craft {
 	 */
 	uint8_t pixelFormatBitWidth( PixelFormat pixelFormat ) {
 		switch ( pixelFormat ) {
-			case craft::PF_565: return 16;
-			case craft::PF_4444: return 16;
-			case craft::PF_6666: return 24;
-			case craft::PF_8565: return 24;
-			case craft::PF_888: return 24;
-			case craft::PF_8888: return 32;
-			case craft::PF_GRAYSCALE8: return 8;
-			case craft::PF_GRAYSCALE4: return 4;
-			case craft::PF_GRAYSCALE2: return 2;
-			case craft::PF_MONO: return 1;
-			case craft::PF_INDEXED: return 8;
-			case craft::PF_UNKNOWN: return 0;
+			case PixelFormat::RGB565: return 16;
+			case PixelFormat::ARGB4444: return 16;
+			case PixelFormat::ARGB6666: return 24;
+			case PixelFormat::ARGB8565: return 24;
+			case PixelFormat::RGB888: return 24;
+			case PixelFormat::ARGB8888: return 32;
+			case PixelFormat::Grayscale8: return 8;
+			case PixelFormat::Grayscale4: return 4;
+			case PixelFormat::Grayscale2: return 2;
+			case PixelFormat::Mono: return 1;
+			case PixelFormat::Indexed: return 8;
+			case PixelFormat::Unknown: return 0;
 			default: return 0;
 		}
 	}
@@ -114,18 +114,18 @@ namespace craft {
 	 */
 	access5565 getAccessor5565( PixelFormat pixelFormat ) {
 		switch ( pixelFormat ) {
-			case craft::PF_565: return get565as5565;
-			case craft::PF_4444: return get4444as5565;
-			case craft::PF_6666: return get6666as5565;
-			case craft::PF_8565: return get8565as5565;
-			case craft::PF_888: return get888as5565;
-			case craft::PF_8888: return get8888as5565;
-			case craft::PF_GRAYSCALE8: return get8as5565;
-			case craft::PF_GRAYSCALE4: return get4as5565;
-			case craft::PF_GRAYSCALE2: return get2as5565;
-			case craft::PF_MONO: return get1as5565;
-			case craft::PF_INDEXED: return 0;	// XXX: Handle indexed colors
-			case craft::PF_UNKNOWN: return 0;
+			case PixelFormat::RGB565: return get565as5565;
+			case PixelFormat::ARGB4444: return get4444as5565;
+			case PixelFormat::ARGB6666: return get6666as5565;
+			case PixelFormat::ARGB8565: return get8565as5565;
+			case PixelFormat::RGB888: return get888as5565;
+			case PixelFormat::ARGB8888: return get8888as5565;
+			case PixelFormat::Grayscale8: return get8as5565;
+			case PixelFormat::Grayscale4: return get4as5565;
+			case PixelFormat::Grayscale2: return get2as5565;
+			case PixelFormat::Mono: return get1as5565;
+			case PixelFormat::Indexed: return 0;	// XXX: Handle indexed colors
+			case PixelFormat::Unknown: return 0;
 		}
 		return 0;
 	}
@@ -180,18 +180,18 @@ namespace craft {
 	 */
 	access8565 getAccessor8565( PixelFormat pixelFormat ) {
 		switch ( pixelFormat ) {
-			case craft::PF_565: return get565as8565;
-			case craft::PF_4444: return get4444as8565;
-			case craft::PF_6666: return get6666as8565;
-			case craft::PF_8565: return get8565as8565;
-			case craft::PF_888: return get888as8565;
-			case craft::PF_8888: return get8888as8565;
-			case craft::PF_GRAYSCALE8: return get8as8565;
-			case craft::PF_GRAYSCALE4: return get4as8565;
-			case craft::PF_GRAYSCALE2: return get2as8565;
-			case craft::PF_MONO: return get1as8565;
-			case craft::PF_INDEXED: return 0;	// XXX: Handle indexed colors
-			case craft::PF_UNKNOWN: return 0;
+			case PixelFormat::RGB565: return get565as8565;
+			case PixelFormat::ARGB4444: return get4444as8565;
+			case PixelFormat::ARGB6666: return get6666as8565;
+			case PixelFormat::ARGB8565: return get8565as8565;
+			case PixelFormat::RGB888: return get888as8565;
+			case PixelFormat::ARGB8888: return get8888as8565;
+			case PixelFormat::Grayscale8: return get8as8565;
+			case PixelFormat::Grayscale4: return get4as8565;
+			case PixelFormat::Grayscale2: return get2as8565;
+			case PixelFormat::Mono: return get1as8565;
+			case PixelFormat::Indexed: return 0;	// XXX: Handle indexed colors
+			case PixelFormat::Unknown: return 0;
 		}
 		return 0;
 	}
@@ -267,18 +267,18 @@ namespace craft {
 	typedef void ( *accessARGB )( uint8_t*, uint8_t&, uint8_t&, uint8_t&, uint8_t& );
 	accessARGB getAccessorARGB( PixelFormat pixelFormat ) {
 		switch ( pixelFormat ) {
-			case craft::PF_565: return get565asARGB;
-			case craft::PF_4444: return get4444asARGB;
-			case craft::PF_6666: return get6666asARGB;
-			case craft::PF_8565: return get8565asARGB;
-			case craft::PF_888: return get888asARGB;
-			case craft::PF_8888: return get8888asARGB;
-			case craft::PF_GRAYSCALE8: return get8asARGB;
-			case craft::PF_GRAYSCALE4: return get4asARGB;
-			case craft::PF_GRAYSCALE2: return get2asARGB;
-			case craft::PF_MONO: return get1asARGB;
-			case craft::PF_INDEXED: return 0;	// XXX: Handle indexed colors
-			case craft::PF_UNKNOWN: return 0;
+			case PixelFormat::RGB565: return get565asARGB;
+			case PixelFormat::ARGB4444: return get4444asARGB;
+			case PixelFormat::ARGB6666: return get6666asARGB;
+			case PixelFormat::ARGB8565: return get8565asARGB;
+			case PixelFormat::RGB888: return get888asARGB;
+			case PixelFormat::ARGB8888: return get8888asARGB;
+			case PixelFormat::Grayscale8: return get8asARGB;
+			case PixelFormat::Grayscale4: return get4asARGB;
+			case PixelFormat::Grayscale2: return get2asARGB;
+			case PixelFormat::Mono: return get1asARGB;
+			case PixelFormat::Indexed: return 0;	// XXX: Handle indexed colors
+			case PixelFormat::Unknown: return 0;
 		}
 		return 0;
 	}
@@ -350,7 +350,7 @@ namespace craft {
 	void get1as8888( uint8_t* p, uint32_t i, uint32_t& c ) {
 		p += ( i >> 3 );
 		i = i - ( ( i >> 3 ) << 3 ); // rem 0-7
-		c = ( ( p[0] >> ( 7 - i ) ) & 0b1 ) ? ARGB8888_White : ARGB8888_Black;
+		c = ( ( p[0] >> ( 7 - i ) ) & 0b1 ) ? ARGB8888::White : ARGB8888::Black;
 	}
 
 	/**
@@ -358,18 +358,18 @@ namespace craft {
 	 */
 	access8888 getAccessor8888( PixelFormat pixelFormat ) {
 		switch ( pixelFormat ) {
-			case craft::PF_565: return get565as8888;
-			case craft::PF_4444: return get4444as8888;
-			case craft::PF_6666: return get6666as8888;
-			case craft::PF_8565: return get8565as8888;
-			case craft::PF_888: return get888as8888;
-			case craft::PF_8888: return get8888as8888;
-			case craft::PF_GRAYSCALE8: return get8as8888;
-			case craft::PF_GRAYSCALE4: return get4as8888;
-			case craft::PF_GRAYSCALE2: return get2as8888;
-			case craft::PF_MONO: return get1as8888;
-			case craft::PF_INDEXED: return 0;	// XXX: Handle indexed colors
-			case craft::PF_UNKNOWN: return 0;
+			case PixelFormat::RGB565: return get565as8888;
+			case PixelFormat::ARGB4444: return get4444as8888;
+			case PixelFormat::ARGB6666: return get6666as8888;
+			case PixelFormat::ARGB8565: return get8565as8888;
+			case PixelFormat::RGB888: return get888as8888;
+			case PixelFormat::ARGB8888: return get8888as8888;
+			case PixelFormat::Grayscale8: return get8as8888;
+			case PixelFormat::Grayscale4: return get4as8888;
+			case PixelFormat::Grayscale2: return get2as8888;
+			case PixelFormat::Mono: return get1as8888;
+			case PixelFormat::Indexed: return 0;	// XXX: Handle indexed colors
+			case PixelFormat::Unknown: return 0;
 		}
 		return 0;
 	}

@@ -32,7 +32,7 @@ __attribute__((aligned(4))) static const uint8_t dogmatix_data[] = {
 ,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26};
 
 const craft::TilemapData dogmatix = {
-	.pixelFormat = craft::PF_8888,
+	.pixelFormat = PixelFormat::ARGB8888,
 	.transparentColor = 0,
 	.dataSize = 912,
 	.data = dogmatix_data,

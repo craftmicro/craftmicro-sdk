@@ -135,7 +135,7 @@ namespace craft {
 			default:
 				_hwSize.setSize( 320, 240 );
 		}
-		_pf = PF_565;
+		_pf = PixelFormat::RGB565;
 		_px = px;
 		_size.setSize( _hwSize.width >> _px, _hwSize.height >> _px );
 
