@@ -97,6 +97,7 @@ namespace craft {
 	 */
 	void DisplayObject::removeChild( DisplayObject* child ) {
 		if ( !_children ) return;
+		
 		DisplayObject* displayObject = _children;
 		while ( displayObject ) {
 			if ( displayObject == child ) {
