@@ -120,7 +120,7 @@ namespace craft {
 		uint8_t sclk,
 		uint8_t miso,
 		uint8_t bklt,
-		PixelScale px
+		uint8_t scale
 	) {
 		_cs = cs;
 		_dc = dc;
@@ -131,12 +131,12 @@ namespace craft {
 		_bklt = bklt;
 		_bkltPWM = false;
 		switch ( sz ) {
-			case displaySize_320x240:
+			case DisplaySize::Size320x240:
 			default:
 				_hwSize.setSize( 320, 240 );
 		}
-		_pf = PF_565;
-		_px = px;
+		_pf = PixelFormat::RGB565;
+		_px = scale;
 		_size.setSize( _hwSize.width >> _px, _hwSize.height >> _px );
 
 		// Set up SPI pins

@@ -12,20 +12,22 @@ namespace craft {
 	/**
 	 * Pixel scaling.
 	 */
-	enum PixelScale {
-		pixelScale_1x1 = 0,
-		pixelScale_2x2 = 1,
-		pixelScale_4x4 = 2,
-		pixelScale_8x8 = 3
+	namespace PixelScale {
+		enum {
+			x1 = 0,
+			x2 = 1,
+			x4 = 2,
+			x8 = 3,
+		};
 	};
 
 	/**
 	 * Display size
 	 */
-	enum DisplaySize {
-		displaySize_128x128,
-		displaySize_320x240,
-		displaySize_135x240,
+	enum class DisplaySize {
+		Size128x128,
+		Size320x240,
+		Size135x240,
 	};
 
 	/**
@@ -168,12 +170,12 @@ namespace craft {
 		/**
 		 * Pixel format
 		 */
-		PixelFormat _pf = PixelFormat::PF_UNKNOWN;
+		PixelFormat _pf = PixelFormat::Unknown;
 
 		/**
 		 * Pixel scale
 		 */
-		PixelScale _px = PixelScale::pixelScale_1x1;
+		uint8_t _px = PixelScale::x1;
 
 		/**
 		 * Actual hardware width and height of the display

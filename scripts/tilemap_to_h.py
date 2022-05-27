@@ -218,23 +218,23 @@ for file in list(resources):
 			"A8": 8
 		}
 		pfCodes = {
-			"ARGB4444": 'craft::PF_4444',
-			"ARGB6666": 'craft::PF_6666',
-			"ARGB8565": 'craft::PF_8565',
-			"ARGB8888": 'craft::PF_8888',
-			"RGB565": 'craft::PF_565',
-			"RGB888": 'craft::PF_888',
-			"A2": 'craft::PF_2',
-			"A4": 'craft::PF_4',
-			"A8": 'craft::PF_8'
+			"ARGB4444": 'PixelFormat::ARGB4444',
+			"ARGB6666": 'PixelFormat::ARGB6666',
+			"ARGB8565": 'PixelFormat::ARGB8565',
+			"ARGB8888": 'PixelFormat::ARGB8888',
+			"RGB565": 'PixelFormat::RGB565',
+			"RGB888": 'PixelFormat::RGB888',
+			"A2": 'PixelFormat::Grayscale2',
+			"A4": 'PixelFormat::Grayscale4',
+			"A8": 'PixelFormat::Grayscale8'
 		}
 		pfTransparentColor = {
 			"ARGB4444": '0',
 			"ARGB6666": '0',
 			"ARGB8565": '0',
 			"ARGB8888": '0',
-			"RGB565": 'craft::RGB565_Transparent',
-			"RGB888": 'craft::RGB888_Transparent',
+			"RGB565": 'RGB565::Transparent',
+			"RGB888": 'RGB888::Transparent',
 			"A2": '0',
 			"A4": '0',
 			"A8": '0'

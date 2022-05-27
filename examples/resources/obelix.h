@@ -233,7 +233,7 @@ __attribute__((aligned(4))) static const uint8_t obelix_data[] = {
 ,0x00,0xff,0xff,0xff};
 
 const craft::TilemapData obelix = {
-	.pixelFormat = craft::PF_8888,
+	.pixelFormat = PixelFormat::ARGB8888,
 	.transparentColor = 0,
 	.dataSize = 8140,
 	.data = obelix_data,

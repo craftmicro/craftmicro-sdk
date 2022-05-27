@@ -75,7 +75,7 @@ namespace craft {
 		/**
 		 * @brief Color for visual debugging
 		 */
-		color888 debugColor = ARGB8888_IndianRed;
+		color888 debugColor = Color8888::IndianRed;
 
 	protected:
 		/**
