@@ -55,7 +55,7 @@ namespace craft {
 			uint8_t sclk = 13,
 			uint8_t miso = 12,
 			uint8_t bklt = 6,
-			PixelScale px = pixelScale_1x1
+			uint8_t scale = PixelScale::x1
 		);
 
 		/**

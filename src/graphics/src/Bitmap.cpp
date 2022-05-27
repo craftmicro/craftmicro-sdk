@@ -106,7 +106,7 @@ namespace craft {
 	}
 	void get1as5565( uint8_t* p, uint16_t& c, uint8_t& a ) {
 		// Hijack 'a' as bit index (0-7 from left to right)
-		c = ( ( p[0] >> ( 7 - a ) ) & 0b1 ) ? RGB565_White : RGB565_Black;
+		c = ( ( p[0] >> ( 7 - a ) ) & 0b1 ) ? Color565::White : Color565::Black;
 	}
 
 	/**
@@ -172,7 +172,7 @@ namespace craft {
 	}
 	void get1as8565( uint8_t* p, uint16_t& c, uint8_t& a ) {
 		// Hijack 'a' as bit index (0-7 from left to right)
-		c = ( ( p[0] >> ( 7 - a ) ) & 0b1 ) ? RGB565_White : RGB565_Black;
+		c = ( ( p[0] >> ( 7 - a ) ) & 0b1 ) ? Color565::White : Color565::Black;
 	}
 
 	/**
@@ -350,7 +350,7 @@ namespace craft {
 	void get1as8888( uint8_t* p, uint32_t i, uint32_t& c ) {
 		p += ( i >> 3 );
 		i = i - ( ( i >> 3 ) << 3 ); // rem 0-7
-		c = ( ( p[0] >> ( 7 - i ) ) & 0b1 ) ? ARGB8888::White : ARGB8888::Black;
+		c = ( ( p[0] >> ( 7 - i ) ) & 0b1 ) ? Color8888::White : Color8888::Black;
 	}
 
 	/**
