@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _CRAFTMICRO_GUIWINDOWH_
-#define _CRAFTMICRO_GUIWINDOWH_ 1
 
 #include "display/gui/Widget.h"
 #include "display/gui/Menu.h"
@@ -33,7 +31,7 @@ namespace craft {
          * @param icon The icon index (-1 is no icon)
          * @return Window* The new or recycled object
          */
-        static Window* Create( char* title, char* acronym = nullptr, int icon = -1 );
+        static Window* Create(char* title, char* acronym = nullptr, int icon = -1);
 
         /**
          * @brief Construct a new Window object
@@ -57,14 +55,14 @@ namespace craft {
          * @param style The style to set
          * @param setForChildren If true, will also set the style (recursively) for all children
          */
-        void style( Style* style, bool setForChildren = true ) override;
+        void style(Style* style, bool setForChildren = true) override;
 
         /**
          * @brief Set the window width
          *
          * @param w The window width
          */
-        void width( float_t w ) override;
+        void width(float_t w) override;
 
         /**
          * @brief Return the window width
@@ -78,7 +76,7 @@ namespace craft {
          *
          * @param h The window height
          */
-        void height( float_t h ) override;
+        void height(float_t h) override;
 
         /**
          * @brief Return the window height
@@ -98,14 +96,14 @@ namespace craft {
          * Ensure child GUI widgets are processed correctly
          * @param child The object being added
          */
-        void _added( DisplayObject* child ) override;
+        void _added(DisplayObject* child) override;
 
         /**
          * @brief Called when a display object is removed from this object
          * Ensure child GUI widgets are processed correctly
          * @param child The object being removed
          */
-        void _removed( DisplayObject* child ) override;
+        void _removed(DisplayObject* child) override;
 
         /**
          * @brief The window background
@@ -114,6 +112,4 @@ namespace craft {
 
     };
 
-} // namespace
-
-#endif
+} // namespace craft

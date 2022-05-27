@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _CRAFTMICRO_COMMONH_
-#define _CRAFTMICRO_COMMONH_ 1
 
 #include <Arduino.h>
 
@@ -68,5 +66,3 @@ namespace craft {
 	}
 
 } // ns::craft
-
-#endif

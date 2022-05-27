@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _CRAFTMICRO_LIGHT_H
-#define _CRAFTMICRO_LIGHT_H 1
 
 #include "utils/MemoryPool.h"
 #include "graphics/Color.h"
@@ -27,7 +25,7 @@ namespace craft {
          * @param type The light type
          * @return The new or recycled object
          */
-        static Light* Create( LightType type );
+        static Light* Create(LightType type);
 
         /**
          * @brief Reset light back to defaults
@@ -88,7 +86,7 @@ namespace craft {
          * @param dx (out) The x direction of the light at the given coordinate
          * @param dy (out) The y direction of the light at the given coordinate
          */
-        void calc( int16_t rx, int16_t ry, float_t& s, float_t& dx, float_t& dy );
+        void calc(int16_t rx, int16_t ry, float_t& s, float_t& dx, float_t& dy);
 
     protected:
         float_t _a = 0;
@@ -96,6 +94,4 @@ namespace craft {
         float_t _dy = 0;
     };
 
-} // namespace
-
-#endif
+} // namespace craft

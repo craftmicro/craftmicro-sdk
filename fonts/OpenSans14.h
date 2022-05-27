@@ -197,7 +197,7 @@ static const unsigned char OpenSans14_index[] = {
 0xf8 };
 /* font index size: 131 bytes */
 
-const packedbdf_t OpenSans14 = {
+const craft::packedbdf_t OpenSans14 = {
 	OpenSans14_index,
 	0,
 	OpenSans14_data,

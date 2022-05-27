@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _CRAFTMICRO_GUIWIDGETH_
-#define _CRAFTMICRO_GUIWIDGETH_ 1
 
 #include "display/DisplayObject.h"
 #include "display/Sprite.h"
@@ -35,7 +33,7 @@ namespace craft {
          *
          * @param style The style to set
          */
-        Widget( Style* style );
+        Widget(Style* style);
 
         /**
          * @brief Set the Style object
@@ -46,7 +44,7 @@ namespace craft {
          * @param style The style to set
          * @param setForChildren If true, will also set the style (recursively) for all children
          */
-        virtual void style( Style* style, bool setForChildren = true );
+        virtual void style(Style* style, bool setForChildren = true);
 
         /**
          * @brief Get the style object
@@ -60,7 +58,7 @@ namespace craft {
          * @param title The title (copied)
          * @param acronym A short acronym when the full title cannot be displayed. Max 4 characters. (copied)
          */
-        virtual void title( char* title = nullptr, char* acronym = nullptr );
+        virtual void title(char* title = nullptr, char* acronym = nullptr);
 
         /**
          * @brief Change the icon
@@ -79,7 +77,7 @@ namespace craft {
          *
          * @param w The window width
          */
-        void width( float_t w ) override;
+        void width(float_t w) override;
 
         /**
          * @brief Return the window width
@@ -93,7 +91,7 @@ namespace craft {
          *
          * @param h The window height
          */
-        void height( float_t h ) override;
+        void height(float_t h) override;
 
         /**
          * @brief Return the window height
@@ -114,7 +112,7 @@ namespace craft {
          * @brief Begin the render sweep for the current frame
          * @param updateArea The area of the display being updated
          */
-        virtual void beginRender( ClipRect* updateArea ) override;
+        virtual void beginRender(ClipRect* updateArea) override;
 
     protected:
 
@@ -134,11 +132,6 @@ namespace craft {
         char* _acronym = nullptr;
 
         /**
-         * @brief Flag to indicate if this GUI widget is active or inactive
-         */
-        bool _active = true;
-
-        /**
          * @brief Flag to indicate that an arrange is required
          */
         bool _needsArrange = true;
@@ -148,14 +141,14 @@ namespace craft {
          * Ensure child GUI widgets are processed correctly
          * @param child The object being added
          */
-        virtual void _added( DisplayObject* child ) override;
+        virtual void _added(DisplayObject* child) override;
 
         /**
          * @brief Called when a display object is removed from this object
          * Ensure child GUI widgets are processed correctly
          * @param child The object being removed
          */
-        virtual void _removed( DisplayObject* child ) override;
+        virtual void _removed(DisplayObject* child) override;
 
         /**
          * @brief Text area for the title
@@ -169,6 +162,4 @@ namespace craft {
 
     };
 
-} // namespace
-
-#endif
+} // namespace craft

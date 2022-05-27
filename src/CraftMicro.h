@@ -18,8 +18,6 @@
  */
 
 #pragma once
-#ifndef _CRAFTMICRO_H_
-#define _CRAFTMICRO_H_ 1
 
 #define CRAFTMICRO_VERSION 0.2
 
@@ -31,5 +29,3 @@
 #include "display/hardware/DisplayILI9341.h"
 #include "graphics/Color8888.h"
 #include "physics/Tween.h"
-
-#endif

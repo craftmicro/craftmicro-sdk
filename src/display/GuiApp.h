@@ -1,8 +1,7 @@
 #pragma once
-#ifndef _CRAFTMICRO_GUIAPPH_
-#define _CRAFTMICRO_GUIAPPH_ 1
 
 #include "display/App.h"
+#include "display/PackedBDF.h"
 #include "display/gui/Style.h"
 #include "display/gui/Window.h"
 
@@ -31,7 +30,7 @@ namespace craft {
          * @param icon              Index of the icon (0 for no icon)
          * @param bufferHeight      The height of the line buffer, in lines. Default = 1. Full framebuffer = 0.
          */
-        GuiApp( Display* display, Style* style, char* title, char* acronym = nullptr, int icon = 0, int bufferHeight = 1 );
+        GuiApp(Display* display, Style* style, char* title, char* acronym = nullptr, int icon = 0, int bufferHeight = 1);
 
         /**
          * Destructor
@@ -44,7 +43,7 @@ namespace craft {
          * `app->window->style( myStyle );` or `app->window->getChild( VOLUME_SLIDER )->style( myStyle );`
          * @param style The style object
          */
-        void style( Style* style );
+        void style(Style* style);
 
         /**
          * @brief Return the stype of the GUI app
@@ -63,6 +62,4 @@ namespace craft {
 
     };
 
-} // namespace
-
-#endif
+} // namespace craft
