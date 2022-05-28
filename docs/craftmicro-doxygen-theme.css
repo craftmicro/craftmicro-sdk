@@ -1,0 +1,13 @@
+/**
+ * Extra stylesheet for Doxygen
+ * Specify in HTML_EXTRA_STYLESHEET
+ **/
+#projectlogo {
+    padding: 1rem;
+}
+.sm-dox {
+    background: none;
+}
+.navpath ul {
+    background: none;
+}
