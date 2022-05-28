@@ -1,5 +1,4 @@
-#ifndef _PACKEDBDF_OPENSANS20_
-#define _PACKEDBDF_OPENSANS20_
+#pragma once
 
 #include "display/PackedBDF.h"
 
@@ -362,4 +361,3 @@ const craft::packedbdf_t OpenSans20 = {
 	20,
 	14
 };
-#endif

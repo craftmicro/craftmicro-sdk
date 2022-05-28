@@ -384,15 +384,15 @@ for file in list(resources):
 	if is_italic: font_name += '_Italic'
 
 	# start header file
-	outstr = '#ifndef _PACKEDBDF_'+font_name.upper()+'_\n'
-	outstr += '#define _PACKEDBDF_'+font_name.upper()+'_\n\n'
+	outstr = '#pragma once\n\n'
+	outstr += '#include "display/PackedBDF.h"\n\n'
 
 	# if we are creating an external file for data, create the header stub first
 	if extern:
 		outstr += '#ifdef __cplusplus\n'
 		outstr += 'extern "C" {\n'
 		outstr += '#endif\n\n'
-		outstr += 'extern const packedbdf_t '+font_name+'\n\n'
+		outstr += 'extern const craft::packedbdf_t '+font_name+'\n\n'
 		outstr += '#ifdef __cplusplus\n'
 		outstr += '}\n'
 		outstr += '#endif\n\n'
@@ -454,7 +454,6 @@ for file in list(resources):
 
 	### Write to file
 	if not extern:
-		outstr += '#endif\n'
 		outfile = open('./'+font_name+'.h', 'w')
 	else:
 		outfile = open('./'+font_name+'.c', 'w')

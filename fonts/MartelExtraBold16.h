@@ -1,5 +1,4 @@
-#ifndef _PACKEDBDF_MARTELEXTRABOLD16_
-#define _PACKEDBDF_MARTELEXTRABOLD16_
+#pragma once
 
 #include "display/PackedBDF.h"
 
@@ -323,4 +322,3 @@ const craft::packedbdf_t MartelExtraBold16 = {
 	16,
 	12
 };
-#endif

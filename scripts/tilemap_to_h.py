@@ -233,8 +233,8 @@ for file in list(resources):
 			"ARGB6666": '0',
 			"ARGB8565": '0',
 			"ARGB8888": '0',
-			"RGB565": 'RGB565::Transparent',
-			"RGB888": 'RGB888::Transparent',
+			"RGB565": 'craft::Color565::Transparent',
+			"RGB888": 'craft::Color888::Transparent',
 			"A2": '0',
 			"A4": '0',
 			"A8": '0'
@@ -327,8 +327,7 @@ for file in list(resources):
 			stride /= n
 
 		# Output to file
-		outstr += '#ifndef _TILEMAP_'+name+'_H_\n'
-		outstr += '#define _TILEMAP_'+name+'_H_ 1\n\n'
+		outstr += '#pragma once\n\n'
 		outstr += '#include "graphics/Bitmap.h"\n\n'
 		outstr += '__attribute__((aligned(4))) static const uint8_t '+name+'_data[] = {\n'
 		c = 0
@@ -361,7 +360,6 @@ for file in list(resources):
 		outstr += '\t.tileCount = '+str(rows*cols)+',\n'
 		outstr += '\t.tileStride = '+str(int(stride))+'\n'
 		outstr += '};\n\n'
-		outstr += '#endif'
 
 		# Save
 		outfile = open('./'+name+'.h', 'w')

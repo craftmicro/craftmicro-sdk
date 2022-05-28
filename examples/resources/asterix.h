@@ -1,5 +1,4 @@
-#ifndef _TILEMAP_asterix_H_
-#define _TILEMAP_asterix_H_ 1
+#pragma once
 
 #include "graphics/Bitmap.h"
 
@@ -99,7 +98,7 @@ __attribute__((aligned(4))) static const uint8_t asterix_data[] = {
 ,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26,0x00,0xff,0xff,0xff};
 
 const craft::TilemapData asterix = {
-	.pixelFormat = PixelFormat::ARGB8888,
+	.pixelFormat = craft::PixelFormat::ARGB8888,
 	.transparentColor = 0,
 	.dataSize = 3344,
 	.data = asterix_data,
@@ -108,5 +107,3 @@ const craft::TilemapData asterix = {
 	.tileCount = 1,
 	.tileStride = 836
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _PACKEDBDF_OPENSANS32_
-#define _PACKEDBDF_OPENSANS32_
+#pragma once
 
 #include "display/PackedBDF.h"
 
@@ -786,4 +785,3 @@ const craft::packedbdf_t OpenSans32 = {
 	32,
 	23
 };
-#endif

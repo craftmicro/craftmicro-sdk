@@ -1,5 +1,4 @@
-#ifndef _PACKEDBDF_OPENSANS8_
-#define _PACKEDBDF_OPENSANS8_
+#pragma once
 
 #include "display/PackedBDF.h"
 
@@ -125,4 +124,3 @@ const craft::packedbdf_t OpenSans8 = {
 	8,
 	6
 };
-#endif
