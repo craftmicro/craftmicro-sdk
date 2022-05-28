@@ -8,6 +8,33 @@
 .sm-dox {
     background: none;
 }
+.navpath {
+    background-color: #736A60;
+}
 .navpath ul {
     background: none;
+    border: 1px solid #504A43;
+}
+.navpath li.navelem a {
+    text-shadow: none;
+}
+.navpath li.navelem a:hover {
+    color: #000;
+}
+#top {
+    background-color: #81776C;
+}
+.sm-dox a, .sm-dox a:focus, .sm-dox a:hover, .sm-dox a:active {
+    text-shadow: none;
+}
+.sm-dox a, .sm-dox a:focus {
+    color: inherit;
+}
+@media (min-width: 768px) {
+    .sm-dox {
+        padding: 0;
+    }
+    .sm-dox a, .sm-dox a:focus, .sm-dox a:active, .sm-dox a:hover, .sm-dox a.highlighted {
+        padding: 0 1.5rem;
+    }
 }

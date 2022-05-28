@@ -44,85 +44,66 @@ $(function() {
   <div class="headertitle"><div class="title">Craft Micro SDK </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_C__Projects_craftmicro_craftmicro_sdk_README"></a> <img src="/logo.png?raw=true" alt="mac logo" title="mac" class="inline"/></p>
+<div class="textblock"><p ><a class="anchor" id="md_C__Projects_craftmicro_craftmicro_sdk_README"></a> <img src="logo.png?raw=true" alt="mac logo" title="mac" class="inline"/></p>
 <p >The Craft Micro SDK is a code library for rapid development of graphical apps for microprocessor-based systems. The various individual libraries that make up this library (such as display and drawing libraries) might also be useful in other projects.</p>
 <p >Craft Micro maintains an open-source software library and set of plans to craft your own microprocessor-based handheld gaming console.</p>
+<p >Craft Micro is based on the Arduino Framework. We recommend the <a href="https://platformio.org/">PlatformIO</a> plugin for VSCode for cross-platform microprocessor development.</p>
 <h1><a class="anchor" id="autotoc_md19"></a>
 Status</h1>
-<p >This library is pre-alpha and is not ready for release. Large parts of the codebase may change without warning.</p>
+<p >Although it is usable, the Craft Micro SDK is pre-alpha and is not recommended for release. Feel free to try it out and use it for your own projects, but expect to find bugs, and expect parts of the codebase to change without warning.</p>
 <h1><a class="anchor" id="autotoc_md20"></a>
-Developer notes 2022-03-19</h1>
-<h2><a class="anchor" id="autotoc_md21"></a>
-TODO next</h2>
-<ul>
-<li>Improve linebuffer for speed</li>
-<li>Improve portability</li>
-<li>Vector rendering</li>
-<li>Radial gradient</li>
-<li>Sprite stamping, animation, rotation</li>
-<li>Attempt to measure RAM usage</li>
-<li>ESP32 support</li>
-</ul>
+Examples and Documentation</h1>
+<p >A good place to begin with Craft Micro is to check out the <a href="examples/">examples</a>.</p>
+<p >Refer to the <a href="https://craftmicro.io/docs/">documentation</a> for more detail. The docs are also included in the repo.</p>
+<h1><a class="anchor" id="autotoc_md21"></a>
+Dependencies</h1>
+<p >Craft Micro itself has no dependencies. However, it's likely that the hardware you are using, such as a TFT display, will require additional libraries - for example SPI or I2C.</p>
+<p >The examples use an ILI9341 TFT display over SPI, and so require the SPI Arduino library. This comes bundled with Arduino Studio and PlatformIO, and almost any otther Arduino-based framework that you might use. The readme in the examples section contains details of how to add dependencies.</p>
 <h1><a class="anchor" id="autotoc_md22"></a>
-Change history</h1>
-<ul>
-<li><b>2022-03-19</b> Added masks (and inverse masks)</li>
-<li><b>2022-03-18</b> Refactored memory pooling and linked lists to use templated classes</li>
-<li><b>2022-03-18</b> Added ability to set any size buffer (from single line to full frame)</li>
-<li><b>2022-03-17</b> Filters (shaders) for tint, HSV, colormask, lighten/darken. Variable height framebuffer</li>
-<li><b>2022-03-16</b> Working linear gradient.</li>
-<li><b>2022-03-10</b> Refactored line buffer and display implementation.</li>
-<li><b>2021-09-19</b> Reorganised codebase into subfolders.</li>
-<li><b>2021-05-25</b> Completely refactored to stage and display list approach (like Flash).</li>
-<li><b>2021-04-27</b> Completely rewritten to convert framebuffer to linebuffer.</li>
-<li><b>2019-04-14</b> Many bitmap and vector features implemented. Working on GUI components.</li>
-<li><b>2018-04-24</b> Very much a work in progress. Only display components currently implemented.</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md23"></a>
-Prerequisites</h1>
-<p >Only tested on Teensy 3.6 but should work on T3.5 and other lower-memory teensy devices.</p>
-<h3><a class="anchor" id="autotoc_md24"></a>
-Minimum requirements:</h3>
+Minimum requirements</h1>
+<p >Only tested on Teensy 3.6 but should work on T3.5 and other lower-memory teensy devices. Working on ESP32 support.</p>
+<p >Examples should work with:</p>
+<ol type="1">
+<li>8kB RAM</li>
+<li>48kB of Flash (Storage for music and graphics etc)</li>
+</ol>
+<p >Recommend at least:</p>
 <ol type="1">
 <li>16kB RAM</li>
-<li>40kB of Flash (Storage for music and graphics etc)</li>
+<li>128kB of Flash (Storage for music and graphics etc)</li>
 </ol>
 <p >The library uses a linebuffer (double-buffered) instead of a full framebuffer for rendering graphics to the screen. This only requires 6 * display_width bytes of RAM. E.g. A 320 width displays scaled to 4x4 pixels (resulting in 80 pixels) requires a 480 byte linebuffer.</p>
-<h3><a class="anchor" id="autotoc_md25"></a>
-Recommended:</h3>
-<ul>
-<li>Teensy 3.6 with 256kB RAM and 1MB Flash</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 Licence</h1>
-<p >Both the software and hardware components of this project are released under the <b><a href="https://en.wikipedia.org/wiki/MIT_License">MIT licence</a></b>, except for the various parts by other authors that may have their own licences (for example, libxm is under the WTFPL).</p>
-<h1><a class="anchor" id="autotoc_md27"></a>
+<p >Both the software and hardware components of this project are released under the <b><a href="https://en.wikipedia.org/wiki/MIT_License">MIT licence</a></b>.</p>
+<h1><a class="anchor" id="autotoc_md24"></a>
 Acknowledgements</h1>
 <p >Code from many authors has contributed to Craft Micro. This project would not be possible without them. These include:</p>
-<h3><a class="anchor" id="autotoc_md28"></a>
+<h3><a class="anchor" id="autotoc_md25"></a>
 Display</h3>
 <ul>
 <li><b>[Paul Stoffregen](mailto:)</b> - <a href="https://github.com/PaulStoffregen/ILI9341_t3">ILI9341_t3</a></li>
 <li><b>[KurtE](mailto:)</b> - <a href="https://github.com/KurtE/ILI9341_t3n">ILI9341_t3n</a></li>
 <li><b>[Frank Boesing](mailto:)</b> - <a href="https://github.com/FrankBoesing/ILI9341_t3DMA">ILI9341_t3DMA</a></li>
+<li><b><a href="https://www.adafruit.com/">Adafruit industries</a></b> - <a href="https://github.com/adafruit">Various libraries</a></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md29"></a>
+<h3><a class="anchor" id="autotoc_md26"></a>
 Graphics and animation</h3>
 <ul>
-<li>**<a href="wm@warrenmoore.net">Warren Moore</a>** - <a href="https://github.com/warrenm/AHEasing">AHEasing</a></li>
+<li>**<a href="#" onclick="location.href='mai'+'lto:'+'wm@'+'wa'+'rre'+'nm'+'oor'+'e.'+'net'; return false;">Warren Moore</a>** - <a href="https://github.com/warrenm/AHEasing">AHEasing</a></li>
 <li><b><a href="https://rosettacode.org/wiki/Rosetta_Code">Rosetta Code</a></b> - <a href="https://rosettacode.org/wiki/Xiaolin_Wu%27s_line_algorithm">Wu's algorithm</a></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md30"></a>
+<h3><a class="anchor" id="autotoc_md27"></a>
 Audio</h3>
 <ul>
 <li>**<a href="#" onclick="location.href='mai'+'lto:'+'art'+'ef'+'act'+'2@'+'gma'+'il'+'.co'+'m'; return false;">Romain "Artefact2" Dalmaso</a>** - <a href="https://github.com/Artefact2/libxm">libxm</a></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md31"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 Support</h3>
 <ul>
 <li><b><a href="https://forum.pjrc.com/">Teensy support forums</a></b></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md32"></a>
+<h3><a class="anchor" id="autotoc_md29"></a>
 Hardware</h3>
 <ul>
 <li><b><a href="https://www.pjrc.com/teensy/">Teensy microprocessor boards</a></b></li>
