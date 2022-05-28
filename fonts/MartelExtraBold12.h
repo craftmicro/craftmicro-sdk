@@ -196,7 +196,7 @@ static const unsigned char MartelExtraBold12_index[] = {
 0xc8 };
 /* font index size: 131 bytes */
 
-const packedbdf_t MartelExtraBold12 = {
+const craft::packedbdf_t MartelExtraBold12 = {
 	MartelExtraBold12_index,
 	0,
 	MartelExtraBold12_data,

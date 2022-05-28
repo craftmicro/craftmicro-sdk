@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _CRAFTMICRO_PIXELH_
-#define _CRAFTMICRO_PIXELH_ 1
 
 #include "Common.h"
 #include "graphics/Color.h"
@@ -21,13 +19,13 @@ namespace craft {
         /**
          * @brief Recycle the pixel list
          */
-        void recycle() override;                                         
+        void recycle() override;
 
         /**
          * Create a new object or take one from the pool
          * @return The new or recycled object
          */
-        static Pixel* Create( color888 color, float_t alpha, boolean mask );
+        static Pixel* Create(color888 color, float_t alpha, boolean mask);
 
         /**
          * @brief Flattens pixel list
@@ -42,6 +40,4 @@ namespace craft {
         float_t _flattenMask();
     };
 
-} // namespace
-
-#endif
+} // namespace craft

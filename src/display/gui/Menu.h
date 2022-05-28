@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _CRAFTMICRO_GUIMENUH_
-#define _CRAFTMICRO_GUIMENUH_ 1
 
 #include "display/gui/Widget.h"
 
@@ -38,25 +36,25 @@ namespace craft {
          * @param icon The index of the icon (0 = no icon). @see style->icons
          * @param event The event to dispatch when this menu item is selected
          */
-        void add( char* title, char* acronym, int icon, uint32_t event, void* eventData );
+        void add(char* title, char* acronym, int icon, uint32_t event, void* eventData);
 
         /**
          * @brief Remove a menu item by title
          * @param title The title
          */
-        void remove( char* title );
+        void remove(char* title);
 
         /**
          * @brief Remove a menu item by its position in the menu
          * @param title The title
          */
-        void remove( int index );
+        void remove(int index);
 
         /**
          * @brief Remove a menu item based on the event data pointer
          * @param data The data pointer
          */
-        void remove( void* eventData );
+        void remove(void* eventData);
 
         /**
          * @brief Remove all menu items from the menu
@@ -64,8 +62,8 @@ namespace craft {
         void clear();
 
     protected:
-        void add( MenuItem* item );
-        void remove( MenuItem* item );
+        void add(MenuItem* item);
+        void remove(MenuItem* item);
 
         /**
          * @brief The items in the menu
@@ -78,6 +76,4 @@ namespace craft {
         MenuItem* _activeItem = nullptr;
     };
 
-} // namespace
-
-#endif
+} // namespace craft

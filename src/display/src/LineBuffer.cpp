@@ -2,12 +2,12 @@
 
 namespace craft {
 
-    LineBuffer::LineBuffer( Display* display, int bufferHeight ) {
+    LineBuffer::LineBuffer(Display* display, int bufferHeight) {
         _display = display;
-        rect.setPosAndSize( 0, 0, _display->width(), _display->height() );
-        _region.set( &rect );
-        if ( bufferHeight == 0 || bufferHeight > _display->height() ) bufferHeight = _display->height();
-        else if ( bufferHeight < 0 ) bufferHeight = 1;
+        rect.setPosAndSize(0, 0, _display->width(), _display->height());
+        _region.set(&rect);
+        if (bufferHeight == 0 || bufferHeight > _display->height()) bufferHeight = _display->height();
+        else if (bufferHeight < 0) bufferHeight = 1;
         _bufferHeight = bufferHeight;
         _bufferWidth = _display->width();
         _data[0].pixels = new color888[_bufferWidth * _bufferHeight];
@@ -20,13 +20,13 @@ namespace craft {
         delete[] _data[1].pixels;
     }
 
-    void LineBuffer::setRegion( ClipRect* rect ) {
+    void LineBuffer::setRegion(ClipRect* rect) {
         // Ensure region is within display area
         _region.set(
-            max( 0, rect->x ),
-            max( 0, rect->y ),
-            min( _bufferWidth, rect->x2 ),
-            min( _bufferWidth, rect->y2 )
+            max(0, rect->x),
+            max(0, rect->y),
+            min(_bufferWidth, rect->x2),
+            min(_bufferWidth, rect->y2)
         );
         resetRegion();
     }
@@ -42,7 +42,7 @@ namespace craft {
         _yOffset = 0;
     }
 
-    void LineBuffer::flip( bool flush ) {
+    void LineBuffer::flip(bool flush) {
         // Advance a line
         _y++;
         _yOffset += _bufferWidth;
@@ -65,9 +65,9 @@ namespace craft {
             );
             _yOffset = 0;
             // Flush to the hardware from the back buffer
-            while ( !_display->ready ) yield();
-            _display->draw( _data[_backIndex] );
+            while (!_display->ready) yield();
+            _display->draw(_data[_backIndex]);
         }
     }
 
-} // namespace
+} // namespace craft

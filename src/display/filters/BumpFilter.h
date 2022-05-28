@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _CRAFTMICRO_BUMPFILTER_H
-#define _CRAFTMICRO_BUMPFILTER_H 1
 
 #include "Filter.h"
 #include "display/Sprite.h"
@@ -22,9 +20,9 @@ namespace craft {
          * @param lightSource The light source
          * @return BumpFilter* The new bunmp filter object
          */
-        static BumpFilter* Create( const TilemapData* tilemapData, uint16_t tileIndex, Light* lightSource ) {
+        static BumpFilter* Create(const TilemapData* tilemapData, uint16_t tileIndex, Light* lightSource) {
             BumpFilter* f = MemoryPool<BumpFilter>::Create();
-            f->map->set( tilemapData, tileIndex );
+            f->map->set(tilemapData, tileIndex);
             f->light = lightSource;
             return f;
         }
@@ -56,8 +54,8 @@ namespace craft {
          *
          * @param ry The line
          */
-        void beginLine( int16_t ry ) override {
-            map->beginLine( ry + map->y() );
+        void beginLine(int16_t ry) override {
+            map->beginLine(ry + map->y());
         }
 
         /**
@@ -68,23 +66,23 @@ namespace craft {
          * @param a (in/out) The alpha value of the pixel being filtered
          * @param c (in/out) The color value of the pixel being filtered
          */
-        void filterPixel( int16_t rx, int16_t ry, float_t& a, color888& c ) override {
-            map->calcPixel( rx, ry );
+        void filterPixel(int16_t rx, int16_t ry, float_t& a, color888& c) override {
+            map->calcPixel(rx, ry);
             color8888 fc = map->getCalcColor();
             float_t s, dx, dy;
-            light->calc( rx, ry, s, dx, dy );
+            light->calc(rx, ry, s, dx, dy);
             // Horizontal (R)
-            float_t r = red( fc ) / 255.0 - 0.5;
+            float_t r = red(fc) / 255.0 - 0.5;
             r *= dx;
 
             // Vertical (G)
-            float_t g = green( fc ) / 255.0 - 0.5;
+            float_t g = green(fc) / 255.0 - 0.5;
             g *= dy;
 
             // Amount of brightness
             float_t fa = r * s + g * s;
-            if ( fa < 0 ) c = darken( c, -fa );
-            else c = lighten( c, fa );
+            if (fa < 0) c = darken(c, -fa);
+            else c = lighten(c, fa);
 
             // XXX: light->color is currently unused
         }
@@ -93,17 +91,13 @@ namespace craft {
          * @brief The light source
          * The caller must ensure that the light is destroyed (it is not owned by the filter)
          */
-        Light* light;
+        Light* light = nullptr;
 
         /**
          * @brief The normal map
          */
-        Sprite* map;
+        Sprite* map = nullptr;
 
     };
 
-
-
-} // namespace
-
-#endif
+} // namespace craft

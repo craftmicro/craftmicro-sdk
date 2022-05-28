@@ -13,7 +13,7 @@ namespace craft {
 
     void Menu::clear() {
         MenuItem* i = _items;
-        while ( i ) {
+        while (i) {
             MenuItem* n = i->next();
             i->remove();
             i->recycle();
@@ -22,7 +22,7 @@ namespace craft {
         _items = nullptr;
     }
 
-    void Menu::add( char* title, char* acronym, int icon, uint32_t event, void* eventData ) {
+    void Menu::add(char* title, char* acronym, int icon, uint32_t event, void* eventData) {
         MenuItem* item = MenuItem::Create();
         item->title = title;
         item->acronym = acronym;
@@ -30,20 +30,20 @@ namespace craft {
         item->event = event;
         item->eventData = eventData;
 
-        add( item );
+        add(item);
     }
 
-    void Menu::add( MenuItem* item ) {
-        if ( _items ) _items->add( item );
+    void Menu::add(MenuItem* item) {
+        if (_items) _items->add(item);
         else _items = item;
     }
 
-    void Menu::remove( char* title ) {
+    void Menu::remove(char* title) {
         MenuItem* i = _items;
-        while ( i ) {
-            if ( strcmp( (const char*)i->title, (const char*)title ) == 0 ) {
+        while (i) {
+            if (strcmp((const char*)i->title, (const char*)title) == 0) {
                 MenuItem* n = i->next();
-                if ( _items == i ) _items = n;
+                if (_items == i) _items = n;
                 i->remove();
                 i->recycle();
                 i = n;
@@ -54,13 +54,13 @@ namespace craft {
         }
     }
 
-    void Menu::remove( int index ) {
+    void Menu::remove(int index) {
         MenuItem* i = _items;
         int idx = 0;
-        while ( i ) {
-            if ( idx == index ) {
+        while (i) {
+            if (idx == index) {
                 MenuItem* n = i->next();
-                if ( _items == i ) _items = n;
+                if (_items == i) _items = n;
                 i->remove();
                 i->recycle();
                 return;
@@ -70,12 +70,12 @@ namespace craft {
         }
     }
 
-    void Menu::remove( void* eventData ) {
+    void Menu::remove(void* eventData) {
         MenuItem* i = _items;
-        while ( i ) {
-            if ( i->eventData == eventData ) {
+        while (i) {
+            if (i->eventData == eventData) {
                 MenuItem* n = i->next();
-                if ( _items == i ) _items = n;
+                if (_items == i) _items = n;
                 i->remove();
                 i->recycle();
                 i = n;
@@ -86,4 +86,4 @@ namespace craft {
         }
     }
 
-} // namespace
+} // namespace craft

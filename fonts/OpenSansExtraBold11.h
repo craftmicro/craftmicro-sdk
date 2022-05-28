@@ -159,7 +159,7 @@ static const unsigned char OpenSansExtraBold11_index[] = {
 0x40 };
 /* font index size: 131 bytes */
 
-const packedbdf_t OpenSansExtraBold11 = {
+const craft::packedbdf_t OpenSansExtraBold11 = {
 	OpenSansExtraBold11_index,
 	0,
 	OpenSansExtraBold11_data,

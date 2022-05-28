@@ -2,7 +2,7 @@
 
 namespace craft {
 
-    Light* Light::Create( LightType type ) {
+    Light* Light::Create(LightType type) {
         Light* l = MemoryPool<Light>::Create();
         l->type = type;
         return l;
@@ -19,15 +19,15 @@ namespace craft {
     }
 
     void Light::update() {
-        _dx = cos( direction );
-        _dy = sin( direction );
+        _dx = cos(direction);
+        _dy = sin(direction);
         _a = attenuation * attenuation;
     }
 
-    void Light::calc( int16_t rx, int16_t ry, float_t& s, float_t& dx, float_t& dy ) {
+    void Light::calc(int16_t rx, int16_t ry, float_t& s, float_t& dx, float_t& dy) {
         s = strength;
         dx = _dx;
         dy = _dy;
     }
 
-} //ns:mac
+} // namespace craft
