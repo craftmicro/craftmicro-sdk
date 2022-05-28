@@ -1,6 +1,6 @@
 # Craft Micro SDK
 
-![mac logo](/logo.png?raw=true "mac")
+![mac logo](logo.png?raw=true "mac")
 
 The Craft Micro SDK is a code library for rapid development of graphical apps for microprocessor-based systems. The various individual libraries that make up this library (such as display and drawing libraries) might also be useful in other projects.
 
@@ -9,6 +9,12 @@ Craft Micro maintains an open-source software library and set of plans to craft 
 ## Status
 
 This library is pre-alpha and is not ready for release. Large parts of the codebase may change without warning.
+
+## Examples and Documentation
+
+A good place to begin with Craft Micro is to check out the [examples](examples/).
+
+Then take a look at the [documentation](https://craftmicro.io/docs/) for more detail!
 
 ## Developer notes 2022-03-19
 ### TODO next
