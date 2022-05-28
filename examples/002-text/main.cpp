@@ -1,5 +1,5 @@
 #include <CraftMicro.h>
-#include "../resources/font_PixelSix008.h"
+#include "examples/resources/font_PixelSix008.h"
 
 using namespace craft;
 
