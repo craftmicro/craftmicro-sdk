@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Common.h"
-#include "fonts/OpenSans11.h"
-#include "fonts/OpenSansExtraBold11.h"
 
 namespace craft {
 
@@ -43,8 +41,8 @@ namespace craft {
         /**
          * Fonts
          */
-        packedbdf_t* font = (packedbdf_t*)&OpenSans11;
-        packedbdf_t* labelFont = (packedbdf_t*)&OpenSans11;
+        packedbdf_t* font = nullptr;
+        packedbdf_t* labelFont = nullptr;
 
         /**
          * Text colors
@@ -58,8 +56,8 @@ namespace craft {
         /**
          * Icon bitmaps
          */
-        const TilemapData* controls = nullptr; //&guiControls;
-        const TilemapData* icons = nullptr; //&guiIcons;
+        const TilemapData* controls = nullptr;
+        const TilemapData* icons = nullptr;
 
         /**
          * Icon colors
