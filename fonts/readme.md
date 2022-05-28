@@ -1,6 +1,6 @@
 # Fonts
 
-All fonts here are available under the OFL. Craft Micro is not the creator of the fonts, but have converted them to Packed BDF.
+All fonts here are available under the OFL. Craft Micro is not the creator of the fonts - we have simply converted them to Packed BDF.
 
 ## Packed BDF font format
 

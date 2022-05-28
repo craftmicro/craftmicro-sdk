@@ -1,5 +1,5 @@
 #include <CraftMicro.h>
-#include "../resources/font_PixelSix008.h"
+#include "../../resources/font_PixelSix008.h"
 
 using namespace craft;
 
@@ -24,11 +24,11 @@ boolean buttonEvent( uint32_t event, void* data ) {
     // Perform different action based on the event that we received
     switch ( event ) {
         case button_down:
-            box->color = ARGB8888::Crimson;
+            box->color = Color8888::Crimson;
             box->dirty(); // Force the box to rdraw after a change
             break;
         case button_up:
-            box->color = ARGB8888::PaleGreen;
+            box->color = Color8888::PaleGreen;
             box->dirty(); // Force the box to rdraw after a change
             break;
         case button_click:
@@ -52,16 +52,16 @@ void setup() {
       // Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
       // Use a single-line line buffer for low memory consumption
     app = new App(
-        new DisplayILI9341( DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, PixelScale::Scale2x2 ),
+        new DisplayILI9341( DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, PixelScale::x2 ),
         LineBufferHeight::singleLine
     );
     app->serialBegin();
     // Set background color
-    app->stage->backgroundColor( ARGB8888::SaddleBrown );
+    app->stage->backgroundColor( Color8888::SaddleBrown );
 
     // Create a box to show the state of the button 
     box = Box::Create( 10, 10, 20, 20 );
-    box->color = ARGB8888::PaleGreen;
+    box->color = Color8888::PaleGreen;
     app->stage->addChild( box );
 
     // Create a text area to show click types
@@ -70,7 +70,7 @@ void setup() {
     text->width( 120 );
     text->x( 40 );
     text->y( 15 );
-    text->color( ARGB8888::White );
+    text->color( Color8888::White );
     app->stage->addChild( text );
 
     // Define which actions we want events fired for

@@ -1,5 +1,4 @@
-#ifndef _PACKEDBDF_OPENSANSEXTRABOLD12_
-#define _PACKEDBDF_OPENSANSEXTRABOLD12_
+#pragma once
 
 #include "display/PackedBDF.h"
 
@@ -205,4 +204,3 @@ const craft::packedbdf_t OpenSansExtraBold12 = {
 	12,
 	9
 };
-#endif

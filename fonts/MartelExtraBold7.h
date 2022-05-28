@@ -1,5 +1,4 @@
-#ifndef _PACKEDBDF_MARTELEXTRABOLD7_
-#define _PACKEDBDF_MARTELEXTRABOLD7_
+#pragma once
 
 #include "display/PackedBDF.h"
 
@@ -121,4 +120,3 @@ const craft::packedbdf_t MartelExtraBold7 = {
 	7,
 	5
 };
-#endif

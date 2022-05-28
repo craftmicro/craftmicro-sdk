@@ -1,5 +1,4 @@
-#ifndef _PACKEDBDF_PIXELSIX008_
-#define _PACKEDBDF_PIXELSIX008_
+#pragma once
 
 static const unsigned char PixelSix008_data[] = {
 0x04,0x40,0x30,0x05,0x40,0x29,0x88,0x0c,0x85,0x45,
@@ -66,7 +65,7 @@ static const unsigned char PixelSix008_index[] = {
 0xf0,0xb8,0xfc,0xce,0x97,0x5b,0xb8 };
 /* font index size: 107 bytes */
 
-const packedbdf_t PixelSix008 = {
+const craft::packedbdf_t PixelSix008 = {
 	PixelSix008_index,
 	0,
 	PixelSix008_data,
@@ -85,4 +84,3 @@ const packedbdf_t PixelSix008 = {
 	8,
 	5
 };
-#endif

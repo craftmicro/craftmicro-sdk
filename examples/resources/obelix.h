@@ -1,5 +1,4 @@
-#ifndef _TILEMAP_obelix_H_
-#define _TILEMAP_obelix_H_ 1
+#pragma once
 
 #include "graphics/Bitmap.h"
 
@@ -233,7 +232,7 @@ __attribute__((aligned(4))) static const uint8_t obelix_data[] = {
 ,0x00,0xff,0xff,0xff};
 
 const craft::TilemapData obelix = {
-	.pixelFormat = PixelFormat::ARGB8888,
+	.pixelFormat = craft::PixelFormat::ARGB8888,
 	.transparentColor = 0,
 	.dataSize = 8140,
 	.data = obelix_data,
@@ -242,5 +241,3 @@ const craft::TilemapData obelix = {
 	.tileCount = 1,
 	.tileStride = 2035
 };
-
-#endif

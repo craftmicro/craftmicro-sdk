@@ -1,5 +1,4 @@
-#ifndef _TILEMAP_normalmap_H_
-#define _TILEMAP_normalmap_H_ 1
+#pragma once
 
 #include "graphics/Bitmap.h"
 
@@ -92,7 +91,7 @@ __attribute__( ( aligned( 4 ) ) ) static const uint8_t normalmap3_data[] = {
 ,0x7f,0x7f,0xff,0x7f,0x7f,0xff,0x7f,0x7f,0xff,0x7f,0x7f,0xff };
 
 const craft::TilemapData normalmap = {
-	.pixelFormat = PixelFormat::RGB888,
+	.pixelFormat = craft::PixelFormat::RGB888,
 	.transparentColor = 0x000000,
 	.dataSize = 3072,
 	.data = normalmap3_data,
@@ -101,5 +100,3 @@ const craft::TilemapData normalmap = {
 	.tileCount = 1,
 	.tileStride = 1024
 };
-
-#endif

@@ -1,5 +1,5 @@
 #include <CraftMicro.h>
-#include "../resources/normalmap.h"
+#include "../../resources/normalmap.h"
 
 using namespace craft;
 
@@ -24,16 +24,16 @@ void setup() {
     // Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
     // Use a single-line line buffer for low memory consumption
     app = new App(
-        new DisplayILI9341( DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, PixelScale::Scale2x2 ),
+        new DisplayILI9341( DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, PixelScale::x2 ),
         LineBufferHeight::singleLine
     );
     // Set background color
-    app->stage->backgroundColor( ARGB8888::SaddleBrown );
+    app->stage->backgroundColor( Color8888::SaddleBrown );
 
     // Create a box and add it to the stage
     box = Box::Create( 20, 20, 32, 32 );
     app->stage->addChild( box );
-    box->color = ARGB8888::Orange;
+    box->color = Color8888::Orange;
 
     // Add a bump filter with a light source
     light = Light::Create( LightType::Directional );

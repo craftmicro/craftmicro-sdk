@@ -3,8 +3,6 @@
 #include "Common.h"
 #include "fonts/OpenSans11.h"
 #include "fonts/OpenSansExtraBold11.h"
-#include "resources/gui_controls.h"
-#include "resources/gui_icons.h"
 
 namespace craft {
 
@@ -60,8 +58,8 @@ namespace craft {
         /**
          * Icon bitmaps
          */
-        const TilemapData* controls = &guiControls;
-        const TilemapData* icons = &guiIcons;
+        const TilemapData* controls = nullptr; //&guiControls;
+        const TilemapData* icons = nullptr; //&guiIcons;
 
         /**
          * Icon colors

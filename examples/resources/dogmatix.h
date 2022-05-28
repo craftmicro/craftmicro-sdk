@@ -1,5 +1,4 @@
-#ifndef _TILEMAP_dogmatix_H_
-#define _TILEMAP_dogmatix_H_ 1
+#pragma once
 
 #include "graphics/Bitmap.h"
 
@@ -32,7 +31,7 @@ __attribute__((aligned(4))) static const uint8_t dogmatix_data[] = {
 ,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26,0xff,0x3e,0x26,0x26};
 
 const craft::TilemapData dogmatix = {
-	.pixelFormat = PixelFormat::ARGB8888,
+	.pixelFormat = craft::PixelFormat::ARGB8888,
 	.transparentColor = 0,
 	.dataSize = 912,
 	.data = dogmatix_data,
@@ -41,5 +40,3 @@ const craft::TilemapData dogmatix = {
 	.tileCount = 1,
 	.tileStride = 228
 };
-
-#endif
