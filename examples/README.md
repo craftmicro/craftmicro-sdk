@@ -1,8 +1,6 @@
 # Craft Micro SDK - Examples
 
-The Craft Micro SDK uses the Arduino framework, so any tool set that uses this framework should be work.
-
-Craft Micro highly recommends [PlatformIO](https://platformio.org) for cross-platform microprocessor development.
+The Craft Micro SDK uses the Arduino framework, so any tool set that uses this framework should work. However, Craft Micro highly recommends [PlatformIO](https://platformio.org) for cross-platform microprocessor development.
 
 - [Run the examples using PlatformIO](#run-the-examples-using-platformio)
 - [Run the examples using Arduino IDE](#run-the-examples-using-arduino-ide)
