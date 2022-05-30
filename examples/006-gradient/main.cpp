@@ -4,11 +4,7 @@ using namespace craft;
 
 App* app;
 Box* box;
-
 LinearGradient* gradient;
-int dir = 0;
-int gx = 0;
-int gy = 30;
 float_t angle = 0;
 
 // Runs on every render cycle. Spins the gradient around
@@ -42,13 +38,12 @@ void setup() {
     // Create a box
     box = Box::Create();
     app->stage->addChild(box);
-    box->id = 22;
     box->x(10);
     box->y(10);
     box->width(140);
     box->height(100);
 
-    // Create a gradient and add 6 stops for a rainbox effect. The 
+    // Create a gradient and add 6 stops for a rainbow effect. The 
     // gradient is applied to the box.
     gradient = LinearGradient::Create(6);
     gradient->stop(0, Color8888::Red, 1.0, 0.0)
