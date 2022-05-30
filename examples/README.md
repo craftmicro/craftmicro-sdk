@@ -16,29 +16,29 @@ The Craft Micro SDK uses the Arduino framework, so any tool set that uses this f
 ### Project setup
 1. [Create a new PlatformIO project](https://docs.platformio.org/en/stable/integration/ide/vscode.html#quick-start)
 2. Choose a location and your dev board, and select `arduino` as the framework (*)
-3. Once the project has been created, edit `platformio.ini`
+3. Once the project has been created, edit `platformio.ini` (see example below)
     1. Add `lib_extra_dirs` with the path to where you cloned the Craft Micro SDK (**)
     2. Add `lib_deps` and specify the `SPI` library (required for the ILI9341 TFT display)
-4. Copy and paste on of the example `main.cpp` files into your project's `src` directory
+    3. Add `build_flags` to add the include path to the Craft Micro SDK folder (for the resources)
+4. Copy and paste one of the example `main.cpp` files into your project's `src` directory
 5. Build and deploy!
 
-_(*) Only the Arduino framework is supported at this time. You will not be able to target boards that do not support the Arduino framework._
+_(*) You can only target boards that support the Arduino framework at this stage._
 
-_(**) Note that the path should be to the library folder (the parent of the Craft Micro folder), not to the Craft Micro folder itself_
+_(**) The path should be to the library folder (the parent of the Craft Micro folder), not to the Craft Micro folder itself._
 
 <details>
 <summary>See example platformio.ini</summary>
-In our example we are targetting the Teensy 3.6 dev board. Our <code>platformio.ini</code> looks like this:
+In our example we are targeting the Teensy 3.6 dev board. Our <code>platformio.ini</code> looks like this:
 
 ```
 [env:teensy36]
 platform = teensy
 board = teensy36
 framework = arduino
-lib_extra_dirs =
-    C:/libraries/
-lib_deps =
-    SPI
+lib_deps = SPI
+lib_extra_dirs = C:/libraries/
+build_flags = -I"C:/libraries/craftmicro-sdk/"
 ```
 </details>
 
@@ -54,8 +54,8 @@ lib_deps =
 ### Project setup
 1. Run Arduino IDE and create a new sketch if you need to
 2. Copy and paste the code from `main.cpp` in one of the examples into your sketch
-3. Save the sketch, then open the folder where the sketch is saved and create the subfolders `examples/resources/`
-    1. Copy the resources your example needs from `craftmicro-sdk/examples/resources` to `my-sketch/examples/resources` (*)
+3. Save the sketch, then open the folder where the sketch is saved and create the subfolder `resources`
+    1. Copy the resources your example needs from `craftmicro-sdk/examples/resources` to `my-sketch/resources` (*)
 4. Build and deploy!
 
 _(*) You need to copy the resources into each sketch that requires them. If you change the folder names, also update the `#include` path to match_
