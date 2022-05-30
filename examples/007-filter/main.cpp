@@ -1,5 +1,5 @@
 #include <CraftMicro.h>
-#include "examples/resources/asterix.h"
+#include "resources/asterix.h"
 
 using namespace craft;
 
