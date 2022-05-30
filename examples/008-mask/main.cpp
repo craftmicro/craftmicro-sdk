@@ -1,7 +1,7 @@
 #include <CraftMicro.h>
-#include "examples/resources/asterix.h"
-#include "examples/resources/obelix.h"
-#include "examples/resources/dogmatix.h"
+#include "resources/asterix.h"
+#include "resources/obelix.h"
+#include "resources/dogmatix.h"
 
 using namespace craft;
 

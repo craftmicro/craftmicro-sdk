@@ -1,5 +1,5 @@
 #include <CraftMicro.h>
-#include "examples/resources/normalmap.h"
+#include "resources/normalmap.h"
 
 using namespace craft;
 
