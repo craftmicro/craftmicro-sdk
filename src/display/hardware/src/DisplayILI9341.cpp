@@ -108,17 +108,7 @@ namespace craft {
      * @param	width	TFT pixel width
      * @param	Height	TFT pixel height
      **/
-    DisplayILI9341::DisplayILI9341(
-        DisplaySize sz,
-        uint8_t cs,
-        uint8_t dc,
-        uint8_t rst,
-        uint8_t mosi,
-        uint8_t sclk,
-        uint8_t miso,
-        uint8_t bklt,
-        uint8_t scale
-    ) {
+    DisplayILI9341::DisplayILI9341(DisplaySize sz, uint8_t cs, uint8_t dc, uint8_t rst, uint8_t mosi, uint8_t sclk, uint8_t miso, uint8_t bklt, uint8_t scale) {
         _cs = cs;
         _dc = dc;
         _rst = rst;

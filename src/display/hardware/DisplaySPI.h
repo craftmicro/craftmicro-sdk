@@ -9,13 +9,8 @@
 namespace craft {
 
     /**
-     * Define SPI parameters
+     * Display base class for SPI displays.
      **/
-    #define SPICLOCK	60e6
-
-     /**
-      * Display base class for SPI displays.
-      **/
     class DisplaySPI : public Display {
     protected:
 
@@ -26,10 +21,12 @@ namespace craft {
 
         #if defined(KINETISK)
 
+        #define SPICLOCK	60e6
+
         ALWAYS_INLINE void init() {
-            if (_mosi > 0) SPI.setMOSI(_mosi);
-            if (_miso > 0) SPI.setMOSI(_miso);
-            if (_sclk > 0)  SPI.setSCK(_sclk);
+            if (_mosi != 255) SPI.setMOSI(_mosi);
+            if (_miso != 255) SPI.setMOSI(_miso);
+            if (_sclk != 255)  SPI.setSCK(_sclk);
             SPI.begin();
 
             if (SPI.pinIsChipSelect(_cs, _dc)) {
@@ -127,11 +124,13 @@ namespace craft {
         // End KINETISK
         #else
 
+        #define SPICLOCK	40e6
+
         SPIClass* _spi = nullptr;
 
         ALWAYS_INLINE void init() {
-            _spi = new SPIClass(HSPI);
-            _spi->begin(_sclk, _miso?_miso:-1, _mosi, _cs); //SCLK, MISO, MOSI, SS
+            _spi = new SPIClass(VSPI);
+            _spi->begin(_sclk, _miso == 255 ? -1 : _miso, _mosi, _cs); //SCLK, MISO, MOSI, SS
             pinMode(_cs, OUTPUT);
         }
 
@@ -159,7 +158,7 @@ namespace craft {
         /**
          * @brief Write SPI data
          */
-        ALWAYS_INLINE void writeData8(uint8_t d){
+        ALWAYS_INLINE void writeData8(uint8_t d) {
             writeCommand(d);
         }
 

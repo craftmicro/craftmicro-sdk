@@ -16,7 +16,7 @@ void setup() {
     // is an ESP32 board with added display. Note that MISO is not supported on this board.
     // Use a single-line line buffer for low memory consumption
     app = new App(
-        new DisplayST7789(DisplaySize::Size135x240, 5, 16, 23, 19, 18, 0, 14, PixelScale::x1),
+        new DisplayST7789(DisplaySize::Size135x240, 5, 16, 23, 19, 18, 14, PixelScale::x1),
         LineBufferHeight::singleLine
     );
     // Set background color

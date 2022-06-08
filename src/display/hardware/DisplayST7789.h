@@ -16,7 +16,6 @@ namespace craft {
 		 * @param	rst		Pin used for Reset (optional. 255=unused)
 		 * @param	mosi	Pin used for MOSI communication (data out from master)
 		 * @param	sclk	Pin used for clock
-		 * @param	miso	Pin used for MISO communication (data out from slave)
 		 * @param	bklt	Pin used for backlight (optional. 255=unused)
 		 * @param	px 		Scale factor from framebuffer to display. Normally 1:1 (pixelScale_1x1)
 		 **/
@@ -27,8 +26,7 @@ namespace craft {
 			uint8_t rst = 23,
 			uint8_t mosi = 19,
 			uint8_t sclk = 18,
-			uint8_t miso = 0,
-			uint8_t bklt = 14,
+			uint8_t bklt = 4,
 			uint8_t scale = PixelScale::x1
 		);
 

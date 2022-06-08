@@ -64,26 +64,16 @@ namespace craft {
 	 * @param	rst		Pin used for Reset (optional. 255=unused)
 	 * @param	mosi	Pin used for MOSI communication (data out from master)
 	 * @param	sclk	Pin used for clock
-	 * @param	miso	Pin used for MISO communication (data out from slave). Ignored for ST7789
 	 * @param	width	TFT pixel width
 	 * @param	Height	TFT pixel height
 	 **/
-	DisplayST7789::DisplayST7789(
-		DisplaySize sz,
-		uint8_t cs,
-		uint8_t dc,
-		uint8_t rst,
-		uint8_t mosi,
-		uint8_t sclk,
-		uint8_t miso,
-		uint8_t bklt,
-		uint8_t scale) {
+	DisplayST7789::DisplayST7789(DisplaySize sz, uint8_t cs, uint8_t dc, uint8_t rst, uint8_t mosi, uint8_t sclk, uint8_t bklt, uint8_t scale) {
 		_cs = cs;
 		_dc = dc;
 		_rst = rst;
 		_mosi = mosi;
 		_sclk = sclk;
-		_miso = miso;
+		_miso = 255;
 		_bklt = bklt;
 		_bkltPWM = false;
 		switch (sz) {
