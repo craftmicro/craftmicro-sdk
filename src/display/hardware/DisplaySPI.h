@@ -127,29 +127,54 @@ namespace craft {
         // End KINETISK
         #else
 
-        ALWAYS_INLINE void init() {}
+        SPIClass* _spi = nullptr;
 
-        ALWAYS_INLINE void beginTransaction() {}
+        ALWAYS_INLINE void init() {
+            _spi = new SPIClass(HSPI);
+            _spi->begin(_sclk, _miso?_miso:-1, _mosi, _cs); //SCLK, MISO, MOSI, SS
+            pinMode(_cs, OUTPUT);
+        }
 
-        ALWAYS_INLINE void endTransaction() {}
+        ALWAYS_INLINE void beginTransaction() {
+            _spi->beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE0));
+        }
+
+        ALWAYS_INLINE void endTransaction() {
+            _spi->endTransaction();
+        }
 
         /**
          * @brief Write an SPI command
          */
-        ALWAYS_INLINE void writeCommand(uint8_t c) {}
+        ALWAYS_INLINE void writeCommand(uint8_t c) {
+            digitalWrite(_spi->pinSS(), LOW);
+            _spi->transfer(c);
+            digitalWrite(_spi->pinSS(), HIGH);
+        }
 
-        ALWAYS_INLINE void writeCommand_last(uint8_t c) {}
+        ALWAYS_INLINE void writeCommand_last(uint8_t c) {
+            writeCommand(c);
+        }
 
         /**
          * @brief Write SPI data
          */
-        ALWAYS_INLINE void writeData8(uint8_t c) {}
+        ALWAYS_INLINE void writeData8(uint8_t d){
+            writeCommand(d);
+        }
 
-        ALWAYS_INLINE void writeData8_last(uint8_t c) {}
+        ALWAYS_INLINE void writeData8_last(uint8_t d) {
+            writeCommand(d);
+        }
 
-        ALWAYS_INLINE void writeData16(uint16_t d) {}
+        ALWAYS_INLINE void writeData16(uint16_t d) {
+            writeCommand((d >> 8) & 0xff);
+            writeCommand(d & 0xff);
+        }
 
-        ALWAYS_INLINE void writeData16_last(uint16_t d) {}
+        ALWAYS_INLINE void writeData16_last(uint16_t d) {
+            writeData16(d);
+        }
 
         #endif
     };
