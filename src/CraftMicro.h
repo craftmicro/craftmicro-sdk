@@ -27,5 +27,6 @@
 #include "Common.h"
 #include "display/GuiApp.h"
 #include "display/hardware/DisplayILI9341.h"
+#include "display/hardware/DisplayST7789.h"
 #include "graphics/Color8888.h"
 #include "physics/Tween.h"

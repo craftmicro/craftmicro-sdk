@@ -52,17 +52,42 @@ namespace craft {
 	 * @brief Swap two values
 	 **/
 	template<typename T>
-	inline void swap( T& a, T& b ) {
+	inline void swap(T& a, T& b) {
 		T t = a;
 		a = b;
 		b = t;
 	}
 
 	/**
+	 * @brief Min implementation 
+	 */
+	template<class A, class B>
+	constexpr auto min(A&& a, B&& b) -> decltype(a < b ? std::forward<A>(a) : std::forward<B>(b)) {
+		return a < b ? std::forward<A>(a) : std::forward<B>(b);
+	}
+
+	/**
+	 * @brief Max implementation 
+	 */
+	template<class A, class B>
+	constexpr auto max(A&& a, B&& b) -> decltype(a < b ? std::forward<A>(a) : std::forward<B>(b)) {
+		return a >= b ? std::forward<A>(a) : std::forward<B>(b);
+	}
+
+	/**
 	 * @brief Linear interpolation between two values
 	 */
-	inline float_t lerp( float_t a, float_t b, float_t k ) {
-		return a + k * ( b - a );
+	inline float_t lerp(float_t a, float_t b, float_t k) {
+		return a + k * (b - a);
 	}
+
+	/**
+	 * @brief Inlining macro
+	 */
+	#if defined(_MSC_VER)
+	#define ALWAYS_INLINE __forceinline inline
+	#elif defined(__GNUC__)
+	#define ALWAYS_INLINE inline
+	#endif
 
 } // ns::craft

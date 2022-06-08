@@ -1,72 +1,69 @@
 #include "../DisplayILI9341.h"
-#include <SPI.h>
-#if CRAFTMICRO_USE_DMA
-#include <DMAChannel.h>
-#endif
-
-/**
- * Define ILI9341 commands
- **/
-typedef enum {
-    NOP = 0x00,
-    SWRESET = 0x01,		// Resets the commands and parameters to their S/W Reset default values
-    RDDID = 0x04,		// Read display identification information (return 24bits)
-    RDDST = 0x09,		// Read display status 
-
-    SLPIN = 0x10,		// Enter sleep mode
-    SLPOUT = 0x11,		// Turns off sleep mode
-    PTLON = 0x12,		// Turns on partial mode
-    NORON = 0x13,		// Returns the display to normal mode (aprtial mode off)
-
-    RDMODE = 0x0A,
-    RDMADCTL = 0x0B,
-    RDPIXFMT = 0x0C,
-    RDIMGFMT = 0x0D,
-    RDSELFDIAG = 0x0F,
-
-    INVOFF = 0x20,		// Recover from display inversion mode
-    INVON = 0x21,		// Enter into display inversion mode
-    GAMMASET = 0x26,		// Select the desired Gamma curve (only 01 is defined)
-    DISPOFF = 0x28,		// Display off
-    DISPON = 0x29,		// Display on
-
-    CASET = 0x2A,		// Column Address Set
-    PASET = 0x2B,		// Page Address Set
-    RAMWR = 0x2C,		// Memory Write
-    RGBSET = 0x2D,		// Color Set
-    RAMRD = 0x2E,		// Memory Read
-
-    PTLAR = 0x30,
-    MADCTL = 0x36,
-    VSCRSADD = 0x37,
-    PIXFMT = 0x3A,
-
-    FRMCTR1 = 0xB1,
-    FRMCTR2 = 0xB2,
-    FRMCTR3 = 0xB3,
-    INVCTR = 0xB4,
-    DFUNCTR = 0xB6,
-
-    PWCTR1 = 0xC0,		// Power control
-    PWCTR2 = 0xC1,
-    PWCTR3 = 0xC2,
-    PWCTR4 = 0xC3,
-    PWCTR5 = 0xC4,
-    VMCTR1 = 0xC5,		// Set the VCOM voltage
-    VMCTR2 = 0xC7,
-
-    RDID1 = 0xDA,
-    RDID2 = 0xDB,
-    RDID3 = 0xDC,
-    RDID4 = 0xDD,
-
-    GMCTRP1 = 0xE0,		// Positive Gamma correction
-    GMCTRN1 = 0xE1,		// Negative Gamma correction
-
-    IFCTL = 0xF6		// Interface Control
-} ILI9341_Command;
 
 namespace craft {
+    /**
+     * Define ILI9341 commands
+     **/
+    namespace ILI9341_Command {
+        enum {
+            NOP = 0x00,
+            SWRESET = 0x01,		// Resets the commands and parameters to their S/W Reset default values
+            RDDID = 0x04,		// Read display identification information (return 24bits)
+            RDDST = 0x09,		// Read display status 
+
+            SLPIN = 0x10,		// Enter sleep mode
+            SLPOUT = 0x11,		// Turns off sleep mode
+            PTLON = 0x12,		// Turns on partial mode
+            NORON = 0x13,		// Returns the display to normal mode (aprtial mode off)
+
+            RDMODE = 0x0A,
+            RDMADCTL = 0x0B,
+            RDPIXFMT = 0x0C,
+            RDIMGFMT = 0x0D,
+            RDSELFDIAG = 0x0F,
+
+            INVOFF = 0x20,		// Recover from display inversion mode
+            INVON = 0x21,		// Enter into display inversion mode
+            GAMMASET = 0x26,		// Select the desired Gamma curve (only 01 is defined)
+            DISPOFF = 0x28,		// Display off
+            DISPON = 0x29,		// Display on
+
+            CASET = 0x2A,		// Column Address Set
+            PASET = 0x2B,		// Page Address Set
+            RAMWR = 0x2C,		// Memory Write
+            RGBSET = 0x2D,		// Color Set
+            RAMRD = 0x2E,		// Memory Read
+
+            PTLAR = 0x30,
+            MADCTL = 0x36,
+            VSCRSADD = 0x37,
+            PIXFMT = 0x3A,
+
+            FRMCTR1 = 0xB1,
+            FRMCTR2 = 0xB2,
+            FRMCTR3 = 0xB3,
+            INVCTR = 0xB4,
+            DFUNCTR = 0xB6,
+
+            PWCTR1 = 0xC0,		// Power control
+            PWCTR2 = 0xC1,
+            PWCTR3 = 0xC2,
+            PWCTR4 = 0xC3,
+            PWCTR5 = 0xC4,
+            VMCTR1 = 0xC5,		// Set the VCOM voltage
+            VMCTR2 = 0xC7,
+
+            RDID1 = 0xDA,
+            RDID2 = 0xDB,
+            RDID3 = 0xDC,
+            RDID4 = 0xDD,
+
+            GMCTRP1 = 0xE0,		// Positive Gamma correction
+            GMCTRN1 = 0xE1,		// Negative Gamma correction
+
+            IFCTL = 0xF6		// Interface Control
+        };
+    };
 
     /**
      * Initialise the display. Called from the constructor.
@@ -139,17 +136,8 @@ namespace craft {
         _px = scale;
         _size.setSize(_hwSize.width >> _px, _hwSize.height >> _px);
 
-        // Set up SPI pins
-        SPI.setMOSI(_mosi);
-        SPI.setMISO(_miso);
-        SPI.setSCK(_sclk);
-
-        SPI.begin();
-
-        if (SPI.pinIsChipSelect(_cs, _dc)) {
-            _pcs_data = SPI.setCS(_cs);
-            _pcs_command = _pcs_data | SPI.setCS(_dc);
-        }
+        // Initilaise SPI
+        init();
 
         // If the reset feature is used, reset the display.
         // Reset is active low.
@@ -164,7 +152,7 @@ namespace craft {
         }
 
         // Send init commands
-        SPI.beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE0));
+        beginTransaction();
         const uint8_t* addr = init_commands;
         while (1) {
             uint8_t count = *addr++;
@@ -175,13 +163,13 @@ namespace craft {
             }
         }
         writeCommand_last(ILI9341_Command::SLPOUT);    // Exit Sleep
-        SPI.endTransaction();
+        endTransaction();
 
         // Turn on the display after a delay
         delay(120);
-        SPI.beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE0));
+        beginTransaction();
         writeCommand_last(ILI9341_Command::DISPON);    // Display on
-        SPI.endTransaction();
+        endTransaction();
 
         // Turn on the backlight
         if (_bklt != 255) {
@@ -203,7 +191,7 @@ namespace craft {
         ready = false;
 
         // Begin the transmission to hardware
-        SPI.beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE0));
+        beginTransaction();
 
         // Set the area of the display to write to
         writeCommand(ILI9341_Command::CASET); // Column addr set
@@ -234,7 +222,7 @@ namespace craft {
             lineOffset += _size.width;
         }
         // Done with complete transaction
-        SPI.endTransaction();
+        endTransaction();
 
         // Set ready to send data
         ready = true;
