@@ -135,7 +135,7 @@ namespace craft {
         }
 
         ALWAYS_INLINE void beginTransaction() {
-            _spi->beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE0));
+            _spi->beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE3));
         }
 
         ALWAYS_INLINE void endTransaction() {
@@ -167,7 +167,7 @@ namespace craft {
         }
 
         ALWAYS_INLINE void writeData16(uint16_t d) {
-            writeCommand((d >> 8) & 0xff);
+            writeCommand(d >> 8);
             writeCommand(d & 0xff);
         }
 
