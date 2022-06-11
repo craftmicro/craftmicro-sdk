@@ -94,6 +94,7 @@ namespace craft {
         3, 		0xb1, 0x00, 0x10, 					// FrameRate Control 119Hz
 
         2, 		ILI9341_Command::MADCTL, 0x20 | 0x08, // 0x80=MY, 0x40=MX, 0x10=ML, 0x04=MH, 0x20=MV, 0x00=RGB, 0x08=BGR, 
+        1,      ILI9341_Command::SLPOUT,
         0
     };
 
@@ -129,43 +130,12 @@ namespace craft {
         // Initilaise SPI
         init();
 
-        // If the reset feature is used, reset the display.
-        // Reset is active low.
-        if (_rst < 255) {
-            pinMode(_rst, OUTPUT);
-            digitalWrite(_rst, HIGH);
-            delay(5);
-            digitalWrite(_rst, LOW);
-            delay(20);
-            digitalWrite(_rst, HIGH);
-            delay(150);
-        }
-
         // Send init commands
         beginTransaction();
-        const uint8_t* addr = init_commands;
-        while (1) {
-            uint8_t count = *addr++;
-            if (count-- == 0) break;
-            writeCommand(*addr++);
-            while (count-- > 0) {
-                writeData8(*addr++);
-            }
-        }
-        writeCommand_last(ILI9341_Command::SLPOUT);    // Exit Sleep
-        endTransaction();
-
-        // Turn on the display after a delay
+        commandSequence(init_commands);
         delay(120);
-        beginTransaction();
         writeCommand_last(ILI9341_Command::DISPON);    // Display on
         endTransaction();
-
-        // Turn on the backlight
-        if (_bklt != 255) {
-            pinMode(_bklt, OUTPUT);
-            backlight(1.0);
-        }
 
         // Ready to send data
         ready = true;

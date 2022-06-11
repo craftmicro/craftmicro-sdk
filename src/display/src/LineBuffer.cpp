@@ -25,8 +25,8 @@ namespace craft {
         _region.set(
             craft::max(0, rect->x),
             craft::max(0, rect->y),
-            craft::min(_bufferWidth, rect->x2),
-            craft::min(_bufferWidth, rect->y2)
+            craft::min(_display->width() - 1, rect->x2),
+            craft::min(_display->height() - 1, rect->y2)
         );
         resetRegion();
     }

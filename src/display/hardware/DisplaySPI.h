@@ -8,6 +8,9 @@
 
 namespace craft {
 
+    #define UNUSED_PIN 255
+    #define DELAY_COMMAND 255
+
     /**
      * Display base class for SPI displays.
      **/
@@ -24,14 +27,32 @@ namespace craft {
         #define SPICLOCK	60e6
 
         ALWAYS_INLINE void init() {
-            if (_mosi != 255) SPI.setMOSI(_mosi);
-            if (_miso != 255) SPI.setMOSI(_miso);
-            if (_sclk != 255)  SPI.setSCK(_sclk);
+            if (_mosi != UNUSED_PIN) SPI.setMOSI(_mosi);
+            if (_miso != UNUSED_PIN) SPI.setMOSI(_miso);
+            if (_sclk != UNUSED_PIN)  SPI.setSCK(_sclk);
             SPI.begin();
 
             if (SPI.pinIsChipSelect(_cs, _dc)) {
                 _pcs_data = SPI.setCS(_cs);
                 _pcs_command = _pcs_data | SPI.setCS(_dc);
+            }
+
+            // If the reset feature is used, reset the display.
+            // Reset is active low.
+            if (_rst != UNUSED_PIN) {
+                pinMode(_rst, OUTPUT);
+                digitalWrite(_rst, HIGH);
+                delay(5);
+                digitalWrite(_rst, LOW);
+                delay(20);
+                digitalWrite(_rst, HIGH);
+                delay(150);
+            }
+
+            // Turn on the backlight
+            if (_bklt != UNUSED_PIN) {
+                pinMode(_bklt, OUTPUT);
+                backlight(1.0);
             }
         }
 
@@ -129,16 +150,44 @@ namespace craft {
         SPIClass* _spi = nullptr;
 
         ALWAYS_INLINE void init() {
+            // If the reset feature is used, reset the display.
+            // Reset is active low.
+            if (_rst != UNUSED_PIN) {
+                pinMode(_rst, OUTPUT);
+                digitalWrite(_rst, HIGH);
+                delay(100);
+                digitalWrite(_rst, LOW);
+                delay(100);
+                digitalWrite(_rst, HIGH);
+                delay(200);
+            }
+
+            // Init SPI
             _spi = new SPIClass(VSPI);
-            _spi->begin(_sclk, _miso == 255 ? -1 : _miso, _mosi, _cs); //SCLK, MISO, MOSI, SS
-            pinMode(_cs, OUTPUT);
+            if (_cs != UNUSED_PIN) {
+                pinMode(_cs, OUTPUT);
+                digitalWrite(_cs, HIGH);
+            }
+            if (_dc != UNUSED_PIN) {
+                pinMode(_dc, OUTPUT);
+                digitalWrite(_dc, HIGH); // Data mode
+            }
+            _spi->begin(_sclk, _miso == UNUSED_PIN ? -1 : _miso, _mosi, _cs); //SCLK, MISO, MOSI, SS
+
+            // Turn on the backlight
+            if (_bklt != UNUSED_PIN) {
+                pinMode(_bklt, OUTPUT);
+                backlight(1.0);
+            }
         }
 
         ALWAYS_INLINE void beginTransaction() {
-            _spi->beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE3));
+            _spi->beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE0));
+            if (_cs != UNUSED_PIN) digitalWrite(_cs, LOW);
         }
 
         ALWAYS_INLINE void endTransaction() {
+            if (_cs != UNUSED_PIN) digitalWrite(_cs, HIGH);
             _spi->endTransaction();
         }
 
@@ -146,9 +195,9 @@ namespace craft {
          * @brief Write an SPI command
          */
         ALWAYS_INLINE void writeCommand(uint8_t c) {
-            digitalWrite(_spi->pinSS(), LOW);
-            _spi->transfer(c);
-            digitalWrite(_spi->pinSS(), HIGH);
+            if (_dc != UNUSED_PIN) digitalWrite(_dc, LOW);
+            _spi->write(c);
+            if (_dc != UNUSED_PIN) digitalWrite(_dc, HIGH);
         }
 
         ALWAYS_INLINE void writeCommand_last(uint8_t c) {
@@ -159,7 +208,7 @@ namespace craft {
          * @brief Write SPI data
          */
         ALWAYS_INLINE void writeData8(uint8_t d) {
-            writeCommand(d);
+            _spi->write(d);
         }
 
         ALWAYS_INLINE void writeData8_last(uint8_t d) {
@@ -167,8 +216,7 @@ namespace craft {
         }
 
         ALWAYS_INLINE void writeData16(uint16_t d) {
-            writeCommand(d >> 8);
-            writeCommand(d & 0xff);
+            _spi->write16(d);
         }
 
         ALWAYS_INLINE void writeData16_last(uint16_t d) {
@@ -176,6 +224,26 @@ namespace craft {
         }
 
         #endif
+
+        ALWAYS_INLINE void commandSequence(const uint8_t* commands) {
+            const uint8_t* addr = commands;
+            uint8_t c;
+            while (1) {
+                uint8_t count = *addr++;
+                if (count-- == 0) break;
+                c = *addr++;
+                if (c == DELAY_COMMAND) {
+                    c = *addr++;
+                    delay(c);
+                }
+                else {
+                    writeCommand(c);
+                    while (count-- > 0) {
+                        writeData8(*addr++);
+                    }
+                }
+            }
+        }
     };
 
 } // namespace craft

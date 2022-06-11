@@ -31,30 +31,24 @@ namespace craft {
 			TEOFF = 0x34, // Tear Effect off
 			TEON = 0x35,  // tear Effect on
 			MADCTL = 0x36,
-			COLMOD = 0x3A,
-
-			DELAY = 0xFF, // Delay (not an ST7789 command, but interpreted as a delay)
+			COLMOD = 0x3A
 		};
 	}
 
 	static const uint8_t init_commands[] = {
-		1, ST7789_Command::SWRESET,								 // Software reset (no args)
-		2, ST7789_Command::DELAY, 150,							 // Delay 150ms
-		1, ST7789_Command::SLPOUT,								 // Out of sleep mode (no args)
-		2, ST7789_Command::DELAY, 10,							 // Delay 10ms
-		2, ST7789_Command::COLMOD, 0x55,						 // Set color mode to 16b color
-		2, ST7789_Command::DELAY, 10,							 // Delay 10ms
-		2, ST7789_Command::MADCTL, 0x08,						 // Mem access ctrl (directions). Row/col addr, bottom-top refresh
-		5, ST7789_Command::CASET, 0x00, 0, 0, 240,				 // Column addr set
-		5, ST7789_Command::RASET, 0x00, 0, 320 >> 8, 320 & 0xff, // Row addr set
-		1, ST7789_Command::INVON,								 // Invert display on (hack)
-		2, ST7789_Command::DELAY, 10,							 // Delay 10ms
-		1, ST7789_Command::NORON,								 // Normal display on
-		2, ST7789_Command::DELAY, 10,							 // Delay 10ms
-		1, ST7789_Command::DISPON,								 // Turn display on
-		2, ST7789_Command::DELAY, 10,							 // Delay 10ms
-		2, ST7789_Command::MADCTL, 0xC0,						 // Normal rotation
-		0														 // End
+		1, ST7789_Command::SLPOUT,
+		2, ST7789_Command::COLMOD, 0x55,
+		2, DELAY_COMMAND, 10,
+		2, ST7789_Command::MADCTL, 0x00,
+		5, ST7789_Command::CASET, 0, 0, 0, 240,
+		5, ST7789_Command::RASET, 0, 0, 320 >> 8, 320 & 0xff,
+		1, ST7789_Command::INVON,
+		2, DELAY_COMMAND, 10,
+		1, ST7789_Command::NORON,
+		2, DELAY_COMMAND, 10,
+		1, ST7789_Command::DISPON,
+		2, DELAY_COMMAND, 255,
+		0
 	};
 
 	/**
@@ -83,7 +77,7 @@ namespace craft {
 				// are actually different for the different rotations.
 				_hwSize.setSize(135, 240);
 				_yoffset = (int)((320 - _hwSize.height) / 2);
-				_xoffset = (int)((240 - _hwSize.width + 1) / 2);
+				_xoffset = (int)((240 - _hwSize.width) / 2);
 		}
 		_pf = PixelFormat::RGB565;
 		_px = scale;
@@ -91,43 +85,13 @@ namespace craft {
 
 		// Initialise SPI
 		init();
-
-		// Send init commands
 		beginTransaction();
-		const uint8_t* addr = init_commands;
-		uint8_t c;
-		while (1) {
-			uint8_t count = *addr++;
-			if (count-- == 0)
-				break;
-			c = *addr++;
-			if (c == ST7789_Command::DELAY) {
-				c = *addr++;
-				delay(c);
-			}
-			else {
-				writeCommand(c);
-				while (count-- > 0) {
-					writeData8(*addr++);
-				}
-			}
-		}
-		writeCommand_last(ST7789_Command::SLPOUT); // Exit Sleep
+		commandSequence(init_commands);
 		endTransaction();
 
-		// Turn on the display after a delay
-		delay(120);
-		beginTransaction();
-		writeCommand_last(ST7789_Command::DISPON); // Display on
-		endTransaction();
-
-		// Turn on the backlight
-		if (_bklt != 255) {
-			pinMode(_bklt, OUTPUT);
-			backlight(1.0);
-		}
+		// Ready to send data
+        ready = true;
 	}
-
 
 	/**
 	 * Update the linebuffer to the display
@@ -142,12 +106,12 @@ namespace craft {
 
 		// Set the area of the display to write to
 		writeCommand(ST7789_Command::CASET); // Column addr set
-		writeData16(buffer.rect.x << _px);
-		writeData16(((buffer.rect.x2 + 1) << _px) - 1);
+		writeData16((buffer.rect.x << _px) + _xoffset);
+		writeData16(((buffer.rect.x2 + 1) << _px) - 1 + _xoffset);
 
 		writeCommand(ST7789_Command::RASET); // Row addr set
-		writeData16(buffer.rect.y << _px);
-		writeData16(((buffer.rect.y2 + 1) << _px) - 1);
+		writeData16((buffer.rect.y << _px) + _yoffset);
+		writeData16(((buffer.rect.y2 + 1) << _px) - 1 + _yoffset);
 
 		// Tell display we are about to send data
 		writeCommand(ST7789_Command::RAMWR);
