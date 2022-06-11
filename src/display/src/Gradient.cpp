@@ -3,7 +3,7 @@
 namespace craft {
 
     Gradient::Gradient(uint8_t numStops) {
-        numStops = max(2, numStops);
+        numStops = craft::max(2, numStops);
         _numStops = numStops;
         _stops = new GradientStop * [numStops];
         while (numStops--) _stops[numStops] = GradientStop::Create();
