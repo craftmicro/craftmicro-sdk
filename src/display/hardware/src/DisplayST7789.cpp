@@ -93,18 +93,7 @@ namespace craft {
 		ready = true;
 	}
 
-	/**
-	 * Update the linebuffer to the display
-	 * @param	continuous	If true, will continuously refresh until stopRefresh is called
-	 **/
-	void DisplayST7789::draw(LineBufferData& buffer) {
-		// Set not ready
-		ready = false;
-
-		// Begin the transmission to hardware
-		beginTransaction();
-
-		// Set the area of the display to write to
+	void DisplayST7789::setArea(LineBufferData& buffer) {
 		writeCommand(ST7789_Command::CASET); // Column addr set
 		writeData16((buffer.rect.x << _px) + _xoffset);
 		writeData16(((buffer.rect.x2 + 1) << _px) - 1 + _xoffset);
@@ -115,29 +104,6 @@ namespace craft {
 
 		// Tell display we are about to send data
 		writeCommand(ST7789_Command::RAMWR);
-
-		// Write pixels. For some reason this SPI implementation requires the final
-		// pixel to be written differently, so we need to keep track of the count
-		int scale = 1 << _px;
-		int count = buffer.rect.width * scale * buffer.rect.height * scale;
-		int lineOffset = 0;
-		for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
-			for (uint16_t i = 0; i < scale; i++) {
-				for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
-					for (uint16_t j = 0; j < scale; j++) {
-						if (--count) writeData16(to565(buffer.pixels[lineOffset + x]));
-						else writeData16_last(to565(buffer.pixels[lineOffset + x]));
-					}
-				}
-			}
-			lineOffset += _size.width;
-		}
-		// Done with complete transaction
-		endTransaction();
-
-		// Set ready to send data
-		ready = true;
 	}
-
 
 } // namespace

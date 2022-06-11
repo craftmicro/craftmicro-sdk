@@ -51,7 +51,7 @@ void setup() {
     app->stage->backgroundColor(Color8888::SaddleBrown);
 
     // Create sprite 1 and add it to the stage
-    asterixSprite1 = Sprite::Create((TilemapData*)&asterix, 0);
+    asterixSprite1 = Sprite::Create(&asterix, 0);
     app->stage->addChild(asterixSprite1);
     asterixSprite1->origin(OriginType::centerBottom, true);
     asterixSprite1->x(25);
@@ -62,7 +62,7 @@ void setup() {
     asterixSprite1->filters = hsvFilter;
 
     // Create sprite 2 and add it to the stage
-    asterixSprite2 = Sprite::Create((TilemapData*)&asterix, 0);
+    asterixSprite2 = Sprite::Create(&asterix, 0);
     app->stage->addChild(asterixSprite2);
     asterixSprite2->origin(OriginType::centerBottom, true);
     asterixSprite2->x(50);
@@ -73,7 +73,7 @@ void setup() {
     asterixSprite2->filters = tintFilter;
 
     // Create sprite 3 and add it to the stage
-    asterixSprite3 = Sprite::Create((TilemapData*)&asterix, 0);
+    asterixSprite3 = Sprite::Create(&asterix, 0);
     app->stage->addChild(asterixSprite3);
     asterixSprite3->origin(OriginType::centerBottom, true);
     asterixSprite3->x(75);
@@ -85,7 +85,7 @@ void setup() {
     asterixSprite3->filters = new ColorMaskFilter(0xffb496);
 
     // Create sprite 4 and add it to the stage
-    asterixSprite4 = Sprite::Create((TilemapData*)&asterix, 0);
+    asterixSprite4 = Sprite::Create(&asterix, 0);
     app->stage->addChild(asterixSprite4);
     asterixSprite4->origin(OriginType::centerBottom, true);
     asterixSprite4->x(100);
@@ -96,7 +96,7 @@ void setup() {
     asterixSprite4->filters = new FuzzyColorMaskFilter(0xffb496, 0.25);
 
     // Create sprite 5 and add it to the stage
-    asterixSprite5 = Sprite::Create((TilemapData*)&asterix, 0);
+    asterixSprite5 = Sprite::Create(&asterix, 0);
     app->stage->addChild(asterixSprite5);
     asterixSprite5->origin(OriginType::centerBottom, true);
     asterixSprite5->x(125);

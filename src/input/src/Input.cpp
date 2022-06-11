@@ -179,14 +179,15 @@ namespace craft {
             buttonClickType = craft::ClickType::none;
 
             // Process digital pin
-            if (ip->pinType == craft::PinType::digital) {
+            if (ip->pinType == craft::PinType::digital || ip->pinType == craft::PinType::digitalNC) {
+                int OPEN = (ip->pinType == craft::PinType::digital)?HIGH:LOW;
 
                 // State based
                 switch (ip->state) {
 
                     // Button is resting
                     case craft::PinState::psRest:
-                        if (buttonState == HIGH) {
+                        if (buttonState == OPEN) {
                             ip->state = craft::PinState::psDown1DB;
                             ip->time = 0;
                         }
@@ -196,7 +197,7 @@ namespace craft {
                     case craft::PinState::psDown1DB:
                         ip->time += dt;
                         if (ip->time >= Input::TIME_DEBOUNCE) {
-                            if (buttonState == HIGH) {
+                            if (buttonState == OPEN) {
                                 buttonClickType = craft::ClickType::down;
                                 ip->state = craft::PinState::psDown1;
                                 ip->time = 0;
@@ -214,7 +215,7 @@ namespace craft {
                             ip->state = craft::PinState::psHold;
                             buttonClickType = craft::ClickType::hold;
                         }
-                        else if (buttonState == LOW) {
+                        else if (buttonState != OPEN) {
                             if (ip->time < TIME_PRESS) {
                                 ip->state = craft::PinState::psUp1DB;
                                 ip->time = 0;
@@ -228,7 +229,7 @@ namespace craft {
 
                         // Button held on first push
                     case craft::PinState::psHold:
-                        if (buttonState == LOW) {
+                        if (buttonState != OPEN) {
                             ip->state = craft::PinState::psLastDB;
                             ip->time = 0;
                         }
@@ -238,7 +239,7 @@ namespace craft {
                     case craft::PinState::psUp1DB:
                         ip->time += dt;
                         if (ip->time >= Input::TIME_DEBOUNCE) {
-                            if (buttonState == LOW) {
+                            if (buttonState != OPEN) {
                                 buttonClickType = craft::ClickType::up;
                                 ip->state = craft::PinState::psUp1;
                                 ip->time = 0;
@@ -252,7 +253,7 @@ namespace craft {
                         // Button debouncing for first release
                     case craft::PinState::psUp1:
                         ip->time += dt;
-                        if (buttonState == HIGH) {
+                        if (buttonState == OPEN) {
                             ip->state = craft::PinState::psDown2DB;
                             ip->time = 0;
                         }
@@ -266,7 +267,7 @@ namespace craft {
                     case craft::PinState::psPress1DB:
                         ip->time += dt;
                         if (ip->time >= Input::TIME_DEBOUNCE) {
-                            if (buttonState == LOW) {
+                            if (buttonState != OPEN) {
                                 buttonClickType = craft::ClickType::press;
                                 ip->state = craft::PinState::psRest;
                             }
@@ -281,7 +282,7 @@ namespace craft {
                     case craft::PinState::psDown2DB:
                         ip->time += dt;
                         if (ip->time >= Input::TIME_DEBOUNCE) {
-                            if (buttonState == HIGH) {
+                            if (buttonState == OPEN) {
                                 buttonClickType = craft::ClickType::down;
                                 ip->state = craft::PinState::psDown2;
                                 ip->time = 0;
@@ -299,7 +300,7 @@ namespace craft {
                             ip->state = craft::PinState::psHold;
                             buttonClickType = craft::ClickType::click_hold;
                         }
-                        else if (buttonState == LOW) {
+                        else if (buttonState != OPEN) {
                             if (ip->time < TIME_PRESS) {
                                 ip->state = craft::PinState::psUp2DB;
                                 ip->time = 0;
@@ -315,7 +316,7 @@ namespace craft {
                     case craft::PinState::psUp2DB:
                         ip->time += dt;
                         if (ip->time >= Input::TIME_DEBOUNCE) {
-                            if (buttonState == LOW) {
+                            if (buttonState != OPEN) {
                                 buttonClickType = craft::ClickType::dbl_click;
                                 ip->state = craft::PinState::psRest;
                             }
@@ -330,7 +331,7 @@ namespace craft {
                     case craft::PinState::psPress2DB:
                         ip->time += dt;
                         if (ip->time >= Input::TIME_DEBOUNCE) {
-                            if (buttonState == LOW) {
+                            if (buttonState != OPEN) {
                                 buttonClickType = craft::ClickType::click_press;
                                 ip->state = craft::PinState::psRest;
                             }
@@ -345,7 +346,7 @@ namespace craft {
                     case craft::PinState::psLastDB:
                         ip->time += dt;
                         if (ip->time >= Input::TIME_DEBOUNCE) {
-                            if (buttonState == LOW) {
+                            if (buttonState != OPEN) {
                                 buttonClickType = craft::ClickType::up;
                                 ip->state = craft::PinState::psRest;
                                 ip->time = 0;

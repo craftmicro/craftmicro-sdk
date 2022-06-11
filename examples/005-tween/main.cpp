@@ -7,8 +7,10 @@ Box* box;
 
 float_t x = 0.0;
 float_t y = 0.0;
-float_t next_x = 150.0;
-float_t next_y = 110.0;
+float_t end_x = 150.0;
+float_t end_y = 110.0;
+float_t next_x = end_x;
+float_t next_y = end_y;
 
 // Start a tween in the horizontal plane
 void hTweenDone(void* data) {
@@ -16,7 +18,7 @@ void hTweenDone(void* data) {
     // Use 'quadratic ease-in and ease-out' easing function.
     // Once the tween is complete, call hTweenDone again
     app->tweens->addTween(&x, x, next_x, 4.3, quadraticEaseInOut, hTweenDone, NULL);
-    next_x = (next_x == 0.0) ? 150.0 : 0.0;
+    next_x = (next_x == 0.0) ? end_x : 0.0;
 }
 
 // Start a tween in the vertical plane
@@ -26,7 +28,7 @@ void vTweenDone(void* data) {
         // Use 'quadratic ease-in' easing function so it eases in slowly.
         // Once the tween is complete, call vTweenDone again
         app->tweens->addTween(&y, y, next_y, 1.0, quadraticEaseOut, vTweenDone, NULL);
-        next_y = 110.0;
+        next_y = end_y;
     }
     else {
         // Tween the 'y' variable between it's current value and next_y over 1.0 seconds.
@@ -63,8 +65,10 @@ void setup() {
     app->stage->addChild(box);
 
     // Start easing in both h and v directions
-    hTweenDone(NULL);
-    vTweenDone(NULL);
+    end_x = next_x = app->display->width() - 10;
+    end_y = next_y = app->display->height() - 10;
+    hTweenDone(nullptr);
+    vTweenDone(nullptr);
 
     // Listen for the update_render event so that we can update the box on
     // everyy render cycle. The function 'updateBox' is called.

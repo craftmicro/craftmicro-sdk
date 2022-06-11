@@ -139,9 +139,10 @@ namespace craft {
     };
 
     enum class PinType {
-        digital = 0,
-        analog = 1, // Analogue, 0=off, >0 is on
-        analog_mid = 2  // Analogue, middle=off, away from middle is on (+ve and -ve)
+        digital,
+        digitalNC,
+        analog, // Analogue, 0=off, >0 is on
+        analog_mid  // Analogue, middle=off, away from middle is on (+ve and -ve)
     };
 
     typedef uint8_t pin;

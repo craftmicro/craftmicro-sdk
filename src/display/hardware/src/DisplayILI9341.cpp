@@ -141,19 +141,7 @@ namespace craft {
         ready = true;
     }
 
-    /**
-     * @brief Draw data to an area of the display
-     *
-     * @param buffer The line buffer to draw
-    */
-    void DisplayILI9341::draw(LineBufferData& buffer) {
-        // Set not ready
-        ready = false;
-
-        // Begin the transmission to hardware
-        beginTransaction();
-
-        // Set the area of the display to write to
+    void DisplayILI9341::setArea(LineBufferData& buffer) {
         writeCommand(ILI9341_Command::CASET); // Column addr set
         writeData16(buffer.rect.x << _px);
         writeData16(((buffer.rect.x2 + 1) << _px) - 1);
@@ -164,28 +152,6 @@ namespace craft {
 
         // Tell display we are about to send data
         writeCommand(ILI9341_Command::RAMWR);
-
-        // Write pixels. For some reason this SPI implementation requires the final
-        // pixel to be written differently, so we need to keep track of the count
-        int scale = 1 << _px;
-        int count = buffer.rect.width * scale * buffer.rect.height * scale;
-        int lineOffset = 0;
-        for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
-            for (uint16_t i = 0; i < scale; i++) {
-                for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
-                    for (uint16_t j = 0; j < scale; j++) {
-                        if (--count) writeData16(to565(buffer.pixels[lineOffset + x]));
-                        else writeData16_last(to565(buffer.pixels[lineOffset + x]));
-                    }
-                }
-            }
-            lineOffset += _size.width;
-        }
-        // Done with complete transaction
-        endTransaction();
-
-        // Set ready to send data
-        ready = true;
     }
 
 } // namespace craft

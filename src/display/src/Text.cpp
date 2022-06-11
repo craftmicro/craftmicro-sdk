@@ -22,7 +22,7 @@ namespace craft {
      * @brief Create a new object by passing in a font definition, or take one from the pool
      * @return The new or recycled object
      */
-    Text* Text::Create(packedbdf_t* font) {
+    Text* Text::Create(const packedbdf_t* font) {
         Text* object = MemoryPool<Text>::Create();
         object->font(font);
         return object;
@@ -32,7 +32,7 @@ namespace craft {
      * @brief Set the font that this text uses
      * @param font 	The font to use
      */
-    void Text::font(packedbdf_t* font) {
+    void Text::font(const packedbdf_t* font) {
         if (_font) delete _font;
         _font = new Font(font);
 
@@ -85,7 +85,7 @@ namespace craft {
      * @brief Set the text string
      * @param t The text string
      */
-    void Text::text(char* t) {
+    void Text::text(const char* t) {
         _text = t;
         _needsCalc = true;
         dirty();
