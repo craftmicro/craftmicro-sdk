@@ -90,7 +90,7 @@ namespace craft {
 		endTransaction();
 
 		// Ready to send data
-        ready = true;
+		ready = true;
 	}
 
 	/**
