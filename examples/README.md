@@ -32,7 +32,7 @@ _(**) The path should be to the library folder (the parent of the Craft Micro fo
 <summary>See example platformio.ini</summary>
 In our example we are targeting the Teensy 3.6 dev board. Our <code>platformio.ini</code> looks like this:
 
-```
+```ini
 [env:teensy36]
 platform = teensy
 board = teensy36
