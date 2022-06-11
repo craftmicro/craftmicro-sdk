@@ -4,6 +4,7 @@ The Craft Micro SDK uses the Arduino framework, so any tool set that uses this f
 
 - [Run the examples using PlatformIO](#run-the-examples-using-platformio)
 - [Run the examples using Arduino IDE](#run-the-examples-using-arduino-ide)
+- [Details about supported TFT displays](Displays.md)
 
 ---
 
@@ -59,3 +60,4 @@ build_flags = -I"C:/libraries/craftmicro-sdk/"
 4. Build and deploy!
 
 _(*) You need to copy the resources into each sketch that requires them. If you change the folder names, also update the `#include` path to match_
+
