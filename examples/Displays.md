@@ -9,7 +9,7 @@ Craft Micro has support for the following TFT displays:
 
 
 ```cpp
-craft::Display = new DisplayILI9341(
+craft::Display display = new DisplayILI9341(
     DisplaySize::Size135x240,   // Pixel size of the display
     10,                         // Chip select pin (CS/SS)
     15,                         // Data/Command pin (DC)
@@ -27,7 +27,7 @@ Only the SPI interface is supported at this time.
 ## ST7789
 
 ```cpp
-craft::Display = new DisplayST7789(
+craft::Display display = new DisplayST7789(
     DisplaySize::Size320x240,   // Pixel size of the display
     5,                          // Chip select pin (CS/SS)
     16,                         // Data/Command pin (DC)
