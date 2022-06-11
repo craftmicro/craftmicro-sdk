@@ -35,7 +35,7 @@ void setup() {
     box->color = Color8888::Orange;
     box->id = 1;
 
-    asterixSprite = Sprite::Create((TilemapData*)&asterix, 0);
+    asterixSprite = Sprite::Create(&asterix, 0);
     box->addChild(asterixSprite);
     asterixSprite->origin(OriginType::centerBottom, true);
     asterixSprite->x(30);
@@ -52,7 +52,7 @@ void setup() {
     box2->color = Color8888::IndianRed;
     box2->id = 2;
 
-    obelixSprite = Sprite::Create((TilemapData*)&obelix, 0);
+    obelixSprite = Sprite::Create(&obelix, 0);
     box2->addChild(obelixSprite);
     obelixSprite->origin(OriginType::centerBottom, true);
     obelixSprite->x(40);
@@ -62,7 +62,7 @@ void setup() {
 
     // now we will just draw add the dogmatix sprite with no
     // masking, just for fun :)
-    dogmatixSprite = Sprite::Create((TilemapData*)&dogmatix, 0);
+    dogmatixSprite = Sprite::Create(&dogmatix, 0);
     box2->addChild(dogmatixSprite);
     dogmatixSprite->origin(OriginType::centerBottom, true);
     dogmatixSprite->x(1);

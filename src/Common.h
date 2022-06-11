@@ -82,6 +82,11 @@ namespace craft {
 	}
 
 	/**
+	 * @brief Modified flash string helper
+	 */
+	#define S(string_literal) ((const char*)F(string_literal))
+
+	/**
 	 * @brief Inlining macro
 	 */
 	#if defined(_MSC_VER)

@@ -9,6 +9,8 @@ Text* text;
 
 // The pin that the button is connected to
 pin BUTTON_PIN = 35;
+// Change this to PinType::digitalNC if the button is "normally closed" (i.e. normally HIGH, LOW when pressed)
+PinType BUTTON_TYPE = PinType::digital;
 
 // Define custom events we want to capture. These events can be any number > 255 (0-255 are reserved)
 typedef enum {
@@ -32,16 +34,16 @@ boolean buttonEvent(uint32_t event, void* data) {
             box->dirty(); // Force the box to rdraw after a change
             break;
         case button_click:
-            text->text((char*)F("Click"));
+            text->text(S("Click"));
             break;
         case button_dblclick:
-            text->text((char*)F("Double-click"));
+            text->text(S("Double-click"));
             break;
         case button_hold:
-            text->text((char*)F("Hold"));
+            text->text(S("Hold"));
             break;
         case button_clickhold:
-            text->text((char*)F("Click then hold"));
+            text->text(S("Click then hold"));
             break;
     }
     return true;
@@ -65,21 +67,21 @@ void setup() {
     app->stage->addChild(box);
 
     // Create a text area to show click types
-    text = Text::Create((packedbdf_t*)&PixelSix008);
-    text->text((char*)F("Press the button"));
-    text->width(120);
-    text->x(40);
-    text->y(15);
+    text = Text::Create(&PixelSix008);
+    text->text(S("Press the button"));
+    text->width(app->display->width() - 20);
+    text->x(10);
+    text->y(40);
     text->color(Color8888::White);
     app->stage->addChild(text);
 
     // Define which actions we want events fired for
-    app->input->map(BUTTON_PIN, PinType::digital, ClickType::down, CustomEvent::button_down);
-    app->input->map(BUTTON_PIN, PinType::digital, ClickType::up, CustomEvent::button_up);
-    app->input->map(BUTTON_PIN, PinType::digital, ClickType::click, CustomEvent::button_click);           // A quick click of the button
-    app->input->map(BUTTON_PIN, PinType::digital, ClickType::dbl_click, CustomEvent::button_dblclick);    // A quick double-click of the button
-    app->input->map(BUTTON_PIN, PinType::digital, ClickType::hold, CustomEvent::button_hold);             // Hold the button down
-    app->input->map(BUTTON_PIN, PinType::digital, ClickType::click_hold, CustomEvent::button_clickhold);  // A quick click followed by holding the button down
+    app->input->map(BUTTON_PIN, BUTTON_TYPE, ClickType::down, CustomEvent::button_down);
+    app->input->map(BUTTON_PIN, BUTTON_TYPE, ClickType::up, CustomEvent::button_up);
+    app->input->map(BUTTON_PIN, BUTTON_TYPE, ClickType::click, CustomEvent::button_click);           // A quick click of the button
+    app->input->map(BUTTON_PIN, BUTTON_TYPE, ClickType::dbl_click, CustomEvent::button_dblclick);    // A quick double-click of the button
+    app->input->map(BUTTON_PIN, BUTTON_TYPE, ClickType::hold, CustomEvent::button_hold);             // Hold the button down
+    app->input->map(BUTTON_PIN, BUTTON_TYPE, ClickType::click_hold, CustomEvent::button_clickhold);  // A quick click followed by holding the button down
 
     // Listen for the events we are interested in
     app->messenger->addListener(CustomEvent::button_down, new CallbackListener(buttonEvent));

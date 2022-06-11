@@ -15,7 +15,7 @@ namespace craft {
         /**
          * @brief Construct a new Font object
          */
-        Font(packedbdf_t* font);
+        Font(const packedbdf_t* font);
 
         /**
          * @brief Get the line height
@@ -78,7 +78,7 @@ namespace craft {
         /**
          * @brief The packed font data
          */
-        packedbdf_t* _font = 0;
+        const packedbdf_t* _font = 0;
 
         /**
          * @brief Bits Per Pixel

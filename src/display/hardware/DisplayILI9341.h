@@ -47,12 +47,8 @@ namespace craft {
             uint8_t scale = PixelScale::x1
         );
 
-        /**
-         * @brief Draw data to an area of the display
-         *
-         * @param buffer The line buffer to draw (buffer is scaled by pixel scale)
-        */
-        void draw(LineBufferData& buffer);
+    protected:
+        void setArea(LineBufferData& buffer) override;
 
     };
 

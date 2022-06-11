@@ -15,6 +15,15 @@ namespace craft {
      * Display base class for SPI displays.
      **/
     class DisplaySPI : public Display {
+    public:
+
+        /**
+         * @brief Draw data to an area of the display
+         *
+         * @param buffer The line buffer to draw (buffer is scaled by pixel scale)
+        */
+        void draw(LineBufferData& buffer) override;
+
     protected:
 
         uint8_t _rst;
@@ -22,6 +31,7 @@ namespace craft {
         uint8_t _miso, _mosi, _sclk;
         uint8_t _pcs_data, _pcs_command;
 
+        // Kinetis K Series microcontrollers (ARM Cortex M4)
         #if defined(KINETISK)
 
         #define SPICLOCK	60e6
@@ -148,6 +158,7 @@ namespace craft {
         #define SPICLOCK	40e6
 
         SPIClass* _spi = nullptr;
+        SPISettings _spiSettings = SPISettings(SPICLOCK, MSBFIRST, SPI_MODE0);
 
         ALWAYS_INLINE void init() {
             // If the reset feature is used, reset the display.
@@ -182,7 +193,7 @@ namespace craft {
         }
 
         ALWAYS_INLINE void beginTransaction() {
-            _spi->beginTransaction(SPISettings(SPICLOCK, MSBFIRST, SPI_MODE0));
+            _spi->beginTransaction(_spiSettings);
             if (_cs != UNUSED_PIN) digitalWrite(_cs, LOW);
         }
 

@@ -22,14 +22,14 @@ void setup() {
     app->stage->backgroundColor(Color8888::SaddleBrown);
 
     // Create an Asterix sprite and put it on the stage
-    asterixSprite = Sprite::Create((TilemapData*)&asterix, 0);
+    asterixSprite = Sprite::Create(&asterix);
     app->stage->addChild(asterixSprite);
     asterixSprite->origin(OriginType::centerBottom, true);
     asterixSprite->x(50);
     asterixSprite->y(100);
 
     // Create an Obelix sprite and put it on the stage
-    obelixSprite = Sprite::Create((TilemapData*)&obelix, 0);
+    obelixSprite = Sprite::Create(&obelix);
     app->stage->addChild(obelixSprite);
     obelixSprite->origin(OriginType::centerBottom, true);
     obelixSprite->x(100);
@@ -38,7 +38,7 @@ void setup() {
     // Add a Dogmatix sprite and add it as a child of Obelix.
     // This means that it will move with Obelix and is treated as
     // part of obelix.
-    dogmatixSprite = Sprite::Create((TilemapData*)&dogmatix, 0);
+    dogmatixSprite = Sprite::Create(&dogmatix);
     obelixSprite->addChild(dogmatixSprite);
     dogmatixSprite->origin(OriginType::centerBottom, true);
     dogmatixSprite->x(-16);

@@ -190,6 +190,13 @@ namespace craft {
          **/
         uint8_t _bklt = 255;
         boolean _bkltPWM = false;
+
+        /**
+         * @brief Set the area of the display to draw to
+         *
+         * @param buffer The line buffer
+         */
+        virtual void setArea(LineBufferData& buffer);
     };
 
 } // namespace craft

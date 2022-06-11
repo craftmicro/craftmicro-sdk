@@ -5,7 +5,7 @@ namespace craft {
     /**
      * @brief Construct a new Font object
      */
-    Font::Font(packedbdf_t* font) {
+    Font::Font(const packedbdf_t* font) {
         _font = font;
 
         // Anti-aliased (multi-bit pixels)

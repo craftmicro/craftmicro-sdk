@@ -30,15 +30,15 @@ void setup() {
     // Set background color
     app->stage->backgroundColor(Color8888::SaddleBrown);
 
-    // Create a box and add it to the stage
-    box = Box::Create(20, 20, 32, 32);
+    // Create a box and add it to the centre of the stage
+    box = Box::Create(app->display->width() / 2 - 16, app->display->height() / 2 - 16, 32, 32);
     app->stage->addChild(box);
     box->color = Color8888::Orange;
 
     // Add a bump filter with a light source
     light = Light::Create(LightType::Directional);
     light->strength = 0.5;
-    filter = BumpFilter::Create((TilemapData*)&normalmap, 0, light);
+    filter = BumpFilter::Create(&normalmap, 0, light);
     box->filters = filter;
 
     // Listen for the update_render event. This runs the 'onRenderFrame' function on

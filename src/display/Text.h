@@ -46,13 +46,13 @@ namespace craft {
          * Create a new object or take one from the pool
          * @return The new or recycled object
          */
-        static Text* Create(packedbdf_t* font);
+        static Text* Create(const packedbdf_t* font);
 
         /**
          * @brief Set the font that this text uses
          * @param font 	The font to use
          */
-        void font(packedbdf_t* font);
+        void font(const packedbdf_t* font);
 
         /**
          * @brief Set the text color
@@ -82,7 +82,7 @@ namespace craft {
          * @brief Set the text string
          * @param t The text string
          */
-        void text(char* t);
+        void text(const char* t);
 
         /**
          * @brief Set the width
@@ -157,7 +157,7 @@ namespace craft {
         virtual void endRender();
 
     protected:
-        char* _text = 0;				// The text string
+        const char* _text = 0;				// The text string
         Font* _font = 0;				// The font to use
         color888 _color = 0;			// The color of the text
 
