@@ -16,9 +16,10 @@ void setup() {
     // is an ESP32 board with added display. Note that MISO is not supported on this board.
     // Use a single-line line buffer for low memory consumption
     app = new App(
-        new DisplayST7789(DisplaySize::Size135x240, 5, 16, 23, 19, 18, 14, PixelScale::x1),
+        new DisplayST7789(DisplaySize::Size135x240, 5, 16, 23, 19, 18, 4, PixelScale::x2),
         LineBufferHeight::singleLine
     );
+
     // Set background color
     app->stage->backgroundColor(Color8888::SaddleBrown);
 
@@ -26,14 +27,14 @@ void setup() {
     asterixSprite = Sprite::Create((TilemapData*)&asterix, 0);
     app->stage->addChild(asterixSprite);
     asterixSprite->origin(OriginType::centerBottom, true);
-    asterixSprite->x(50);
+    asterixSprite->x(15);
     asterixSprite->y(100);
 
     // Create an Obelix sprite and put it on the stage
     obelixSprite = Sprite::Create((TilemapData*)&obelix, 0);
     app->stage->addChild(obelixSprite);
     obelixSprite->origin(OriginType::centerBottom, true);
-    obelixSprite->x(100);
+    obelixSprite->x(45);
     obelixSprite->y(100);
 
     // Add a Dogmatix sprite and add it as a child of Obelix.
