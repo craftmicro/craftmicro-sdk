@@ -61,6 +61,8 @@ namespace craft {
 	/**
 	 * @brief Min implementation 
 	 */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-compare"
 	template<class A, class B>
 	constexpr auto min(A&& a, B&& b) -> decltype(a < b ? std::forward<A>(a) : std::forward<B>(b)) {
 		return a < b ? std::forward<A>(a) : std::forward<B>(b);
@@ -73,6 +75,7 @@ namespace craft {
 	constexpr auto max(A&& a, B&& b) -> decltype(a < b ? std::forward<A>(a) : std::forward<B>(b)) {
 		return a >= b ? std::forward<A>(a) : std::forward<B>(b);
 	}
+#pragma GCC diagnostic pop
 
 	/**
 	 * @brief Linear interpolation between two values
