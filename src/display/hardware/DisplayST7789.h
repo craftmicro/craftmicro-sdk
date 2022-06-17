@@ -27,7 +27,7 @@ namespace craft {
 			uint8_t mosi = 19,
 			uint8_t sclk = 18,
 			uint8_t bklt = 4,
-			uint8_t scale = PixelScale::x1
+			uint8_t scale = 1
 		);
 
 	protected:

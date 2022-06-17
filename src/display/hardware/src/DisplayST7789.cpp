@@ -80,8 +80,8 @@ namespace craft {
 				_xoffset = (int)((240 - _hwSize.width) / 2);
 		}
 		_pf = PixelFormat::RGB565;
-		_px = scale;
-		_size.setSize(_hwSize.width >> _px, _hwSize.height >> _px);
+		_px = scale == 0 ? 1 : scale;
+		_size.setSize(_hwSize.width / _px, _hwSize.height / _px);
 
 		// Initialise SPI
 		init();
@@ -95,12 +95,12 @@ namespace craft {
 
 	void DisplayST7789::setArea(LineBufferData& buffer) {
 		writeCommand(ST7789_Command::CASET); // Column addr set
-		writeData16((buffer.rect.x << _px) + _xoffset);
-		writeData16(((buffer.rect.x2 + 1) << _px) - 1 + _xoffset);
+		writeData16((buffer.rect.x * _px) + _xoffset);
+		writeData16(((buffer.rect.x2 + 1) * _px) - 1 + _xoffset);
 
 		writeCommand(ST7789_Command::RASET); // Row addr set
-		writeData16((buffer.rect.y << _px) + _yoffset);
-		writeData16(((buffer.rect.y2 + 1) << _px) - 1 + _yoffset);
+		writeData16((buffer.rect.y * _px) + _yoffset);
+		writeData16(((buffer.rect.y2 + 1) * _px) - 1 + _yoffset);
 
 		// Tell display we are about to send data
 		writeCommand(ST7789_Command::RAMWR);

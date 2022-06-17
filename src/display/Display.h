@@ -8,18 +8,6 @@
 namespace craft {
 
     /**
-     * Pixel scaling.
-     */
-    namespace PixelScale {
-        enum {
-            x1 = 0,
-            x2 = 1,
-            x4 = 2,
-            x8 = 3,
-        };
-    };
-
-    /**
      * Display size
      */
     enum class DisplaySize {
@@ -174,7 +162,7 @@ namespace craft {
         /**
          * Pixel scale
          */
-        uint8_t _px = PixelScale::x1;
+        uint8_t _px = 1;
 
         /**
          * Actual hardware width and height of the display

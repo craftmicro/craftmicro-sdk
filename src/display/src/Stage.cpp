@@ -74,7 +74,7 @@ namespace craft {
         Filter* filter;
         DisplayList* head = _displayList->next();
         DisplayList* next;
-        _renderList = DisplayList::Create(this);
+        _renderList = DisplayList::Create(this); // Start with just stage (this)
         float_t localx;
         float_t localy;
         for (uint16_t y = renderBounds->y; y <= renderBounds->y2; y++) {
