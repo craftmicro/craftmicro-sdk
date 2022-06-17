@@ -124,10 +124,10 @@ namespace craft {
                 _hwSize.setSize(320, 240);
         }
         _pf = PixelFormat::RGB565;
-        _px = scale;
-        _size.setSize(_hwSize.width >> _px, _hwSize.height >> _px);
+        _px = scale == 0 ? 1 : scale;
+        _size.setSize(_hwSize.width / _px, _hwSize.height / _px);
 
-        // Initilaise SPI
+        // Initialise SPI
         init();
 
         // Send init commands
@@ -143,12 +143,12 @@ namespace craft {
 
     void DisplayILI9341::setArea(LineBufferData& buffer) {
         writeCommand(ILI9341_Command::CASET); // Column addr set
-        writeData16(buffer.rect.x << _px);
-        writeData16(((buffer.rect.x2 + 1) << _px) - 1);
+        writeData16(buffer.rect.x * _px);
+        writeData16(((buffer.rect.x2 + 1) * _px) - 1);
 
         writeCommand(ILI9341_Command::PASET); // Row addr set
-        writeData16(buffer.rect.y << _px);
-        writeData16(((buffer.rect.y2 + 1) << _px) - 1);
+        writeData16(buffer.rect.y * _px);
+        writeData16(((buffer.rect.y2 + 1) * _px) - 1);
 
         // Tell display we are about to send data
         writeCommand(ILI9341_Command::RAMWR);

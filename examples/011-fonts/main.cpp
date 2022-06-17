@@ -89,10 +89,10 @@ FontEntry fonts[12] = {
 
 void setup() {
     // Create a new application
-    // Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
+    // Use a 320x240 ILI9341 display
     // Use a single-line line buffer for low memory consumption
     app = new App(
-        new DisplayILI9341(DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, PixelScale::x1),
+        new DisplayILI9341(DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, 1),
         LineBufferHeight::singleLine
     );
     // Set background color
