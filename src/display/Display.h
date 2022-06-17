@@ -25,6 +25,7 @@ namespace craft {
     enum class DisplaySize {
         Size128x128,
         Size320x240,
+        Size240x240,
         Size135x240,
     };
 
