@@ -22,7 +22,7 @@ typedef enum {
     button_clickhold = 1005,
 } CustomEvent;
 
-boolean buttonEvent(uint32_t event, void* data) {
+bool buttonEvent(uint32_t event, void* data) {
     // Perform different action based on the event that we received
     switch (event) {
         case button_down:

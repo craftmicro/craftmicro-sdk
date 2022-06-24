@@ -1,4 +1,5 @@
 #include "../Text.h"
+#include "utils/Math.h"
 
 namespace craft {
 
@@ -149,17 +150,16 @@ namespace craft {
     }
 
     /**
-     * @brief Set the global position of the display object
+     * @brief Set the global transform of the display object
      *
-     * @param x The global X position
-     * @param y The global Y position
+     * @param t The parent transformation matrix
      */
-    void Text::globalPos(float_t x, float_t y) {
+    void Text::transform(Matrix* t) {
         // Do we need to recalculate text area?
         if (_needsCalc) _calculateSize();
 
         // Now we can calc global position
-        DisplayObject::globalPos(x, y);
+        DisplayObject::transform(t);
     }
 
     /**
@@ -257,14 +257,14 @@ namespace craft {
      *
      * @param skip If true, will not add the glyphs to the render list
      */
-    void Text::_prepareLine(boolean skip) {
+    void Text::_prepareLine(bool skip) {
         int32_t startCharIndex = _charIndex;
         int32_t endCharIndex = _charIndex;
         int16_t charWidth = 0;
         int16_t lineWidth = 0;
         int16_t lineWidthAtEndChar = 0;
         GlyphInfo* glyph = 0;
-        boolean ignoreRest __attribute__((unused)) = false;
+        bool ignoreRest __attribute__((unused)) = false;
         char c = 0;
 
         lineWidth = 0;
@@ -343,10 +343,10 @@ namespace craft {
 
         // Adjust for text align
         if (_align == TextAlign::right) {
-            lineWidth = craft::max(0, _localBounds->width - lineWidthAtEndChar);
+            lineWidth = Math::max(0, _localBounds->width - lineWidthAtEndChar);
         }
         else if (_align == TextAlign::center) {
-            lineWidth = craft::max(0, (int16_t)((_localBounds->width - (float_t)lineWidthAtEndChar) / 2));
+            lineWidth = Math::max(0, (_localBounds->width - (float_t)lineWidthAtEndChar) / 2);
         }
         else {
             lineWidth = 0;
@@ -423,7 +423,7 @@ namespace craft {
             int16_t lineHeight = _lineHeight;
             int32_t index = 0;
             int16_t wrapIndex = 0;
-            boolean justWrapped = false; // Wrap without newline just occured
+            bool justWrapped = false; // Wrap without newline just occured
             char c = 0;
             while (true) {
                 c = _text[index++];
@@ -496,9 +496,9 @@ namespace craft {
      * @brief Check if a character is a printable character (has a glyph)
      *
      * @param c The character
-     * @return boolean True if printable
+     * @return bool True if printable
      */
-    boolean Text::_isPrintable(uint8_t c) {
+    bool Text::_isPrintable(uint8_t c) {
         if (c < 32) return false;
         if (c > 126) return false;
         return true;

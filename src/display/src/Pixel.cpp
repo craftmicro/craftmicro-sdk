@@ -3,7 +3,7 @@
 
 namespace craft {
 
-    Pixel* Pixel::Create(color888 color, float_t alpha, boolean mask) {
+    Pixel* Pixel::Create(color888 color, float_t alpha, bool mask) {
         Pixel* p = MemoryPool<Pixel>::Create();
         p->c = color;
         p->a = alpha;

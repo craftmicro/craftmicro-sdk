@@ -131,7 +131,7 @@ namespace craft {
     void Messenger::sendMessage(uint32_t event) {
         ListenerItem* item = _listeners;
         ListenerItem* tempItem;
-        boolean res;
+        bool res;
         while (item) {
             // Fire the event
             if (item->event == event) {
@@ -161,7 +161,7 @@ namespace craft {
     void Messenger::update(float_t dt) {
         TimerItem* item = _timers;
         TimerItem* tempItem;
-        boolean res;
+        bool res;
         while (item) {
             // Update the timer
             item->currentTime += dt;

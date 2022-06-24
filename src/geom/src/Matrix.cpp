@@ -1,5 +1,6 @@
 #include "Common.h"
 #include "../Matrix.h"
+#include "utils/Math.h"
 
 namespace craft {
 
@@ -26,8 +27,8 @@ namespace craft {
             b *= scaleY;
             d *= scaleY;
         }
-        this->tx = tx - (ox * a + oy * c);
-        this->ty = ty - (ox * b + oy * d);
+        this->tx = tx + (ox * a + oy * c);
+        this->ty = ty + (ox * b + oy * d);
     }
 
     void Matrix::apply(float_t scaleX, float_t scaleY, float_t rotation, float_t tx, float_t ty, float_t ox, float_t oy) {
@@ -52,6 +53,52 @@ namespace craft {
 
     void Matrix::transform(Point* p, float_t originX, float_t originY) {
         transform(p);
+    }
+
+    void Matrix::transform(ClipRect* r) {
+        Point tl = Point(r->x, r->y);
+        Point tr = Point(r->x2-1, r->y);
+        Point bl = Point(r->x, r->y2-1);
+        Point br = Point(r->x2-1, r->y2-1);
+        transform(&tl);
+        transform(&tr);
+        transform(&bl);
+        transform(&br);
+        r->set( // 12 compares
+            Math::min(tl.x, Math::min(tr.x, Math::min(bl.x, br.x))),
+            Math::min(tl.y, Math::min(tr.y, Math::min(bl.y, br.y))),
+            Math::max(tl.x, Math::max(tr.x, Math::max(bl.x, br.x))),
+            Math::max(tl.y, Math::max(tr.y, Math::max(bl.y, br.y)))
+        );
+    }
+
+    /**
+     * @brief Transform a ClipRect using the matrix
+     *
+     * @param from The ClipRect to transform
+     * @param to (out) The transformed ClipRect
+     */
+    void Matrix::transform(ClipRect* from, ClipRect* to) {
+        Point tl = Point(from->x, from->y);
+        Point tr = Point(from->x2-1, from->y);
+        Point bl = Point(from->x, from->y2-1);
+        Point br = Point(from->x2-1, from->y2-1);
+        transform(&tl);
+        transform(&tr);
+        transform(&bl);
+        transform(&br);
+        to->set( // 12 compares
+            Math::min(tl.x, Math::min(tr.x, Math::min(bl.x, br.x))),
+            Math::min(tl.y, Math::min(tr.y, Math::min(bl.y, br.y))),
+            Math::max(tl.x, Math::max(tr.x, Math::max(bl.x, br.x))),
+            Math::max(tl.y, Math::max(tr.y, Math::max(bl.y, br.y)))
+        );
+        /* This is only 4 compares, but assumes no skew or inverse scale
+        if (rotation is between 0 and 90) //tr is top, br is right
+        else if (rotation is 90 to 180) //br is top, bl is right
+        else if (rotation is 180 to 270) //bl is top, tl is right
+        else //tl is top, tr is right
+        */
     }
 
     void Matrix::inverseTransform(Point* p) {
@@ -88,9 +135,9 @@ namespace craft {
     }
 
     void Matrix::inverseTransform(Point* p, float_t ox, float_t oy) {
-        translate(-ox, -oy);
-        inverseTransform(p);
         translate(ox, oy);
+        inverseTransform(p);
+        translate(-ox, -oy);
     }
 
     void Matrix::concat(Matrix* m) {
@@ -157,8 +204,8 @@ namespace craft {
 
     void Matrix::rotate(float_t angle, float_t ox, float_t oy) {
         rotate(angle);
-        this->tx = tx - (ox * a + oy * c);
-        this->ty = ty - (ox * b + oy * d);
+        this->tx = tx + (ox * a + oy * c);
+        this->ty = ty + (ox * b + oy * d);
     }
 
     void Matrix::scale(float_t sx, float_t sy) {

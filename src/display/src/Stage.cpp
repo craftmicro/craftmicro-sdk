@@ -32,11 +32,13 @@ namespace craft {
         else _dirtyBounds->clear();
         _displayListDepth = 0;
         _displayList = DisplayList::Create(this);
-        if (_children) _traverse(buffer, _children, _dirty, 0, 0, _children->mask != MaskType::none);
+        if (_children) _traverse(buffer, _children, _dirty, _transform, _children->mask != MaskType::none);
 
         // Calculate the updated area of ths display
         renderBounds->set(_dirtyBounds);
         renderBounds->clip(&buffer->rect);
+        //Serial.println("Render bounds");
+        //Serial.printf("  %d,%d %dx%d\n", renderBounds->x, renderBounds->y, renderBounds->width, renderBounds->height);
 
         // TODO: Handle this. For now do nothing
         if (_displayListDepth == 0) {}
@@ -48,9 +50,9 @@ namespace craft {
         }
 
         /* Debug display list and render bounds
-        Serial.println( "DisplayList" );
+        Serial.println("DisplayList");
         DisplayList* debugNode = _displayList->next();
-        while ( debugNode ) {
+        while (debugNode) {
             Serial.printf(
                 "  ID %d: %d,%d %dx%d (d=%d) (m=%d,%d)\n",
                 debugNode->object->id,
@@ -64,8 +66,8 @@ namespace craft {
             );
             debugNode = debugNode->next();
         }
-        Serial.println( "Render bounds" );
-        Serial.printf( "  %d,%d %dx%d\n", renderBounds->x, renderBounds->y, renderBounds->width, renderBounds->height );
+        Serial.println("Render bounds");
+        Serial.printf("  %d,%d %dx%d\n", renderBounds->x, renderBounds->y, renderBounds->width, renderBounds->height);
         */
 
         // Initialise the display to draw only the dirty area
@@ -88,18 +90,21 @@ namespace craft {
                 _beginRender(head->object);
                 head = head->next();
             }
+
             /* Debug render list
-            Serial.println( "RenderList\n" );
-            DisplayList* list = _renderList;
-            while ( list ) {
-                Serial.printf( "  ID:%d at y=%d, x=%d (%dx%d) with d=%d is masked %d\n",
-                    list->object->id,
-                    int16_t( list->object->y() ), int16_t( list->object->x() ),
-                    int16_t( list->object->width() ), int16_t( list->object->height() ),
-                    list->object->depth,
-                    list->object->_hasMask
-                );
-                list = list->next();
+            if (y == renderBounds->y) {
+                Serial.println("RenderList\n");
+                DisplayList* list = _renderList;
+                while (list) {
+                    Serial.printf("  ID:%d at y=%d, x=%d (%dx%d) with d=%d is masked %d\n",
+                        list->object->id,
+                        int16_t(list->object->y()), int16_t(list->object->x()),
+                        int16_t(list->object->width()), int16_t(list->object->height()),
+                        list->object->depth,
+                        list->object->_hasMask
+                    );
+                    list = list->next();
+                }
             } */
 
             // For this line, remove the display objects that are complete, and set the
@@ -263,9 +268,10 @@ namespace craft {
         return _backgroundColor;
     }
 
-    void Stage::_traverse(LineBuffer* buffer, DisplayObject* child, boolean forceDirty, float_t px, float_t py, boolean isMask) {
+    void Stage::_traverse(LineBuffer* buffer, DisplayObject* child, bool forceDirty, Matrix* t, bool isMask) {
         // Step all children
         while (child) {
+            //Serial.printf("Traversing child ID:%d\n", child->id);
 
             // Mask
             if (child->mask != MaskType::none && child->visible()) {
@@ -282,7 +288,13 @@ namespace craft {
             }
 
             // Get child to calculate global bounds
-            child->globalPos(px, py);
+            child->transform(t);
+
+            /* Debug trnasforms
+            Serial.printf("  Local bounds %d,%d %dx%d\n", child->_localBounds->x, child->_localBounds->y, child->_localBounds->width, child->_localBounds->height);
+            Serial.printf("  Transform %2.f,%2.f\n", child->_transform->tx, child->_transform->ty);
+            Serial.printf("  Global bounds %d,%d %dx%d\n", child->globalBounds->x, child->globalBounds->y, child->globalBounds->width, child->globalBounds->height);
+            */
 
             // If child is dirty, include it's old position
             if (child->isDirty() && !child->cleanBounds->isEmpty()) {
@@ -307,7 +319,7 @@ namespace craft {
             }
 
             // Recurse
-            if (child->hasChildren()) _traverse(buffer, child->firstChild(), child->isDirty(), child->globalBounds->x - child->_ox, child->globalBounds->y - child->_oy, isMask || child->mask != MaskType::none);
+            if (child->hasChildren()) _traverse(buffer, child->firstChild(), child->isDirty(), child->_transform, isMask || child->mask != MaskType::none);
 
             // Next sibling
             child = child->next();

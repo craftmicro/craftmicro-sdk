@@ -44,7 +44,7 @@ $(function() {
   <div class="headertitle"><div class="title">Craft Micro SDK </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_C__Projects_craftmicro_craftmicro_sdk_README"></a> <img src="logo.png?raw=true" alt="mac logo" title="mac" class="inline"/></p>
+<div class="textblock"><p ><a class="anchor" id="md_C__Projects_craftmicro_craftmicro_sdk_README"></a> <img src="logo.png?raw=true" alt="Craft Micro logo" title="Craft Micro" class="inline"/></p>
 <p >The Craft Micro SDK is a code library for rapid development of graphical apps for microprocessor-based systems. The various individual libraries that make up this library (such as display and drawing libraries) might also be useful in other projects.</p>
 <p >Craft Micro maintains an open-source software library and set of plans to craft your own microprocessor-based handheld gaming console.</p>
 <p >Craft Micro is based on the Arduino Framework. We recommend the <a href="https://platformio.org/">PlatformIO</a> plugin for VSCode for cross-platform microprocessor development.</p>
@@ -58,57 +58,26 @@ Examples and Documentation</h1>
 <h1><a class="anchor" id="autotoc_md21"></a>
 Dependencies</h1>
 <p >Craft Micro itself has no dependencies. However, it's likely that the hardware you are using, such as a TFT display, will require additional libraries - for example SPI or I2C.</p>
-<p >The examples use an ILI9341 TFT display over SPI, and so require the SPI Arduino library. This comes bundled with Arduino Studio and PlatformIO, and almost any otther Arduino-based framework that you might use. The readme in the examples section contains details of how to add dependencies.</p>
+<p >The examples use an ILI9341 TFT display over SPI, and so require the SPI Arduino library. This comes bundled with Arduino Studio and PlatformIO, and almost any other Arduino-based framework that you might use. The readme in the examples section contains details of how to add dependencies.</p>
 <h1><a class="anchor" id="autotoc_md22"></a>
 Minimum requirements</h1>
-<p >Only tested on Teensy 3.6 but should work on T3.5 and other lower-memory teensy devices. Working on ESP32 support.</p>
-<p >Examples should work with:</p>
-<ol type="1">
-<li>8kB RAM</li>
-<li>48kB of Flash (Storage for music and graphics etc)</li>
-</ol>
+<p >Tested on:</p><ul>
+<li><a href="https://www.pjrc.com/store/teensy36.html">Teensy 3.6</a></li>
+<li><a href="https://www.espressif.com/en/products/socs/esp32">ESP32</a> (<a href="http://www.lilygo.cn/prod_view.aspx?Id=1126">TTGO T-Display</a>)</li>
+</ul>
 <p >Recommend at least:</p>
 <ol type="1">
 <li>16kB RAM</li>
 <li>128kB of Flash (Storage for music and graphics etc)</li>
 </ol>
-<p >The library uses a linebuffer (double-buffered) instead of a full framebuffer for rendering graphics to the screen. This only requires 6 * display_width bytes of RAM. E.g. A 320 width displays scaled to 4x4 pixels (resulting in 80 pixels) requires a 480 byte linebuffer.</p>
+<p ><em>Minimum requirements are as-yet untested. This section will be updated as new devices are tested.</em></p>
+<p >To keep memory usage low, this SDK uses a linebuffer (double-buffered) instead of a full framebuffer for rendering graphics to the screen. This only requires 6 * display_width bytes of RAM. E.g. A 320 width displays scaled to 4x4 pixels (resulting in 80 pixels) requires a 480 byte linebuffer.</p>
 <h1><a class="anchor" id="autotoc_md23"></a>
 Licence</h1>
 <p >Both the software and hardware components of this project are released under the <b><a href="https://en.wikipedia.org/wiki/MIT_License">MIT licence</a></b>.</p>
 <h1><a class="anchor" id="autotoc_md24"></a>
 Acknowledgements</h1>
-<p >Code from many authors has contributed to Craft Micro. This project would not be possible without them. These include:</p>
-<h3><a class="anchor" id="autotoc_md25"></a>
-Display</h3>
-<ul>
-<li><b>[Paul Stoffregen](mailto:)</b> - <a href="https://github.com/PaulStoffregen/ILI9341_t3">ILI9341_t3</a></li>
-<li><b>[KurtE](mailto:)</b> - <a href="https://github.com/KurtE/ILI9341_t3n">ILI9341_t3n</a></li>
-<li><b>[Frank Boesing](mailto:)</b> - <a href="https://github.com/FrankBoesing/ILI9341_t3DMA">ILI9341_t3DMA</a></li>
-<li><b><a href="https://www.adafruit.com/">Adafruit industries</a></b> - <a href="https://github.com/adafruit">Various libraries</a></li>
-</ul>
-<h3><a class="anchor" id="autotoc_md26"></a>
-Graphics and animation</h3>
-<ul>
-<li>**<a href="#" onclick="location.href='mai'+'lto:'+'wm@'+'wa'+'rre'+'nm'+'oor'+'e.'+'net'; return false;">Warren Moore</a>** - <a href="https://github.com/warrenm/AHEasing">AHEasing</a></li>
-<li><b><a href="https://rosettacode.org/wiki/Rosetta_Code">Rosetta Code</a></b> - <a href="https://rosettacode.org/wiki/Xiaolin_Wu%27s_line_algorithm">Wu's algorithm</a></li>
-</ul>
-<h3><a class="anchor" id="autotoc_md27"></a>
-Audio</h3>
-<ul>
-<li>**<a href="#" onclick="location.href='mai'+'lto:'+'art'+'ef'+'act'+'2@'+'gma'+'il'+'.co'+'m'; return false;">Romain "Artefact2" Dalmaso</a>** - <a href="https://github.com/Artefact2/libxm">libxm</a></li>
-</ul>
-<h3><a class="anchor" id="autotoc_md28"></a>
-Support</h3>
-<ul>
-<li><b><a href="https://forum.pjrc.com/">Teensy support forums</a></b></li>
-</ul>
-<h3><a class="anchor" id="autotoc_md29"></a>
-Hardware</h3>
-<ul>
-<li><b><a href="https://www.pjrc.com/teensy/">Teensy microprocessor boards</a></b></li>
-<li><b><a href="https://www.buydisplay.com">BuyDisplay</a></b> - <a href="https://www.buydisplay.com/default/3-2-inch-capacitive-touchscreen-240x320-tft-lcd-module-display">ILI9341 TFT module</a> - <a href="https://www.buydisplay.com/default/lcd-3-5-inch-320x480-tft-display-module-optl-touch-screen-w-breakout-board">ILI9488 TFT module</a> </li>
-</ul>
+<p >Code from many authors has contributed to Craft Micro. This project would not be possible without them. There are too many people to thank, but a special shout-out goes to <a href="https://www.adafruit.com/">Adafruit industries</a> for their amazing, comprehensive and well-written <a href="https://github.com/adafruit">software libraries</a>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

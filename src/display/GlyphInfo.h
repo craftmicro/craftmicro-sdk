@@ -71,7 +71,7 @@ namespace craft {
         /**
          * @brief Indicate whether the glyph has started rendering yet
          */
-        boolean renderStarted = false;
+        bool renderStarted = false;
 
         /**
          * @brief Number of repeats left on current line

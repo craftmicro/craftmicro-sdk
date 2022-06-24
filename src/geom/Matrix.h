@@ -1,6 +1,7 @@
 #pragma once
 
 #include "geom/Point.h"
+#include "geom/ClipRect.h"
 
 using namespace std;
 
@@ -112,6 +113,21 @@ namespace craft {
          * @param x The Y coordinate
          */
         Point* transform(float_t x, float_t y);
+
+        /**
+         * @brief Transform a ClipRect using the matrix
+         *
+         * @param r (out) The ClipRect to transform
+         */
+        void transform(ClipRect* r);
+
+        /**
+         * @brief Transform a ClipRect using the matrix
+         *
+         * @param from The ClipRect to transform
+         * @param to (out) The transformed ClipRect
+         */
+        void transform(ClipRect* from, ClipRect* to);
 
         /**
          * @brief Transform a point using the inverse matrix

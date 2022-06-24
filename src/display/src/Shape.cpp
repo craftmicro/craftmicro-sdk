@@ -27,18 +27,18 @@ namespace craft {
         DisplayObject::update(dt);
     }
 
-    void Shape::globalPos(float_t x, float_t y) {
+    void Shape::transform(Matrix* t) {
         _localBounds->clear();
         uint16_t l = _pointsLen;
         Point* p;
         while (l--) {
             p = _points[l];
-            _localBounds->x = craft::min(_localBounds->x, p->x);
-            _localBounds->x2 = craft::max(_localBounds->x2, p->x);
-            _localBounds->y = craft::min(_localBounds->y, p->y);
-            _localBounds->y2 = craft::max(_localBounds->y2, p->y);
+            _localBounds->x = Math::min(_localBounds->x, p->x);
+            _localBounds->x2 = Math::max(_localBounds->x2, p->x);
+            _localBounds->y = Math::min(_localBounds->y, p->y);
+            _localBounds->y2 = Math::max(_localBounds->y2, p->y);
         }
-        DisplayObject::globalPos(x, y);
+        DisplayObject::transform(t);
     }
 
     void Shape::beginLine(int16_t ry) {

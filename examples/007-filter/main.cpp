@@ -19,7 +19,7 @@ float_t da = 0.01;
 
 // Runs on every render cycle. Animate a 
 // couple of the filters,
-boolean onRenderFrame(uint32_t event, void* data) {
+bool onRenderFrame(uint32_t event, void* data) {
     h++;
     hsvFilter->h = h;
     asterixSprite1->dirty(); // Forces the sprite to redraw

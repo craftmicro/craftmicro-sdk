@@ -2,6 +2,7 @@
 
 #include "Common.h"
 #include "graphics/Color.h"
+#include "utils/Math.h"
 
 /**
  * 16-bit color 565 functions
@@ -411,9 +412,9 @@ namespace craft {
      */
     inline color565 tint(color565 c, color565 t, float_t amount) {
         amount = alphaClamp(amount);
-        uint8_t R = floor(lerp(red(c), red(t), amount));
-        uint8_t G = floor(lerp(green(c), green(t), amount));
-        uint8_t B = floor(lerp(blue(c), blue(t), amount));
+        uint8_t R = floor(Math::lerp(red(c), red(t), amount));
+        uint8_t G = floor(Math::lerp(green(c), green(t), amount));
+        uint8_t B = floor(Math::lerp(blue(c), blue(t), amount));
         return to565(R, G, B);
     }
 
@@ -441,9 +442,9 @@ namespace craft {
      */
     inline color565 lighten(color565 c, float_t amount) {
         amount = alphaClamp(amount);
-        uint8_t R = floor(lerp(red(c), 255, amount));
-        uint8_t G = floor(lerp(green(c), 255, amount));
-        uint8_t B = floor(lerp(blue(c), 255, amount));
+        uint8_t R = floor(Math::lerp(red(c), 255, amount));
+        uint8_t G = floor(Math::lerp(green(c), 255, amount));
+        uint8_t B = floor(Math::lerp(blue(c), 255, amount));
         return to565(R, G, B);
     }
 

@@ -178,7 +178,7 @@ namespace craft {
          * Backlight
          **/
         uint8_t _bklt = 255;
-        boolean _bkltPWM = false;
+        bool _bkltPWM = false;
 
         /**
          * @brief Set the area of the display to draw to

@@ -14,7 +14,7 @@ namespace craft {
     public:
         color888 c = 0;
         float_t a = 0.0;
-        boolean m = false;
+        bool m = false;
 
         /**
          * @brief Recycle the pixel list
@@ -25,7 +25,7 @@ namespace craft {
          * Create a new object or take one from the pool
          * @return The new or recycled object
          */
-        static Pixel* Create(color888 color, float_t alpha, boolean mask);
+        static Pixel* Create(color888 color, float_t alpha, bool mask);
 
         /**
          * @brief Flattens pixel list

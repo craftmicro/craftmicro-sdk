@@ -23,10 +23,10 @@ namespace craft {
     void LineBuffer::setRegion(ClipRect* rect) {
         // Ensure region is within display area
         _region.set(
-            craft::max(0, rect->x),
-            craft::max(0, rect->y),
-            craft::min(_display->width() - 1, rect->x2),
-            craft::min(_display->height() - 1, rect->y2)
+            Math::max(0, rect->x),
+            Math::max(0, rect->y),
+            Math::min(_display->width() - 1, rect->x2),
+            Math::min(_display->height() - 1, rect->y2)
         );
         resetRegion();
     }

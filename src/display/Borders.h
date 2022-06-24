@@ -22,7 +22,7 @@ namespace craft {
         Border* left;
         Border* right;
 
-        boolean inset = false;
+        bool inset = false;
 
     };
 

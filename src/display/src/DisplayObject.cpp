@@ -10,6 +10,7 @@ namespace craft {
         _localBounds = new ClipRect();
         cleanBounds = new ClipRect();
         renderBounds = new ClipRect();
+        _transform = new Matrix();
     }
 
     /**
@@ -21,6 +22,7 @@ namespace craft {
         delete cleanBounds;
         delete _localBounds;
         delete globalBounds;
+        delete _transform;
     }
 
     /**
@@ -45,16 +47,16 @@ namespace craft {
         renderBounds->clear();
     }
 
-    void DisplayObject::visible(boolean v) {
+    void DisplayObject::visible(bool v) {
         _visible = v;
         _dirty = true;
     }
 
     /**
      * Get the visibility of an object
-     * @return boolean The visibility
+     * @return bool The visibility
      */
-    boolean DisplayObject::visible() {
+    bool DisplayObject::visible() {
         return _visible;
     }
 
@@ -69,7 +71,7 @@ namespace craft {
     /**
      * Return true if there is a parent
      */
-    boolean DisplayObject::hasParent() {
+    bool DisplayObject::hasParent() {
         return (_parent != 0);
     }
 
@@ -154,7 +156,7 @@ namespace craft {
     /**
      * Remove all children from the list
      */
-    void DisplayObject::removeAllChildren(boolean free) {
+    void DisplayObject::removeAllChildren(bool free) {
         if (!_children) return;
         DisplayObject* displayObject = _children;
         DisplayObject* nextDisplayObject;
@@ -225,8 +227,8 @@ namespace craft {
     /**
      * Return true if there are children
      */
-    boolean DisplayObject::hasChildren() {
-        return (boolean)_children;
+    bool DisplayObject::hasChildren() {
+        return (bool)_children;
     }
 
     /**
@@ -308,7 +310,7 @@ namespace craft {
      * @param position The position of the origin
      * @param roundToInt If true, will round the x and y cooridnates using floor
      */
-    void DisplayObject::origin(OriginType position, boolean roundToInt) {
+    void DisplayObject::origin(OriginType position, bool roundToInt) {
         switch (position) {
             case OriginType::centerTop:
             case OriginType::center:
@@ -385,6 +387,41 @@ namespace craft {
     }
 
     /**
+     * @brief Set the rotation, in degrees
+     * @param s The new rotation, in degrees
+     */
+    void DisplayObject::rotation(float_t r) {
+        _rotation = r;
+        dirty();
+    }
+
+    /**
+     * @brief Adjust the rotation by a value in degrees
+     * @param s The adjustment, in degrees
+     */
+    void DisplayObject::rotate(float_t r) {
+        _rotation += r;
+        dirty();
+    }
+
+    /**
+     * @return float_t The rotation, in degrees
+     */
+    float_t DisplayObject::rotation() {
+        return _rotation;
+    }
+
+    /**
+     * @brief Set the x and y coordinates
+     * @param x The x coordinate
+     * @param y The y coordinate
+     */
+    void DisplayObject::position(float_t x, float_t y) {
+        _localBounds->setPos(x, y);
+        dirty();
+    }
+
+    /**
      * @brief Set the width
      * @param value The new width
      */
@@ -417,6 +454,40 @@ namespace craft {
     }
 
     /**
+     * @brief Set the scale
+     * @param s The new scale
+     */
+    void DisplayObject::scale(float_t s) {
+        _sx = _sy = s;
+        dirty();
+    }
+
+    /**
+     * @brief Set the scale
+     * @param sx The new scale is x direction
+     * @param sy The new scale is y direction
+     */
+    void DisplayObject::scale(float_t sx, float_t sy) {
+        _sx = sx;
+        _sy = sy;
+        dirty();
+    }
+
+    /**
+     * @return float_t The scale in the x direction
+     */
+    float_t DisplayObject::scaleX() {
+        return _sx;
+    }
+
+    /**
+     * @return float_t The scale in the y direction
+     */
+    float_t DisplayObject::scaleY() {
+        return _sy;
+    }
+
+    /**
      * Set self to dirty
      */
     void DisplayObject::dirty() {
@@ -426,23 +497,21 @@ namespace craft {
     /**
      * Check if object is dirty
      */
-    boolean DisplayObject::isDirty() {
+    bool DisplayObject::isDirty() {
         return _dirty;
     }
 
     /**
-     * @brief Set the global position of the display object
+     * @brief Set the global transform of the display object
      *
-     * @param x The global X position
-     * @param y The global Y position
+     * @param x The global transformation matrix
      */
-    void DisplayObject::globalPos(float_t x, float_t y) {
-        globalBounds->setPosAndSize(
-            x + _ox + _localBounds->x,
-            y + _oy + _localBounds->y,
-            _localBounds->width,
-            _localBounds->height
-        );
+    void DisplayObject::transform(Matrix* t) {
+        _transform->copy(t);
+        _transform->apply(_sx, _sy, Math::degToRad(_rotation), _localBounds->x, _localBounds->y, _ox, _oy);
+        globalBounds->set(0, 0, _localBounds->width, _localBounds->height);
+        _transform->transform(globalBounds);
+        _transform->translate(-_ox, -_oy);
     }
 
     /**

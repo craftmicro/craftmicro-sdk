@@ -124,12 +124,11 @@ namespace craft {
         uint8_t tabWidth();
 
         /**
-         * @brief Set the global position of the display object
+         * @brief Set the global transform of the display object
          *
-         * @param x The global X position
-         * @param y The global Y position
+         * @param t The parent transformation matrix
          */
-        virtual void globalPos(float_t x, float_t y);
+        virtual void transform(Matrix* t);
 
         /**
          * @brief Begin the render sweep for the current frame
@@ -161,21 +160,21 @@ namespace craft {
         Font* _font = 0;				// The font to use
         color888 _color = 0;			// The color of the text
 
-        boolean _needsCalc = false;		// Need to recaculate text area metrics
-        boolean _endOfText = false;		// Have reached the end of the text string
+        bool _needsCalc = false;		// Need to recaculate text area metrics
+        bool _endOfText = false;		// Have reached the end of the text string
 
         float_t _lineSpacing = 1.25f;		// Spacing from one line of text to the next, based on font line height
         int16_t _lineHeight = 0;		// Linme height in pixels calculated from font size and lineSpacing
         TextAlign _align = TextAlign::left;	// Horizontal text alignment
         TextWrap _wrap = TextWrap::word;	// Type of wrapping
-        boolean _autoWidth = true;		// Text area width set automatically cased on text
-        boolean _autoHeight = true;		// Text area height set automatically based on text
+        bool _autoWidth = true;		// Text area width set automatically cased on text
+        bool _autoHeight = true;		// Text area height set automatically based on text
         uint8_t _tabWidth = 4;			// number of spaces in tab
 
         GlyphInfo* _glyphs = 0;			// List of glyphs currently being rendered
         int16_t _nextLineY = 0;			// Start y position of the next line
         int32_t _charIndex = 0;			// Current character index
-        boolean _justWrapped = false; 	// Unforced wrap just occured
+        bool _justWrapped = false; 	// Unforced wrap just occured
 
         /**
          * @brief Calculate the size of the text area based on the text string
@@ -189,15 +188,15 @@ namespace craft {
          *
          * @param skip If true, will not add the glyphs to the render list
          */
-        void _prepareLine(boolean skip);
+        void _prepareLine(bool skip);
 
         /**
          * @brief Check if a character is a printable character (has a glyph)
          *
          * @param c The character
-         * @return boolean True if printable
+         * @return bool True if printable
          */
-        boolean _isPrintable(uint8_t c);
+        bool _isPrintable(uint8_t c);
 
     };
 
