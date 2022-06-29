@@ -33,10 +33,12 @@ namespace craft {
         Point* p;
         while (l--) {
             p = _points[l];
-            _localBounds->x = Math::min(_localBounds->x, p->x);
-            _localBounds->x2 = Math::max(_localBounds->x2, p->x);
-            _localBounds->y = Math::min(_localBounds->y, p->y);
-            _localBounds->y2 = Math::max(_localBounds->y2, p->y);
+            _localBounds->set(
+                Math::min(_localBounds->p1.x, p->x),
+                Math::min(_localBounds->p1.y, p->y),
+                Math::max(_localBounds->p2.x, p->x),
+                Math::max(_localBounds->p2.y, p->y)
+            );
         }
         DisplayObject::transform(t);
     }

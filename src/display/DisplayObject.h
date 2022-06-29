@@ -3,6 +3,7 @@
 #include "utils/MemoryPool.h"
 #include "geom/ClipRect.h"
 #include "geom/Matrix.h"
+#include "geom/Rect.h"
 #include "display/filters/Filter.h"
 #include "display/IDrawable.h"
 #include "display/Messenger.h"
@@ -464,7 +465,7 @@ namespace craft {
          * The width and height must contain the pixels completely. The x and y values are the
          * position of the object (relative to the parent).
          */
-        ClipRect* _localBounds;
+        Rect* _localBounds;
 
         /**
          * @brief The global transform

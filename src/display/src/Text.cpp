@@ -101,7 +101,7 @@ namespace craft {
      */
     void Text::width(float_t value) {
         DisplayObject::width(value);
-        _autoWidth = (_localBounds->width == 0);
+        _autoWidth = (_localBounds->width() == 0);
         _needsCalc = true;
     }
 
@@ -121,7 +121,7 @@ namespace craft {
      */
     void Text::height(float_t value) {
         DisplayObject::height(value);
-        _autoHeight = (_localBounds->height == 0);
+        _autoHeight = (_localBounds->height() == 0);
         _needsCalc = true;
     }
 
@@ -314,7 +314,7 @@ namespace craft {
             }
 
             // Are we wider than the text area?
-            if ((lineWidth + charWidth) > _localBounds->width) {
+            if ((lineWidth + charWidth) > (int)_localBounds->width()) {
                 // See if character wrap is set
                 if (_wrap == TextWrap::character) {
                     _charIndex--;
@@ -343,10 +343,10 @@ namespace craft {
 
         // Adjust for text align
         if (_align == TextAlign::right) {
-            lineWidth = Math::max(0, _localBounds->width - lineWidthAtEndChar);
+            lineWidth = Math::max(0, (int)_localBounds->width() - lineWidthAtEndChar);
         }
         else if (_align == TextAlign::center) {
-            lineWidth = Math::max(0, (_localBounds->width - (float_t)lineWidthAtEndChar) / 2);
+            lineWidth = Math::max(0, ((int)_localBounds->width() - (float_t)lineWidthAtEndChar) / 2);
         }
         else {
             lineWidth = 0;
@@ -408,7 +408,7 @@ namespace craft {
                 }
                 if (c == '\n') { // newline
                     lineWidth = 0;
-                    if (!_autoHeight && (lineHeight >= _localBounds->height)) break; // Reached height
+                    if (!_autoHeight && (lineHeight >= (int)_localBounds->height())) break; // Reached height
                     lineHeight += _lineHeight;
                     continue;
                 }
@@ -457,7 +457,7 @@ namespace craft {
                 }
 
                 // Are we wider than the text area?
-                if ((lineWidth + charWidth) > _localBounds->width) {
+                if ((lineWidth + charWidth) > (int)_localBounds->width()) {
                     // See if character wrap is set
                     if (_wrap == TextWrap::character) {
                         index--;

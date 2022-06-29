@@ -7,9 +7,9 @@ namespace craft {
      */
     DisplayObject::DisplayObject() {
         globalBounds = new ClipRect();
-        _localBounds = new ClipRect();
         cleanBounds = new ClipRect();
         renderBounds = new ClipRect();
+        _localBounds = new Rect();
         _transform = new Matrix();
     }
 
@@ -20,8 +20,8 @@ namespace craft {
         reset();
         delete renderBounds;
         delete cleanBounds;
-        delete _localBounds;
         delete globalBounds;
+        delete _localBounds;
         delete _transform;
     }
 
@@ -359,7 +359,7 @@ namespace craft {
      * @param value The x coordinate
      */
     void DisplayObject::x(float_t value) {
-        _localBounds->setPos(value, _localBounds->y);
+        _localBounds->setPos(value, _localBounds->p1.y);
         dirty();
     }
 
@@ -367,7 +367,7 @@ namespace craft {
      * @return float_t The x coordinate
      */
     float_t DisplayObject::x() {
-        return _localBounds->x;
+        return _localBounds->p1.x;
     }
 
     /**
@@ -375,7 +375,7 @@ namespace craft {
      * @param value The y coordinate
      */
     void DisplayObject::y(float_t value) {
-        _localBounds->setPos(_localBounds->x, value);
+        _localBounds->setPos(_localBounds->p1.x, value);
         dirty();
     }
 
@@ -383,7 +383,7 @@ namespace craft {
      * @return float_t The y coordinate
      */
     float_t DisplayObject::y() {
-        return _localBounds->y;
+        return _localBounds->p1.y;
     }
 
     /**
@@ -426,7 +426,7 @@ namespace craft {
      * @param value The new width
      */
     void DisplayObject::width(float_t value) {
-        _localBounds->setWidth((value > 0) ? value : 0);
+        _localBounds->width((value > 0) ? value : 0);
         dirty();
     }
 
@@ -434,7 +434,7 @@ namespace craft {
      * @return float_t The width
      */
     float_t DisplayObject::width() {
-        return _localBounds->width;
+        return _localBounds->width();
     }
 
     /**
@@ -442,7 +442,7 @@ namespace craft {
      * @param value The new height
      */
     void DisplayObject::height(float_t value) {
-        _localBounds->setHeight((value > 0) ? value : 0);
+        _localBounds->height((value > 0) ? value : 0);
         dirty();
     }
 
@@ -450,7 +450,7 @@ namespace craft {
      * @return float_t The height
      */
     float_t DisplayObject::height() {
-        return _localBounds->height;
+        return _localBounds->height();
     }
 
     /**
@@ -508,10 +508,10 @@ namespace craft {
      */
     void DisplayObject::transform(Matrix* t) {
         _transform->copy(t);
-        _transform->apply(_sx, _sy, Math::degToRad(_rotation), _localBounds->x, _localBounds->y, _ox, _oy);
-        globalBounds->set(0, 0, _localBounds->width, _localBounds->height);
-        _transform->transform(globalBounds);
-        _transform->translate(-_ox, -_oy);
+        _transform->apply(_sx, _sy, Math::degToRad(_rotation), _localBounds->p1.x, _localBounds->p1.y);
+        Rect temp = Rect(0, 0, _localBounds->width(), _localBounds->height());
+        temp.transform(_transform, _ox, _oy);
+        globalBounds->set(&temp);
     }
 
     /**

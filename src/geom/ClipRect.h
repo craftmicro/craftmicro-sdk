@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common.h"
+#include "Rect.h"
 
 /**
  * Integer rect
@@ -14,17 +15,31 @@ namespace craft {
 
     public:
         /**
-         * Constructor
+         * Construct an empty clip rect
          */
         ClipRect() {
             clear();
         }
 
         /**
-         * Constructor
+         * Construct a clip rect as a copy of another
+         */
+        ClipRect(ClipRect* rect) {
+            set(rect);
+        }
+
+        /**
+         * Construct a clip rect from a point and size
          */
         ClipRect(int16_t px, int16_t py, int16_t w, int16_t h) {
             setPosAndSize(px, py, w, h);
+        }
+
+        /**
+         * Construct a clip rect as an integer copy of a rect (floats)
+         */
+        ClipRect(Rect* rect) {
+            set(rect);
         }
 
         /**
@@ -83,6 +98,14 @@ namespace craft {
             y2 = rect->y2;
             width = rect->width;
             height = rect->height;
+        }
+
+        /**
+         * Set (copy) the size of the rect from the supplied rect
+         * @param rect   	The rect to set from
+         */
+        void set(Rect* rect) {
+            set((int16_t)rect->p1.x, (int16_t)rect->p1.y, (int16_t)rect->p2.x - 1, (int16_t)rect->p2.y - 1);
         }
 
         /**
