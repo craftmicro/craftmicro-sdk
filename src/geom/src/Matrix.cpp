@@ -52,7 +52,16 @@ namespace craft {
     }
 
     void Matrix::transform(Point* p, float_t originX, float_t originY) {
+        // TODO: Not sure if originX and originY need to be adjusted by the matrix as well (see constructor). i.e:
+        //     float_t ox = originX;
+        //     float_t oy = originY;
+        //     originX = ox * a + oy * c;
+        //     originY = ox * b + oy * d;
+        p->x -= originX;
+        p->y -= originY;
         transform(p);
+        p->x += originX;
+        p->y += originY;
     }
 
     void Matrix::inverseTransform(Point* p) {

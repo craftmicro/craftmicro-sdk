@@ -271,7 +271,6 @@ namespace craft {
     void Stage::_traverse(LineBuffer* buffer, DisplayObject* child, bool forceDirty, Matrix* t, bool isMask) {
         // Step all children
         while (child) {
-            //Serial.printf("Traversing child ID:%d\n", child->id);
 
             // Mask
             if (child->mask != MaskType::none && child->visible()) {
@@ -289,12 +288,6 @@ namespace craft {
 
             // Get child to calculate global bounds
             child->transform(t);
-
-            /* Debug trnasforms
-            Serial.printf("  Local bounds %d,%d %dx%d\n", child->_localBounds->x, child->_localBounds->y, child->_localBounds->width, child->_localBounds->height);
-            Serial.printf("  Transform %2.f,%2.f\n", child->_transform->tx, child->_transform->ty);
-            Serial.printf("  Global bounds %d,%d %dx%d\n", child->globalBounds->x, child->globalBounds->y, child->globalBounds->width, child->globalBounds->height);
-            */
 
             // If child is dirty, include it's old position
             if (child->isDirty() && !child->cleanBounds->isEmpty()) {
@@ -314,6 +307,13 @@ namespace craft {
                 if (child->isDirty()) {
                     _dirtyBounds->grow(child->globalBounds);
                     child->cleanBounds->set(child->globalBounds);
+
+                    /* Debug transforms
+                    Serial.printf("Traversing child ID:%d\n", child->id);
+                    Serial.printf("  Local bounds %.2f,%.2f %.2fx%.2f\n", child->_localBounds->p1.x, child->_localBounds->p1.y, child->_localBounds->width(), child->_localBounds->height());
+                    Serial.printf("  Transform %.2f,%.2f, Offset %.2f,%.2f\n", child->_transform->tx, child->_transform->ty, child->_ox, child->_oy);
+                    Serial.printf("  Global bounds %d,%d %dx%d\n", child->globalBounds->x, child->globalBounds->y, child->globalBounds->width, child->globalBounds->height);
+                    */
                 }
 
             }

@@ -199,10 +199,30 @@ namespace craft {
         /**
          * Transform the rect with the provided matrix
          * @param t The matrix to transform by
+         */
+        void transform(Matrix* t) {
+            Point tl = Point(p1.x, p1.y);
+            Point tr = Point(p2.x, p1.y);
+            Point bl = Point(p1.x, p2.y);
+            Point br = Point(p2.x, p2.y);
+            t->transform(&tl);
+            t->transform(&tr);
+            t->transform(&bl);
+            t->transform(&br);
+            // TODO: 12 compares. Can we improve this?
+            p1.x = Math::min(tl.x, Math::min(tr.x, Math::min(bl.x, br.x)));
+            p1.y = Math::min(tl.y, Math::min(tr.y, Math::min(bl.y, br.y)));
+            p2.x = Math::max(tl.x, Math::max(tr.x, Math::max(bl.x, br.x)));
+            p2.y = Math::max(tl.y, Math::max(tr.y, Math::max(bl.y, br.y)));
+        }
+
+        /**
+         * Transform the rect with the provided matrix around a point
+         * @param t The matrix to transform by
          * @param originX The X-coordinate as the origin
          * @param originY The Y-coordinate as the origin
          */
-        void transform(Matrix* t, float_t originX = 0, float_t originY = 0) {
+        void transform(Matrix* t, float_t originX, float_t originY) {
             Point tl = Point(p1.x, p1.y);
             Point tr = Point(p2.x, p1.y);
             Point bl = Point(p1.x, p2.y);
@@ -211,12 +231,11 @@ namespace craft {
             t->transform(&tr, originX, originY);
             t->transform(&bl, originX, originY);
             t->transform(&br, originX, originY);
-            set( // 12 compares
-                Math::min(tl.x, Math::min(tr.x, Math::min(bl.x, br.x))),
-                Math::min(tl.y, Math::min(tr.y, Math::min(bl.y, br.y))),
-                Math::max(tl.x, Math::max(tr.x, Math::max(bl.x, br.x))),
-                Math::max(tl.y, Math::max(tr.y, Math::max(bl.y, br.y)))
-            );
+            // TODO: 12 compares. Can we improve this?
+            p1.x = Math::min(tl.x, Math::min(tr.x, Math::min(bl.x, br.x)));
+            p1.y = Math::min(tl.y, Math::min(tr.y, Math::min(bl.y, br.y)));
+            p2.x = Math::max(tl.x, Math::max(tr.x, Math::max(bl.x, br.x)));
+            p2.y = Math::max(tl.y, Math::max(tr.y, Math::max(bl.y, br.y)));
         }
 
         /**

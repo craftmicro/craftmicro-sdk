@@ -509,8 +509,8 @@ namespace craft {
     void DisplayObject::transform(Matrix* t) {
         _transform->copy(t);
         _transform->apply(_sx, _sy, Math::degToRad(_rotation), _localBounds->p1.x, _localBounds->p1.y);
-        Rect temp = Rect(0, 0, _localBounds->width(), _localBounds->height());
-        temp.transform(_transform, _ox, _oy);
+        Rect temp = Rect(_ox, _oy, _localBounds->width(), _localBounds->height());
+        temp.transform(_transform);
         globalBounds->set(&temp);
     }
 
