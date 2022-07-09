@@ -2,6 +2,7 @@
 
 #include "Common.h"
 #include "graphics/Color.h"
+#include "utils/Math.h"
 
 /**
  * 32-bit color 8888 (ARGB)
@@ -424,9 +425,9 @@ namespace craft {
      */
     inline color8888 tint(color8888 c, color8888 t, float_t amount) {
         amount = alphaClamp(amount);
-        uint8_t R = floor(lerp(red(c), red(t), amount));
-        uint8_t G = floor(lerp(green(c), green(t), amount));
-        uint8_t B = floor(lerp(blue(c), blue(t), amount));
+        uint8_t R = floor(Math::lerp(red(c), red(t), amount));
+        uint8_t G = floor(Math::lerp(green(c), green(t), amount));
+        uint8_t B = floor(Math::lerp(blue(c), blue(t), amount));
         return to8888(R, G, B, c >> 24);
     }
 
@@ -454,9 +455,9 @@ namespace craft {
      */
     inline color8888 lighten(color8888 c, float_t amount) {
         amount = alphaClamp(amount);
-        uint8_t R = floor(lerp(red(c), 255, amount));
-        uint8_t G = floor(lerp(green(c), 255, amount));
-        uint8_t B = floor(lerp(blue(c), 255, amount));
+        uint8_t R = floor(Math::lerp(red(c), 255, amount));
+        uint8_t G = floor(Math::lerp(green(c), 255, amount));
+        uint8_t B = floor(Math::lerp(blue(c), 255, amount));
         return to8888(R, G, B, c >> 24);
     }
 

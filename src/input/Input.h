@@ -265,7 +265,7 @@ namespace craft {
          * still process pins when update() is called.
          * @param 	state 	true if active, false if not active
          */
-        void setActive(boolean state);
+        void setActive(bool state);
 
         /**
          * Update inputs
@@ -277,7 +277,7 @@ namespace craft {
         /**
          * Active flag
          */
-        boolean _active = true;
+        bool _active = true;
 
         /**
          * This listener for firing input events

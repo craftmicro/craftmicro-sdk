@@ -64,7 +64,7 @@ namespace craft {
          * @param  messageData Any user message data that was registered with the messenger
          * @return             Keep the listener?
          */
-        virtual boolean listen(uint32_t event, void* messageData) { return true; }
+        virtual bool listen(uint32_t event, void* messageData) { return true; }
     };
 
     /**
@@ -72,7 +72,7 @@ namespace craft {
      * Example usage:
      *
      * // Define the callback function
-     * boolean handleTheEvent( uint32_t event, void* data ) {
+     * bool handleTheEvent( uint32_t event, void* data ) {
      * 		// Do something
      * 		Serial.printf("Event received. The event is %l.\n", event );
      *
@@ -94,23 +94,23 @@ namespace craft {
          *
          * @param callback The callback function to trigger when the event is received
          */
-        CallbackListener(boolean(*callback)(uint32_t event, void* data)) {
+        CallbackListener(bool(*callback)(uint32_t event, void* data)) {
             this->callback = callback;
         }
 
         /**
          * The callback listener that is triggered when the event is received
          */
-        boolean(*callback)(uint32_t event, void* data);
+        bool(*callback)(uint32_t event, void* data);
 
         /**
          * @brief This method is called when the event is fired. It will trigger the callback.
          *
          * @param event The event that was received
          * @param messageData Any message data passed through with the event
-         * @return boolean True to continue to listen for events, false to remove this listener
+         * @return bool True to continue to listen for events, false to remove this listener
          */
-        boolean listen(uint32_t event, void* messageData) {
+        bool listen(uint32_t event, void* messageData) {
             if (this->callback) return this->callback(event, messageData);
             return true;
         }

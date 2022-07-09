@@ -2,6 +2,8 @@
 
 #include "utils/MemoryPool.h"
 #include "geom/ClipRect.h"
+#include "geom/Matrix.h"
+#include "geom/Rect.h"
 #include "display/filters/Filter.h"
 #include "display/IDrawable.h"
 #include "display/Messenger.h"
@@ -112,13 +114,13 @@ namespace craft {
          * Set the Visibility of the object
          * @param v 	The visibility
          */
-        void visible(boolean v);
+        void visible(bool v);
 
         /**
          * Get the visibility of an object
-         * @return boolean The visibility
+         * @return bool The visibility
          */
-        boolean visible();
+        bool visible();
 
         /**
          * @brief Return parent
@@ -129,7 +131,7 @@ namespace craft {
         /**
          * Return true if there is a parent
          */
-        boolean hasParent();
+        bool hasParent();
 
         /**
          * Add a display object to the top of the list
@@ -157,7 +159,7 @@ namespace craft {
          * Remove all children from the list
          * @param 	free		If true, will delete the objects from memory.
          */
-        void removeAllChildren(boolean free = true);
+        void removeAllChildren(bool free = true);
 
         /**
          * Return the first child
@@ -183,7 +185,7 @@ namespace craft {
         /**
          * Return true if there are children
          */
-        boolean hasChildren();
+        bool hasChildren();
 
         /**
          * Get next sibling in the list
@@ -222,7 +224,7 @@ namespace craft {
          * @param position The position of the origin
          * @param roundToInt If true, will round the x and y cooridnates using floor
          */
-        virtual void origin(OriginType position, boolean roundToInt = false);
+        virtual void origin(OriginType position, bool roundToInt = false);
 
         /**
          * @brief Set the x coordinate
@@ -247,6 +249,13 @@ namespace craft {
         virtual float_t y();
 
         /**
+         * @brief Set the x and y coordinates
+         * @param x The x coordinate
+         * @param y The y coordinate
+         */
+        virtual void position(float_t x, float_t y);
+
+        /**
          * @brief Set the width
          * @param value The new width
          */
@@ -269,6 +278,46 @@ namespace craft {
         virtual float_t height();
 
         /**
+         * @brief Set the scale
+         * @param s The new scale
+         */
+        virtual void scale(float_t s);
+
+        /**
+         * @brief Set the scale
+         * @param sx The new scale is x direction
+         * @param sy The new scale is y direction
+         */
+        virtual void scale(float_t sx, float_t sy);
+
+        /**
+         * @return float_t The scale in the x direction
+         */
+        virtual float_t scaleX();
+
+        /**
+         * @return float_t The scale in the y direction
+         */
+        virtual float_t scaleY();
+
+        /**
+         * @brief Set the rotation, in degrees
+         * @param s The new rotation, in degrees
+         */
+        virtual void rotation(float_t r);
+
+        /**
+         * @brief Adjust the rotation by a value in degrees
+         * @param s The adjustment, in degrees
+         */
+        virtual void rotate(float_t r);
+
+        /**
+         * @return float_t The rotation, in degrees
+         */
+        virtual float_t rotation();
+
+        /**
          * Update the display object.
          * @param	dt 			Time since last update in seconds
          * @return 	Return self for chaining
@@ -276,12 +325,11 @@ namespace craft {
         virtual void update(float_t dt);
 
         /**
-         * @brief Set the global position of the display object
+         * @brief Set the global transform of the display object
          *
-         * @param x The global X position
-         * @param y The global Y position
+         * @param t The parent transformation matrix
          */
-        virtual void globalPos(float_t x, float_t y);
+        virtual void transform(Matrix* t);
 
         /**
          * @brief Convert a global X coordinate to a local coord
@@ -314,7 +362,7 @@ namespace craft {
         /**
          * Check if object is dirty
          */
-        boolean isDirty();
+        bool isDirty();
 
         /**
          * @brief Filters to apply during rendering
@@ -364,27 +412,27 @@ namespace craft {
         /**
          * Flag to indicate that the object needs to be redrawn
          */
-        boolean _dirty = true;
+        bool _dirty = true;
 
         /**
          * Visibility of the object. If false, object is updated but not rendered.
          */
-        boolean _visible = true;
+        bool _visible = true;
 
         /**
          * Active flag. If false, object does not accept input.
          */
-        boolean _active = true;
+        bool _active = true;
 
         /**
          * Animation flag. If false, object does not animate.
          */
-        boolean _animate = false;
+        bool _animate = false;
 
         /**
          * Masked flag. If true, this display object is masked.
          */
-        boolean _hasMask = false;
+        bool _hasMask = false;
 
         /**
          * X offset of origin
@@ -397,12 +445,33 @@ namespace craft {
         float_t _oy = 0;
 
         /**
+         * X scale
+         */
+        float_t _sx = 1.0;
+
+        /**
+         * Y scale
+         */
+        float_t _sy = 1.0;
+
+        /**
+         * @brief Rotation, in degrees
+         */
+        float_t _rotation = 0;
+
+        /**
          * @brief Rect describing the bounds in local space
          *
          * The width and height must contain the pixels completely. The x and y values are the
          * position of the object (relative to the parent).
          */
-        ClipRect* _localBounds;
+        Rect* _localBounds;
+
+        /**
+         * @brief The global transform
+         * Calculated during each render cycle.
+         */
+        Matrix* _transform;
 
         /**
          * List of children

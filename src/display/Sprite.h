@@ -74,6 +74,13 @@ namespace craft {
         color888 color;
 
         /**
+         * @brief Whether to smooth/anti-alias the sprite when it is rotated
+         * Setting this to false results in faster performance. Setting it to true
+         * results in a more accurate render.
+         */
+        bool smoothing = false;
+
+        /**
          * Set the tilemap and the tileIndex that the sprite uses.
          * @param tilemap 	The tilemap to use
          * @param tileIndex The index of the active tile

@@ -7,7 +7,7 @@ namespace craft {
      * @param  pixelFormat The pixel format to check
      * @return             Return true if the pixel format has an alpha channel, otherwise false
      */
-    boolean pixelFormatHasAlpha(PixelFormat pixelFormat) {
+    bool pixelFormatHasAlpha(PixelFormat pixelFormat) {
         switch (pixelFormat) {
             case PixelFormat::ARGB4444: return true;
             case PixelFormat::ARGB6666: return true;

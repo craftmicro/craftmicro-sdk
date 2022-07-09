@@ -163,7 +163,7 @@ namespace craft {
      * still process pins when update() is called.
      * @param 	state 	true if active, false if not active
      */
-    void Input::setActive(boolean state) {
+    void Input::setActive(bool state) {
         _active = state;
     }
 
@@ -180,7 +180,7 @@ namespace craft {
 
             // Process digital pin
             if (ip->pinType == craft::PinType::digital || ip->pinType == craft::PinType::digitalNC) {
-                int OPEN = (ip->pinType == craft::PinType::digital)?HIGH:LOW;
+                int OPEN = (ip->pinType == craft::PinType::digital) ? HIGH : LOW;
 
                 // State based
                 switch (ip->state) {
@@ -367,7 +367,7 @@ namespace craft {
             if ((buttonClickType != ClickType::none) && _active) {
                 InputMap* im = ip->mappings;
                 // If the click type is press, click_press or dbl_click, we also need to fire the 'up' events
-                boolean alsoUp = (buttonClickType == ClickType::press) || (buttonClickType == ClickType::click_press) || (buttonClickType == ClickType::dbl_click);
+                bool alsoUp = (buttonClickType == ClickType::press) || (buttonClickType == ClickType::click_press) || (buttonClickType == ClickType::dbl_click);
                 while (im) {
                     // Trigger event for click type
                     if (im->clickType == buttonClickType) {

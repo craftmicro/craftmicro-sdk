@@ -68,7 +68,7 @@ namespace craft {
         /**
          * @brief Enable visual debugging of update area
          */
-        boolean debug = false;
+        bool debug = false;
 
         /**
          * @brief Color for visual debugging
@@ -125,7 +125,7 @@ namespace craft {
           * @param py			The y-coordinate
           * @param isMask		True to force the child to be processed as a mask
           */
-        void _traverse(LineBuffer* buffer, DisplayObject* child, boolean forceDirty, float_t px, float_t py, boolean isMask);
+        void _traverse(LineBuffer* buffer, DisplayObject* child, bool forceDirty, Matrix* t, bool isMask);
 
         /**
          * Clear a DisplayList

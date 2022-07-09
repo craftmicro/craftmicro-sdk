@@ -47,6 +47,7 @@ namespace craft {
         // Update input and messenger as often as possible
         input->update(deltaSecs);
         messenger->update(deltaSecs);
+        stage->update(deltaSecs);
 
         // User update functions
         messenger->sendMessage(Event::update_all);
@@ -74,7 +75,7 @@ namespace craft {
         lastMicros = thisMicros;
     }
 
-    void App::serialBegin(boolean waitUntilReady) {
+    void App::serialBegin(bool waitUntilReady) {
         // Initialise the serial for debugging info
         Serial.begin(9600);
         if (waitUntilReady) {

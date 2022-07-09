@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common.h"
+#include "Rect.h"
 
 /**
  * Integer rect
@@ -14,17 +15,31 @@ namespace craft {
 
     public:
         /**
-         * Constructor
+         * Construct an empty clip rect
          */
         ClipRect() {
             clear();
         }
 
         /**
-         * Constructor
+         * Construct a clip rect as a copy of another
+         */
+        ClipRect(ClipRect* rect) {
+            set(rect);
+        }
+
+        /**
+         * Construct a clip rect from a point and size
          */
         ClipRect(int16_t px, int16_t py, int16_t w, int16_t h) {
             setPosAndSize(px, py, w, h);
+        }
+
+        /**
+         * Construct a clip rect as an integer copy of a rect (floats)
+         */
+        ClipRect(Rect* rect) {
+            set(rect);
         }
 
         /**
@@ -83,6 +98,14 @@ namespace craft {
             y2 = rect->y2;
             width = rect->width;
             height = rect->height;
+        }
+
+        /**
+         * Set (copy) the size of the rect from the supplied rect
+         * @param rect   	The rect to set from
+         */
+        void set(Rect* rect) {
+            set((int16_t)rect->p1.x, (int16_t)rect->p1.y, (int16_t)rect->p2.x - 1, (int16_t)rect->p2.y - 1);
         }
 
         /**
@@ -220,7 +243,7 @@ namespace craft {
          * @param  py 	Y coord to test
          * @return   True if point within rect
          */
-        boolean contains(int16_t px, int16_t py) {
+        bool contains(int16_t px, int16_t py) {
             return ((px >= x) && (px <= x2) && (py >= y) && (py <= y2));
         }
 
@@ -229,7 +252,7 @@ namespace craft {
          * @param  px  	X coord to test
          * @return   True if point within rect
          */
-        boolean containsX(int16_t px) {
+        bool containsX(int16_t px) {
             return ((px >= x) && (px <= x2));
         }
 
@@ -238,7 +261,7 @@ namespace craft {
          * @param  px  	Y coord to test
          * @return   True if point within rect
          */
-        boolean containsY(int16_t py) {
+        bool containsY(int16_t py) {
             return ((py >= y) && (py <= y2));
         }
 
@@ -246,16 +269,16 @@ namespace craft {
          * Check if the clip rect is empty (has a 0 width or height)
          * @return True if the rect is empty
          */
-        boolean isEmpty() {
+        bool isEmpty() {
             return (width == 0) || (height == 0);
         }
 
         /**
          * Check if any part of another rect overlaps this one
          * @param rect The other rect
-         * @return boolean True if any part of the rects overlap
+         * @return bool True if any part of the rects overlap
          */
-        boolean overlaps(ClipRect* rect) {
+        bool overlaps(ClipRect* rect) {
             if (isEmpty() || rect->isEmpty()) return false;
             if (rect->x2 < x) return false;
             if (rect->x > x2) return false;

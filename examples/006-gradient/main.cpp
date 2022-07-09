@@ -12,7 +12,7 @@ float_t center_y = 0;
 
 // Runs on every render cycle. Spins the gradient around
 // in a circle and changes it's size.
-boolean onRenderFrame(uint32_t event, void* data) {
+bool onRenderFrame(uint32_t event, void* data) {
     angle += 0.05;
     if (angle > (M_PI * 2)) angle -= M_PI * 2;
     float_t r = center_x + center_x * 0.5 * cosf(angle * 5);

@@ -15,6 +15,7 @@ namespace craft {
         Size320x240,
         Size240x240,
         Size135x240,
+        Size320x480,
     };
 
     /**
@@ -178,7 +179,7 @@ namespace craft {
          * Backlight
          **/
         uint8_t _bklt = 255;
-        boolean _bkltPWM = false;
+        bool _bkltPWM = false;
 
         /**
          * @brief Set the area of the display to draw to

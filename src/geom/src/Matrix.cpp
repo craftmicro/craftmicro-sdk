@@ -1,5 +1,6 @@
 #include "Common.h"
 #include "../Matrix.h"
+#include "utils/Math.h"
 
 namespace craft {
 
@@ -26,8 +27,8 @@ namespace craft {
             b *= scaleY;
             d *= scaleY;
         }
-        this->tx = tx - (ox * a + oy * c);
-        this->ty = ty - (ox * b + oy * d);
+        this->tx = tx + (ox * a + oy * c);
+        this->ty = ty + (ox * b + oy * d);
     }
 
     void Matrix::apply(float_t scaleX, float_t scaleY, float_t rotation, float_t tx, float_t ty, float_t ox, float_t oy) {
@@ -51,7 +52,16 @@ namespace craft {
     }
 
     void Matrix::transform(Point* p, float_t originX, float_t originY) {
+        // TODO: Not sure if originX and originY need to be adjusted by the matrix as well (see constructor). i.e:
+        //     float_t ox = originX;
+        //     float_t oy = originY;
+        //     originX = ox * a + oy * c;
+        //     originY = ox * b + oy * d;
+        p->x -= originX;
+        p->y -= originY;
         transform(p);
+        p->x += originX;
+        p->y += originY;
     }
 
     void Matrix::inverseTransform(Point* p) {
@@ -88,9 +98,9 @@ namespace craft {
     }
 
     void Matrix::inverseTransform(Point* p, float_t ox, float_t oy) {
-        translate(-ox, -oy);
-        inverseTransform(p);
         translate(ox, oy);
+        inverseTransform(p);
+        translate(-ox, -oy);
     }
 
     void Matrix::concat(Matrix* m) {
@@ -157,8 +167,8 @@ namespace craft {
 
     void Matrix::rotate(float_t angle, float_t ox, float_t oy) {
         rotate(angle);
-        this->tx = tx - (ox * a + oy * c);
-        this->ty = ty - (ox * b + oy * d);
+        this->tx = tx + (ox * a + oy * c);
+        this->ty = ty + (ox * b + oy * d);
     }
 
     void Matrix::scale(float_t sx, float_t sy) {

@@ -45,12 +45,11 @@ namespace craft {
         color888 color;
 
         /**
-         * @brief Set the global position of the display object
+         * @brief Set the global transform of the display object
          *
-         * @param x The global X position
-         * @param y The global Y position
+         * @param t The parent transformation matrix
          */
-        void globalPos(float_t x, float_t y);
+        virtual void transform(Matrix* t);
 
         /**
          * prepare to render the next line

@@ -9,7 +9,7 @@ BumpFilter* filter;
 Light* light;
 
 // Runs on every render cycle
-boolean onRenderFrame(uint32_t event, void* data) {
+bool onRenderFrame(uint32_t event, void* data) {
     // Change the direction of the light source (circular)
     light->direction += 0.01;
     light->update();

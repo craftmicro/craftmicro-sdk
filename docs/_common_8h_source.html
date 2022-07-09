@@ -71,21 +71,24 @@ $(function() {
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">    #endif</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="namespacecraft.html#a156442b985e3673b0f2ef0414ee89a38">   55</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecraft.html#a156442b985e3673b0f2ef0414ee89a38">swap</a>( T&amp; a, T&amp; b ) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="namespacecraft.html#a156442b985e3673b0f2ef0414ee89a38">   55</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacecraft.html#a156442b985e3673b0f2ef0414ee89a38">swap</a>(T&amp; a, T&amp; b) {</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        T t = a;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        a = b;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        b = t;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="namespacecraft.html#a5076c994c9b4f823ea903ed0f9526174">   64</a></span>    <span class="keyword">inline</span> <a class="code hl_typedef" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a> <a class="code hl_function" href="namespacecraft.html#a5076c994c9b4f823ea903ed0f9526174">lerp</a>( <a class="code hl_typedef" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a> a, <a class="code hl_typedef" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a> b, <a class="code hl_typedef" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a> k ) {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> a + k * ( b - a );</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>} <span class="comment">// ns::craft</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">    #define S(string_literal) ((const char*)F(string_literal))</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">    #if defined(_MSC_VER)</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">    #define ALWAYS_INLINE __forceinline inline</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">    #elif defined(__GNUC__)</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">    #define ALWAYS_INLINE inline</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>} <span class="comment">// ns::craft</span></div>
 <div class="ttc" id="anamespacecraft_html"><div class="ttname"><a href="namespacecraft.html">craft</a></div><div class="ttdef"><b>Definition:</b> Common.h:5</div></div>
 <div class="ttc" id="anamespacecraft_html_a156442b985e3673b0f2ef0414ee89a38"><div class="ttname"><a href="namespacecraft.html#a156442b985e3673b0f2ef0414ee89a38">craft::swap</a></div><div class="ttdeci">void swap(T &amp;a, T &amp;b)</div><div class="ttdoc">Swap two values.</div><div class="ttdef"><b>Definition:</b> Common.h:55</div></div>
 <div class="ttc" id="anamespacecraft_html_a2c9327a8993924562e501b87a47321bf"><div class="ttname"><a href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">craft::float_t</a></div><div class="ttdeci">float float_t</div><div class="ttdef"><b>Definition:</b> Common.h:48</div></div>
-<div class="ttc" id="anamespacecraft_html_a5076c994c9b4f823ea903ed0f9526174"><div class="ttname"><a href="namespacecraft.html#a5076c994c9b4f823ea903ed0f9526174">craft::lerp</a></div><div class="ttdeci">float_t lerp(float_t a, float_t b, float_t k)</div><div class="ttdoc">Linear interpolation between two values.</div><div class="ttdef"><b>Definition:</b> Common.h:64</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

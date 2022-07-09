@@ -48,6 +48,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classcraft_1_1_display-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">craft::Display Class Reference</div></div>
@@ -61,7 +62,9 @@ Inheritance diagram for craft::Display:</div>
  <div class="center">
   <img src="classcraft_1_1_display.png" usemap="#craft::Display_map" alt=""/>
   <map id="craft::Display_map" name="craft::Display_map">
-<area href="classcraft_1_1_display_i_l_i9341.html" alt="craft::DisplayILI9341" shape="rect" coords="0,56,127,80"/>
+<area href="classcraft_1_1_display_s_p_i.html" title="Determine clock speed." alt="craft::DisplaySPI" shape="rect" coords="69,56,198,80"/>
+<area href="classcraft_1_1_display_i_l_i9341.html" alt="craft::DisplayILI9341" shape="rect" coords="0,112,129,136"/>
+<area href="classcraft_1_1_display_s_t7789.html" alt="craft::DisplayST7789" shape="rect" coords="139,112,268,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -90,11 +93,17 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a237bf0a49c3ff7205a87fe577843a7af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a237bf0a49c3ff7205a87fe577843a7af">ready</a> = false</td></tr>
 <tr class="separator:a237bf0a49c3ff7205a87fe577843a7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a23c4db9351d9e3d624a74933c2aa0182"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a23c4db9351d9e3d624a74933c2aa0182">setArea</a> (<a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;buffer)</td></tr>
+<tr class="memdesc:a23c4db9351d9e3d624a74933c2aa0182"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the area of the display to draw to.  <a href="classcraft_1_1_display.html#a23c4db9351d9e3d624a74933c2aa0182">More...</a><br /></td></tr>
+<tr class="separator:a23c4db9351d9e3d624a74933c2aa0182"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ae0749e82741e096771babef8e15306c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacecraft.html#afb854678b047bba0cd5889d36ab87ed4">PixelFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#ae0749e82741e096771babef8e15306c1">_pf</a> = PixelFormat::Unknown</td></tr>
 <tr class="separator:ae0749e82741e096771babef8e15306c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af59d6c9279dc9dd7cb05473aca8cc483"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af59d6c9279dc9dd7cb05473aca8cc483">_px</a> = PixelScale::x1</td></tr>
+<tr class="memitem:af59d6c9279dc9dd7cb05473aca8cc483"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af59d6c9279dc9dd7cb05473aca8cc483">_px</a> = 1</td></tr>
 <tr class="separator:af59d6c9279dc9dd7cb05473aca8cc483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4cfa284023d61c3fcf6a08c04663715"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af4cfa284023d61c3fcf6a08c04663715">_hwSize</a></td></tr>
 <tr class="separator:af4cfa284023d61c3fcf6a08c04663715"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -102,9 +111,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac488486fec304be873f4bef58e67c0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73a9559dd176de06312907ea3e151694"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a73a9559dd176de06312907ea3e151694">_bklt</a> = 255</td></tr>
 <tr class="separator:a73a9559dd176de06312907ea3e151694"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac73e1baed10ffb6f5aa7e898682d38f3"><td class="memItemLeft" align="right" valign="top"><a id="ac73e1baed10ffb6f5aa7e898682d38f3" name="ac73e1baed10ffb6f5aa7e898682d38f3"></a>
-boolean&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = false</td></tr>
-<tr class="separator:ac73e1baed10ffb6f5aa7e898682d38f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf39e033e9b1599973be6337cb8215ab"><td class="memItemLeft" align="right" valign="top"><a id="abf39e033e9b1599973be6337cb8215ab" name="abf39e033e9b1599973be6337cb8215ab"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = false</td></tr>
+<tr class="separator:abf39e033e9b1599973be6337cb8215ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p ><a class="el" href="classcraft_1_1_display.html">Display</a> base class. This minimal version of the display class only includes enough code to set up the display and to draw pixels to it. Do not use this class directly. Use one of the derived classes specifically for your display in /display/hardware</p>
@@ -206,7 +215,7 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = fal
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classcraft_1_1_display_i_l_i9341.html#ad54dd9e670a5fe81393e282eb8e87913">craft::DisplayILI9341</a>.</p>
+<p>Reimplemented in <a class="el" href="classcraft_1_1_display_s_p_i.html#aeea304f2c5159aaf1c37bce7d238c2ea">craft::DisplaySPI</a>.</p>
 
 </div>
 </div>
@@ -311,6 +320,42 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = fal
 </table>
 </div><div class="memdoc">
 <p >The pixel format of the display </p>
+
+</div>
+</div>
+<a id="a23c4db9351d9e3d624a74933c2aa0182" name="a23c4db9351d9e3d624a74933c2aa0182"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23c4db9351d9e3d624a74933c2aa0182">&#9670;&nbsp;</a></span>setArea()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void craft::Display::setArea </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the area of the display to draw to. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>The line buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classcraft_1_1_display_i_l_i9341.html#a3818c5e36a5791d2d833d09bfbdf98fb">craft::DisplayILI9341</a>, and <a class="el" href="classcraft_1_1_display_s_t7789.html#a5d711866d460e6fbc8a556b658b140c7">craft::DisplayST7789</a>.</p>
 
 </div>
 </div>
@@ -420,7 +465,7 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = fal
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t craft::Display::_px = PixelScale::x1</td>
+          <td class="memname">uint8_t craft::Display::_px = 1</td>
         </tr>
       </table>
   </td>

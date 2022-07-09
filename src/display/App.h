@@ -83,9 +83,9 @@ namespace craft {
 
         /**
          * Initialise serial for debugging messages
-         * @param boolean If true, wait until serial object is ready (maximum of 2 seconds)
+         * @param bool If true, wait until serial object is ready (maximum of 2 seconds)
          */
-        void serialBegin(boolean waitUntilReady = false);
+        void serialBegin(bool waitUntilReady = false);
 
     protected:
 

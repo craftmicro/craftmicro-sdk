@@ -71,12 +71,12 @@ namespace craft {
      **/
     static const uint8_t init_commands[] = {
         4, 		0xEF, 0x03, 0x80, 0x02,
-        4, 		0xCF, 0x00, 0XC1, 0X30,				// Power control B
-        5, 		0xED, 0x64, 0x03, 0X12, 0X81,		// Power on sequence control
-        4, 		0xE8, 0x85, 0x00, 0x78,				// Driver timing control A
-        6, 		0xCB, 0x39, 0x2C, 0x00, 0x34, 0x02, // Power control A
-        2, 		0xF7, 0x20,							// Pump ratio control
-        3, 		0xEA, 0x00, 0x00,					// Driver timing control B
+        4, 		0xCF, 0x00, 0XC1, 0X30,				        // Power control B
+        5, 		0xED, 0x64, 0x03, 0X12, 0X81,		        // Power on sequence control
+        4, 		0xE8, 0x85, 0x00, 0x78,				        // Driver timing control A
+        6, 		0xCB, 0x39, 0x2C, 0x00, 0x34, 0x02,         // Power control A
+        2, 		0xF7, 0x20,							        // Pump ratio control
+        3, 		0xEA, 0x00, 0x00,					        // Driver timing control B
         2, 		ILI9341_Command::PWCTR1, 0x23, 				// Power control
         2, 		ILI9341_Command::PWCTR2, 0x10, 				// Power control
         3, 		ILI9341_Command::VMCTR1, 0x3e, 0x28, 		// VCM control
@@ -85,29 +85,30 @@ namespace craft {
         2, 		ILI9341_Command::PIXFMT, 0x55,				// 16bit 565 pixel format
         3, 		ILI9341_Command::FRMCTR1, 0x00, 0x18,
         4, 		ILI9341_Command::DFUNCTR, 0x08, 0x82, 0x27,	// Display Function Control
-        2, 		0xF2, 0x00, 						// Gamma Function Disable
-        2, 		ILI9341_Command::GAMMASET, 0x01, 			// Gamma curve selected
+        2, 		0xF2, 0x00, 						        // Gamma Function Disable
+        2, 		ILI9341_Command::GAMMASET, 0x01,            // Gamma curve selected
         16, 	ILI9341_Command::GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08,
-                0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00, // Set Gamma
+                0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00, // Set Positive Gamma
         16, 	ILI9341_Command::GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07,
-                0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F, // Set Gamma
-        3, 		0xb1, 0x00, 0x10, 					// FrameRate Control 119Hz
+                0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F, // Set Negative Gamma
+        3, 		0xb1, 0x00, 0x10, 					        // FrameRate Control 119Hz
 
-        2, 		ILI9341_Command::MADCTL, 0x20 | 0x08, // 0x80=MY, 0x40=MX, 0x10=ML, 0x04=MH, 0x20=MV, 0x00=RGB, 0x08=BGR, 
-        1,      ILI9341_Command::SLPOUT,
+        2, 		ILI9341_Command::MADCTL, 0x20 | 0x08,       // 0x80=MY, 0x40=MX, 0x10=ML, 0x04=MH, 0x20=MV, 0x00=RGB, 0x08=BGR, 
+        1,      ILI9341_Command::SLPOUT,                    // Sleep Out
+        2,      DELAY_COMMAND, 120,                         // Delay 120ms
         0
     };
 
     /**
-     * Constructor. Note - constructor calls init
+     * Constructor for 4-wire SPI.
      * @param	cs		Pin used for Chip Select
      * @param	dc		Pin used for Data Control
      * @param	rst		Pin used for Reset (optional. 255=unused)
      * @param	mosi	Pin used for MOSI communication (data out from master)
      * @param	sclk	Pin used for clock
      * @param	miso	Pin used for MISO communication (data out from slave)
-     * @param	width	TFT pixel width
-     * @param	Height	TFT pixel height
+     * @param	bklt	Pin used for backlight (optional. 255=unused)
+     * @param	px 		Scale factor from framebuffer to display. Normally 1:1 (pixelScale_1x1)
      **/
     DisplayILI9341::DisplayILI9341(DisplaySize sz, uint8_t cs, uint8_t dc, uint8_t rst, uint8_t mosi, uint8_t sclk, uint8_t miso, uint8_t bklt, uint8_t scale) {
         _cs = cs;
@@ -133,7 +134,6 @@ namespace craft {
         // Send init commands
         beginTransaction();
         commandSequence(init_commands);
-        delay(120);
         writeCommand_last(ILI9341_Command::DISPON);    // Display on
         endTransaction();
 
