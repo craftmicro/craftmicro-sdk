@@ -16,6 +16,18 @@ namespace craft {
         Size240x240,
         Size135x240,
         Size320x480,
+        Size480x320,
+    };
+
+    /**
+     * Display orientation
+     */
+    enum class DisplayOrientation {
+        Default,            // Default for the display. Could be either portrait or landscape
+        Landscape,          // Landscape
+        Portrait,           // Portrait
+        LandscapeFlipped,   // Landscape but upside-down
+        PortraitFlipped,    // Portrait but upside-down
     };
 
     /**
@@ -140,6 +152,11 @@ namespace craft {
         PixelFormat pixelFormat() { return _pf; }
 
         /**
+         * The orientation of the display
+         */
+        DisplayOrientation orientation() { return _o; }
+
+        /**
          * Turn the backlight on or off. If the backlight pin is set, the backlight
          * is turned on automatically during init/construction. If you want it off, call
          * backlight(0) after construction.
@@ -166,6 +183,11 @@ namespace craft {
         uint8_t _px = 1;
 
         /**
+         * @brief Display orientation
+         */
+        DisplayOrientation _o = DisplayOrientation::Default;
+
+        /**
          * Actual hardware width and height of the display
          */
         ClipRect _hwSize;
@@ -187,6 +209,19 @@ namespace craft {
          * @param buffer The line buffer
          */
         virtual void setArea(LineBufferData& buffer);
+
+        /**
+         * @brief Set the Orientation of the display
+         *
+         * At this time this must be called only once during display construction. It is not possible
+         * to change the display orientation at runtime. Well, that's not exactly true - it should be
+         * possible to switch between landscape/landscapeFlipped, or between portrait/portraitFlipped
+         * but not from one to the other. This is because the line buffer would also need to be changed
+         * to reflect the different size of the line.
+         *
+         * @param o The orientation
+         */
+        virtual void setOrientation(DisplayOrientation o) {}
     };
 
 } // namespace craft

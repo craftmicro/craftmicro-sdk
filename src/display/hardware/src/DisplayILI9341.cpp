@@ -123,6 +123,7 @@ namespace craft {
             case DisplaySize::Size320x240:
             default:
                 _hwSize.setSize(320, 240);
+                _o = DisplayOrientation::Landscape;
         }
         _pf = PixelFormat::RGB565;
         _px = scale == 0 ? 1 : scale;
