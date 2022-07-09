@@ -15,6 +15,7 @@ namespace craft {
         Size320x240,
         Size240x240,
         Size135x240,
+        Size320x480,
     };
 
     /**

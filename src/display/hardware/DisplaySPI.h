@@ -10,7 +10,7 @@ namespace craft {
 
     #define UNUSED_PIN 255
     #define PIN_OR_UNUSED(p) p==UNUSED_PIN?-1:p
-    #define DELAY_COMMAND 255
+    #define DELAY_COMMAND 0xff
 
     /**
      * @brief Determine clock speed
@@ -23,11 +23,123 @@ namespace craft {
     public:
 
         /**
-         * @brief Draw data to an area of the display
-         *
-         * @param buffer The line buffer to draw (buffer is scaled by pixel scale)
-        */
-        void draw(LineBufferData& buffer) override;
+         * Update the linebuffer to the display
+         **/
+        void draw(LineBufferData& buffer) override {
+            switch (_pf) {
+                case PixelFormat::RGB888:
+                    draw888(buffer);
+                    break;
+                case PixelFormat::RGB565:
+                default:
+                    draw565(buffer);
+                    break;
+            }
+        }
+
+        /**
+         * Update the linebuffer to the display for 16-bit pixel formats
+         **/
+        void draw565(LineBufferData& buffer) {
+            // Set not ready
+            ready = false;
+
+            // Begin the transmission to hardware
+            beginTransaction();
+
+            // Set the area of the display to write to
+            setArea(buffer);
+
+            // Write pixels. Some SPI implementations require the final pixel
+            // to be written differently, so we need to keep track of the count
+            if (_px == 1) {
+                int lineOffset = 0;
+                int count = buffer.rect.width * buffer.rect.height;
+                for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
+                    for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
+                        if (--count) writeData16(to565(buffer.pixels[lineOffset + x]));
+                        else writeData16_last(to565(buffer.pixels[lineOffset + x]));
+                    }
+                    lineOffset += _size.width;
+                }
+            }
+            else {
+                int count = buffer.rect.width * _px * buffer.rect.height * _px;
+                int lineOffset = 0;
+                for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
+                    for (uint16_t i = 0; i < _px; i++) {
+                        for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
+                            for (uint16_t j = 0; j < _px; j++) {
+                                if (--count) writeData16(to565(buffer.pixels[lineOffset + x]));
+                                else writeData16_last(to565(buffer.pixels[lineOffset + x]));
+                            }
+                        }
+                    }
+                    lineOffset += _size.width;
+                }
+            }
+            // Done with complete transaction
+            endTransaction();
+
+            // Set ready to send data
+            ready = true;
+        }
+
+        /**
+         * Update the linebuffer to the display
+         **/
+        void draw888(LineBufferData& buffer) {
+            // Set not ready
+            ready = false;
+
+            // Begin the transmission to hardware
+            beginTransaction();
+
+            // Set the area of the display to write to
+            setArea(buffer);
+
+            // Write pixels. Some SPI implementations require the final pixel
+            // to be written differently, so we need to keep track of the count
+            if (_px == 1) {
+                color888 c;
+                int lineOffset = 0;
+                int count = buffer.rect.width * buffer.rect.height;
+                for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
+                    for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
+                        c = buffer.pixels[lineOffset + x];
+                        writeData8((c >> 16) & 0xff);
+                        writeData8((c >> 8) & 0xff);
+                        if (--count) writeData8(c & 0xff);
+                        else writeData8_last(c & 0xff);
+                    }
+                    lineOffset += _size.width;
+                }
+            }
+            else {
+                color888 c;
+                int count = buffer.rect.width * _px * buffer.rect.height * _px;
+                int lineOffset = 0;
+                for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
+                    for (uint16_t i = 0; i < _px; i++) {
+                        for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
+                            c = buffer.pixels[lineOffset + x];
+                            for (uint16_t j = 0; j < _px; j++) {
+                                writeData8((c >> 16) & 0xff);
+                                writeData8((c >> 8) & 0xff);
+                                if (--count) writeData8(c & 0xff);
+                                else writeData8_last(c & 0xff);
+                            }
+                        }
+                    }
+                    lineOffset += _size.width;
+                }
+            }
+            // Done with complete transaction
+            endTransaction();
+
+            // Set ready to send data
+            ready = true;
+        }
 
     protected:
 
@@ -60,7 +172,7 @@ namespace craft {
             _spi = new SPIClass(SPI);
             _useSpiTransaction = false;
             #else
-            _spi = new SPIClass(SPI);
+            _spi = new SPIClass(VSPI);
             #endif
 
             // Set up MISO, MOSI and SCLK
@@ -274,6 +386,7 @@ namespace craft {
         }
 
         #endif // KINETISK
+
     };
 
 } // namespace craft
