@@ -148,7 +148,7 @@ namespace craft {
         uint8_t _miso, _mosi, _sclk;
         uint8_t _pcs_data, _pcs_command;
         uint32_t _spiClock;
-        bool _useSpiTransaction = true;
+        bool _manualCSandDC = true;
         SPIClass* _spi = nullptr;
 
         /**
@@ -164,15 +164,43 @@ namespace craft {
             #endif
 
             // Determnine SPI class
-            // TODO: Based on pins?
             #if defined(ESP32)
-            _spi = new SPIClass(VSPI);
-            _useSpiTransaction = true;
+            switch (_mosi) {
+                #if defined(HSPI)
+                case 13:
+                    _spi = new SPIClass(HSPI);
+                    break;
+                #endif
+                #if defined(VSPI)
+                case 23:
+                    _spi = new SPIClass(VSPI);
+                    break;
+                #endif
+                default:
+                    _spi = new SPIClass(SPI);
+                    break;
+            }
+            _manualCSandDC = true;
             #elif defined(KINETISK)
-            _spi = new SPIClass(SPI);
-            _useSpiTransaction = false;
+            switch (_mosi) {
+                case 0:
+                case 21:
+                    _spi = new SPIClass(SPI1);
+                    break;
+                case 44:
+                case 52:
+                    _spi = new SPIClass(SPI2);
+                    break;
+                case 11:
+                case 7:
+                case 28:
+                default:
+                    _spi = new SPIClass(SPI); // SPI0
+                    break;
+            }
+            _manualCSandDC = false;
             #else
-            _spi = new SPIClass(VSPI);
+            _spi = new SPIClass(SPI);
             #endif
 
             // Set up MISO, MOSI and SCLK
@@ -192,10 +220,10 @@ namespace craft {
                 _pcs_command = _pcs_data | SPI.setCS(_dc);
             }
             else {
-                _useSpiTransaction = true; // Fallback
+                _manualCSandDC = true; // Fallback
             }
             #endif
-            if (_useSpiTransaction) {
+            if (_manualCSandDC) {
                 if (_cs != UNUSED_PIN) {
                     pinMode(_cs, OUTPUT);
                     digitalWrite(_cs, HIGH);
@@ -254,14 +282,14 @@ namespace craft {
          */
         ALWAYS_INLINE void beginTransaction() {
             SPI.beginTransaction(SPISettings(_spiClock, MSBFIRST, SPI_MODE0));
-            if (_cs != UNUSED_PIN && _useSpiTransaction) digitalWrite(_cs, LOW);
+            if (_manualCSandDC && _cs != UNUSED_PIN) digitalWrite(_cs, LOW);
         }
 
         /**
          * @brief End the SPI transaction
          */
         ALWAYS_INLINE void endTransaction() {
-            if (_cs != UNUSED_PIN && _useSpiTransaction) digitalWrite(_cs, HIGH);
+            if (_manualCSandDC && _cs != UNUSED_PIN) digitalWrite(_cs, HIGH);
             SPI.endTransaction();
         }
 
@@ -270,7 +298,7 @@ namespace craft {
          */
         ALWAYS_INLINE void writeCommand(uint8_t c) {
             #if defined(KINETISK)
-            if (!_useSpiTransaction) {
+            if (!_manualCSandDC) {
                 KINETISK_SPI0.PUSHR = c | _pcs_command << 16 | SPI_PUSHR_CTAS(0) | SPI_PUSHR_CONT;
                 waitFifoNotFull();
                 return;
@@ -282,7 +310,7 @@ namespace craft {
         }
         ALWAYS_INLINE void writeCommand_last(uint8_t c) {
             #if defined(KINETISK)
-            if (!_useSpiTransaction) {
+            if (!_manualCSandDC) {
                 uint32_t mcr = SPI0_MCR;
                 KINETISK_SPI0.PUSHR = c | _pcs_command << 16 | SPI_PUSHR_CTAS(0) | SPI_PUSHR_EOQ;
                 waitTransmitComplete(mcr);
@@ -297,7 +325,7 @@ namespace craft {
          */
         ALWAYS_INLINE void writeData8(uint8_t d) {
             #if defined(KINETISK)
-            if (!_useSpiTransaction) {
+            if (!_manualCSandDC) {
                 KINETISK_SPI0.PUSHR = d | _pcs_data << 16 | SPI_PUSHR_CTAS(0) | SPI_PUSHR_CONT;
                 waitFifoNotFull();
                 return;
@@ -307,7 +335,7 @@ namespace craft {
         }
         ALWAYS_INLINE void writeData8_last(uint8_t d) {
             #if defined(KINETISK)
-            if (!_useSpiTransaction) {
+            if (!_manualCSandDC) {
                 uint32_t mcr = SPI0_MCR;
                 KINETISK_SPI0.PUSHR = d | _pcs_data << 16 | SPI_PUSHR_CTAS(0) | SPI_PUSHR_EOQ;
                 waitTransmitComplete(mcr);
@@ -318,7 +346,7 @@ namespace craft {
         }
         ALWAYS_INLINE void writeData16(uint16_t d) {
             #if defined(KINETISK)
-            if (!_useSpiTransaction) {
+            if (!_manualCSandDC) {
                 KINETISK_SPI0.PUSHR = d | _pcs_data << 16 | SPI_PUSHR_CTAS(1) | SPI_PUSHR_CONT;
                 waitFifoNotFull();
                 return;
@@ -328,7 +356,7 @@ namespace craft {
         }
         ALWAYS_INLINE void writeData16_last(uint16_t d) {
             #if defined(KINETISK)
-            if (!_useSpiTransaction) {
+            if (!_manualCSandDC) {
                 uint32_t mcr = SPI0_MCR;
                 KINETISK_SPI0.PUSHR = d | _pcs_data << 16 | SPI_PUSHR_CTAS(1) | SPI_PUSHR_EOQ;
                 waitTransmitComplete(mcr);
