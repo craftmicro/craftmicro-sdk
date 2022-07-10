@@ -111,10 +111,17 @@ namespace craft {
         _miso = miso;
         _bklt = bklt;
         _bkltPWM = false;
+        DisplayOrientation so = DisplayOrientation::Default;
         switch (sz) {
+            case DisplaySize::Size480x320:
+                _hwSize.setSize(480, 320);
+                so = DisplayOrientation::Landscape;
+                break;
             case DisplaySize::Size320x480:
             default:
                 _hwSize.setSize(320, 480);
+                _o = DisplayOrientation::Portrait;
+                so = _o;
         }
         _pf = PixelFormat::RGB888;
         _px = scale == 0 ? 1 : scale;
@@ -129,8 +136,34 @@ namespace craft {
         writeCommand_last(ILI9488_Command::DISPON);    // Display on
         endTransaction();
 
+        // Rotate display
+        setOrientation(so);
+
         // Ready to send data
         ready = true;
+    }
+
+    void DisplayILI9488::setOrientation(DisplayOrientation o) {
+        if (_o == o) return;
+        _o = o;
+        beginTransaction();
+        writeCommand(ILI9488_Command::MADCTL);
+        switch (_o) {
+            case DisplayOrientation::Landscape:
+                writeData8_last(0x20 | 0x08);
+                break;
+            case DisplayOrientation::Default:
+            case DisplayOrientation::Portrait:
+                writeData8_last(0x40 | 0x08);
+                break;
+            case DisplayOrientation::LandscapeFlipped:
+                writeData8_last(0x40 | 0x80 | 0x20 | 0x08);
+                break;
+            case DisplayOrientation::PortraitFlipped:
+                writeData8_last(0x80 | 0x08);
+                break;
+        }
+        endTransaction();
     }
 
     void DisplayILI9488::setArea(LineBufferData& buffer) {

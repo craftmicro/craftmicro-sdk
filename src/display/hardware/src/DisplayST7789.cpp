@@ -78,6 +78,7 @@ namespace craft {
 				_hwSize.setSize(135, 240);
 				_yoffset = (int)((320 - _hwSize.height) / 2);
 				_xoffset = (int)((240 - _hwSize.width) / 2);
+				_o = DisplayOrientation::Portrait;
 		}
 		_pf = PixelFormat::RGB565;
 		_px = scale == 0 ? 1 : scale;

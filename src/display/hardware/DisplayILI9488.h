@@ -39,7 +39,7 @@ namespace craft {
 
     protected:
         void setArea(LineBufferData& buffer) override;
-
+        void setOrientation(DisplayOrientation o) override;
     };
 
 } // namespace craft
