@@ -163,7 +163,7 @@ namespace craft {
          * @param	brightness	0.0 - 1.0
          **/
         void backlight(float_t brightness) {
-            if (_bklt == 255) return;
+            if (_bklt == UNUSED_PIN) return;
             brightness = alphaClamp(brightness);
             if (brightness == 0) digitalWrite(_bklt, LOW);
             else if (_bkltPWM) analogWrite(_bklt, (uint8_t)(255.0 * brightness));
@@ -173,12 +173,12 @@ namespace craft {
     protected:
 
         /**
-         * Pixel format
+         * @brief Pixel format
          */
         PixelFormat _pf = PixelFormat::Unknown;
 
         /**
-         * Pixel scale
+         * @brief Pixel scale
          */
         uint8_t _px = 1;
 
@@ -188,19 +188,23 @@ namespace craft {
         DisplayOrientation _o = DisplayOrientation::Default;
 
         /**
-         * Actual hardware width and height of the display
+         * @brief Actual hardware width and height of the display
          */
         ClipRect _hwSize;
 
         /**
-         * Width and height after applying pixel scale
+         * @brief Width and height after applying pixel scale
          */
         ClipRect _size;
 
         /**
-         * Backlight
+         * @brief Backlight
          **/
-        uint8_t _bklt = 255;
+        uint8_t _bklt = UNUSED_PIN;
+
+        /**
+         * @brief Flag to indicate if the backlight is on/off or PWM
+         */
         bool _bkltPWM = false;
 
         /**

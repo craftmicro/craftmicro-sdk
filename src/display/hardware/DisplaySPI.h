@@ -8,8 +8,6 @@
 
 namespace craft {
 
-    #define UNUSED_PIN 255
-    #define PIN_OR_UNUSED(p) p==UNUSED_PIN?-1:p
     #define DELAY_COMMAND 0xff
 
     /**
@@ -170,12 +168,12 @@ namespace craft {
                 case 13:
                     _spi = new SPIClass(HSPI);
                     break;
-                #endif
-                #if defined(VSPI)
+                    #endif
+                    #if defined(VSPI)
                 case 23:
                     _spi = new SPIClass(VSPI);
                     break;
-                #endif
+                    #endif
                 default:
                     _spi = new SPIClass(SPI);
                     break;
@@ -250,7 +248,7 @@ namespace craft {
                 pinMode(_bklt, OUTPUT);
                 backlight(1.0);
             }
-        }
+            }
 
         /**
          * @brief Perform a sequence of SPI commands
@@ -307,7 +305,7 @@ namespace craft {
             if (_dc != UNUSED_PIN) digitalWrite(_dc, LOW);
             _spi->transfer(c);
             if (_dc != UNUSED_PIN) digitalWrite(_dc, HIGH);
-        }
+            }
         ALWAYS_INLINE void writeCommand_last(uint8_t c) {
             #if defined(KINETISK)
             if (!_manualCSandDC) {
@@ -318,7 +316,7 @@ namespace craft {
             }
             #endif
             writeCommand(c);
-        }
+            }
 
         /**
          * @brief Write SPI data
@@ -332,7 +330,7 @@ namespace craft {
             }
             #endif
             _spi->transfer(d);
-        }
+            }
         ALWAYS_INLINE void writeData8_last(uint8_t d) {
             #if defined(KINETISK)
             if (!_manualCSandDC) {
@@ -343,7 +341,7 @@ namespace craft {
             }
             #endif
             writeData8(d);
-        }
+            }
         ALWAYS_INLINE void writeData16(uint16_t d) {
             #if defined(KINETISK)
             if (!_manualCSandDC) {
@@ -353,7 +351,7 @@ namespace craft {
             }
             #endif
             _spi->transfer16(d);
-        }
+            }
         ALWAYS_INLINE void writeData16_last(uint16_t d) {
             #if defined(KINETISK)
             if (!_manualCSandDC) {
@@ -364,7 +362,7 @@ namespace craft {
             }
             #endif
             writeData16(d);
-        }
+            }
 
         // KINETISK methods for fast hardware SPI
         #if defined(KINETISK)
@@ -415,6 +413,6 @@ namespace craft {
 
         #endif // KINETISK
 
-    };
+        };
 
-} // namespace craft
+        } // namespace craft
