@@ -5,9 +5,9 @@
 namespace craft {
 
     /**
-     * Display base class for SPI-based ST7789 displays.
+     * Display base class for SPI-based Raydium RM67162 displays.
      **/
-    class DisplayST7789: public DisplaySPI {
+    class DisplayRM67162: public DisplaySPI {
     public:
         /**
          * Constructor for 4-wire SPI.
@@ -19,8 +19,8 @@ namespace craft {
          * @param	bklt	Pin used for backlight (optional. 255=unused)
          * @param	px 		Scale factor from framebuffer to display. Normally 1:1 (pixelScale_1x1)
          **/
-        DisplayST7789(
-            DisplaySize sz, // size320x240
+        DisplayRM67162(
+            DisplaySize sz, // size400x400
             uint8_t cs,		// 5
             uint8_t dc,		// 16
             uint8_t rst = 23,
@@ -31,11 +31,10 @@ namespace craft {
         );
 
     protected:
-        int _xoffset = 0;
+        int _xoffset = 0; // Not sure if we need these yet
         int _yoffset = 0;
 
         void setArea(LineBufferData& buffer) override;
-        void setOrientation(DisplayOrientation o) override;
     };
 
 } // namespace craft
