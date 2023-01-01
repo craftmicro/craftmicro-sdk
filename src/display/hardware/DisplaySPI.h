@@ -19,7 +19,7 @@ namespace craft {
      /**
       * Display base class for SPI displays.
       **/
-    class DisplaySPI : public Display {
+    class DisplaySPI: public Display {
     public:
 
         /**
@@ -160,7 +160,7 @@ namespace craft {
             #if defined(KINETISK)
             _spiClock = 60e6;
             #else
-            _spiClock = 40e6;
+            _spiClock = 16000000;
             #endif
 
             // Determnine SPI class
@@ -170,12 +170,12 @@ namespace craft {
                 case 13:
                     _spi = new SPIClass(HSPI);
                     break;
-                #endif
-                #if defined(VSPI)
+                    #endif
+                    #if defined(VSPI)
                 case 23:
                     _spi = new SPIClass(VSPI);
                     break;
-                #endif
+                    #endif
                 default:
                     _spi = new SPIClass(SPI);
                     break;
@@ -352,7 +352,8 @@ namespace craft {
                 return;
             }
             #endif
-            _spi->transfer16(d);
+            _spi->transfer(d >> 8);
+            _spi->transfer(d);
         }
         ALWAYS_INLINE void writeData16_last(uint16_t d) {
             #if defined(KINETISK)
