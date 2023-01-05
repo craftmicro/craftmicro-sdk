@@ -164,7 +164,15 @@ namespace craft {
             #endif
 
             // Determnine SPI class
-            #if defined(ESP32)
+            #if CRAFTMICRO_DISPLAY_SPI == 1
+            _spi = new SPIClass(SPI1);
+            #elif CRAFTMICRO_DISPLAY_SPI == 2
+            _spi = new SPIClass(SPI2);
+            #elif CRAFTMICRO_DISPLAY_SPI == 3
+            _spi = new SPIClass(SPI3);
+            #elif CRAFTMICRO_DISPLAY_SPI == 4
+            _spi = new SPIClass(SPI4);
+            #elif defined(ESP32)
             switch (_mosi) {
                 #if defined(HSPI)
                 case 13:

@@ -79,8 +79,14 @@ namespace craft {
         _sclk = sclk;
         _miso = 255;
         _bklt = bklt;
-        _bkltPWM = false;
+        _bkltPWM = true; // TODO: Check correct
         switch (sz) {
+            case DisplaySize::Size240x280:
+                _o = DisplayOrientation::Portrait;
+                _hwSize.setSize(240, 280);
+                _yoffset = (int)((320 - _hwSize.height) / 2);
+                _xoffset = (int)((240 - _hwSize.width) / 2);
+                break;
             case DisplaySize::Size240x135:
                 _o = DisplayOrientation::Landscape;
                 _hwSize.setSize(240, 135);
