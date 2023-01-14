@@ -210,10 +210,10 @@ namespace craft {
             t->transform(&bl);
             t->transform(&br);
             // TODO: 12 compares. Can we improve this?
-            p1.x = Math::min(tl.x, Math::min(tr.x, Math::min(bl.x, br.x)));
-            p1.y = Math::min(tl.y, Math::min(tr.y, Math::min(bl.y, br.y)));
-            p2.x = Math::max(tl.x, Math::max(tr.x, Math::max(bl.x, br.x)));
-            p2.y = Math::max(tl.y, Math::max(tr.y, Math::max(bl.y, br.y)));
+            p1.x = min(tl.x, min(tr.x, min(bl.x, br.x)));
+            p1.y = min(tl.y, min(tr.y, min(bl.y, br.y)));
+            p2.x = max(tl.x, max(tr.x, max(bl.x, br.x)));
+            p2.y = max(tl.y, max(tr.y, max(bl.y, br.y)));
         }
 
         /**
@@ -232,10 +232,10 @@ namespace craft {
             t->transform(&bl, originX, originY);
             t->transform(&br, originX, originY);
             // TODO: 12 compares. Can we improve this?
-            p1.x = Math::min(tl.x, Math::min(tr.x, Math::min(bl.x, br.x)));
-            p1.y = Math::min(tl.y, Math::min(tr.y, Math::min(bl.y, br.y)));
-            p2.x = Math::max(tl.x, Math::max(tr.x, Math::max(bl.x, br.x)));
-            p2.y = Math::max(tl.y, Math::max(tr.y, Math::max(bl.y, br.y)));
+            p1.x = min(tl.x, min(tr.x, min(bl.x, br.x)));
+            p1.y = min(tl.y, min(tr.y, min(bl.y, br.y)));
+            p2.x = max(tl.x, max(tr.x, max(bl.x, br.x)));
+            p2.y = max(tl.y, max(tr.y, max(bl.y, br.y)));
         }
 
         /**
