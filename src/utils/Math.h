@@ -34,30 +34,6 @@ namespace craft {
          */
         constexpr static const double _180_Pi = 180.0 / Math::Pi;
 
-        // Ignore sign-unsgned comparison errors
-        #pragma GCC diagnostic push
-        #pragma GCC diagnostic ignored "-Wsign-compare"
-
-        /**
-         * @brief Min implementation
-         *
-        template<class A, class B>
-        static constexpr auto min(A&& a, B&& b) -> decltype(a < b ? std::forward<A>(a) : std::forward<B>(b)) {
-            return a < b ? std::forward<A>(a) : std::forward<B>(b);
-        }
-
-        /**
-         * @brief Max implementation
-         *
-        template<class A, class B>
-        static constexpr auto max(A&& a, B&& b) -> decltype(a < b ? std::forward<A>(a) : std::forward<B>(b)) {
-            return a >= b ? std::forward<A>(a) : std::forward<B>(b);
-        }
-        */
-
-        // Stop ignoring errors
-        #pragma GCC diagnostic pop
-
         /**
          * @brief Linear interpolation between two values
          * Note: Does not check if k is in correct range

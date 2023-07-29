@@ -343,10 +343,10 @@ namespace craft {
 
         // Adjust for text align
         if (_align == TextAlign::right) {
-            lineWidth = Math::max(0, (int)_localBounds->width() - lineWidthAtEndChar);
+            lineWidth = max(0, (int)_localBounds->width() - lineWidthAtEndChar);
         }
         else if (_align == TextAlign::center) {
-            lineWidth = Math::max(0, ((int)_localBounds->width() - (float_t)lineWidthAtEndChar) / 2);
+            lineWidth = max(0, (int)((_localBounds->width() - (float_t)lineWidthAtEndChar) / 2));
         }
         else {
             lineWidth = 0;
