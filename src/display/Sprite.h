@@ -2,6 +2,7 @@
 
 #include "display/DisplayObject.h"
 #include "graphics/Bitmap.h"
+#include <string>
 
 namespace craft {
 
@@ -9,27 +10,26 @@ namespace craft {
      * Blend modes supported by Sprite
      */
     enum class BlendMode {
-        normal,
-        stamp
+        Normal,
+        Stamp
     };
 
     /**
      * Transformations supported by Sprite
+     * E.g. rotate = Rotate90 | FlipH
      */
-    enum class Transform {
-        normal,
-        flipH,
-        flipV,
-        flipHV,
-        rotate180
-    };
+    typedef enum {
+        None = 0,
+        FlipH = 1,
+        FlipV = 2,
+        Rotate90 = 4,
+    } Transform;
 
     /**
      * A sprite
      */
     class Sprite : public DisplayObject, public MemoryPool<Sprite> {
     public:
-
         /**
          * Create a new object or take one from the pool
          * @return The new or recycled object
@@ -61,12 +61,12 @@ namespace craft {
         /**
          * transform for sprite
          */
-        Transform transform = Transform::normal;
+        Transform transform = Transform::None;
 
         /**
          * Blend mode for sprite
          */
-        BlendMode blendMode = BlendMode::normal;
+        BlendMode blendMode = BlendMode::Normal;
 
         /**
          * Color (used for some blend modes)
@@ -85,20 +85,20 @@ namespace craft {
          * @param tilemap 	The tilemap to use
          * @param tileIndex The index of the active tile
          */
-        virtual void set(const TilemapData* tilemapData, uint16_t tileIndex = 0);
+        void set(const TilemapData* tilemapData, uint16_t tileIndex = 0);
 
         /**
          * prepare to render the next line
          * @param ry The y position in local coordinates
          */
-        virtual void beginLine(int16_t ry);
+        void beginLine(int16_t ry);
 
         /**
          * Read a pixel from the sprite and advance position
          * @param rx The x position in local coordinates
          * @param ry The y position in local coordinates
          */
-        virtual void calcPixel(int16_t rx, int16_t ry);
+        void calcPixel(int16_t rx, int16_t ry);
 
     protected:
         /**
@@ -116,6 +116,144 @@ namespace craft {
          */
         int32_t _dataStep;
 
+    };
+
+    typedef enum {
+        Forward = 0,
+        Reverse = 1,
+        PingPong = 2,
+    } AnimationDirection;
+
+    struct LayeredSpritePart {
+        uint32_t width;                     // Size of part
+        uint32_t height;
+        uint32_t anchorX;                   // Coord of anchor of part
+        uint32_t anchorY;
+        const uint8_t* partData;             // Pixel data (palette indexes)
+    };
+
+    struct LayeredSpriteLayer {
+        uint8_t partIndex;                  // The part in this layer
+        uint8_t orientation;                // Orientation of the part
+        uint32_t x;                         // Coords of the part in this layer
+        uint32_t y;
+    };
+
+    struct LayeredSpriteFrame {
+        uint16_t duration;                  // milliseconds
+        uint8_t layerCount;                 // Number of layers
+        const LayeredSpriteLayer* layerData;      // Layer structs
+    };
+
+    struct LayeredSpriteAnim {
+        uint8_t direction;                  // AnimationDirection
+        uint8_t frameCount;                 // Number of frames
+        const LayeredSpriteFrame* frameData;      // Frame structs
+    };
+
+    struct LayeredSpriteData {
+        uint8_t paletteCount;                       // Number of palette entries
+        const color8888* paletteData;               // ARGB color
+        uint8_t partCount;                          // Number of parts
+        const LayeredSpritePart* partData;          // Part structs
+        uint8_t animCount;                          // Number of animations
+        const LayeredSpriteAnim* animData;          // Animation structs
+        const uint8_t* animNames;                   // Animation name data (0=len,1...len=name)
+    };
+
+    class LayeredSprite : public DisplayObject, public MemoryPool<LayeredSprite> {
+    public:
+        /**
+         * @brief Construct a new Layered Sprite object
+         * The data is usually stored in flashmem
+         * @param data The data for the sprite
+         * @param animation The index of the active animation
+         */
+        static LayeredSprite* Create(const LayeredSpriteData* data, uint8_t animation = 0, bool start = false);
+
+        /**
+         * @brief Reset the layered sprite back to defaults
+         */
+        void reset() override;
+
+        /**
+         * Update the display object.
+         * @param	dt 			Time since last update in seconds
+         */
+        void update(float_t dt) override;
+
+        /**
+         * Set the data and the animation that the sprite uses.
+         * @param tilemap 	The layered sprite data to use
+         * @param animation The index of the active animation
+         * @param start     True if the animation should start immediately from the beginning
+         */
+        void set(const LayeredSpriteData* data, uint8_t animation = 0, bool start = false);
+
+        /**
+         * @brief Set the active animation
+         *
+         * @param index The index of the animation
+         */
+        void animation(int index);
+
+        /**
+         * @brief Set or change the position of the animation
+         *
+         * @param dt The time from which to start the animation
+         * @param advance If true, will advance the position from the current position. Otherwise will start at the beginning
+         */
+        void position(float_t dt = 0, bool advance = false);
+
+        /**
+         * @brief Pause the animation at the current position
+         */
+        void pause();
+
+        /**
+         * @brief Resume the animation from the current position
+         */
+        void resume();
+
+        /**
+         * prepare to render the next line
+         * @param ry The y position in local coordinates
+         */
+        void beginLine(int16_t ry);
+
+        /**
+         * Read a pixel from the sprite and advance position
+         * @param rx The x position in local coordinates
+         * @param ry The y position in local coordinates
+         */
+        void calcPixel(int16_t rx, int16_t ry);
+
+        /**
+         * @brief Get the index of the animation by name
+         * String comparison is slow. Use it once and cache the index.
+         * @param name The animation name
+         * @return int The index
+         */
+        int getAnimationIndex(std::string name);
+
+    protected:
+        // The sprite data
+        const LayeredSpriteData* _data = nullptr;
+
+        // The active animation
+        const LayeredSpriteAnim* _anim = nullptr;
+        // The current advance direction
+        bool _animForward = true;
+
+        // The active frame
+        const LayeredSpriteFrame* _frame = nullptr;
+        // The active frame index
+        uint8_t _frameIndex = 0;
+        // Total millis into the frame
+        uint32_t _framePos = 0;
+
+        // Flag to indicate whether the animation is playing
+        bool _playing = false;
     };
 
 } // namespace craft

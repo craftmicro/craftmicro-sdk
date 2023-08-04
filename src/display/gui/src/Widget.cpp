@@ -31,7 +31,7 @@ namespace craft {
             this->_acronym = nullptr;
         }
         if (title) {
-            int len = Math::min(CRAFTMICRO_GUI_MAX_TITLE_LEN, strlen((const char*)title));
+            int len = min(size_t(CRAFTMICRO_GUI_MAX_TITLE_LEN), strlen((const char*)title));
             this->_title = new char[len + 1];
             strncpy(this->_title, (const char*)title, len);
         }
