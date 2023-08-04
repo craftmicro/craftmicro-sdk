@@ -71,7 +71,7 @@ namespace craft {
         */
 
         // Initialise the display to draw only the dirty area
-        buffer->setRegion(renderBounds);
+        buffer->begin(renderBounds);
 
         Filter* filter;
         DisplayList* head = _displayList->next();
@@ -189,6 +189,8 @@ namespace craft {
             // Flip the buffer (auto-advances to next line)
             buffer->flip();
         }
+        buffer->end();
+
         _recycleList(_renderList);
         _renderList = 0;
         _recycleList(_displayList);

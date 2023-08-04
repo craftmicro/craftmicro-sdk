@@ -128,14 +128,14 @@ namespace craft {
         ready = true;
     }
 
-    void DisplayST7789::setArea(LineBufferData& buffer) {
+    void DisplayST7789::setArea(ClipRect& rect) {
         writeCommand(ST7789_Command::CASET); // Column addr set
-        writeData16((buffer.rect.x * _px) + _xoffset);
-        writeData16(((buffer.rect.x2 + 1) * _px) - 1 + _xoffset);
+        writeData16((rect.x * _px) + _xoffset);
+        writeData16((rect.x2 + 1) * _px - 1 + _xoffset);
 
         writeCommand(ST7789_Command::RASET); // Row addr set
-        writeData16((buffer.rect.y * _px) + _yoffset);
-        writeData16(((buffer.rect.y2 + 1) * _px) - 1 + _yoffset);
+        writeData16((rect.y * _px) + _yoffset);
+        writeData16((rect.y2 + 1) * _px - 1 + _yoffset);
 
         // Tell display we are about to send data
         writeCommand(ST7789_Command::RAMWR);

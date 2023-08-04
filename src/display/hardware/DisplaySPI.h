@@ -19,8 +19,19 @@ namespace craft {
      /**
       * Display base class for SPI displays.
       **/
-    class DisplaySPI: public Display {
+    class DisplaySPI : public Display {
     public:
+
+        /**
+         * Prepare to start sending pixels
+         */
+        void beginDrawing(ClipRect& rect) override {
+            // Begin the transmission to hardware
+            beginTransaction();
+
+            // Set the area of the display to write to
+            setArea(rect);
+        }
 
         /**
          * Update the linebuffer to the display
@@ -38,17 +49,19 @@ namespace craft {
         }
 
         /**
+         * Finalise sending pixels
+         */
+        void endDrawing() override {
+            // Done with complete transaction
+            endTransaction();
+        }
+
+        /**
          * Update the linebuffer to the display for 16-bit pixel formats
          **/
         void draw565(LineBufferData& buffer) {
             // Set not ready
             ready = false;
-
-            // Begin the transmission to hardware
-            beginTransaction();
-
-            // Set the area of the display to write to
-            setArea(buffer);
 
             // Write pixels. Some SPI implementations require the final pixel
             // to be written differently, so we need to keep track of the count
@@ -78,8 +91,6 @@ namespace craft {
                     lineOffset += _size.width;
                 }
             }
-            // Done with complete transaction
-            endTransaction();
 
             // Set ready to send data
             ready = true;
@@ -91,12 +102,6 @@ namespace craft {
         void draw888(LineBufferData& buffer) {
             // Set not ready
             ready = false;
-
-            // Begin the transmission to hardware
-            beginTransaction();
-
-            // Set the area of the display to write to
-            setArea(buffer);
 
             // Write pixels. Some SPI implementations require the final pixel
             // to be written differently, so we need to keep track of the count
@@ -134,8 +139,6 @@ namespace craft {
                     lineOffset += _size.width;
                 }
             }
-            // Done with complete transaction
-            endTransaction();
 
             // Set ready to send data
             ready = true;

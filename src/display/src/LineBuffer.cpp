@@ -5,7 +5,7 @@ namespace craft {
     LineBuffer::LineBuffer(Display* display, int bufferHeight) {
         _display = display;
         rect.setPosAndSize(0, 0, _display->width(), _display->height());
-        _region.set(&rect);
+        region.set(&rect);
         if (bufferHeight == 0 || bufferHeight > _display->height()) bufferHeight = _display->height();
         else if (bufferHeight < 0) bufferHeight = 1;
         _bufferHeight = bufferHeight;
@@ -20,25 +20,30 @@ namespace craft {
         delete[] _data[1].pixels;
     }
 
-    void LineBuffer::setRegion(ClipRect* rect) {
+    void LineBuffer::begin(ClipRect* rect) {
         // Ensure region is within display area
-        _region.set(
+        region.set(
             max(int16_t(0), rect->x),
             max(int16_t(0), rect->y),
             min(_display->width() - 1, (int)rect->x2),
             min(_display->height() - 1, (int)rect->y2)
         );
         resetRegion();
+        _display->beginDrawing(region);
+    }
+
+    void LineBuffer::end() {
+        _display->endDrawing();
     }
 
     void LineBuffer::resetRegion() {
         _data[_frontIndex].rect.set(
-            _region.x,
-            _region.y,
-            _region.x2,
-            _region.y + _bufferHeight - 1
+            region.x,
+            region.y,
+            region.x2,
+            region.y + _bufferHeight - 1
         );
-        _y = _region.y;
+        _y = region.y;
         _yOffset = 0;
     }
 
@@ -48,7 +53,7 @@ namespace craft {
         _yOffset += _bufferWidth;
 
         // If we have filled the buffer or reached the end of the region, flip and push
-        if ((_y > _data[_frontIndex].rect.y2) || (_y > _region.y2) || flush) {
+        if ((_y > _data[_frontIndex].rect.y2) || (_y > region.y2) || flush) {
             // Filp the buffers
             _backIndex = _frontIndex;
             _frontIndex ^= 1;
@@ -56,7 +61,7 @@ namespace craft {
             _data[_backIndex].rect.y2 = _y - 1;
             _data[_backIndex].rect.height = _y - _data[_backIndex].rect.y;
             // Set the new front buffer region
-            if (_y > _region.y2) _y = _region.y;
+            if (_y > region.y2) _y = region.y;
             _data[_frontIndex].rect.set(
                 _data[_backIndex].rect.x,
                 _y,

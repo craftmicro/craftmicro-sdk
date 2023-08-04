@@ -142,14 +142,14 @@ namespace craft {
         ready = true;
     }
 
-    void DisplayILI9341::setArea(LineBufferData& buffer) {
+    void DisplayILI9341::setArea(ClipRect& rect) {
         writeCommand(ILI9341_Command::CASET); // Column addr set
-        writeData16(buffer.rect.x * _px);
-        writeData16(((buffer.rect.x2 + 1) * _px) - 1);
+        writeData16(rect.x * _px);
+        writeData16((rect.x2 + 1) * _px - 1);
 
         writeCommand(ILI9341_Command::PASET); // Row addr set
-        writeData16(buffer.rect.y * _px);
-        writeData16(((buffer.rect.y2 + 1) * _px) - 1);
+        writeData16(rect.y * _px);
+        writeData16((rect.y2 + 1) * _px - 1);
 
         // Tell display we are about to send data
         writeCommand(ILI9341_Command::RAMWR);

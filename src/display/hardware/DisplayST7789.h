@@ -7,7 +7,7 @@ namespace craft {
     /**
      * Display base class for SPI-based ST7789 displays.
      **/
-    class DisplayST7789: public DisplaySPI {
+    class DisplayST7789 : public DisplaySPI {
     public:
         /**
          * Constructor for 4-wire SPI.
@@ -34,7 +34,7 @@ namespace craft {
         int _xoffset = 0;
         int _yoffset = 0;
 
-        void setArea(LineBufferData& buffer) override;
+        void setArea(ClipRect& rect) override;
         void setOrientation(DisplayOrientation o) override;
     };
 

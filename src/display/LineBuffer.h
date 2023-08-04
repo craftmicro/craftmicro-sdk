@@ -36,11 +36,16 @@ namespace craft {
         ~LineBuffer();
 
         /**
-         * @brief Set the area of the buffer to draw to
+         * @brief Start the render process for a frame
          * Sets the buffer region
          * @param rect The region of the display to draw to
          */
-        void setRegion(ClipRect* rect);
+        void begin(ClipRect* rect);
+
+        /**
+         * @brief End the render process for a frame
+         */
+        void end();
 
         /**
          * Resets the region without changing it. This resets the line buffer to
@@ -62,8 +67,8 @@ namespace craft {
          * Fill the current line with a color. Respects region
          **/
         inline void clear(color888 c) {
-            uint16_t i = _region.x;
-            while (i < _region.x2) _data[_frontIndex].pixels[i++] = c;
+            uint16_t i = region.x;
+            while (i < region.x2) _data[_frontIndex].pixels[i++] = c;
         }
 
         /**
@@ -110,6 +115,11 @@ namespace craft {
          */
         ClipRect rect;
 
+        /**
+         * @brief Rect describing the dirty region (region of the buffer being updated)
+         */
+        ClipRect region;
+
     protected:
 
         /**
@@ -151,11 +161,6 @@ namespace craft {
          * @brief Reference to the display
          */
         Display* _display;
-
-        /**
-         * @brief Rect describing the drawing region (scaled to pixelscale)
-         */
-        ClipRect _region;
     };
 
 } // namespace craft
