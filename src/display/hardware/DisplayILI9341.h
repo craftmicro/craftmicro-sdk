@@ -48,7 +48,7 @@ namespace craft {
         );
 
     protected:
-        void setArea(LineBufferData& buffer) override;
+        void setArea(ClipRect& rect) override;
 
     };
 

@@ -116,14 +116,14 @@ namespace craft {
         ready = true;
     }
 
-    void DisplayRM67162::setArea(LineBufferData& buffer) {
+    void DisplayRM67162::setArea(ClipRect& rect) {
         writeCommand(RM67162_Command::CASET); // Column addr set
-        writeData16(buffer.rect.x * _px);
-        writeData16(((buffer.rect.x2 + 1) * _px) - 1);
+        writeData16(rect.x * _px);
+        writeData16((rect.x2 + 1 * _px) - 1);
 
         writeCommand(RM67162_Command::PASET); // Row addr set
-        writeData16(buffer.rect.y * _px);
-        writeData16(((buffer.rect.y2 + 1) * _px) - 1);
+        writeData16(rect.y * _px);
+        writeData16((rect.y2 + 1 * _px) - 1);
 
         // Tell display we are about to send data
         writeCommand(RM67162_Command::RAMWR);

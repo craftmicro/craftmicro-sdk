@@ -7,7 +7,7 @@ namespace craft {
     /**
      * Display base class for SPI-based Raydium RM67162 displays.
      **/
-    class DisplayRM67162: public DisplaySPI {
+    class DisplayRM67162 : public DisplaySPI {
     public:
         /**
          * Constructor for 4-wire SPI.
@@ -34,7 +34,7 @@ namespace craft {
         int _xoffset = 0; // Not sure if we need these yet
         int _yoffset = 0;
 
-        void setArea(LineBufferData& buffer) override;
+        void setArea(ClipRect& rect) override;
     };
 
 } // namespace craft
