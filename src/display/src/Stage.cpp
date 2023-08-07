@@ -11,11 +11,11 @@ namespace craft {
         delete _dirtyBounds;
     }
 
-    void Stage::update(float_t dt) {
+    void Stage::update(float_t dt, boolean isRenderUpdate) {
         // Update self
 
         // Update children
-        DisplayObject::update(dt);
+        DisplayObject::update(dt, isRenderUpdate);
     }
 
     void Stage::render(LineBuffer* buffer) {
@@ -142,7 +142,7 @@ namespace craft {
                 while (node) {
                     if (node->object->globalBounds->containsX(x)) {
 
-                        // Calculate color and alpha 
+                        // Calculate color and alpha
                         localx = node->object->globalToLocalX(x);
                         localy = node->object->globalToLocalY(y);
                         node->object->calcPixel(localx, localy);

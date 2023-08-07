@@ -312,7 +312,7 @@ for name, a in pairs(animations) do
     local frameIndex = 0
     for _, f in pairs(a.frames) do
         output = output.."\t{\n"
-        output = output.."\t\t.duration = "..math.floor(f.duration*1000)..",\n"
+        output = output.."\t\t.duration = "..string.format("%.4f", f.duration)..",\n"
         output = output.."\t\t.layerCount = "..#f.parts..",\n"
         output = output.."\t\t.layerData = "..outputId.."_anim"..animIndex.."_layer"..frameIndex.."_data\n"
         output = output.."\t}"
@@ -395,7 +395,11 @@ output = output.."\t.partCount = "..#parts..",\n"
 output = output.."\t.partData = "..outputId.."_parts,\n"
 output = output.."\t.animCount = "..animCount..",\n"
 output = output.."\t.animData = "..outputId.."_anims,\n"
-output = output.."\t.animNames = "..outputId.."_names\n"
+output = output.."\t.animNames = "..outputId.."_names,\n"
+output = output.."\t.width = "..sprite.width..",\n"
+output = output.."\t.height = "..sprite.height..",\n"
+output = output.."\t.anchorX = "..math.floor(sprite.width/2)..",\n"
+output = output.."\t.anchorY = "..(sprite.height-1).."\n"
 output = output.."};\n\n"
 
 --

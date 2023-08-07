@@ -61,6 +61,9 @@ namespace craft {
             // Update tweens
             tweens->update(renderDeltaSecs);
 
+            // Update stage
+            stage->update(renderDeltaSecs, true);
+
             // Render the stage
             stage->render(buffer);
 

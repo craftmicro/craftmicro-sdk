@@ -43,9 +43,10 @@ namespace craft {
 
         /**
          * Update the display object.
-         * @param	dt 			Time since last update in seconds
+         * @param	dt 			    Time since last update in seconds
+         * @param   isRenderUpdate  True if this update is during the render phase, false otherwise
          */
-        void update(float_t dt) override;
+        void update(float_t dt, boolean isRenderUpdate = false) override;
 
         /**
          * The tilemap that contains the sprite bitmap data.
@@ -125,40 +126,47 @@ namespace craft {
     } AnimationDirection;
 
     struct LayeredSpritePart {
-        uint32_t width;                     // Size of part
-        uint32_t height;
-        uint32_t anchorX;                   // Coord of anchor of part
-        uint32_t anchorY;
-        const uint8_t* partData;             // Pixel data (palette indexes)
+        uint16_t width;                         // Size of part
+        uint16_t height;
+        int16_t anchorX;                        // Coord of anchor of part
+        int16_t anchorY;
+        const uint8_t* partData;                // Pixel data (palette indexes)
     };
 
     struct LayeredSpriteLayer {
-        uint8_t partIndex;                  // The part in this layer
-        uint8_t orientation;                // Orientation of the part
-        uint32_t x;                         // Coords of the part in this layer
-        uint32_t y;
+        uint8_t partIndex;                      // The part in this layer
+        uint8_t orientation;                    // Orientation of the part
+        int16_t x;                              // Coords of the part in this layer
+        int16_t y;
+        uint32_t start;                         // The index into the data to start drawing from (depends on orientation)
+        int16_t strideX;                        // The stride in each direction (depends on orientation)
+        int16_t strideY;
     };
 
     struct LayeredSpriteFrame {
-        uint16_t duration;                  // milliseconds
-        uint8_t layerCount;                 // Number of layers
-        const LayeredSpriteLayer* layerData;      // Layer structs
+        float_t duration;                       // seconds
+        uint8_t layerCount;                     // Number of layers
+        const LayeredSpriteLayer* layerData;    // Layer structs
     };
 
     struct LayeredSpriteAnim {
-        uint8_t direction;                  // AnimationDirection
-        uint8_t frameCount;                 // Number of frames
-        const LayeredSpriteFrame* frameData;      // Frame structs
+        uint8_t direction;                      // AnimationDirection
+        uint8_t frameCount;                     // Number of frames
+        const LayeredSpriteFrame* frameData;    // Frame structs
     };
 
     struct LayeredSpriteData {
-        uint8_t paletteCount;                       // Number of palette entries
-        const color8888* paletteData;               // ARGB color
-        uint8_t partCount;                          // Number of parts
-        const LayeredSpritePart* partData;          // Part structs
-        uint8_t animCount;                          // Number of animations
-        const LayeredSpriteAnim* animData;          // Animation structs
-        const uint8_t* animNames;                   // Animation name data (0=len,1...len=name)
+        uint8_t paletteCount;                   // Number of palette entries
+        const color8888* paletteData;           // ARGB color
+        uint8_t partCount;                      // Number of parts
+        const LayeredSpritePart* partData;      // Part structs
+        uint8_t animCount;                      // Number of animations
+        const LayeredSpriteAnim* animData;      // Animation structs
+        const uint8_t* animNames;               // Animation name data (0=len,1...len=name)
+        uint16_t width;                         // Size of sprite
+        uint16_t height;
+        int16_t anchorX;                        // Coord of anchor of sprite
+        int16_t anchorY;
     };
 
     class LayeredSprite : public DisplayObject, public MemoryPool<LayeredSprite> {
@@ -178,9 +186,10 @@ namespace craft {
 
         /**
          * Update the display object.
-         * @param	dt 			Time since last update in seconds
+         * @param	dt 			    Time since last update in seconds
+         * @param   isRenderUpdate  True if this update is during the render phase, false otherwise
          */
-        void update(float_t dt) override;
+        void update(float_t dt, boolean isRenderUpdate = false) override;
 
         /**
          * Set the data and the animation that the sprite uses.
@@ -250,7 +259,7 @@ namespace craft {
         // The active frame index
         uint8_t _frameIndex = 0;
         // Total millis into the frame
-        uint32_t _framePos = 0;
+        float_t _framePos = 0;
 
         // Flag to indicate whether the animation is playing
         bool _playing = false;
