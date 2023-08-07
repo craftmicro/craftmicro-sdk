@@ -118,6 +118,12 @@ namespace craft {
         _frame = &_anim->frameData[_frameIndex];
     }
 
+    int LayeredSprite::animation(char* name) {
+        int index = getAnimationIndex(name);
+        if (index >= 0) animation(index);
+        return index;
+    }
+
     void LayeredSprite::position(float_t pos, bool advance) {
         int8_t newIndex = _frameIndex;
         if (!advance) {
@@ -200,18 +206,21 @@ namespace craft {
         DisplayObject::update(dt, isRenderUpdate);
     }
 
-    int LayeredSprite::getAnimationIndex(string name) {
+    int LayeredSprite::getAnimationIndex(char* name) {
         int offset = 0;
         int len = 0;
+        bool matched = true;
         for (int a = 0; a < _data->animCount; a++) {
+            matched = true;
             len = _data->animNames[offset];
             for (int c = 0; c < len; c++) {
-                if (_data->animNames[offset + 1 + c] != name.c_str()[c]) {
+                if ((name[c] == '\0') || (_data->animNames[offset + 1 + c] != name[c])) {
                     offset += (len + 1);
+                    matched = false;
                     break;
                 }
             }
-            return a;
+            if (matched) return a;
         }
         return -1;
     }

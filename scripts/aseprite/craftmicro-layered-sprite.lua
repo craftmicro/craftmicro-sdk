@@ -108,6 +108,64 @@ compareImages = function(part, compare)
 
     return ImageCompare.Different;
 end
+calcPartIndexData = function(part, orientation)
+    if orientation == 0 then
+        return {
+            start = 0,
+            strideX = 1,
+            strideY = part.image.width
+        }
+    end
+    if orientation == (ImageCompare.FlipH) then
+        return {
+            start = part.image.width-1,
+            strideX = -1,
+            strideY = part.image.width
+        }
+    end
+    if orientation == (ImageCompare.FlipV) then
+        return {
+            start = part.image.width*(part.image.height-1),
+            strideX = 1,
+            strideY = -part.image.width
+        }
+    end
+    if orientation == (ImageCompare.FlipH | ImageCompare.FlipV) then
+        return {
+            start = part.image.width*part.image.height-1,
+            strideX = -1,
+            strideY = -part.image.width
+        }
+    end
+    if orientation == (ImageCompare.Rot90) then
+        return {
+            start = part.image.width*(part.image.height-1),
+            strideX = -part.image.width,
+            strideY = 1
+        }
+    end
+    if orientation == (ImageCompare.Rot90 | ImageCompare.FlipH) then
+        return {
+            start = 0,
+            strideX = part.image.width,
+            strideY = 1
+        }
+    end
+    if orientation == (ImageCompare.Rot90 | ImageCompare.FlipV) then
+        return {
+            start = part.image.width*part.image.height-1,
+            strideX = -part.image.width,
+            strideY = -1
+        }
+    end
+    if orientation == (ImageCompare.Rot90 | ImageCompare.FlipH | ImageCompare.FlipV) then
+        return {
+            start = part.image.width - 1,
+            strideX = part.image.width,
+            strideY = -1
+        }
+    end
+end
 
 --
 -- Step through all animations
@@ -127,7 +185,7 @@ if #tags == 0 then
 end
 
 for _,tag in ipairs(tags) do
-    animation = {direction = tag.aniDir, frames = {}}
+    animation = {name = tag.name, direction = tag.aniDir, frames = {}}
     frame = tag.fromFrame
     while frame do
         layeredSprite = {index = frame.frameNumber - tag.fromFrame.frameNumber + 1, duration = frame.duration, parts = {}}
@@ -160,10 +218,20 @@ for _,tag in ipairs(tags) do
                 }
                 table.insert(parts, part)
                 partsArea = partsArea + cel.image.width * cel.image.height
+                orientation = ImageCompare.Same
             end
 
             -- Add to layered sprite
-            local sharedPart = {index = part.index, x = bounds.x, y = bounds.y, orientation = orientation}
+            local partIndexData = calcPartIndexData(part, orientation);
+            local sharedPart = {
+                index = part.index,
+                x = bounds.x,
+                y = bounds.y,
+                orientation = orientation,
+                start = partIndexData.start,
+                strideX = partIndexData.strideX,
+                strideY = partIndexData.strideY
+            }
             table.insert(layeredSprite.parts, sharedPart)
         end
 
@@ -177,7 +245,7 @@ for _,tag in ipairs(tags) do
         end
     end
 
-    animations[tag.name] = animation
+    table.insert(animations, animation)
 end
 
 --
@@ -266,14 +334,17 @@ animDirectionEnum = function(index)
 end
 
 animOrientationEnum = function(index)
+    if index == 0 then
+        return "Transform::None"
+    end
     local s = {}
-    if index & 1 then
+    if (index & 1) ~= 0 then
         table.insert(s, "Transform::FlipH")
     end
-    if index & 2 then
+    if (index & 2) ~= 0 then
         table.insert(s, "Transform::FlipV")
     end
-    if index & 4 then
+    if (index & 4) ~= 0 then
         table.insert(s, "Transform::Rotate90")
     end
     if #s == 0 then
@@ -283,10 +354,10 @@ animOrientationEnum = function(index)
 end
 
 local animIndex = 0
-for name, a in pairs(animations) do
+for _, a in pairs(animations) do
     local frameIndex = 0
     for _, f in ipairs(a.frames) do
-        output = output.."\n// Animation '"..name.."' frame "..frameIndex.." layers ("..#f.parts.." layers)\n"
+        output = output.."\n// Animation '"..a.name.."' frame "..frameIndex.." layers ("..#f.parts.." layers)\n"
         output = output.."static const LayeredSpriteLayer "..outputId.."_anim"..animIndex.."_layer"..frameIndex.."_data[] = {\n"
         local count = 0
         for _, p in pairs(f.parts) do
@@ -294,7 +365,10 @@ for name, a in pairs(animations) do
             output = output.."\t\t.partIndex = "..p.index..",\n"
             output = output.."\t\t.orientation = "..animOrientationEnum(p.orientation)..",\n"
             output = output.."\t\t.x = "..p.x..",\n"
-            output = output.."\t\t.y = "..p.y.."\n"
+            output = output.."\t\t.y = "..p.y..",\n"
+            output = output.."\t\t.start = "..p.start..",\n"
+            output = output.."\t\t.strideX = "..p.strideX..",\n"
+            output = output.."\t\t.strideY = "..p.strideY.."\n"
             output = output.."\t}"
             count = count + 1
             if count < #f.parts then
@@ -306,7 +380,7 @@ for name, a in pairs(animations) do
         frameIndex = frameIndex + 1
     end
 
-    output = output.."\n// Animation '"..name.."' frames array ("..#a.frames.." frames)\n"
+    output = output.."\n// Animation '"..a.name.."' frames array ("..#a.frames.." frames)\n"
     output = output.."static const LayeredSpriteFrame "..outputId.."_anim"..animIndex.."_frames[] = {\n"
     local count = 0
     local frameIndex = 0
@@ -332,18 +406,18 @@ output = output.."// Animations array\n"
 output = output.."static const LayeredSpriteAnim "..outputId.."_anims[] = {\n"
 local animIndex = 0
 local total = 0
-for name, a in pairs(animations) do
-    total = total + #name + 1
-    output = output.."\t// Animation '"..name.."'\n"
+for _, a in pairs(animations) do
+    total = total + #a.name + 1
+    output = output.."\t// Animation '"..a.name.."'\n"
     output = output.."\t{\n"
     output = output.."\t\t.direction = "..animDirectionEnum(a.direction)..",\n"
     output = output.."\t\t.frameCount = "..#a.frames..",\n"
     output = output.."\t\t.frameData = "..outputId.."_anim"..animIndex.."_frames\n"
     output = output.."\t}"
-    animIndex = animIndex + 1
     if (animIndex < #animations) then
         output = output..","
     end
+    animIndex = animIndex + 1
     output = output.."\n"
 end
 output = output.."};\n\n"
@@ -351,11 +425,11 @@ output = output.."};\n\n"
 output = output.."// Animation names\n"
 output = output.."static const uint8_t "..outputId.."_names[] = {\n"
 local count = 0
-for name, _ in pairs(animations) do
+for _, a in pairs(animations) do
     if count % 16 == 0 then
         output = output.."\t"
     end
-    output = output.."0x"..string.format("%02x", #name)
+    output = output.."0x"..string.format("%02x", #a.name)
     count = count + 1
     if count < total then
         output = output..","
@@ -364,7 +438,7 @@ for name, _ in pairs(animations) do
         output = output.."\n"
     end
 
-    for c in name:gmatch"." do
+    for c in a.name:gmatch"." do
         if count % 16 == 0 then
             output = output.."\t"
         end
