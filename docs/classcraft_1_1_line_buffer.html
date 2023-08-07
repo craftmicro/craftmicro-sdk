@@ -65,9 +65,13 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~LineBuffer</b> ()</td></tr>
 <tr class="memdesc:aae7ebc01edde5fd6a8b6d072da4e4868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classcraft_1_1_line.html">Line</a> Buffer object. <br /></td></tr>
 <tr class="separator:aae7ebc01edde5fd6a8b6d072da4e4868"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3500b485d9f8ad4bf12c9b00712fd2a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_line_buffer.html#a3500b485d9f8ad4bf12c9b00712fd2a8">setRegion</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *<a class="el" href="classcraft_1_1_line_buffer.html#a5049e13c64bc4e44b4407c10a3d67275">rect</a>)</td></tr>
-<tr class="memdesc:a3500b485d9f8ad4bf12c9b00712fd2a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the area of the buffer to draw to Sets the buffer region.  <a href="classcraft_1_1_line_buffer.html#a3500b485d9f8ad4bf12c9b00712fd2a8">More...</a><br /></td></tr>
-<tr class="separator:a3500b485d9f8ad4bf12c9b00712fd2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69e9422861ab8e6814b7ed903e83cf1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_line_buffer.html#a69e9422861ab8e6814b7ed903e83cf1e">begin</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *<a class="el" href="classcraft_1_1_line_buffer.html#a5049e13c64bc4e44b4407c10a3d67275">rect</a>)</td></tr>
+<tr class="memdesc:a69e9422861ab8e6814b7ed903e83cf1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the render process for a frame Sets the buffer region.  <a href="classcraft_1_1_line_buffer.html#a69e9422861ab8e6814b7ed903e83cf1e">More...</a><br /></td></tr>
+<tr class="separator:a69e9422861ab8e6814b7ed903e83cf1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2153d7abc2cc06b590f287bbb19e649"><td class="memItemLeft" align="right" valign="top"><a id="ae2153d7abc2cc06b590f287bbb19e649" name="ae2153d7abc2cc06b590f287bbb19e649"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="memdesc:ae2153d7abc2cc06b590f287bbb19e649"><td class="mdescLeft">&#160;</td><td class="mdescRight">End the render process for a frame. <br /></td></tr>
+<tr class="separator:ae2153d7abc2cc06b590f287bbb19e649"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a966915021b00cb6739791887e588ca9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_line_buffer.html#a966915021b00cb6739791887e588ca9a">resetRegion</a> ()</td></tr>
 <tr class="separator:a966915021b00cb6739791887e588ca9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75817d08ae2f6e63175884e0d7ffa71f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_line_buffer.html#a75817d08ae2f6e63175884e0d7ffa71f">flip</a> (bool flush=false)</td></tr>
@@ -90,6 +94,10 @@ Public Attributes</h2></td></tr>
 <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a>&#160;</td><td class="memItemRight" valign="bottom"><b>rect</b></td></tr>
 <tr class="memdesc:a5049e13c64bc4e44b4407c10a3d67275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum buffer size as dictated by display. <br /></td></tr>
 <tr class="separator:a5049e13c64bc4e44b4407c10a3d67275"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbbd294ae90f2ede21e2bb004b544e92"><td class="memItemLeft" align="right" valign="top"><a id="abbbd294ae90f2ede21e2bb004b544e92" name="abbbd294ae90f2ede21e2bb004b544e92"></a>
+<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a>&#160;</td><td class="memItemRight" valign="bottom"><b>region</b></td></tr>
+<tr class="memdesc:abbbd294ae90f2ede21e2bb004b544e92"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcraft_1_1_rect.html">Rect</a> describing the dirty region (region of the buffer being updated) <br /></td></tr>
+<tr class="separator:abbbd294ae90f2ede21e2bb004b544e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -125,10 +133,6 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>_yOffset</b> = 0<
 <a class="el" href="classcraft_1_1_display.html">Display</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_display</b></td></tr>
 <tr class="memdesc:a3a77064e768b13a8ff9207d87077799c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the display. <br /></td></tr>
 <tr class="separator:a3a77064e768b13a8ff9207d87077799c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada8f6d653d9bb5348fe5ac8026ffb0e0"><td class="memItemLeft" align="right" valign="top"><a id="ada8f6d653d9bb5348fe5ac8026ffb0e0" name="ada8f6d653d9bb5348fe5ac8026ffb0e0"></a>
-<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_region</b></td></tr>
-<tr class="memdesc:ada8f6d653d9bb5348fe5ac8026ffb0e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rect describing the drawing region (scaled to pixelscale) <br /></td></tr>
-<tr class="separator:ada8f6d653d9bb5348fe5ac8026ffb0e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p ><a class="el" href="classcraft_1_1_line.html">Line</a> Buffer A line-by-line frame buffer implementation </p>
@@ -171,6 +175,32 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>_yOffset</b> = 0<
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a69e9422861ab8e6814b7ed903e83cf1e" name="a69e9422861ab8e6814b7ed903e83cf1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69e9422861ab8e6814b7ed903e83cf1e">&#9670;&nbsp;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void craft::LineBuffer::begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *&#160;</td>
+          <td class="paramname"><em>rect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start the render process for a frame Sets the buffer region. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rect</td><td>The region of the display to draw to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7a692042da1e99bbbebf149fee75b8c2" name="a7a692042da1e99bbbebf149fee75b8c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a692042da1e99bbbebf149fee75b8c2">&#9670;&nbsp;</a></span>blend() <span class="overload">[1/2]</span></h2>
 
@@ -415,32 +445,6 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>_yOffset</b> = 0<
       </table>
 </div><div class="memdoc">
 <p >Resets the region without changing it. This resets the line buffer to start of the region. The backbuffer is not affected until the next flip. </p>
-
-</div>
-</div>
-<a id="a3500b485d9f8ad4bf12c9b00712fd2a8" name="a3500b485d9f8ad4bf12c9b00712fd2a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3500b485d9f8ad4bf12c9b00712fd2a8">&#9670;&nbsp;</a></span>setRegion()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void craft::LineBuffer::setRegion </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *&#160;</td>
-          <td class="paramname"><em>rect</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the area of the buffer to draw to Sets the buffer region. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rect</td><td>The region of the display to draw to </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

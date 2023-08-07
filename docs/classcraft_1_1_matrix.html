@@ -86,12 +86,6 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Matrix</b> ()</td
 <tr class="memitem:acdbeee0f13fb4be27fe420719f8c6f21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcraft_1_1_point.html">Point</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_matrix.html#acdbeee0f13fb4be27fe420719f8c6f21">transform</a> (<a class="el" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a> x, <a class="el" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a> y)</td></tr>
 <tr class="memdesc:acdbeee0f13fb4be27fe420719f8c6f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a point using the matrix and return a <a class="el" href="classcraft_1_1_point.html">Point</a> with the new values.  <a href="classcraft_1_1_matrix.html#acdbeee0f13fb4be27fe420719f8c6f21">More...</a><br /></td></tr>
 <tr class="separator:acdbeee0f13fb4be27fe420719f8c6f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab512789033722e7553cfd8b1f1043dbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_matrix.html#ab512789033722e7553cfd8b1f1043dbd">transform</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *r)</td></tr>
-<tr class="memdesc:ab512789033722e7553cfd8b1f1043dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> using the matrix.  <a href="classcraft_1_1_matrix.html#ab512789033722e7553cfd8b1f1043dbd">More...</a><br /></td></tr>
-<tr class="separator:ab512789033722e7553cfd8b1f1043dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0fad880a0aa5909ad4fbb3c6c574b87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_matrix.html#ae0fad880a0aa5909ad4fbb3c6c574b87">transform</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *from, <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *to)</td></tr>
-<tr class="memdesc:ae0fad880a0aa5909ad4fbb3c6c574b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> using the matrix.  <a href="classcraft_1_1_matrix.html#ae0fad880a0aa5909ad4fbb3c6c574b87">More...</a><br /></td></tr>
-<tr class="separator:ae0fad880a0aa5909ad4fbb3c6c574b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5ab7cf247b12c951c331c182f12c5d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_matrix.html#ab5ab7cf247b12c951c331c182f12c5d6">inverseTransform</a> (<a class="el" href="classcraft_1_1_point.html">Point</a> *p)</td></tr>
 <tr class="memdesc:ab5ab7cf247b12c951c331c182f12c5d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a point using the inverse matrix.  <a href="classcraft_1_1_matrix.html#ab5ab7cf247b12c951c331c182f12c5d6">More...</a><br /></td></tr>
 <tr class="separator:ab5ab7cf247b12c951c331c182f12c5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -630,71 +624,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae0fad880a0aa5909ad4fbb3c6c574b87" name="ae0fad880a0aa5909ad4fbb3c6c574b87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0fad880a0aa5909ad4fbb3c6c574b87">&#9670;&nbsp;</a></span>transform() <span class="overload">[1/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void craft::Matrix::transform </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *&#160;</td>
-          <td class="paramname"><em>from</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *&#160;</td>
-          <td class="paramname"><em>to</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Transform a <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> using the matrix. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">from</td><td>The <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> to transform </td></tr>
-    <tr><td class="paramname">to</td><td>(out) The transformed <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ab512789033722e7553cfd8b1f1043dbd" name="ab512789033722e7553cfd8b1f1043dbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab512789033722e7553cfd8b1f1043dbd">&#9670;&nbsp;</a></span>transform() <span class="overload">[2/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void craft::Matrix::transform </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Transform a <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> using the matrix. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">r</td><td>(out) The <a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> to transform </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="acdbeee0f13fb4be27fe420719f8c6f21" name="acdbeee0f13fb4be27fe420719f8c6f21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdbeee0f13fb4be27fe420719f8c6f21">&#9670;&nbsp;</a></span>transform() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acdbeee0f13fb4be27fe420719f8c6f21">&#9670;&nbsp;</a></span>transform() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -731,7 +662,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a44889cdef6f7d4212a61c82a15d63b9f" name="a44889cdef6f7d4212a61c82a15d63b9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44889cdef6f7d4212a61c82a15d63b9f">&#9670;&nbsp;</a></span>transform() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a44889cdef6f7d4212a61c82a15d63b9f">&#9670;&nbsp;</a></span>transform() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -768,7 +699,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="af19fc1ce5f3a7b23c608fbf22306d921" name="af19fc1ce5f3a7b23c608fbf22306d921"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af19fc1ce5f3a7b23c608fbf22306d921">&#9670;&nbsp;</a></span>transform() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af19fc1ce5f3a7b23c608fbf22306d921">&#9670;&nbsp;</a></span>transform() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -794,7 +725,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a50dd1be78be2143a014ed88281de4fb2" name="a50dd1be78be2143a014ed88281de4fb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50dd1be78be2143a014ed88281de4fb2">&#9670;&nbsp;</a></span>transform() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a50dd1be78be2143a014ed88281de4fb2">&#9670;&nbsp;</a></span>transform() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
