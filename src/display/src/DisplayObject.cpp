@@ -264,11 +264,11 @@ namespace craft {
     /**
      * Update and render the display object
      */
-    void DisplayObject::update(float_t dt) {
+    void DisplayObject::update(float_t dt, boolean isRenderUpdate) {
         if (!_children) return;
         DisplayObject* displayObject = _children;
         while (displayObject) {
-            displayObject->update(dt);
+            displayObject->update(dt, isRenderUpdate);
             displayObject = displayObject->next();
         }
     }

@@ -319,10 +319,10 @@ namespace craft {
 
         /**
          * Update the display object.
-         * @param	dt 			Time since last update in seconds
-         * @return 	Return self for chaining
+         * @param	dt 			    Time since last update in seconds
+         * @param   isRenderUpdate  True if this update is during the render phase, false otherwise
          */
-        virtual void update(float_t dt);
+        virtual void update(float_t dt, boolean isRenderUpdate = false);
 
         /**
          * @brief Set the global transform of the display object

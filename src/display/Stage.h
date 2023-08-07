@@ -45,8 +45,9 @@ namespace craft {
          * Update all objects on the stage. This will advance animations, messages etc but
          * will not update the objects to the display.
          * @param	dt 			Time since last update in seconds
+         * @param   isRenderUpdate      True if this update is during the render phase, false otherwise
          */
-        void update(float_t dt) override;
+        void update(float_t dt, boolean isRenderUpdate = false) override;
 
         /**
          * Render the objects to the display
