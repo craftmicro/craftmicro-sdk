@@ -2,7 +2,6 @@
 
 #include "display/DisplayObject.h"
 #include "graphics/Bitmap.h"
-#include <string>
 
 namespace craft {
 
@@ -162,7 +161,7 @@ namespace craft {
         const LayeredSpritePart* partData;      // Part structs
         uint8_t animCount;                      // Number of animations
         const LayeredSpriteAnim* animData;      // Animation structs
-        const uint8_t* animNames;               // Animation name data (0=len,1...len=name)
+        const int8_t* animNames;                // Animation name data (0=len,1...len=name)
         uint16_t width;                         // Size of sprite
         uint16_t height;
         int16_t anchorX;                        // Coord of anchor of sprite
@@ -207,6 +206,14 @@ namespace craft {
         void animation(int index);
 
         /**
+         * @brief Set the active animation
+         *
+         * @param name The animation name
+         * @return int The index of the animation
+         */
+        int animation(char* name);
+
+        /**
          * @brief Set or change the position of the animation
          *
          * @param dt The time from which to start the animation
@@ -243,7 +250,7 @@ namespace craft {
          * @param name The animation name
          * @return int The index
          */
-        int getAnimationIndex(std::string name);
+        int getAnimationIndex(char* name);
 
     protected:
         // The sprite data
