@@ -274,6 +274,7 @@ namespace craft {
             if (c == '\0') { // EOF
                 _endOfText = true;
                 endCharIndex = _charIndex - 1;
+                lineWidthAtEndChar = lineWidth; // 55. Correct?
                 break;
             }
             else if (c == '\t') { // tab
