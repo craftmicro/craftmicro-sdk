@@ -42,6 +42,7 @@ namespace craft {
     void Box::beginRender(ClipRect* updateArea) {
         DisplayObject::beginRender(updateArea);
         if (gradient) gradient->beginRender(renderBounds);
+        else _ra = (color >> 24) / 255.0;
     }
 
     void Box::beginLine(int16_t ry) {
@@ -55,8 +56,7 @@ namespace craft {
             _rc = gradient->rc;
         }
         else {
-            _ra = 1;
-            _rc = color;
+            _rc = color & 0xffffff;
         }
     }
 

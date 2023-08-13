@@ -21,7 +21,7 @@ namespace craft {
         icon = 0;
     }
 
-    void Widget::title(char* title, char* acronym) {
+    void Widget::title(const char* title, const char* acronym) {
         if (this->_title) {
             delete this->_title;
             this->_title = nullptr;
@@ -31,13 +31,13 @@ namespace craft {
             this->_acronym = nullptr;
         }
         if (title) {
-            int len = min(size_t(CRAFTMICRO_GUI_MAX_TITLE_LEN), strlen((const char*)title));
+            int len = min(size_t(CRAFTMICRO_GUI_MAX_TITLE_LEN), strlen(title));
             this->_title = new char[len + 1];
-            strncpy(this->_title, (const char*)title, len);
+            strncpy(this->_title, title, len);
         }
         if (acronym) {
             this->_acronym = new char[CRAFTMICRO_GUI_MAX_ACRONYM_LEN + 1];
-            strncpy(this->_acronym, (const char*)acronym, CRAFTMICRO_GUI_MAX_ACRONYM_LEN);
+            strncpy(this->_acronym, acronym, CRAFTMICRO_GUI_MAX_ACRONYM_LEN);
         }
         else if (title) {
             // Create an acronym from the title. CamelCase, ignores whitespace. Examples:
@@ -65,21 +65,18 @@ namespace craft {
                 soffset++;
             }
         }
-        this->_title = title;
-        if (acronym) this->_acronym = acronym;
-        else this->_acronym = this->_title;
     }
 
     void Widget::_added(DisplayObject* child) {
         // if the child is a GUI Display Object
-        if (child->type >= WidgetType::WTMin && child->type <= WidgetType::WTMax) {
+        if (child->type >= WidgetType::Min && child->type <= WidgetType::Max) {
             ((Widget*)child)->style(_style, true);
         }
-        _needsArrange = true;
+        needsArrange = true;
     }
 
     void Widget::_removed(DisplayObject* child) {
-        _needsArrange = true;
+        needsArrange = true;
     }
 
     void Widget::style(Style* style, bool setForChildren) {
@@ -87,7 +84,7 @@ namespace craft {
         if (setForChildren) {
             DisplayObject* child = _children;
             while (child) {
-                if (child->type >= WidgetType::WTMin && child->type <= WidgetType::WTMax) {
+                if (child->type >= WidgetType::Min && child->type <= WidgetType::Max) {
                     ((Widget*)child)->style(style);
                     child->dirty();
                 }
@@ -103,16 +100,16 @@ namespace craft {
 
     void Widget::width(float_t w) {
         DisplayObject::width(w);
-        _needsArrange = true;
+        needsArrange = true;
     }
 
     void Widget::height(float_t h) {
         DisplayObject::height(h);
-        _needsArrange = true;
+        needsArrange = true;
     }
 
     void Widget::beginRender(ClipRect* updateArea) {
-        if (_needsArrange) arrange();
+        if (needsArrange) arrange();
         DisplayObject::beginRender(updateArea);
     }
 
@@ -135,12 +132,12 @@ namespace craft {
         */
         DisplayObject* child = _children;
         while (child) {
-            if (child->type >= WidgetType::WTMin && child->type <= WidgetType::WTMax) {
+            if (child->type >= WidgetType::Min && child->type <= WidgetType::Max) {
                 ((Widget*)child)->arrange();
             }
             child = child->next();
         }
-        _needsArrange = false;
+        needsArrange = false;
     }
 
 } // namespace craft

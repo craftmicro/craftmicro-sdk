@@ -48,7 +48,7 @@ namespace craft {
         /**
          * Color. Note that if a gradient is set, it will be used instead
          */
-        color888 color;
+        color8888 color;
 
         /**
          * Gradient. If set, will be used instead of color

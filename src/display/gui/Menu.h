@@ -1,13 +1,14 @@
 #pragma once
 
 #include "display/gui/Widget.h"
+#include "display/Box.h"
 
 namespace craft {
 
     class MenuItem : public LinkedList<MenuItem>, public MemoryPool<MenuItem> {
     public:
-        char* title = nullptr;
-        char* acronym = nullptr;
+        const char* title = nullptr;
+        const char* acronym = nullptr;
         int icon = 0;
         uint32_t event = 0;
         void* eventData = nullptr;
@@ -35,8 +36,9 @@ namespace craft {
          * @param acronym A shorter acronym to display if the title does not fit
          * @param icon The index of the icon (0 = no icon). @see style->icons
          * @param event The event to dispatch when this menu item is selected
+         * @param eventData User data that can be stored against the event
          */
-        void add(char* title, char* acronym, int icon, uint32_t event, void* eventData);
+        void add(const char* title, const char* acronym, int icon, uint32_t event, void* eventData);
 
         /**
          * @brief Remove a menu item by title
@@ -61,6 +63,47 @@ namespace craft {
          */
         void clear();
 
+        /**
+         * @brief Check if there are any menu items
+         */
+        boolean isEmpty();
+
+        /**
+         * @brief Set the menu width
+         *
+         * @param w The menu width
+         */
+        void width(float_t w) override;
+
+        /**
+         * @brief Return the window width
+         *
+         * @return float_t The window width
+         */
+        float_t width() override { return Widget::width(); }
+
+        /**
+         * @brief Set the menu height
+         *
+         * @param h The menu height
+         */
+        void height(float_t h) override;
+
+        /**
+         * @brief Return the window height
+         *
+         * @return float_t The window height
+         */
+        float_t height() override { return Widget::height(); }
+
+        /**
+         * @brief Set style
+         *
+         * @param style The style to set
+         * @param setForChildren If true, will also set the style (recursively) for all children
+         */
+        void style(Style* style, bool setForChildren) override;
+
     protected:
         void add(MenuItem* item);
         void remove(MenuItem* item);
@@ -74,6 +117,11 @@ namespace craft {
          * @brief The currently active item
          */
         MenuItem* _activeItem = nullptr;
+
+        /**
+         * @brief The menu background
+         */
+        Box* _bg = nullptr;
     };
 
 } // namespace craft

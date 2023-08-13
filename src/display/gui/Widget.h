@@ -10,16 +10,19 @@ namespace craft {
     /**
      * @brief Register of widget types
      */
-    typedef enum {
-        WTMin = 1,
-        WTWindow = 1,
-        WTMenu = 2,
-        WTMax = 2
-    } WidgetType;
+    namespace WidgetType {
+        enum {
+            Min = 1,
+            Gui = 1,
+            Window = 2,
+            Menu = 3,
+            Max = 3
+        };
+    };
 
     /**
      * The GUI widget base class
-     * Provides functionallity common to all GUI widgets.
+     * Provides functionality common to all GUI widgets.
      */
     class Widget : public DisplayObject {
     public:
@@ -58,7 +61,21 @@ namespace craft {
          * @param title The title (copied)
          * @param acronym A short acronym when the full title cannot be displayed. Max 4 characters. (copied)
          */
-        virtual void title(char* title = nullptr, char* acronym = nullptr);
+        virtual void title(const char* title, const char* acronym = nullptr);
+
+        /**
+         * @brief Return the title
+         *
+         * @return const char* the title
+         */
+        const char* title() { return _title; }
+
+        /**
+         * @brief Return the acronym
+         *
+         * @return const char* the acronym
+         */
+        const char* acronym() { return _acronym; }
 
         /**
          * @brief Change the icon
@@ -114,6 +131,11 @@ namespace craft {
          */
         virtual void beginRender(ClipRect* updateArea) override;
 
+        /**
+         * @brief Flag to indicate that an arrange is required
+         */
+        bool needsArrange = true;
+
     protected:
 
         /**
@@ -130,11 +152,6 @@ namespace craft {
          * @brief The widget acronym
          */
         char* _acronym = nullptr;
-
-        /**
-         * @brief Flag to indicate that an arrange is required
-         */
-        bool _needsArrange = true;
 
         /**
          * @brief Called when a display object is added to this object
@@ -159,7 +176,6 @@ namespace craft {
          * @brief Sprite for the icon
          */
         Sprite* _icon;
-
     };
 
 } // namespace craft

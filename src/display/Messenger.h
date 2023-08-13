@@ -47,7 +47,8 @@ namespace craft {
         update_all = 60,	// Update events
         update_render = 61,
 
-        gui_menuitem_selected = 70		// Gui events
+        // Gui events
+        gui_menuitem_selected = 70
     } Event;
 
     /**
@@ -177,7 +178,7 @@ namespace craft {
         void removeTimersForEvent(uint32_t event);
 
         /**
-         * Trigger an message. This calls the Listener::listen method on the listener. If the method
+         * Trigger a message. This calls the Listener::listen method on the listener. If the method
          * returns true, the listener remains in place. If the method returns false, the listener
          * is removed.
          * Events 0-255 are reserved. Events >255 are user events

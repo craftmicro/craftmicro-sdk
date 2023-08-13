@@ -31,7 +31,7 @@ namespace craft {
          * @param icon The icon index (-1 is no icon)
          * @return Window* The new or recycled object
          */
-        static Window* Create(char* title, char* acronym = nullptr, int icon = -1);
+        static Window* Create(const char* title, const char* acronym = nullptr, int icon = -1);
 
         /**
          * @brief Construct a new Window object
@@ -44,49 +44,7 @@ namespace craft {
         void reset();
 
         /**
-         * @brief The window menu
-         * Child windows are automatically added to this menu. Custom
-         * items may also be added.
-         */
-        Menu* menu = nullptr;
-
-        /**
-         * @brief Set the window style
-         * @param style The style to set
-         * @param setForChildren If true, will also set the style (recursively) for all children
-         */
-        void style(Style* style, bool setForChildren = true) override;
-
-        /**
-         * @brief Set the window width
-         *
-         * @param w The window width
-         */
-        void width(float_t w) override;
-
-        /**
-         * @brief Return the window width
-         *
-         * @return float_t The window width
-         */
-        float_t width() override { return Widget::width(); }
-
-        /**
-         * @brief Set the window height
-         *
-         * @param h The window height
-         */
-        void height(float_t h) override;
-
-        /**
-         * @brief Return the window height
-         *
-         * @return float_t The window height
-         */
-        float_t height() override { return Widget::height(); }
-
-        /**
-         * @brief Arrange children to fit thie object
+         * @brief Arrange children to fit this object
          */
         void arrange() override;
 
@@ -104,11 +62,6 @@ namespace craft {
          * @param child The object being removed
          */
         void _removed(DisplayObject* child) override;
-
-        /**
-         * @brief The window background
-         */
-        Box* _bg = nullptr;
 
     };
 

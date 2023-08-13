@@ -3,7 +3,9 @@
 namespace craft {
 
     Menu::Menu() {
-        type = WidgetType::WTMenu;
+        type = WidgetType::Menu;
+        _bg = Box::Create();
+        addChild(_bg);
     }
 
     void Menu::reset() {
@@ -22,7 +24,11 @@ namespace craft {
         _items = nullptr;
     }
 
-    void Menu::add(char* title, char* acronym, int icon, uint32_t event, void* eventData) {
+    boolean Menu::isEmpty() {
+        return _items == nullptr;
+    }
+
+    void Menu::add(const char* title, const char* acronym, int icon, uint32_t event, void* eventData) {
         MenuItem* item = MenuItem::Create();
         item->title = title;
         item->acronym = acronym;
@@ -84,6 +90,21 @@ namespace craft {
                 i = i->next();
             }
         }
+    }
+
+    void Menu::width(float_t w) {
+        Widget::width(w);
+        _bg->width(w);
+    }
+
+    void Menu::height(float_t h) {
+        Widget::height(h);
+        _bg->height(h);
+    }
+
+    void Menu::style(Style* style, bool setForChildren) {
+        Widget::style(style, setForChildren);
+        _bg->color = _style->panelBackgroundColor[0];
     }
 
 } // namespace craft

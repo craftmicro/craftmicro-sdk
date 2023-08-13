@@ -118,7 +118,7 @@ namespace craft {
         _frame = &_anim->frameData[_frameIndex];
     }
 
-    int LayeredSprite::animation(char* name) {
+    int LayeredSprite::animation(const char* name) {
         int index = getAnimationIndex(name);
         if (index >= 0) animation(index);
         return index;
@@ -206,7 +206,7 @@ namespace craft {
         DisplayObject::update(dt, isRenderUpdate);
     }
 
-    int LayeredSprite::getAnimationIndex(char* name) {
+    int LayeredSprite::getAnimationIndex(const char* name) {
         int offset = 0;
         int len = 0;
         bool matched = true;

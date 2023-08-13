@@ -211,7 +211,7 @@ namespace craft {
          * @param name The animation name
          * @return int The index of the animation
          */
-        int animation(char* name);
+        int animation(const char* name);
 
         /**
          * @brief Set or change the position of the animation
@@ -250,7 +250,7 @@ namespace craft {
          * @param name The animation name
          * @return int The index
          */
-        int getAnimationIndex(char* name);
+        int getAnimationIndex(const char* name);
 
     protected:
         // The sprite data

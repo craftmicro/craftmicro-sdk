@@ -423,7 +423,7 @@ end
 output = output.."};\n\n"
 
 output = output.."// Animation names\n"
-output = output.."static const uint8_t "..outputId.."_names[] = {\n"
+output = output.."static const int8_t "..outputId.."_names[] = {\n"
 local count = 0
 for _, a in pairs(animations) do
     if count % 16 == 0 then

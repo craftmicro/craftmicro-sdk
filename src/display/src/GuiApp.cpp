@@ -2,20 +2,28 @@
 
 namespace craft {
 
-    GuiApp::GuiApp(Display* display, Style* style, char* title, char* acronym, int icon, int bufferHeight) : App(display, bufferHeight) {
-        serialBegin(true);
+    GuiApp::GuiApp(Display* display, Style* style, int bufferHeight) : App(display, bufferHeight) {
+        gui = new Gui(style);
+        gui->width(display->width());
+        gui->height(display->height());
+        stage->addChild(gui);
 
-        window = Window::Create(title, acronym, icon);
-        window->width(display->width());
-        window->height(display->height());
-        window->style(style);
-        stage->addChild(window);
-        window->arrange();
-        stage->backgroundColor(style->screenColor);
+        if (style) stage->backgroundColor(style->screenColor);
+    }
+
+    GuiApp::~GuiApp() {
+        stage->removeChild(gui);
+        delete gui;
     }
 
     void GuiApp::style(Style* style) {
-        window->style(style, true);
+        if (style) stage->backgroundColor(style->screenColor);
+        gui->style(style, true);
+    }
+
+    Style* GuiApp::style() {
+        Style* s = ((Widget*)gui)->style();
+        return s;
     }
 
 } // namespace craft

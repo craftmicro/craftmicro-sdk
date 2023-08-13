@@ -5,23 +5,6 @@
 namespace craft {
 
     /**
-     * Styles for a text element
-     */
-    class TextStyle {
-        color888 color = 0xecf0f1;
-        color888 inactiveColor = 0x95a5a6;
-    };
-
-    /**
-     * Styles for a panel element
-     */
-    class PanelStyle {
-        color888 backgroundColor = 0x1c1d1e;
-        color888 borderColor = 0x121314;
-        color888 highlightColor = 0x202122;
-    };
-
-    /**
      * Styles for GUI
      */
     class Style {
@@ -29,29 +12,37 @@ namespace craft {
         /**
          * Screen color
          */
-        color888 screenColor = 0x151617;
+        color8888 screenColor = 0xff151617;
 
         /**
          * Panel colors
          */
-        color888 panelBackgroundColor[2] = { 0x1c1d1e, 0x222324 };
-        color888 panelBorderColor[2] = { 0x121314, 0x18191a };
-        color888 panelHighlightColor[2] = { 0x202122, 0x262728 };
+        color8888 panelBackgroundColor[3] = {0xff151617, 0xff1C1D1E, 0xff222324};
 
         /**
          * Fonts
          */
-        packedbdf_t* font = nullptr;
-        packedbdf_t* labelFont = nullptr;
+        const packedbdf_t* font = nullptr;
+        const packedbdf_t* labelFont = nullptr;
 
         /**
          * Text colors
          */
-        color888 textColor = 0xecf0f1;
-        color888 textInactiveColor = 0x95a5a6;
+        color8888 textColor = 0xffecf0f1;
+        color8888 textActiveColor = 0xff08a5ff;
+        float_t textInactiveAlpha = 0.1;
 
-        color888 labelColor = 0x7f8c8d;
-        color888 labelInactiveColor = 0x454646;
+        color8888 labelColor = 0xffecf0f1;
+        color8888 labelActiveColor = 0xffff8c4c;
+        float_t labelInactiveAlpha = 0.1;
+
+        /**
+         * Feature colours
+         */
+        float_t featureHue[3] = {0.0, 1.0, 0.5}; // min, max, start
+        uint8_t featureHueSteps = 8;
+        float_t featureSaturation = 0.5;
+        float_t featureLightness = 0.5;
 
         /**
          * Icon bitmaps
@@ -60,11 +51,10 @@ namespace craft {
         const TilemapData* icons = nullptr;
 
         /**
-         * Icon colors
+         * Badge
          */
-        color888 iconColor = 0xecf0f1;
-        color888 badgeTextColor = 0xecf0f1;
-        color888 badgeColor = 0xe94b35;
+        color8888 badgeTextColor = 0xffecf0f1;
+        color8888 badgeColor = 0xffe94b35;
     };
 
 } // namespace craft

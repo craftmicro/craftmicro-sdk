@@ -3,7 +3,7 @@
 namespace craft {
 
     /**
-     * Double-linked list. Inherit from this object to add list functionallity.
+     * Double-linked list. Inherit from this object to add list functionality.
      */
     template <class T> class LinkedList {
     public:
