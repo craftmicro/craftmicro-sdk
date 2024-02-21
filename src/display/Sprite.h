@@ -124,7 +124,7 @@ namespace craft {
         PingPong = 2,
     } AnimationDirection;
 
-    struct LayeredSpritePart {
+    struct PlySpritePart {
         uint16_t width;                         // Size of part
         uint16_t height;
         int16_t anchorX;                        // Coord of anchor of part
@@ -132,7 +132,7 @@ namespace craft {
         const uint8_t* partData;                // Pixel data (palette indexes)
     };
 
-    struct LayeredSpriteLayer {
+    struct PlySpriteLayer {
         uint8_t partIndex;                      // The part in this layer
         uint8_t orientation;                    // Orientation of the part
         int16_t x;                              // Coords of the part in this layer
@@ -142,25 +142,28 @@ namespace craft {
         int16_t strideY;
     };
 
-    struct LayeredSpriteFrame {
+    struct PlySpriteFrame {
         float_t duration;                       // seconds
         uint8_t layerCount;                     // Number of layers
-        const LayeredSpriteLayer* layerData;    // Layer structs
+        const PlySpriteLayer* layerData;    // Layer structs
     };
 
-    struct LayeredSpriteAnim {
+    struct PlySpriteAnim {
         uint8_t direction;                      // AnimationDirection
+        uint8_t repeats;                        // Number of times to repeat (0=infinite)
+        float_t anchorX;                        // Coords of anchor of animation
+        float_t anchorY;
         uint8_t frameCount;                     // Number of frames
-        const LayeredSpriteFrame* frameData;    // Frame structs
+        const PlySpriteFrame* frameData;    // Frame structs
     };
 
-    struct LayeredSpriteData {
+    struct PlySpriteData {
         uint8_t paletteCount;                   // Number of palette entries
         const color8888* paletteData;           // ARGB color
         uint8_t partCount;                      // Number of parts
-        const LayeredSpritePart* partData;      // Part structs
+        const PlySpritePart* partData;          // Part structs
         uint8_t animCount;                      // Number of animations
-        const LayeredSpriteAnim* animData;      // Animation structs
+        const PlySpriteAnim* animData;          // Animation structs
         const int8_t* animNames;                // Animation name data (0=len,1...len=name)
         uint16_t width;                         // Size of sprite
         uint16_t height;
@@ -168,18 +171,18 @@ namespace craft {
         int16_t anchorY;
     };
 
-    class LayeredSprite : public DisplayObject, public MemoryPool<LayeredSprite> {
+    class PlySprite : public DisplayObject, public MemoryPool<PlySprite> {
     public:
         /**
-         * @brief Construct a new Layered Sprite object
+         * @brief Construct a new Ply Sprite object
          * The data is usually stored in flashmem
          * @param data The data for the sprite
          * @param animation The index of the active animation
          */
-        static LayeredSprite* Create(const LayeredSpriteData* data, uint8_t animation = 0, bool start = false);
+        static PlySprite* Create(const PlySpriteData* data, uint8_t animation = 0, bool start = false);
 
         /**
-         * @brief Reset the layered sprite back to defaults
+         * @brief Reset the Ply sprite back to defaults
          */
         void reset() override;
 
@@ -192,11 +195,11 @@ namespace craft {
 
         /**
          * Set the data and the animation that the sprite uses.
-         * @param tilemap 	The layered sprite data to use
+         * @param tilemap 	The ply sprite data to use
          * @param animation The index of the active animation
          * @param start     True if the animation should start immediately from the beginning
          */
-        void set(const LayeredSpriteData* data, uint8_t animation = 0, bool start = false);
+        void set(const PlySpriteData* data, uint8_t animation = 0, bool start = false);
 
         /**
          * @brief Set the active animation
@@ -211,7 +214,7 @@ namespace craft {
          * @param name The animation name
          * @return int The index of the animation
          */
-        int animation(char* name);
+        int animation(const char* name);
 
         /**
          * @brief Set or change the position of the animation
@@ -250,19 +253,19 @@ namespace craft {
          * @param name The animation name
          * @return int The index
          */
-        int getAnimationIndex(char* name);
+        int getAnimationIndex(const char* name);
 
     protected:
         // The sprite data
-        const LayeredSpriteData* _data = nullptr;
+        const PlySpriteData* _data = nullptr;
 
         // The active animation
-        const LayeredSpriteAnim* _anim = nullptr;
+        const PlySpriteAnim* _anim = nullptr;
         // The current advance direction
         bool _animForward = true;
 
         // The active frame
-        const LayeredSpriteFrame* _frame = nullptr;
+        const PlySpriteFrame* _frame = nullptr;
         // The active frame index
         uint8_t _frameIndex = 0;
         // Total millis into the frame

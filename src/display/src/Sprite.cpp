@@ -67,16 +67,16 @@ namespace craft {
     }
 
     /**
-     * Layered Sprite
+     * Ply Sprite
      */
 
-    LayeredSprite* LayeredSprite::Create(const LayeredSpriteData* data, uint8_t animation, bool start) {
-        LayeredSprite* sprite = MemoryPool<LayeredSprite>::Create();
+    PlySprite* PlySprite::Create(const PlySpriteData* data, uint8_t animation, bool start) {
+        PlySprite* sprite = MemoryPool<PlySprite>::Create();
         sprite->set(data, animation, start);
         return sprite;
     }
 
-    void LayeredSprite::reset() {
+    void PlySprite::reset() {
         _data = nullptr;
         _anim = nullptr;
         _frame = nullptr;
@@ -86,7 +86,7 @@ namespace craft {
         _animForward = true;
     }
 
-    void LayeredSprite::set(const LayeredSpriteData* data, uint8_t animation, bool start) {
+    void PlySprite::set(const PlySpriteData* data, uint8_t animation, bool start) {
         reset();
         if (data) {
             _data = data;
@@ -98,7 +98,7 @@ namespace craft {
         dirty();
     }
 
-    void LayeredSprite::animation(int index) {
+    void PlySprite::animation(int index) {
         if (index < 0 || index >= _data->animCount) {
             _anim = nullptr;
             _frame = nullptr;
@@ -118,13 +118,13 @@ namespace craft {
         _frame = &_anim->frameData[_frameIndex];
     }
 
-    int LayeredSprite::animation(char* name) {
+    int PlySprite::animation(const char* name) {
         int index = getAnimationIndex(name);
         if (index >= 0) animation(index);
         return index;
     }
 
-    void LayeredSprite::position(float_t pos, bool advance) {
+    void PlySprite::position(float_t pos, bool advance) {
         int8_t newIndex = _frameIndex;
         if (!advance) {
             _framePos = 0;
@@ -188,15 +188,15 @@ namespace craft {
         }
     }
 
-    void LayeredSprite::pause() {
+    void PlySprite::pause() {
         _playing = false;
     }
 
-    void LayeredSprite::resume() {
+    void PlySprite::resume() {
         _playing = true;
     }
 
-    void LayeredSprite::update(float_t dt, boolean isRenderUpdate) {
+    void PlySprite::update(float_t dt, boolean isRenderUpdate) {
         // Update self
         if (isRenderUpdate) {
             if (_playing) position(dt, true);
@@ -206,7 +206,7 @@ namespace craft {
         DisplayObject::update(dt, isRenderUpdate);
     }
 
-    int LayeredSprite::getAnimationIndex(char* name) {
+    int PlySprite::getAnimationIndex(const char* name) {
         int offset = 0;
         int len = 0;
         bool matched = true;
@@ -225,15 +225,15 @@ namespace craft {
         return -1;
     }
 
-    void LayeredSprite::beginLine(int16_t ry) {}
+    void PlySprite::beginLine(int16_t ry) {}
 
-    void LayeredSprite::calcPixel(int16_t rx, int16_t ry) {
+    void PlySprite::calcPixel(int16_t rx, int16_t ry) {
         if (!_frame) return;
 
         // Step through each layer
         _ra = 0.0;
-        const LayeredSpriteLayer* layer;
-        const LayeredSpritePart* part;
+        const PlySpriteLayer* layer;
+        const PlySpritePart* part;
         color8888 c;
         uint8_t a;
         for (int i = 0; i < _frame->layerCount; i++) {
