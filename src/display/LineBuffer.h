@@ -26,9 +26,9 @@ namespace craft {
          * @brief Construct a new Line Buffer object
          *
          * @param	display			A Display instance for the hardware display being used.
-         * @param	bufferHeight	The height of the line buffer, in lines. Default = 1. Full framebuffer = 0.
+         * @param	bufferHeight	The height of the line buffer, in lines. Default = 1. Full frame buffer = 0.
          */
-        LineBuffer(Display* display, int bufferHeight = 1);
+        LineBuffer(Display* display);
 
         /**
          * @brief Destroy the Line Buffer object
@@ -49,7 +49,7 @@ namespace craft {
 
         /**
          * Resets the region without changing it. This resets the line buffer to
-         * start of the region. The backbuffer is not affected until the next flip.
+         * start of the region. The back buffer is not affected until the next flip.
          */
         void resetRegion();
 
@@ -110,6 +110,11 @@ namespace craft {
         }
 
         /**
+         * @brief Reference to the display
+         */
+        Display* display;
+
+        /**
          * @brief Maximum buffer size as dictated by display
          *
          */
@@ -120,8 +125,14 @@ namespace craft {
          */
         ClipRect region;
 
-    protected:
+        /**
+         * @brief Get the buffer to draw (the back buffer)
+         */
+        LineBufferData drawBuffer() {
+            return _data[_frontIndex];
+        }
 
+    protected:
         /**
          * @brief Pointer to the pixel data
          */
@@ -133,7 +144,7 @@ namespace craft {
         uint8_t _frontIndex = 0;
 
         /**
-         * @brief Index to the active data buffer for transfering to the hardware. I.e: `lineBuff->data[ lineBuff->backIndex ][ x ]`
+         * @brief Index to the active data buffer for transferring to the hardware. I.e: `lineBuff->data[ lineBuff->backIndex ][ x ]`
          */
         uint8_t _backIndex = 1;
 
@@ -156,11 +167,6 @@ namespace craft {
          * @brief Pixel offset of current line
          */
         uint16_t _yOffset = 0;
-
-        /**
-         * @brief Reference to the display
-         */
-        Display* _display;
     };
 
 } // namespace craft

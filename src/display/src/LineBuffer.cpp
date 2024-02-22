@@ -2,14 +2,17 @@
 
 namespace craft {
 
-    LineBuffer::LineBuffer(Display* display, int bufferHeight) {
-        _display = display;
-        rect.setPosAndSize(0, 0, _display->width(), _display->height());
+    LineBuffer::LineBuffer(Display* display) {
+        this->display = display;
+        int scaledWidth = display->width * display->pixelScale;
+        int scaledHeight = display->height * display->pixelScale;
+
+        rect.setPosAndSize(0, 0, scaledWidth, scaledHeight);
         region.set(&rect);
-        if (bufferHeight == 0 || bufferHeight > _display->height()) bufferHeight = _display->height();
-        else if (bufferHeight < 0) bufferHeight = 1;
-        _bufferHeight = bufferHeight;
-        _bufferWidth = _display->width();
+        if (display->lineBufferHeight == 0 || display->lineBufferHeight > scaledHeight) display->lineBufferHeight = scaledHeight;
+        else if (display->lineBufferHeight < 0) display->lineBufferHeight = 1;
+        _bufferHeight = display->lineBufferHeight;
+        _bufferWidth = scaledWidth;
         _data[0].pixels = new color888[_bufferWidth * _bufferHeight];
         _data[1].pixels = new color888[_bufferWidth * _bufferHeight];
         _yOffset = 0;
@@ -25,15 +28,15 @@ namespace craft {
         region.set(
             max(int16_t(0), rect->x),
             max(int16_t(0), rect->y),
-            min(_display->width() - 1, (int)rect->x2),
-            min(_display->height() - 1, (int)rect->y2)
+            min(display->width - 1, (int)rect->x2),
+            min(display->height - 1, (int)rect->y2)
         );
         resetRegion();
-        _display->beginDrawing(region);
+        display->beginDrawing(region);
     }
 
     void LineBuffer::end() {
-        _display->endDrawing();
+        display->endDrawing();
     }
 
     void LineBuffer::resetRegion() {
@@ -69,9 +72,9 @@ namespace craft {
                 _y + _bufferHeight - 1
             );
             _yOffset = 0;
+
             // Flush to the hardware from the back buffer
-            while (!_display->ready) yield();
-            _display->draw(_data[_backIndex]);
+            display->draw(_data[_backIndex], _bufferWidth);
         }
     }
 

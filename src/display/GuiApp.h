@@ -30,7 +30,7 @@ namespace craft {
          * @param icon              Index of the icon (0 for no icon)
          * @param bufferHeight      The height of the line buffer, in lines. Default = 1. Full framebuffer = 0.
          */
-        GuiApp(Display* display, Style* style, char* title, char* acronym = nullptr, int icon = 0, int bufferHeight = 1);
+        GuiApp(Display* display, Style* style, char* title, char* acronym = nullptr, int icon = 0);
 
         /**
          * Destructor

@@ -32,17 +32,12 @@ namespace craft {
          * @param	display			A Display instance for the hardware display being used.
          * @param	bufferHeight	The height of the line buffer, in lines. Default = 1. Full framebuffer = 0.
          **/
-        App(Display* display, int bufferHeight = 1);
+        App(Display* display);
 
         /**
          * Destructor
          **/
         ~App();
-
-        /**
-         * The hardware display object
-         */
-        Display* display;
 
         /**
          * The drawing buffer object
