@@ -113,7 +113,7 @@ namespace craft {
          * Adjusts width and height.
          * @param px   	X coordinate of top-left corner
          * @param py 	Y coordinate of top-left corner
-         * @param px2	X coordinate of bottom-right corner
+         * @param px2   X coordinate of bottom-right corner
          * @param py2  	Y coordinate of bottom-right corner
          */
         void set(int16_t px, int16_t py, int16_t px2, int16_t py2) {

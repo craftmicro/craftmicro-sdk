@@ -6,8 +6,8 @@ namespace craft {
         serialBegin(true);
 
         window = Window::Create(title, acronym, icon);
-        window->width(buffer->rect.width);
-        window->height(buffer->rect.height);
+        window->width(stage->width());
+        window->height(stage->height());
         window->style(style);
         stage->addChild(window);
         window->arrange();

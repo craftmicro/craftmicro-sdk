@@ -23,22 +23,30 @@ namespace craft {
     void Display::draw565(LineBufferData& buffer, int bufferWidth) {
         if (pixelScale == 1) {
             int lineOffset = 0;
+            int sx = _x;
             for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
                 for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
                     drawPixel565(to565(buffer.pixels[lineOffset + x]));
+                    _x++;
                 }
+                _x = sx;
+                _y++;
                 lineOffset += bufferWidth;
             }
         }
         else {
             int lineOffset = 0;
+            int sx = _x;
             for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
                 for (uint16_t i = 0; i < pixelScale; i++) {
                     for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
                         for (uint16_t j = 0; j < pixelScale; j++) {
                             drawPixel565(to565(buffer.pixels[lineOffset + x]));
+                            _x++;
                         }
                     }
+                    _x = sx;
+                    _y++;
                 }
                 lineOffset += bufferWidth;
             }
@@ -51,22 +59,30 @@ namespace craft {
     void Display::draw888(LineBufferData& buffer, int bufferWidth) {
         if (pixelScale == 1) {
             int lineOffset = 0;
+            int sx = _x;
             for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
                 for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
                     drawPixel888(buffer.pixels[lineOffset + x]);
+                    _x++;
                 }
+                _x = sx;
+                _y++;
                 lineOffset += bufferWidth;
             }
         }
         else {
             int lineOffset = 0;
+            int sx = _x;
             for (uint16_t y = buffer.rect.y; y <= buffer.rect.y2; y++) {
                 for (uint16_t i = 0; i < pixelScale; i++) {
                     for (uint16_t x = buffer.rect.x; x <= buffer.rect.x2; x++) {
                         for (uint16_t j = 0; j < pixelScale; j++) {
                             drawPixel888(buffer.pixels[lineOffset + x]);
+                            _x++;
                         }
                     }
+                    _x = sx;
+                    _y++;
                 }
                 lineOffset += bufferWidth;
             }

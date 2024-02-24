@@ -116,14 +116,18 @@ namespace craft {
 
         /**
          * @brief Maximum buffer size as dictated by display
-         *
          */
-        ClipRect rect;
+        ClipRect maxRegion;
 
         /**
          * @brief Rect describing the dirty region (region of the buffer being updated)
          */
         ClipRect region;
+
+        /**
+         * @brief Rect describing the scaled region (region scaled by pixelScale)
+         */
+        ClipRect scaledRegion;
 
         /**
          * @brief Get the buffer to draw (the back buffer)

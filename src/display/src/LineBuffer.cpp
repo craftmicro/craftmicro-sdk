@@ -4,11 +4,11 @@ namespace craft {
 
     LineBuffer::LineBuffer(Display* display) {
         this->display = display;
-        int scaledWidth = display->width * display->pixelScale;
-        int scaledHeight = display->height * display->pixelScale;
+        int scaledWidth = (int)(display->width / display->pixelScale);
+        int scaledHeight = (int)(display->height / display->pixelScale);
 
-        rect.setPosAndSize(0, 0, scaledWidth, scaledHeight);
-        region.set(&rect);
+        maxRegion.setPosAndSize(0, 0, scaledWidth, scaledHeight);
+        region.set(&maxRegion);
         if (display->lineBufferHeight == 0 || display->lineBufferHeight > scaledHeight) display->lineBufferHeight = scaledHeight;
         else if (display->lineBufferHeight < 0) display->lineBufferHeight = 1;
         _bufferHeight = display->lineBufferHeight;
@@ -23,16 +23,22 @@ namespace craft {
         delete[] _data[1].pixels;
     }
 
-    void LineBuffer::begin(ClipRect* rect) {
+    void LineBuffer::begin(ClipRect* targetRect) {
         // Ensure region is within display area
         region.set(
-            max(int16_t(0), rect->x),
-            max(int16_t(0), rect->y),
-            min(display->width - 1, (int)rect->x2),
-            min(display->height - 1, (int)rect->y2)
+            max(maxRegion.x, targetRect->x),
+            max(maxRegion.y, targetRect->y),
+            min(maxRegion.x2, targetRect->x2),
+            min(maxRegion.y2, targetRect->y2)
         );
         resetRegion();
-        display->beginDrawing(region);
+        scaledRegion.setPosAndSize(
+            region.x * display->pixelScale,
+            region.y * display->pixelScale,
+            region.width * display->pixelScale,
+            region.height * display->pixelScale
+        );
+        display->beginDrawing(scaledRegion);
     }
 
     void LineBuffer::end() {
@@ -57,7 +63,7 @@ namespace craft {
 
         // If we have filled the buffer or reached the end of the region, flip and push
         if ((_y > _data[_frontIndex].rect.y2) || (_y > region.y2) || flush) {
-            // Filp the buffers
+            // Flip the buffers
             _backIndex = _frontIndex;
             _frontIndex ^= 1;
             // Update the back buffer region
@@ -74,7 +80,7 @@ namespace craft {
             _yOffset = 0;
 
             // Flush to the hardware from the back buffer
-            display->draw(_data[_backIndex], _bufferWidth);
+            display->draw(_data[_backIndex], _data[_backIndex].rect.width);
         }
     }
 

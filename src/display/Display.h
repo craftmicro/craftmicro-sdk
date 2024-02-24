@@ -9,6 +9,11 @@ namespace craft {
 
     /**
      * Display base class
+     *
+     * To use this class, you must subclass it and implement
+     *  - beginDrawing()
+     *  - drawPixel565() or drawPixel888()
+     *  - endDrawing()
      **/
     class Display {
     public:
@@ -44,7 +49,10 @@ namespace craft {
          *
          * @param rect The area of the display that will be drawn
          */
-        virtual void beginDrawing(ClipRect& rect) = 0;
+        virtual void beginDrawing(ClipRect& rect) {
+            _x = rect.x;
+            _y = rect.y;
+        };
 
         /**
          * @brief Called to draw a single 16bit RGB565 pixel to the display
@@ -63,7 +71,7 @@ namespace craft {
         /**
          * @brief Called to end drawing the current frame
          */
-        virtual void endDrawing();
+        virtual void endDrawing() {}
 
     protected:
         friend class LineBuffer;
@@ -82,6 +90,12 @@ namespace craft {
          * Update the linebuffer to the display
          **/
         void draw888(LineBufferData& buffer, int bufferWidth);
+
+        /**
+         * @brief Current screen drawing position
+         */
+        int _x = 0;
+        int _y = 0;
     };
 
 } // namespace craft

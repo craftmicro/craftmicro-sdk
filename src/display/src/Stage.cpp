@@ -22,13 +22,13 @@ namespace craft {
         //Serial.println("Stage::render");
 
         // Set stage to match display
-        _localBounds->setSize(buffer->rect.width, buffer->rect.height);
+        _localBounds->setSize(buffer->maxRegion.width, buffer->maxRegion.height);
 
         // Build display list. At the same time, determine the area of the display that is dirty
         // The display list is a list of all visible display objects (both with 'visibility' flag
         // set to true, and at least partially visible on the display) ordered from top to bottom
         // and left to right.
-        if (_dirty) _dirtyBounds->set(&buffer->rect);
+        if (_dirty) _dirtyBounds->set(&buffer->maxRegion);
         else _dirtyBounds->clear();
         _displayListDepth = 0;
         _displayList = DisplayList::Create(this);
@@ -36,7 +36,7 @@ namespace craft {
 
         // Calculate the updated area of ths display
         renderBounds->set(_dirtyBounds);
-        renderBounds->clip(&buffer->rect);
+        renderBounds->clip(&buffer->maxRegion);
         //Serial.println("Render bounds");
         //Serial.printf("  %d,%d %dx%d\n", renderBounds->x, renderBounds->y, renderBounds->width, renderBounds->height);
 
@@ -297,7 +297,7 @@ namespace craft {
             }
 
             // Check if on the display and is not a mask
-            if (child->globalBounds->overlaps(&buffer->rect) && child->mask == MaskType::none && !isMask) {
+            if (child->globalBounds->overlaps(&buffer->maxRegion) && child->mask == MaskType::none && !isMask) {
 
                 // Calculate depth
                 child->depth = ++_displayListDepth;

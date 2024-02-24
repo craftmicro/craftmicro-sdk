@@ -16,8 +16,8 @@ namespace craft {
         this->lastMicros = micros();
 
         this->stage = new Stage();
-        this->stage->width(this->buffer->display->width);
-        this->stage->height(this->buffer->display->height);
+        this->stage->width(this->buffer->maxRegion.width);
+        this->stage->height(this->buffer->maxRegion.height);
         this->messenger = new Messenger();
         this->tweens = new Tween();
         this->input = new Input(this->messenger);
