@@ -22,7 +22,7 @@ Refer to the [documentation](https://craftmicro.io/docs/) for more detail. The d
 
 Craft Micro itself has no dependencies. However, it's likely that the hardware you are using, such as a TFT display, will require additional libraries - for example SPI or I2C.
 
-The examples use an ILI9341 TFT display over SPI, and so require the SPI Arduino library. This comes bundled with Arduino Studio and PlatformIO, and almost any other Arduino-based framework that you might use. The readme in the examples section contains details of how to add dependencies.
+The examples use Bodmer's TFT_eSPI library.
 
 ## Minimum requirements
 
@@ -41,7 +41,7 @@ To keep memory usage low, this SDK uses a linebuffer (double-buffered) instead o
 
 ## Licence
 
-Both the software and hardware components of this project are released under the **[MIT licence](https://en.wikipedia.org/wiki/MIT_License)**.
+The software components of this project are released under the **[MIT licence](https://en.wikipedia.org/wiki/MIT_License)**.
 
 ## Acknowledgements
 

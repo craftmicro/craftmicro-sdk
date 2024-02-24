@@ -50,154 +50,86 @@ $(function() {
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classcraft_1_1_display-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">craft::Display Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_display_8h_source.html">Display.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for craft::Display:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classcraft_1_1_display.png" usemap="#craft::Display_map" alt=""/>
-  <map id="craft::Display_map" name="craft::Display_map">
-<area href="classcraft_1_1_display_s_p_i.html" title="Determine clock speed." alt="craft::DisplaySPI" shape="rect" coords="225,56,365,80"/>
-<area href="classcraft_1_1_display_i_l_i9341.html" alt="craft::DisplayILI9341" shape="rect" coords="0,112,140,136"/>
-<area href="classcraft_1_1_display_i_l_i9488.html" alt="craft::DisplayILI9488" shape="rect" coords="150,112,290,136"/>
-<area href="classcraft_1_1_display_r_m67162.html" alt="craft::DisplayRM67162" shape="rect" coords="300,112,440,136"/>
-<area href="classcraft_1_1_display_s_t7789.html" alt="craft::DisplayST7789" shape="rect" coords="450,112,590,136"/>
-  </map>
-</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a26d6a0b1c154db1b397585b94bea7b94"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a26d6a0b1c154db1b397585b94bea7b94">~Display</a> (void)</td></tr>
-<tr class="separator:a26d6a0b1c154db1b397585b94bea7b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d2eb6d0a1af702eb8abdd81e4dcba0f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a8d2eb6d0a1af702eb8abdd81e4dcba0f">beginDrawing</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> &amp;rect)</td></tr>
-<tr class="memdesc:a8d2eb6d0a1af702eb8abdd81e4dcba0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up to begin drawing a single render pass (frame)  <a href="classcraft_1_1_display.html#a8d2eb6d0a1af702eb8abdd81e4dcba0f">More...</a><br /></td></tr>
+<tr class="memdesc:a8d2eb6d0a1af702eb8abdd81e4dcba0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to begin drawing a new frame.  <a href="classcraft_1_1_display.html#a8d2eb6d0a1af702eb8abdd81e4dcba0f">More...</a><br /></td></tr>
 <tr class="separator:a8d2eb6d0a1af702eb8abdd81e4dcba0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1888ca50ad6b596133afe708b3fe6cd3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a1888ca50ad6b596133afe708b3fe6cd3">draw</a> (<a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;buffer)</td></tr>
-<tr class="memdesc:a1888ca50ad6b596133afe708b3fe6cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a buffer of pixel data to the display.  <a href="classcraft_1_1_display.html#a1888ca50ad6b596133afe708b3fe6cd3">More...</a><br /></td></tr>
-<tr class="separator:a1888ca50ad6b596133afe708b3fe6cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6d5c7c47df476f772a0f48b531435db"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#ad6d5c7c47df476f772a0f48b531435db">endDrawing</a> ()</td></tr>
-<tr class="memdesc:ad6d5c7c47df476f772a0f48b531435db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalise drawing a single render pass.  <a href="classcraft_1_1_display.html#ad6d5c7c47df476f772a0f48b531435db">More...</a><br /></td></tr>
+<tr class="memitem:af42a37be49fb332a1a44b3bb21da0032"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af42a37be49fb332a1a44b3bb21da0032">drawPixel565</a> (<a class="el" href="namespacecraft.html#af85ee23e342b19b7641843cf0056471d">color565</a> color)</td></tr>
+<tr class="memdesc:af42a37be49fb332a1a44b3bb21da0032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to draw a single 16bit RGB565 pixel to the display.  <a href="classcraft_1_1_display.html#af42a37be49fb332a1a44b3bb21da0032">More...</a><br /></td></tr>
+<tr class="separator:af42a37be49fb332a1a44b3bb21da0032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a01f280ffd785f803d4d591c26c2d5d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a6a01f280ffd785f803d4d591c26c2d5d">drawPixel888</a> (<a class="el" href="namespacecraft.html#a6aa894cf17dbb4f37159c79d13b2db53">color888</a> color)</td></tr>
+<tr class="memdesc:a6a01f280ffd785f803d4d591c26c2d5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to draw a single 24bit RGB888 pixel to the display.  <a href="classcraft_1_1_display.html#a6a01f280ffd785f803d4d591c26c2d5d">More...</a><br /></td></tr>
+<tr class="separator:a6a01f280ffd785f803d4d591c26c2d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6d5c7c47df476f772a0f48b531435db"><td class="memItemLeft" align="right" valign="top"><a id="ad6d5c7c47df476f772a0f48b531435db" name="ad6d5c7c47df476f772a0f48b531435db"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>endDrawing</b> ()</td></tr>
+<tr class="memdesc:ad6d5c7c47df476f772a0f48b531435db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to end drawing the current frame. <br /></td></tr>
 <tr class="separator:ad6d5c7c47df476f772a0f48b531435db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38ec53a12edde9e48669614f7f64ce47"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a38ec53a12edde9e48669614f7f64ce47">width</a> ()</td></tr>
-<tr class="separator:a38ec53a12edde9e48669614f7f64ce47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcbac40e18e57481c4a1abb19beb93ef"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#abcbac40e18e57481c4a1abb19beb93ef">height</a> ()</td></tr>
-<tr class="separator:abcbac40e18e57481c4a1abb19beb93ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71af5e46a5c9c6cd0f6bc95c9b102321"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a71af5e46a5c9c6cd0f6bc95c9b102321">hardwareWidth</a> ()</td></tr>
-<tr class="separator:a71af5e46a5c9c6cd0f6bc95c9b102321"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4357821480606d3bc60b1741aebcf93"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af4357821480606d3bc60b1741aebcf93">hardwareHeight</a> ()</td></tr>
-<tr class="separator:af4357821480606d3bc60b1741aebcf93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a786f141febd3f1c5115eeab98c96f9f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacecraft.html#afb854678b047bba0cd5889d36ab87ed4">PixelFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a786f141febd3f1c5115eeab98c96f9f0">pixelFormat</a> ()</td></tr>
-<tr class="separator:a786f141febd3f1c5115eeab98c96f9f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b6d071fe0eae763bdca323b3408a94d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacecraft.html#a0ed802328f2d0d684a838f7f2a3794de">DisplayOrientation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a0b6d071fe0eae763bdca323b3408a94d">orientation</a> ()</td></tr>
-<tr class="separator:a0b6d071fe0eae763bdca323b3408a94d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34c7d3ccbc217dd826e1c82a56fbe45f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a34c7d3ccbc217dd826e1c82a56fbe45f">backlight</a> (<a class="el" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a> brightness)</td></tr>
-<tr class="separator:a34c7d3ccbc217dd826e1c82a56fbe45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a237bf0a49c3ff7205a87fe577843a7af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a237bf0a49c3ff7205a87fe577843a7af">ready</a> = false</td></tr>
-<tr class="separator:a237bf0a49c3ff7205a87fe577843a7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad48dba6d59bd1b22e0cdb42bcb004ea5"><td class="memItemLeft" align="right" valign="top"><a id="ad48dba6d59bd1b22e0cdb42bcb004ea5" name="ad48dba6d59bd1b22e0cdb42bcb004ea5"></a>
+<a class="el" href="namespacecraft.html#afb854678b047bba0cd5889d36ab87ed4">PixelFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><b>pixelFormat</b> = PixelFormat::Unknown</td></tr>
+<tr class="memdesc:ad48dba6d59bd1b22e0cdb42bcb004ea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Currently only RGB565 (16bit) and RGB888 (24bit) are supported. <br /></td></tr>
+<tr class="separator:ad48dba6d59bd1b22e0cdb42bcb004ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79c8ce5c4910780a236fb3815cb3a581"><td class="memItemLeft" align="right" valign="top"><a id="a79c8ce5c4910780a236fb3815cb3a581" name="a79c8ce5c4910780a236fb3815cb3a581"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>width</b> = 0</td></tr>
+<tr class="memdesc:a79c8ce5c4910780a236fb3815cb3a581"><td class="mdescLeft">&#160;</td><td class="mdescRight">The width of the display in pixels. <br /></td></tr>
+<tr class="separator:a79c8ce5c4910780a236fb3815cb3a581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c7aff3e281800253f73fe443d7bfc52"><td class="memItemLeft" align="right" valign="top"><a id="a9c7aff3e281800253f73fe443d7bfc52" name="a9c7aff3e281800253f73fe443d7bfc52"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = 0</td></tr>
+<tr class="memdesc:a9c7aff3e281800253f73fe443d7bfc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">The height of the display in pixels. <br /></td></tr>
+<tr class="separator:a9c7aff3e281800253f73fe443d7bfc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230f2ea4e00ad73d8f22377603381276"><td class="memItemLeft" align="right" valign="top"><a id="a230f2ea4e00ad73d8f22377603381276" name="a230f2ea4e00ad73d8f22377603381276"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>pixelScale</b> = 1</td></tr>
+<tr class="memdesc:a230f2ea4e00ad73d8f22377603381276"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount to scale pixels. <br /></td></tr>
+<tr class="separator:a230f2ea4e00ad73d8f22377603381276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeef56a811b5b5161d082e8c8eb078052"><td class="memItemLeft" align="right" valign="top"><a id="aeef56a811b5b5161d082e8c8eb078052" name="aeef56a811b5b5161d082e8c8eb078052"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>lineBufferHeight</b> = 1</td></tr>
+<tr class="memdesc:aeef56a811b5b5161d082e8c8eb078052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the line buffer in lines (0 for full frame buffer) <br /></td></tr>
+<tr class="separator:aeef56a811b5b5161d082e8c8eb078052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a1b8f5ff4ceb43a21848397a76dbc2cde"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a1b8f5ff4ceb43a21848397a76dbc2cde">setArea</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> &amp;rect)</td></tr>
-<tr class="memdesc:a1b8f5ff4ceb43a21848397a76dbc2cde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the area of the display to draw to.  <a href="classcraft_1_1_display.html#a1b8f5ff4ceb43a21848397a76dbc2cde">More...</a><br /></td></tr>
-<tr class="separator:a1b8f5ff4ceb43a21848397a76dbc2cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86e838d0acba36c2d2dccf4a3362ea82"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a86e838d0acba36c2d2dccf4a3362ea82">setOrientation</a> (<a class="el" href="namespacecraft.html#a0ed802328f2d0d684a838f7f2a3794de">DisplayOrientation</a> o)</td></tr>
-<tr class="memdesc:a86e838d0acba36c2d2dccf4a3362ea82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Orientation of the display.  <a href="classcraft_1_1_display.html#a86e838d0acba36c2d2dccf4a3362ea82">More...</a><br /></td></tr>
-<tr class="separator:a86e838d0acba36c2d2dccf4a3362ea82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d08109a79e21201d97265f8a14e0fda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a9d08109a79e21201d97265f8a14e0fda">draw</a> (<a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;buffer, int bufferWidth)</td></tr>
+<tr class="separator:a9d08109a79e21201d97265f8a14e0fda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11c6b58c458016af72cb9149686016e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#aa11c6b58c458016af72cb9149686016e">draw565</a> (<a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;buffer, int bufferWidth)</td></tr>
+<tr class="separator:aa11c6b58c458016af72cb9149686016e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af263540f912e57c6e8e3badc1d5f0162"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af263540f912e57c6e8e3badc1d5f0162">draw888</a> (<a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;buffer, int bufferWidth)</td></tr>
+<tr class="separator:af263540f912e57c6e8e3badc1d5f0162"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ae0749e82741e096771babef8e15306c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacecraft.html#afb854678b047bba0cd5889d36ab87ed4">PixelFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#ae0749e82741e096771babef8e15306c1">_pf</a> = PixelFormat::Unknown</td></tr>
-<tr class="separator:ae0749e82741e096771babef8e15306c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af59d6c9279dc9dd7cb05473aca8cc483"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af59d6c9279dc9dd7cb05473aca8cc483">_px</a> = 1</td></tr>
-<tr class="separator:af59d6c9279dc9dd7cb05473aca8cc483"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7c8c4e7991c702f554cfe9692a1cebf"><td class="memItemLeft" align="right" valign="top"><a id="ab7c8c4e7991c702f554cfe9692a1cebf" name="ab7c8c4e7991c702f554cfe9692a1cebf"></a>
-<a class="el" href="namespacecraft.html#a0ed802328f2d0d684a838f7f2a3794de">DisplayOrientation</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_o</b> = DisplayOrientation::Default</td></tr>
-<tr class="memdesc:ab7c8c4e7991c702f554cfe9692a1cebf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcraft_1_1_display.html">Display</a> orientation. <br /></td></tr>
-<tr class="separator:ab7c8c4e7991c702f554cfe9692a1cebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4cfa284023d61c3fcf6a08c04663715"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af4cfa284023d61c3fcf6a08c04663715">_hwSize</a></td></tr>
-<tr class="separator:af4cfa284023d61c3fcf6a08c04663715"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac488486fec304be873f4bef58e67c0a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#ac488486fec304be873f4bef58e67c0a7">_size</a></td></tr>
-<tr class="separator:ac488486fec304be873f4bef58e67c0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73a9559dd176de06312907ea3e151694"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a73a9559dd176de06312907ea3e151694">_bklt</a> = 255</td></tr>
-<tr class="separator:a73a9559dd176de06312907ea3e151694"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf39e033e9b1599973be6337cb8215ab"><td class="memItemLeft" align="right" valign="top"><a id="abf39e033e9b1599973be6337cb8215ab" name="abf39e033e9b1599973be6337cb8215ab"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = false</td></tr>
-<tr class="separator:abf39e033e9b1599973be6337cb8215ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ae5692d871fa7523a72f895e563fe30"><td class="memItemLeft" align="right" valign="top"><a id="a4ae5692d871fa7523a72f895e563fe30" name="a4ae5692d871fa7523a72f895e563fe30"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_x</b> = 0</td></tr>
+<tr class="memdesc:a4ae5692d871fa7523a72f895e563fe30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current screen drawing position. <br /></td></tr>
+<tr class="separator:a4ae5692d871fa7523a72f895e563fe30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b48b1ef3dc8b0acd222d7320711e90"><td class="memItemLeft" align="right" valign="top"><a id="ab7b48b1ef3dc8b0acd222d7320711e90" name="ab7b48b1ef3dc8b0acd222d7320711e90"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_y</b> = 0</td></tr>
+<tr class="separator:ab7b48b1ef3dc8b0acd222d7320711e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a6f03461ff780ebcbde1a80169e78a7b0"><td class="memItemLeft" align="right" valign="top"><a id="a6f03461ff780ebcbde1a80169e78a7b0" name="a6f03461ff780ebcbde1a80169e78a7b0"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td></tr>
+<tr class="separator:a6f03461ff780ebcbde1a80169e78a7b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p ><a class="el" href="classcraft_1_1_display.html">Display</a> base class. This minimal version of the display class only includes enough code to set up the display and to draw pixels to it. Do not use this class directly. Use one of the derived classes specifically for your display in /display/hardware</p>
-<p >Any hardware implementation is required to implement: Constructor draw (</p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classcraft_1_1_display.html#a1888ca50ad6b596133afe708b3fe6cd3" title="Draw a buffer of pixel data to the display.">Display::draw</a>) <a class="el" href="classcraft_1_1_display.html#a237bf0a49c3ff7205a87fe577843a7af">ready</a> (</dd>
-<dd>
-<a class="el" href="classcraft_1_1_display.html#a237bf0a49c3ff7205a87fe577843a7af">Display::ready</a>) </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a26d6a0b1c154db1b397585b94bea7b94" name="a26d6a0b1c154db1b397585b94bea7b94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26d6a0b1c154db1b397585b94bea7b94">&#9670;&nbsp;</a></span>~Display()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual craft::Display::~Display </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Destroy the <a class="el" href="classcraft_1_1_display.html">Display</a> object </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a34c7d3ccbc217dd826e1c82a56fbe45f" name="a34c7d3ccbc217dd826e1c82a56fbe45f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34c7d3ccbc217dd826e1c82a56fbe45f">&#9670;&nbsp;</a></span>backlight()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void craft::Display::backlight </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a>&#160;</td>
-          <td class="paramname"><em>brightness</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Turn the backlight on or off. If the backlight pin is set, the backlight is turned on automatically during init/construction. If you want it off, call backlight(0) after construction. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">brightness</td><td>0.0 - 1.0 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
+<div class="textblock"><p ><a class="el" href="classcraft_1_1_display.html">Display</a> base class</p>
+<p >To use this class, you must subclass it and implement</p><ul>
+<li><a class="el" href="classcraft_1_1_display.html#a8d2eb6d0a1af702eb8abdd81e4dcba0f" title="Called to begin drawing a new frame.">beginDrawing()</a></li>
+<li><a class="el" href="classcraft_1_1_display.html#af42a37be49fb332a1a44b3bb21da0032" title="Called to draw a single 16bit RGB565 pixel to the display.">drawPixel565()</a> or <a class="el" href="classcraft_1_1_display.html#a6a01f280ffd785f803d4d591c26c2d5d" title="Called to draw a single 24bit RGB888 pixel to the display.">drawPixel888()</a></li>
+<li><a class="el" href="classcraft_1_1_display.html#ad6d5c7c47df476f772a0f48b531435db" title="Called to end drawing the current frame.">endDrawing()</a> </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8d2eb6d0a1af702eb8abdd81e4dcba0f" name="a8d2eb6d0a1af702eb8abdd81e4dcba0f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d2eb6d0a1af702eb8abdd81e4dcba0f">&#9670;&nbsp;</a></span>beginDrawing()</h2>
 
@@ -217,25 +149,24 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = false<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set up to begin drawing a single render pass (frame) </p>
+<p>Called to begin drawing a new frame. </p>
+<p >This will be followed by a series of drawPixel() calls, and finally <a class="el" href="classcraft_1_1_display.html#ad6d5c7c47df476f772a0f48b531435db" title="Called to end drawing the current frame.">endDrawing()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rect</td><td>The area to draw to </td></tr>
+    <tr><td class="paramname">rect</td><td>The area of the display that will be drawn </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classcraft_1_1_display_s_p_i.html#a0e52c7250dd0c2a6ce36f0824947f527">craft::DisplaySPI</a>.</p>
-
 </div>
 </div>
-<a id="a1888ca50ad6b596133afe708b3fe6cd3" name="a1888ca50ad6b596133afe708b3fe6cd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1888ca50ad6b596133afe708b3fe6cd3">&#9670;&nbsp;</a></span>draw()</h2>
+<a id="a9d08109a79e21201d97265f8a14e0fda" name="a9d08109a79e21201d97265f8a14e0fda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d08109a79e21201d97265f8a14e0fda">&#9670;&nbsp;</a></span>draw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,10 +175,121 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = false<
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void craft::Display::draw </td>
+          <td class="memname">void craft::Display::draw </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bufferWidth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Update the linebuffer to the display </p>
+
+</div>
+</div>
+<a id="aa11c6b58c458016af72cb9149686016e" name="aa11c6b58c458016af72cb9149686016e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa11c6b58c458016af72cb9149686016e">&#9670;&nbsp;</a></span>draw565()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void craft::Display::draw565 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bufferWidth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Update the linebuffer to the display for 16-bit pixel formats </p>
+
+</div>
+</div>
+<a id="af263540f912e57c6e8e3badc1d5f0162" name="af263540f912e57c6e8e3badc1d5f0162"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af263540f912e57c6e8e3badc1d5f0162">&#9670;&nbsp;</a></span>draw888()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void craft::Display::draw888 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bufferWidth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Update the linebuffer to the display </p>
+
+</div>
+</div>
+<a id="af42a37be49fb332a1a44b3bb21da0032" name="af42a37be49fb332a1a44b3bb21da0032"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af42a37be49fb332a1a44b3bb21da0032">&#9670;&nbsp;</a></span>drawPixel565()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void craft::Display::drawPixel565 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacecraft.html#af85ee23e342b19b7641843cf0056471d">color565</a>&#160;</td>
+          <td class="paramname"><em>color</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -258,25 +300,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = false<
 </table>
 </div><div class="memdoc">
 
-<p>Draw a buffer of pixel data to the display. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcraft_1_1_display.html#a8d2eb6d0a1af702eb8abdd81e4dcba0f" title="Set up to begin drawing a single render pass (frame)">beginDrawing</a> should be called first </dd>
-<dd>
-<a class="el" href="classcraft_1_1_display.html#ad6d5c7c47df476f772a0f48b531435db" title="Finalise drawing a single render pass.">endDrawing</a> should be called once all pixel data is complete</dd></dl>
-<p>Each display must override this method. The example below provides a template of the steps required to implement the draw method. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classcraft_1_1_display_i_l_i9341.html">DisplayILI9341</a> for a full implementation using 4-wire SPI</dd></dl>
-<p>It is always assumed that all inputs are valid, and no checking or clipping needs to occur</p>
+<p>Called to draw a single 16bit RGB565 pixel to the display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">buffer</td><td>The line buffer to draw (buffer is scaled by pixel scale) </td></tr>
+    <tr><td class="paramname">color</td><td>The color of the pixel to draw </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classcraft_1_1_display_s_p_i.html#aeea304f2c5159aaf1c37bce7d238c2ea">craft::DisplaySPI</a>.</p>
-
 </div>
 </div>
-<a id="ad6d5c7c47df476f772a0f48b531435db" name="ad6d5c7c47df476f772a0f48b531435db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6d5c7c47df476f772a0f48b531435db">&#9670;&nbsp;</a></span>endDrawing()</h2>
+<a id="a6a01f280ffd785f803d4d591c26c2d5d" name="a6a01f280ffd785f803d4d591c26c2d5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a01f280ffd785f803d4d591c26c2d5d">&#9670;&nbsp;</a></span>drawPixel888()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -285,387 +320,33 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_bkltPWM</b> = false<
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void craft::Display::endDrawing </td>
+          <td class="memname">virtual void craft::Display::drawPixel888 </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacecraft.html#a6aa894cf17dbb4f37159c79d13b2db53">color888</a>&#160;</td>
+          <td class="paramname"><em>color</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Finalise drawing a single render pass. </p>
-
-<p>Reimplemented in <a class="el" href="classcraft_1_1_display_s_p_i.html#a4a1863ed3f156068ac8ef5e96e4809ba">craft::DisplaySPI</a>.</p>
-
-</div>
-</div>
-<a id="af4357821480606d3bc60b1741aebcf93" name="af4357821480606d3bc60b1741aebcf93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4357821480606d3bc60b1741aebcf93">&#9670;&nbsp;</a></span>hardwareHeight()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t craft::Display::hardwareHeight </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Height of the display in pixels (unscaled). Read-only. </p>
-
-</div>
-</div>
-<a id="a71af5e46a5c9c6cd0f6bc95c9b102321" name="a71af5e46a5c9c6cd0f6bc95c9b102321"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71af5e46a5c9c6cd0f6bc95c9b102321">&#9670;&nbsp;</a></span>hardwareWidth()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t craft::Display::hardwareWidth </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Width of the display in pixels (unscaled). Read-only. </p>
-
-</div>
-</div>
-<a id="abcbac40e18e57481c4a1abb19beb93ef" name="abcbac40e18e57481c4a1abb19beb93ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcbac40e18e57481c4a1abb19beb93ef">&#9670;&nbsp;</a></span>height()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t craft::Display::height </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Height of the display in pixels (scaled by pixelscale). Read-only. </p>
-
-</div>
-</div>
-<a id="a0b6d071fe0eae763bdca323b3408a94d" name="a0b6d071fe0eae763bdca323b3408a94d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b6d071fe0eae763bdca323b3408a94d">&#9670;&nbsp;</a></span>orientation()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacecraft.html#a0ed802328f2d0d684a838f7f2a3794de">DisplayOrientation</a> craft::Display::orientation </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >The orientation of the display </p>
-
-</div>
-</div>
-<a id="a786f141febd3f1c5115eeab98c96f9f0" name="a786f141febd3f1c5115eeab98c96f9f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a786f141febd3f1c5115eeab98c96f9f0">&#9670;&nbsp;</a></span>pixelFormat()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacecraft.html#afb854678b047bba0cd5889d36ab87ed4">PixelFormat</a> craft::Display::pixelFormat </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >The pixel format of the display </p>
-
-</div>
-</div>
-<a id="a1b8f5ff4ceb43a21848397a76dbc2cde" name="a1b8f5ff4ceb43a21848397a76dbc2cde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b8f5ff4ceb43a21848397a76dbc2cde">&#9670;&nbsp;</a></span>setArea()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void craft::Display::setArea </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> &amp;&#160;</td>
-          <td class="paramname"><em>rect</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the area of the display to draw to. </p>
+<p>Called to draw a single 24bit RGB888 pixel to the display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rect</td><td>The area to draw to </td></tr>
+    <tr><td class="paramname">color</td><td>The color of the pixel to draw </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classcraft_1_1_display_i_l_i9341.html#a5602daf85e4312783ee0ca08248b3e51">craft::DisplayILI9341</a>, <a class="el" href="classcraft_1_1_display_i_l_i9488.html#ad9672af4d1265cfaebaca018076483bb">craft::DisplayILI9488</a>, <a class="el" href="classcraft_1_1_display_r_m67162.html#a982c38343a079943764f2f40acf1b7d2">craft::DisplayRM67162</a>, and <a class="el" href="classcraft_1_1_display_s_t7789.html#aa80efd76584bdab60d1f20c64a682d06">craft::DisplayST7789</a>.</p>
-
 </div>
 </div>
-<a id="a86e838d0acba36c2d2dccf4a3362ea82" name="a86e838d0acba36c2d2dccf4a3362ea82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86e838d0acba36c2d2dccf4a3362ea82">&#9670;&nbsp;</a></span>setOrientation()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void craft::Display::setOrientation </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacecraft.html#a0ed802328f2d0d684a838f7f2a3794de">DisplayOrientation</a>&#160;</td>
-          <td class="paramname"><em>o</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the Orientation of the display. </p>
-<p >At this time this must be called only once during display construction. It is not possible to change the display orientation at runtime. Well, that's not exactly true - it should be possible to switch between landscape/landscapeFlipped, or between portrait/portraitFlipped but not from one to the other. This is because the line buffer would also need to be changed to reflect the different size of the line.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">o</td><td>The orientation </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented in <a class="el" href="classcraft_1_1_display_i_l_i9488.html#a8f613499cf6af7968abacb05e1ee4604">craft::DisplayILI9488</a>, and <a class="el" href="classcraft_1_1_display_s_t7789.html#a56f0ed0444ceed69dca07676712228fa">craft::DisplayST7789</a>.</p>
-
-</div>
-</div>
-<a id="a38ec53a12edde9e48669614f7f64ce47" name="a38ec53a12edde9e48669614f7f64ce47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38ec53a12edde9e48669614f7f64ce47">&#9670;&nbsp;</a></span>width()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t craft::Display::width </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Width of the display in pixels (scaled by pixelscale). Read-only. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a73a9559dd176de06312907ea3e151694" name="a73a9559dd176de06312907ea3e151694"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73a9559dd176de06312907ea3e151694">&#9670;&nbsp;</a></span>_bklt</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t craft::Display::_bklt = 255</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Backlight </p>
-
-</div>
-</div>
-<a id="af4cfa284023d61c3fcf6a08c04663715" name="af4cfa284023d61c3fcf6a08c04663715"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4cfa284023d61c3fcf6a08c04663715">&#9670;&nbsp;</a></span>_hwSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> craft::Display::_hwSize</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Actual hardware width and height of the display </p>
-
-</div>
-</div>
-<a id="ae0749e82741e096771babef8e15306c1" name="ae0749e82741e096771babef8e15306c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0749e82741e096771babef8e15306c1">&#9670;&nbsp;</a></span>_pf</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacecraft.html#afb854678b047bba0cd5889d36ab87ed4">PixelFormat</a> craft::Display::_pf = PixelFormat::Unknown</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p ><a class="el" href="classcraft_1_1_pixel.html">Pixel</a> format </p>
-
-</div>
-</div>
-<a id="af59d6c9279dc9dd7cb05473aca8cc483" name="af59d6c9279dc9dd7cb05473aca8cc483"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af59d6c9279dc9dd7cb05473aca8cc483">&#9670;&nbsp;</a></span>_px</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t craft::Display::_px = 1</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p ><a class="el" href="classcraft_1_1_pixel.html">Pixel</a> scale </p>
-
-</div>
-</div>
-<a id="ac488486fec304be873f4bef58e67c0a7" name="ac488486fec304be873f4bef58e67c0a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac488486fec304be873f4bef58e67c0a7">&#9670;&nbsp;</a></span>_size</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> craft::Display::_size</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Width and height after applying pixel scale </p>
-
-</div>
-</div>
-<a id="a237bf0a49c3ff7205a87fe577843a7af" name="a237bf0a49c3ff7205a87fe577843a7af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a237bf0a49c3ff7205a87fe577843a7af">&#9670;&nbsp;</a></span>ready</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool craft::Display::ready = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Flag indicates when the draw command has finished pushing pixels to the hardware. </p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Projects/craftmicro/craftmicro-sdk/src/display/<a class="el" href="_display_8h_source.html">Display.h</a></li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>D:/Projects/craftmicro/craftmicro-sdk/src/display/<a class="el" href="_display_8h_source.html">Display.h</a></li>
+<li>D:/Projects/craftmicro/craftmicro-sdk/src/display/src/Display.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

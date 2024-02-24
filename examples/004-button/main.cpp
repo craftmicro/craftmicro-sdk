@@ -1,4 +1,5 @@
 #include <CraftMicro.h>
+#include "TFT_eSPI_display.h"
 #include "resources/font_PixelSix008.h"
 
 using namespace craft;
@@ -50,13 +51,9 @@ bool buttonEvent(uint32_t event, void* data) {
 }
 
 void setup() {
-    // Create a new application
-      // Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
-      // Use a single-line line buffer for low memory consumption
-    app = new App(
-        new DisplayILI9341(DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, 2),
-        LineBufferHeight::singleLine
-    );
+    // Create a new application. Scale all pixels to 2x2
+    app = new App(new TFTDisplay(0, 1, 2));
+
     app->serialBegin();
     // Set background color
     app->stage->backgroundColor(Color8888::SaddleBrown);
@@ -69,7 +66,7 @@ void setup() {
     // Create a text area to show click types
     text = Text::Create(&PixelSix008);
     text->text(S("Press the button"));
-    text->width(app->display->width() - 20);
+    text->width(app->stage->width() - 20);
     text->x(10);
     text->y(40);
     text->color(Color8888::White);

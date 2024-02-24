@@ -1,4 +1,5 @@
 #include <CraftMicro.h>
+#include "TFT_eSPI_display.h"
 
 // You will need to clone the craftmicro-fonts repo to access these fonts.
 // If you are using the Arduino IDE, just clone it to your Arduino libraries
@@ -88,18 +89,14 @@ FontEntry fonts[12] = {
 };
 
 void setup() {
-    // Create a new application
-    // Use a 320x240 ILI9341 display
-    // Use a single-line line buffer for low memory consumption
-    app = new App(
-        new DisplayILI9341(DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, 1),
-        LineBufferHeight::singleLine
-    );
+    // Create a new application. Scale all pixels to 2x2
+    app = new App(new TFTDisplay(0, 1, 2));
+
     // Set background color
     app->stage->backgroundColor(Color8888::SaddleBrown);
 
     heading = Text::Create(fonts[0].font);
-    heading->width(app->display->width() - 20);
+    heading->width(app->stage->width() - 20);
     heading->x(10);
     heading->y(10);
     heading->color(Color8888::Yellow);
@@ -108,7 +105,7 @@ void setup() {
     // Create the body text object
     body = Text::Create(fonts[0].font);
     body->text(S("All children, except one, grow up. They soon know that they will grow up, and the way Wendy knew was this.\nABCDEFGHIJKLM NOPQRSTUVWXYZ abcdefghijklm nopqrstuvwxyz (0123456789)[a+b=c]"));
-    body->width(app->display->width() - 20);
+    body->width(app->stage->width() - 20);
     body->x(10);
     body->y(10);
     body->lineSpacing(1.25);
