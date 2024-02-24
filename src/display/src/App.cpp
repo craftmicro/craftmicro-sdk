@@ -6,10 +6,9 @@ namespace craft {
         this->_init();
     }
 
-    App::App(Display* display, int bufferHeight) {
+    App::App(Display* display) {
         // Graphics
-        this->display = display;
-        this->buffer = new LineBuffer(this->display, bufferHeight);
+        this->buffer = new LineBuffer(display);
         this->_init();
     }
 
@@ -17,15 +16,14 @@ namespace craft {
         this->lastMicros = micros();
 
         this->stage = new Stage();
-        this->stage->width(this->display->width());
-        this->stage->height(this->display->height());
+        this->stage->width(this->buffer->maxRegion.width);
+        this->stage->height(this->buffer->maxRegion.height);
         this->messenger = new Messenger();
         this->tweens = new Tween();
         this->input = new Input(this->messenger);
     }
 
     App::~App() {
-        if (this->display) delete this->display;
         delete this->buffer;
         delete this->input;
         delete this->tweens;
