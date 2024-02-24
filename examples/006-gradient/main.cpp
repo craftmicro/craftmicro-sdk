@@ -1,4 +1,5 @@
 #include <CraftMicro.h>
+#include "TFT_eSPI_display.h"
 
 using namespace craft;
 
@@ -28,13 +29,9 @@ bool onRenderFrame(uint32_t event, void* data) {
 }
 
 void setup() {
-    // Create a new application
-    // Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
-    // Use a single-line line buffer for low memory consumption
-    app = new App(
-        new DisplayILI9341(DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, 2),
-        LineBufferHeight::singleLine
-    );
+    // Create a new application. Scale all pixels to 2x2
+    app = new App(new TFTDisplay(0, 1, 2));
+
     // Set background color
     app->stage->backgroundColor(Color8888::SaddleBrown);
 
@@ -44,13 +41,13 @@ void setup() {
     box->id = 22;
     box->x(10);
     box->y(10);
-    box->width(app->display->width() - 20);
-    box->height(app->display->height() - 20);
+    box->width(app->stage->width() - 20);
+    box->height(app->stage->height() - 20);
 
     // Create a gradient and add 6 stops for a rainbox effect. The 
     // gradient is applied to the box.
-    center_x = (app->display->width() - 20) / 2;
-    center_y = (app->display->height() - 20) / 2;
+    center_x = (app->stage->width() - 20) / 2;
+    center_y = (app->stage->height() - 20) / 2;
     gradient = LinearGradient::Create(6);
     gradient->stop(0, Color8888::Red, 1.0, 0.0)
         ->stop(1, Color8888::Orange, 1.0, 0.2)
@@ -58,7 +55,7 @@ void setup() {
         ->stop(3, Color8888::Green, 1.0, 0.6)
         ->stop(4, Color8888::Indigo, 1.0, 0.8)
         ->stop(5, Color8888::Violet, 1.0, 1.0);
-    gradient->position(center_x, 10, center_x, app->display->height() - 10);
+    gradient->position(center_x, 10, center_x, app->stage->height() - 10);
     box->gradient = gradient;
 
     // Listen for the update_render event. This runs the 'onRenderFrame' function on

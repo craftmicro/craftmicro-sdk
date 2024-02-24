@@ -1,4 +1,5 @@
 #include <CraftMicro.h>
+#include "TFT_eSPI_display.h"
 #include "resources/font_PixelSix.h"
 
 using namespace craft;
@@ -7,20 +8,16 @@ App* app;
 Text* text;
 
 void setup() {
-    // Create a new application
-    // Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
-    // Use a single-line line buffer for low memory consumption
-    app = new App(
-        new DisplayILI9341(DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, 2),
-        LineBufferHeight::singleLine
-    );
+    // Create a new application. Scale all pixels to 2x2
+    app = new App(new TFTDisplay(0, 1, 2));
+
     // Set background color
     app->stage->backgroundColor(Color8888::SaddleBrown);
 
     // Create a text object usiing the "PixelSix" font
     text = Text::Create(&PixelSix);
     text->text(S("All children, except one, grow up. They soon know that they will grow up, and the way Wendy knew was this."));
-    text->width(app->display->width() - 50);
+    text->width(app->stage->width() - 50);
     text->x(40);
     text->y(10);
     text->color(Color8888::White);

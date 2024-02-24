@@ -1,4 +1,5 @@
 #include <CraftMicro.h>
+#include "TFT_eSPI_display.h"
 #include "resources/asterix.h"
 #include "resources/obelix.h"
 #include "resources/dogmatix.h"
@@ -11,13 +12,9 @@ Sprite* obelixSprite;
 Sprite* dogmatixSprite;
 
 void setup() {
-    // Create a new application
-    // Use a 320x240 ILI9341 display, and scale all pixels to 2x2 (effective size is 160x120)
-    // Use a single-line line buffer for low memory consumption
-    app = new App(
-        new DisplayILI9341(DisplaySize::Size320x240, 10, 15, 4, 11, 13, 12, 6, 2),
-        LineBufferHeight::singleLine
-    );
+    // Create a new application. Scale all pixels to 2x2
+    app = new App(new TFTDisplay(0, 1, 2));
+
     // Set background color
     app->stage->backgroundColor(Color8888::SaddleBrown);
 
