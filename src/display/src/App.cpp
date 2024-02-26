@@ -2,13 +2,11 @@
 
 namespace craft {
 
-    App::App() {
-        this->_init();
-    }
-
     App::App(Display* display) {
-        // Graphics
-        this->buffer = new LineBuffer(display);
+        if (display) {
+            this->display = display;
+            this->display->mount();
+        }
         this->_init();
     }
 
@@ -16,15 +14,14 @@ namespace craft {
         this->lastMicros = micros();
 
         this->stage = new Stage();
-        this->stage->width(this->buffer->maxRegion.width);
-        this->stage->height(this->buffer->maxRegion.height);
+        this->stage->width(this->display->rect.width);
+        this->stage->height(this->display->rect.height);
         this->messenger = new Messenger();
         this->tweens = new Tween();
         this->input = new Input(this->messenger);
     }
 
     App::~App() {
-        delete this->buffer;
         delete this->input;
         delete this->tweens;
         delete this->messenger;
@@ -63,7 +60,7 @@ namespace craft {
             stage->update(renderDeltaSecs, true);
 
             // Render the stage
-            stage->render(buffer);
+            stage->render(display);
 
             // User render functions
             messenger->sendMessage(Event::update_render);

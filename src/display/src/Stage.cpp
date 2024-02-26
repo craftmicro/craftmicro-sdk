@@ -4,11 +4,13 @@ namespace craft {
 
     Stage::Stage() {
         _dirtyBounds = new ClipRect();
+        _scaledRenderBounds = new ClipRect();
         id = 0;
     }
 
     Stage::~Stage() {
         delete _dirtyBounds;
+        delete _scaledRenderBounds;
     }
 
     void Stage::update(float_t dt, boolean isRenderUpdate) {
@@ -18,25 +20,25 @@ namespace craft {
         DisplayObject::update(dt, isRenderUpdate);
     }
 
-    void Stage::render(LineBuffer* buffer) {
+    void Stage::render(Display* display) {
         //Serial.println("Stage::render");
 
-        // Set stage to match display
-        _localBounds->setSize(buffer->maxRegion.width, buffer->maxRegion.height);
+        // Init stage to match display
+        _localBounds->setSize(display->rect.width, display->rect.height);
 
         // Build display list. At the same time, determine the area of the display that is dirty
         // The display list is a list of all visible display objects (both with 'visibility' flag
         // set to true, and at least partially visible on the display) ordered from top to bottom
         // and left to right.
-        if (_dirty) _dirtyBounds->set(&buffer->maxRegion);
+        if (_dirty) _dirtyBounds->set(&display->rect);
         else _dirtyBounds->clear();
         _displayListDepth = 0;
         _displayList = DisplayList::Create(this);
-        if (_children) _traverse(buffer, _children, _dirty, _transform, _children->mask != MaskType::none);
+        if (_children) _traverse(display, _children, _dirty, _transform, _children->mask != MaskType::none);
 
-        // Calculate the updated area of ths display
+        // Calculate the updated area of the display (the dirty area)
         renderBounds->set(_dirtyBounds);
-        renderBounds->clip(&buffer->maxRegion);
+        renderBounds->clip(&display->rect);
         //Serial.println("Render bounds");
         //Serial.printf("  %d,%d %dx%d\n", renderBounds->x, renderBounds->y, renderBounds->width, renderBounds->height);
 
@@ -70,8 +72,14 @@ namespace craft {
         Serial.printf("  %d,%d %dx%d\n", renderBounds->x, renderBounds->y, renderBounds->width, renderBounds->height);
         */
 
-        // Initialise the display to draw only the dirty area
-        buffer->begin(renderBounds);
+        // Render the display list to the display
+        _scaledRenderBounds->set(
+            renderBounds->x * display->pixelScale,
+            renderBounds->y * display->pixelScale,
+            renderBounds->width * display->pixelScale,
+            renderBounds->height * display->pixelScale
+        );
+        display->drawBegin(_scaledRenderBounds);
 
         Filter* filter;
         DisplayList* head = _displayList->next();
@@ -128,14 +136,8 @@ namespace craft {
             // Step pixels in this line
             for (uint16_t x = renderBounds->x; x <= renderBounds->x2; x++) {
 
-                // Debug the render bounds
-                if (debug && ((y == renderBounds->y) || (y == renderBounds->y2) || (x == renderBounds->x) || (x == renderBounds->x2))) {
-                    buffer->pixel(this->debugColor, x);
-                    continue;
-                }
-
                 // Base color
-                buffer->pixel(this->_backgroundColor, x);
+                display->draw(x, y, this->_backgroundColor, 1.0f);
 
                 // Step through the objects in the display buffer
                 node = _renderList->next();
@@ -179,17 +181,18 @@ namespace craft {
                         }
 
                         // Draw to buffer
-                        if (node->object->_ra == 1.0) buffer->pixel(node->object->_rc, x);
-                        else if (node->object->_ra > 0) buffer->blend(node->object->_rc, alphaClamp(node->object->_ra), x);
+                        display->draw(x, y, node->object->_rc, node->object->_ra);
                     }
                     node = node->next();
                 }
-            }
 
-            // Flip the buffer (auto-advances to next line)
-            buffer->flip();
+                // Debug the render bounds
+                if (debug && ((y == renderBounds->y) || (y == renderBounds->y2) || (x == renderBounds->x) || (x == renderBounds->x2))) {
+                    display->draw(x, y, this->debugColor, 0.5f);
+                }
+            }
         }
-        buffer->end();
+        display->drawEnd();
 
         _recycleList(_renderList);
         _renderList = 0;
@@ -270,7 +273,7 @@ namespace craft {
         return _backgroundColor;
     }
 
-    void Stage::_traverse(LineBuffer* buffer, DisplayObject* child, bool forceDirty, Matrix* t, bool isMask) {
+    void Stage::_traverse(Display* display, DisplayObject* child, bool forceDirty, Matrix* t, bool isMask) {
         // Step all children
         while (child) {
 
@@ -297,7 +300,7 @@ namespace craft {
             }
 
             // Check if on the display and is not a mask
-            if (child->globalBounds->overlaps(&buffer->maxRegion) && child->mask == MaskType::none && !isMask) {
+            if (child->globalBounds->overlaps(&display->rect) && child->mask == MaskType::none && !isMask) {
 
                 // Calculate depth
                 child->depth = ++_displayListDepth;
@@ -321,7 +324,7 @@ namespace craft {
             }
 
             // Recurse
-            if (child->hasChildren()) _traverse(buffer, child->firstChild(), child->isDirty(), child->_transform, isMask || child->mask != MaskType::none);
+            if (child->hasChildren()) _traverse(display, child->firstChild(), child->isDirty(), child->_transform, isMask || child->mask != MaskType::none);
 
             // Next sibling
             child = child->next();

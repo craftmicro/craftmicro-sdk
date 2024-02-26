@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Common.h"
-#include "display/LineBufferData.h"
 #include "geom/ClipRect.h"
 #include "graphics/Bitmap.h"
 
@@ -10,10 +9,12 @@ namespace craft {
     /**
      * Display base class
      *
-     * To use this class, you must subclass it and implement
-     *  - beginDrawing()
-     *  - drawPixel565() or drawPixel888()
-     *  - endDrawing()
+     * To use this class, you must subclass it and provide all properties:
+     * - pixelFormat
+     * - width
+     * - height
+     * - pixelScale
+     * - framebuffer
      **/
     class Display {
     public:
@@ -38,64 +39,106 @@ namespace craft {
         int pixelScale = 1;
 
         /**
-         * @brief Size of the line buffer in lines (0 for full frame buffer)
+         * @brief Pointer to the framebuffer
+         *
+         * If there is no framebuffer, implement drawBegin, drawEnd, and either drawPixel565 or drawPixel888
          */
-        int lineBufferHeight = 1;
+        void* framebuffer = nullptr;
 
         /**
-         * @brief Called to begin drawing a new frame
+         * @brief Internal: Called automatically once to initialize the display when mounted
          *
-         * This will be followed by a series of drawPixel() calls, and finally endDrawing().
-         *
-         * @param rect The area of the display that will be drawn
+         * Do not call this method directly. It is used internally.
          */
-        virtual void beginDrawing(ClipRect& rect) {
-            _x = rect.x;
-            _y = rect.y;
-        };
+        void mount();
 
         /**
-         * @brief Called to draw a single 16bit RGB565 pixel to the display
+         * @brief Called at the start of a frame when drawing to the display
          *
-         * @param color The color of the pixel to draw
+         * @param area The area of the display that will be updated
          */
-        virtual inline void drawPixel565(color565 color) {};
+        virtual void drawBegin(ClipRect* area) {}
 
         /**
-         * @brief Called to draw a single 24bit RGB888 pixel to the display
+         * @brief Draw a pixel to the display. Should be implemented if framebuffer is not provided and color mode is RGB565.
          *
-         * @param color The color of the pixel to draw
+         * @param x The x coordinate
+         * @param y The y coordinate
+         * @param color The color to draw
          */
-        virtual inline void drawPixel888(color888 color) {};
+        virtual void drawPixel565(int x, int y, uint16_t color) {}
 
         /**
-         * @brief Called to end drawing the current frame
+         * @brief Draw a pixel to the display. Should be implemented if framebuffer is not provided and color mode is RGB888.
+         *
+         * @param x The x coordinate
+         * @param y The y coordinate
+         * @param color The color to draw
          */
-        virtual void endDrawing() {}
+        virtual void drawPixel888(int x, int y, uint32_t color) {}
+
+        /**
+         * @brief Called at the end of a frame when drawing to the display
+         */
+        virtual void drawEnd() {}
 
     protected:
-        friend class LineBuffer;
+        friend class App;
+        friend class Stage;
 
         /**
-         * Update the linebuffer to the display
-         **/
-        void draw(LineBufferData& buffer, int bufferWidth);
-
-        /**
-         * Update the linebuffer to the display for 16-bit pixel formats
-         **/
-        void draw565(LineBufferData& buffer, int bufferWidth);
-
-        /**
-         * Update the linebuffer to the display
-         **/
-        void draw888(LineBufferData& buffer, int bufferWidth);
-
-        /**
-         * @brief Current screen drawing position
+         * @brief The drawable size in scaled pixels
          */
-        int _x = 0;
-        int _y = 0;
+        ClipRect rect;
+
+        /**
+         * @brief Draw a pixel to the framebuffer
+         *
+         * @param x The x coordinate
+         * @param y The y coordinate
+         * @param color The color to draw
+         * @param a The alpha value
+         */
+        void draw(int x, int y, uint32_t color, float_t a);
+
+        /**
+         * @brief Draw a pixel to the framebuffer
+         *
+         * @param x The x coordinate
+         * @param y The y coordinate
+         * @param color The color to draw
+         */
+        void draw565(int x, int y, uint16_t color);
+
+        /**
+         * @brief Blend a pixel to the framebuffer
+         *
+         * @param x The x coordinate
+         * @param y The y coordinate
+         * @param color The color to draw
+         * @param a The alpha value
+         */
+        void blend565(int x, int y, uint16_t color, float_t a);
+
+        /**
+         * @brief Draw a pixel to the framebuffer
+         *
+         * @param x The x coordinate
+         * @param y The y coordinate
+         * @param color The color to draw
+         */
+        void draw888(int x, int y, uint32_t color);
+
+        /**
+         * @brief Blend a pixel to the framebuffer
+         *
+         * @param x The x coordinate
+         * @param y The y coordinate
+         * @param color The color to draw
+         * @param a The alpha value
+         */
+        void blend888(int x, int y, uint32_t color, float_t a);
+
     };
 
 } // namespace craft
