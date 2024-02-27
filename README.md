@@ -28,7 +28,10 @@ The examples use Bodmer's TFT_eSPI library.
 
 Tested on:
 - [Teensy 3.6](https://www.pjrc.com/store/teensy36.html)
-- [ESP32](https://www.espressif.com/en/products/socs/esp32) ([TTGO T-Display](http://www.lilygo.cn/prod_view.aspx?Id=1126))
+- [ESP32](https://www.espressif.com/en/products/socs/esp32)
+    - ([TTGO T-Display](https://www.lilygo.cc/products/lilygo%C2%AE-ttgo-t-display-1-14-inch-lcd-esp32-control-board))
+    - ([TTGO T-Display S3](https://www.lilygo.cc/products/t-display-s3))
+    - ([Smart Panlee Round Display with Rotary Switch - ZX2D10GE01R-V4848](https://device.report/manual/10028569))
 
 Recommend at least:
 
