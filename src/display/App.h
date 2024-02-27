@@ -23,16 +23,10 @@ namespace craft {
     public:
 
         /**
-         * Constructor for app without any graphical elements.
+         * Constructor with display
+         * @param	display			A display. Can be nullptr for non-graphical apps.
          **/
-        App();
-
-        /**
-         * Constructor with display adapter object
-         * @param	display			A Display instance for the hardware display being used.
-         * @param	bufferHeight	The height of the line buffer, in lines. Default = 1. Full framebuffer = 0.
-         **/
-        App(Display* display);
+        App(Display* display = nullptr);
 
         /**
          * Destructor
@@ -42,7 +36,7 @@ namespace craft {
         /**
          * The drawing buffer object
          */
-        LineBuffer* buffer;
+        Display* display;
 
         /**
          * The stage for rendering graphics

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "display/DisplayList.h"
-#include "display/LineBuffer.h"
+#include "display/Display.h"
 // Display object types
 #include "display/DisplayObject.h"
 #include "display/Sprite.h"
@@ -52,7 +52,7 @@ namespace craft {
         /**
          * Render the objects to the display
          */
-        void render(LineBuffer* buffer);
+        void render(Display* display);
 
         /**
          * Set the background color
@@ -106,27 +106,21 @@ namespace craft {
         DisplayList* _renderList;
 
         /**
-         * The line buffer
+         * Area of the display that is dirty
          */
-        LineBuffer* _lineBuffer;
+        ClipRect* _scaledRenderBounds;
 
         /**
-         * Step recursively through all children. Calculate the relative depth of
-         * children, and insert into the display list.
-         * @param children The children to add
+         * @brief Traverse through display objects and insert into display list
+         *
+         * @param display 		The display (for accessing display size)
+         * @param child 		The display object to process
+         * @param forceDirty	True to force the child to be redrawn
+         * @param px			The x-coordinate
+         * @param py			The y-coordinate
+         * @param isMask		True to force the child to be processed as a mask
          */
-
-         /**
-          * @brief Traverse through display objects and insert into display list
-          *
-          * @param buffer 		The buffer (for accessing display size)
-          * @param child 		The display object to process
-          * @param forceDirty	True to force the child to be redrawn
-          * @param px			The x-coordinate
-          * @param py			The y-coordinate
-          * @param isMask		True to force the child to be processed as a mask
-          */
-        void _traverse(LineBuffer* buffer, DisplayObject* child, bool forceDirty, Matrix* t, bool isMask);
+        void _traverse(Display* display, DisplayObject* child, bool forceDirty, Matrix* t, bool isMask);
 
         /**
          * Clear a DisplayList
