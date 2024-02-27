@@ -2,13 +2,21 @@
 
 A Ply Sprite is a layered sprite format optimised for size.
 
-Normally in sprite sheets, each frame of animation is one tile. For example, an 8-frame animation of a figure walking will have 8 tiles, each with the figure in a slightly different position. This can be inefficient because in many cases large portions of the sprite remain the same between frames.
+Normally in sprite sheets, each frame of animation is one tile. For example, an 8-frame animation of a figure walking will have 8 tiles, each with the figure in a slightly different position. Here is an example of a sprite sheet with 3 animations: stand, scratch and walk, with 11 total frames. 
 
-For example, the body may go up and down but remain the same, while only the hair, arms and legs change between frames. In a Ply Sprite the body is one layer (ply) and the arms, legs and hair are further layers on top of the body. The sprite sheet will only save one image of the body, and then 8 frames of the arms, legs and hair animating, which are much smaller, saving a large amount of space and memory.
+![Ninja as a Sprite Sheet](img/ninja-spritesheet.png?raw=true "Ninja as a Sprite Sheet")
 
-A ply sprite will even re-use a part that has been mirrored and/or rotated. Only one image will be stored, and it will be transformed when it is rendered.
+_102x55 pixels (5,610 pixels)_
 
-This script (ply-sprite.lua[ply-sprite.lua]) lets you export Ply Sprites directly from Aseprite.
+This is inefficient because large portions of the sprite remain the same between frames. The body goes up and down but remains the same, while only the eyes, arms and legs change between frames. In a Ply Sprite the body would be one layer (ply) and the moving parts are each layers on top of (or behind) the body as separate plys. The sprite sheet will only save one image of the body, and then only changes to the arms, legs and eyes animating, which are much smaller, saving a large amount of space and memory.
+
+![Ninja as a Ply Sprite](img/ninja-plysprite.png?raw=true "Ninja as a Ply Sprite")
+
+_31x30 pixels (930 pixels)_
+
+As you can see, the ply sprite in this case is over 6 times smaller. A ply sprite can even re-use a part that has been mirrored and/or rotated. Only one image will be stored, and it will be transformed when it is rendered, saving even more space.
+
+The script [ply-sprite.lua](ply-sprite.lua) lets you export Ply Sprites directly from Aseprite.
 
 Of course, to create a ply sprite you need to draw it in a certain way to begin with.
 
@@ -40,12 +48,6 @@ Of course, to create a ply sprite you need to draw it in a certain way to begin 
 ![Aseprite screenshot](img/aseprite-screenshot-1.png?raw=true "Aseprite screenshot")
 
 This screenshot of Aseprite shows a Ply Sprite being created. There is a separate layer for the body, the eyes (they blink) the arms and legs. You can also see three loop sections for three different animations - Stand, Scratch and Walk. This animation can be seen in action in the example above.
-
-When this ply sprite is exported, the image is 31x30 pixels. The animation exported as a traditional sprite sheet would be 102x55 pixels, over 6 times as big in bytes. You can imagine that with larger animations, the savings will be even bigger!
-
-Side-by-side they'd look something like this:
-
-![Ninja as a Ply Sprite](img/ninja-plysprite.png?raw=true "Ninja as a Ply Sprite") ![Ninja as a Sprite Sheet](img/ninja-spritesheet.png?raw=true "Ninja as a Sprite Sheet")
 
 ## Anchor
 
