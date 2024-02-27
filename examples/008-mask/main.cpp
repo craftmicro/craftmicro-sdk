@@ -15,7 +15,7 @@ Sprite* dogmatixSprite;
 
 void setup() {
     // Create a new application. Scale all pixels to 2x2
-    app = new App(new TFTDisplay(0, 1, 2));
+    app = new App(new TFTDisplay(0, 2));
 
     // Set background color
     app->stage->backgroundColor(Color8888::White);
