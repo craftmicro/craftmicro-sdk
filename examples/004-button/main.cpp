@@ -52,7 +52,7 @@ bool buttonEvent(uint32_t event, void* data) {
 
 void setup() {
     // Create a new application. Scale all pixels to 2x2
-    app = new App(new TFTDisplay(0, 1, 2));
+    app = new App(new TFTDisplay(0, 2));
 
     app->serialBegin();
     // Set background color
