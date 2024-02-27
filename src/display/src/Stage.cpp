@@ -24,13 +24,13 @@ namespace craft {
         //Serial.println("Stage::render");
 
         // Init stage to match display
-        _localBounds->setSize(display->rect.width, display->rect.height);
+        _localBounds->setSize(display->_rect.width, display->_rect.height);
 
         // Build display list. At the same time, determine the area of the display that is dirty
         // The display list is a list of all visible display objects (both with 'visibility' flag
         // set to true, and at least partially visible on the display) ordered from top to bottom
         // and left to right.
-        if (_dirty) _dirtyBounds->set(&display->rect);
+        if (_dirty) _dirtyBounds->set(&display->_rect);
         else _dirtyBounds->clear();
         _displayListDepth = 0;
         _displayList = DisplayList::Create(this);
@@ -38,7 +38,7 @@ namespace craft {
 
         // Calculate the updated area of the display (the dirty area)
         renderBounds->set(_dirtyBounds);
-        renderBounds->clip(&display->rect);
+        renderBounds->clip(&display->_rect);
         //Serial.println("Render bounds");
         //Serial.printf("  %d,%d %dx%d\n", renderBounds->x, renderBounds->y, renderBounds->width, renderBounds->height);
 
@@ -73,13 +73,13 @@ namespace craft {
         */
 
         // Render the display list to the display
-        _scaledRenderBounds->set(
+        _scaledRenderBounds->setPosAndSize(
             renderBounds->x * display->pixelScale,
             renderBounds->y * display->pixelScale,
             renderBounds->width * display->pixelScale,
             renderBounds->height * display->pixelScale
         );
-        display->drawBegin(_scaledRenderBounds);
+        display->_drawBegin(_scaledRenderBounds);
 
         Filter* filter;
         DisplayList* head = _displayList->next();
@@ -134,10 +134,11 @@ namespace craft {
             }
 
             // Step pixels in this line
+            display->_lineBegin(y);
             for (uint16_t x = renderBounds->x; x <= renderBounds->x2; x++) {
 
                 // Base color
-                display->draw(x, y, this->_backgroundColor, 1.0f);
+                display->_draw(x, this->_backgroundColor, 1.0f);
 
                 // Step through the objects in the display buffer
                 node = _renderList->next();
@@ -181,16 +182,17 @@ namespace craft {
                         }
 
                         // Draw to buffer
-                        display->draw(x, y, node->object->_rc, node->object->_ra);
+                        display->_draw(x, node->object->_rc, node->object->_ra);
                     }
                     node = node->next();
                 }
 
                 // Debug the render bounds
                 if (debug && ((y == renderBounds->y) || (y == renderBounds->y2) || (x == renderBounds->x) || (x == renderBounds->x2))) {
-                    display->draw(x, y, this->debugColor, 0.5f);
+                    display->_draw(x, this->debugColor, 0.5f);
                 }
             }
+            display->_lineFlush();
         }
         display->drawEnd();
 
@@ -300,7 +302,7 @@ namespace craft {
             }
 
             // Check if on the display and is not a mask
-            if (child->globalBounds->overlaps(&display->rect) && child->mask == MaskType::none && !isMask) {
+            if (child->globalBounds->overlaps(&display->_rect) && child->mask == MaskType::none && !isMask) {
 
                 // Calculate depth
                 child->depth = ++_displayListDepth;

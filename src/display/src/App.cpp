@@ -5,7 +5,7 @@ namespace craft {
     App::App(Display* display) {
         if (display) {
             this->display = display;
-            this->display->mount();
+            this->display->_mount();
         }
         this->_init();
     }
@@ -14,8 +14,8 @@ namespace craft {
         this->lastMicros = micros();
 
         this->stage = new Stage();
-        this->stage->width(this->display->rect.width);
-        this->stage->height(this->display->rect.height);
+        this->stage->width(this->display->_rect.width);
+        this->stage->height(this->display->_rect.height);
         this->messenger = new Messenger();
         this->tweens = new Tween();
         this->input = new Input(this->messenger);
