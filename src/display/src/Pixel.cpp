@@ -3,44 +3,44 @@
 
 namespace craft {
 
-    Pixel* Pixel::Create(color888 color, float_t alpha, bool mask) {
-        Pixel* p = MemoryPool<Pixel>::Create();
-        p->c = color;
-        p->a = alpha;
-        p->m = mask;
-        return p;
+    PixelStack::PixelStack() {
+        this->capacity = 16;
+        c = new color888[capacity];
+        a = new float_t[capacity];
     }
 
-    void Pixel::recycle() {
-        if (next()) next()->recycle();
-        _next = nullptr;
-        _prev = nullptr;
-        MemoryPool<Pixel>::recycle();
+    PixelStack::~PixelStack() {
+        delete[] c;
+        delete[] a;
     }
 
-    color8888 Pixel::flatten() {
-        // See if there is a child
-        Pixel* p = next();
-        if (p) {
-            // If the child is a mask, calculate the alpha and apply it
-            if (p->m) {
-                float_t ma = p->_flattenMask();
-                a *= ma;
-                if (a == 0) return 0;
-            }
-            // If the child is not a mask, blend it down
-            else {
-                p->flatten();
-                return blend8888(c, p->c, p->a);
-            }
+    bool PixelStack::push(color888 color, float_t alpha) {
+        if (length >= capacity) {
+            delete[] c;
+            delete[] a;
+            capacity += 16;
+            c = new color888[capacity];
+            a = new float_t[capacity];
         }
-
-        // Return own color
-        return  ((uint8_t)(a * 255.0) << 24) | (c & 0xffffff);
+        c[length] = color;
+        a[length] = alpha;
+        length++;
+        if (alpha == 1.0f) {
+            solid = true;
+        }
+        return solid;
     }
 
-    float_t Pixel::_flattenMask() {
-        return a;
+    color888 PixelStack::flatten(color888 base = 0) {
+        if (solid) {
+            base = c[--length];
+        }
+        while (length--) {
+            base = blend8888(base, c[length], a[length]);
+        }
+        length = 0;
+        solid = false;
+        return base;
     }
 
 } // namespace craft

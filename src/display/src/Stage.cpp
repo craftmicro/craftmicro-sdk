@@ -87,6 +87,7 @@ namespace craft {
         _renderList = DisplayList::Create(this); // Start with just stage (this)
         float_t localx;
         float_t localy;
+        PixelStack* pixelStack = new PixelStack();
         for (uint16_t y = renderBounds->y; y <= renderBounds->y2; y++) {
 
             //Serial.printf("\nStart line y=%d\n", y);
@@ -137,9 +138,6 @@ namespace craft {
             display->_lineBegin(y);
             for (uint16_t x = renderBounds->x; x <= renderBounds->x2; x++) {
 
-                // Base color
-                display->_draw(x, this->_backgroundColor, 1.0f);
-
                 // Step through the objects in the display buffer
                 node = _renderList->next();
                 while (node) {
@@ -148,44 +146,52 @@ namespace craft {
                         // Calculate color and alpha
                         localx = node->object->globalToLocalX(x);
                         localy = node->object->globalToLocalY(y);
-                        node->object->calcPixel(localx, localy);
-                        node->object->_ra *= node->object->alpha;
-
-                        // Apply filters
-                        filter = node->object->filters;
-                        while (filter) {
-                            filter->filterPixel(localx, localy, node->object->_ra, node->object->_rc);
-                            filter = filter->next();
+                        if (pixelStack->solid) {
+                            node->object->skipPixel(localx, localy);
                         }
+                        else {
+                            node->object->calcPixel(localx, localy);
+                            node->object->_ra *= node->object->alpha;
 
-                        // Calculate masking
-                        if (node->object->_hasMask) {
-                            DisplayObject* child = node->object->firstChild();
-                            float_t ma = 0;
-                            while (child) {
-                                if (child->mask != MaskType::none && child->visible()) {
-                                    if ((child->alpha > 0) && child->globalBounds->contains(x, y)) {
-                                        localx = child->globalToLocalX(x);
-                                        localy = child->globalToLocalY(y);
-                                        child->calcPixel(localx, localy);
-                                        if (child->mask == MaskType::inverse) child->_ra = 1 - child->_ra;
-                                        child->_ra *= child->alpha;
-                                        ma = (1 - child->_ra) * ma + child->_ra;
-                                    }
-                                    else if (child->mask == MaskType::inverse) {
-                                        ma = 1;
-                                    }
-                                }
-                                child = child->next();
+                            // Apply filters
+                            filter = node->object->filters;
+                            while (filter) {
+                                filter->filterPixel(localx, localy, node->object->_ra, node->object->_rc);
+                                filter = filter->next();
                             }
-                            node->object->_ra *= ma;
-                        }
 
-                        // Draw to buffer
-                        display->_draw(x, node->object->_rc, node->object->_ra);
+                            // Calculate masking
+                            if (node->object->_hasMask) {
+                                DisplayObject* child = node->object->firstChild();
+                                float_t ma = 0;
+                                while (child) {
+                                    if (child->mask != MaskType::none && child->visible()) {
+                                        if ((child->alpha > 0) && child->globalBounds->contains(x, y)) {
+                                            localx = child->globalToLocalX(x);
+                                            localy = child->globalToLocalY(y);
+                                            child->calcPixel(localx, localy);
+                                            if (child->mask == MaskType::inverse) child->_ra = 1 - child->_ra;
+                                            child->_ra *= child->alpha;
+                                            ma = (1 - child->_ra) * ma + child->_ra;
+                                        }
+                                        else if (child->mask == MaskType::inverse) {
+                                            ma = 1;
+                                        }
+                                    }
+                                    child = child->next();
+                                }
+                                node->object->_ra *= ma;
+                            }
+
+                            // Push to buffer
+                            pixelStack->push(node->object->_rc, node->object->_ra);
+                        }
                     }
                     node = node->next();
                 }
+
+                // Draw the pixel stack
+                display->_drawSolid(x, pixelStack->flatten(this->_backgroundColor));
 
                 // Debug the render bounds
                 if (debug && ((y == renderBounds->y) || (y == renderBounds->y2) || (x == renderBounds->x) || (x == renderBounds->x2))) {
@@ -196,6 +202,7 @@ namespace craft {
         }
         display->drawEnd();
 
+        delete pixelStack;
         _recycleList(_renderList);
         _renderList = 0;
         _recycleList(_displayList);

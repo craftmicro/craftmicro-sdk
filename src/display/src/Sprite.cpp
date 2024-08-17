@@ -66,6 +66,10 @@ namespace craft {
         }
     }
 
+    void Sprite::skipPixel(int16_t rx, int16_t ry) {
+        _dataOffset += _dataStep;
+    }
+
     /**
      * Ply Sprite
      */

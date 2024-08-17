@@ -98,7 +98,14 @@ namespace craft {
          * @param rx The x position in local coordinates
          * @param ry The y position in local coordinates
          */
-        void calcPixel(int16_t rx, int16_t ry);
+        void calcPixel(int16_t rx, int16_t ry) override;
+
+        /**
+         * @brief Advance position without calculating pixel
+         * @param rx The x position in local coordinates
+         * @param ry The y position in local coordinates
+         */
+        void skipPixel(int16_t rx, int16_t ry) override;
 
     protected:
         /**
