@@ -2,7 +2,7 @@
 
 ## v0.4.0 (WIP)
 
-- Performance improvements (now 40466)
+- Performance improvements (now 40644)
   - Implemented pixel stack to render pipeline
   - Improvements to pixel draw routine
 
