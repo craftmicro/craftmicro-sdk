@@ -22,6 +22,9 @@ namespace craft {
 
     void Stage::render(Display* display) {
         //Serial.println("Stage::render");
+        #if CRAFTMICRO_BENCHMARK
+        uint32_t start = micros();
+        #endif
 
         // Init stage to match display
         _localBounds->setSize(display->_rect.width, display->_rect.height);
@@ -214,6 +217,10 @@ namespace craft {
         _recycleList(_displayList);
         _displayList = 0;
         _dirty = false;
+
+        #if CRAFTMICRO_BENCHMARK
+        Serial.printf("Stage render time: %d\n", micros() - start);
+        #endif
     }
 
     void Stage::_beginRender(DisplayObject* object) {

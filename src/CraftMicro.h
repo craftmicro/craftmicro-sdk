@@ -2,24 +2,19 @@
  * @file CraftMicro.h
  * @author Peter "Projectitis" Vullings <peter@projectitis.com>
  * @brief App development library for microprocessors
- * @version 0.2
- * @date 2022-05-25
- * @copyright Copyright (c) 2022
- * @license https://choosealicense.com/licenses/mit/
+ * @version 0.3
+ * @copyright Copyright (c) 2024
+ * @license MIT
  *
  * Craft Micro maintains an open-source software library and set of plans
  * to craft your own microprocessor-based handheld gaming console.
  *
- * Version 0.2 supports
- *      Teensy
- *
- * Planned support for
- *      ESP32 (via Arduino)
+ * Version 0.3+ supports any platform using the Arduino framework (Teensy, ESP32, etc)
  */
 
 #pragma once
 
-#define CRAFTMICRO_VERSION 0.2
+#define CRAFTMICRO_VERSION 0.3
 
  /**
   * Include all Craft Micro headers
