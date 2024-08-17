@@ -146,45 +146,51 @@ namespace craft {
                         // Calculate color and alpha
                         localx = node->object->globalToLocalX(x);
                         localy = node->object->globalToLocalY(y);
-                        if (pixelStack->solid) {
-                            node->object->skipPixel(localx, localy);
+                        node->object->calcPixel(localx, localy);
+                        node->object->_ra *= node->object->alpha;
+
+                        // Apply filters
+                        filter = node->object->filters;
+                        while (filter) {
+                            filter->filterPixel(localx, localy, node->object->_ra, node->object->_rc);
+                            filter = filter->next();
                         }
-                        else {
-                            node->object->calcPixel(localx, localy);
-                            node->object->_ra *= node->object->alpha;
 
-                            // Apply filters
-                            filter = node->object->filters;
-                            while (filter) {
-                                filter->filterPixel(localx, localy, node->object->_ra, node->object->_rc);
-                                filter = filter->next();
-                            }
-
-                            // Calculate masking
-                            if (node->object->_hasMask) {
-                                DisplayObject* child = node->object->firstChild();
-                                float_t ma = 0;
-                                while (child) {
-                                    if (child->mask != MaskType::none && child->visible()) {
-                                        if ((child->alpha > 0) && child->globalBounds->contains(x, y)) {
-                                            localx = child->globalToLocalX(x);
-                                            localy = child->globalToLocalY(y);
-                                            child->calcPixel(localx, localy);
-                                            if (child->mask == MaskType::inverse) child->_ra = 1 - child->_ra;
-                                            child->_ra *= child->alpha;
-                                            ma = (1 - child->_ra) * ma + child->_ra;
-                                        }
-                                        else if (child->mask == MaskType::inverse) {
-                                            ma = 1;
-                                        }
+                        // Calculate masking
+                        if (node->object->_hasMask) {
+                            DisplayObject* child = node->object->firstChild();
+                            float_t ma = 0;
+                            while (child) {
+                                if (child->mask != MaskType::none && child->visible()) {
+                                    if ((child->alpha > 0) && child->globalBounds->contains(x, y)) {
+                                        localx = child->globalToLocalX(x);
+                                        localy = child->globalToLocalY(y);
+                                        child->calcPixel(localx, localy);
+                                        if (child->mask == MaskType::inverse) child->_ra = 1 - child->_ra;
+                                        child->_ra *= child->alpha;
+                                        ma = (1 - child->_ra) * ma + child->_ra;
                                     }
-                                    child = child->next();
+                                    else if (child->mask == MaskType::inverse) {
+                                        ma = 1;
+                                    }
                                 }
-                                node->object->_ra *= ma;
+                                child = child->next();
                             }
+                            node->object->_ra *= ma;
+                        }
 
-                            // Push to buffer
-                            pixelStack->push(node->object->_rc, node->object->_ra);
+                        // Push to buffer. Skip remaining objects if pixel is solid (they are obscured)
+                        if (pixelStack->push(node->object->_rc, node->object->_ra)) {
+                            node = node->next();
+                            while (node) {
+                                if (node->object->globalBounds->containsX(x)) {
+                                    localx = node->object->globalToLocalX(x);
+                                    localy = node->object->globalToLocalY(y);
+                                    node->object->skipPixel(localx, localy);
+                                }
+                                node = node->next();
+                            }
+                            break;
                         }
                     }
                     node = node->next();
