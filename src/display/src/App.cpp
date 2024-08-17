@@ -11,7 +11,7 @@ namespace craft {
     }
 
     void App::_init() {
-        this->lastMicros = micros();
+        this->lastMicros = micros() - _renderDeltaMicrosMax;
 
         this->stage = new Stage();
         this->stage->width(this->display->_rect.width);

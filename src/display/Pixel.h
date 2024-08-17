@@ -8,36 +8,23 @@
 namespace craft {
 
     /**
-     * Stacked pixel class for blending and masking pixels during rendering (sued by Stage)
+     * Stacked pixel class for blending and masking pixels during rendering (used by Stage)
      */
-    class Pixel : public LinkedList<Pixel>, public MemoryPool<Pixel> {
+    class PixelStack {
     public:
-        color888 c = 0;
-        float_t a = 0.0;
-        bool m = false;
+        uint16_t length = 0;
+        uint16_t capacity = 0;
+        color888* c;
+        float_t* a;
+        bool solid = false;
 
-        /**
-         * @brief Recycle the pixel list
-         */
-        void recycle() override;
+        PixelStack();
 
-        /**
-         * Create a new object or take one from the pool
-         * @return The new or recycled object
-         */
-        static Pixel* Create(color888 color, float_t alpha, bool mask);
+        ~PixelStack();
 
-        /**
-         * @brief Flattens pixel list
-         * Will flatten the pixels by blending them downward, respecting masks.
-         * Will also recycle the pixels, results in an empty list
-         * @param c
-         * @return color8888
-         */
-        color8888 flatten();
+        bool push(color888 color, float_t alpha);
 
-    protected:
-        float_t _flattenMask();
+        color888 flatten(color888 base);
     };
 
 } // namespace craft

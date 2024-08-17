@@ -21,7 +21,7 @@ namespace craft {
      * @return int8_t >0 if a is first, <0 if b is first, 0 if equal
      */
     int compareDisplayObjectByDepth(DisplayObject* a, DisplayObject* b) {
-        return (int)b->depth - (int)a->depth;
+        return (int)a->depth - (int)b->depth;
     }
 
     /**

@@ -87,6 +87,7 @@ namespace craft {
         _renderList = DisplayList::Create(this); // Start with just stage (this)
         float_t localx;
         float_t localy;
+        PixelStack* pixelStack = new PixelStack();
         for (uint16_t y = renderBounds->y; y <= renderBounds->y2; y++) {
 
             //Serial.printf("\nStart line y=%d\n", y);
@@ -137,9 +138,6 @@ namespace craft {
             display->_lineBegin(y);
             for (uint16_t x = renderBounds->x; x <= renderBounds->x2; x++) {
 
-                // Base color
-                display->_draw(x, this->_backgroundColor, 1.0f);
-
                 // Step through the objects in the display buffer
                 node = _renderList->next();
                 while (node) {
@@ -181,11 +179,25 @@ namespace craft {
                             node->object->_ra *= ma;
                         }
 
-                        // Draw to buffer
-                        display->_draw(x, node->object->_rc, node->object->_ra);
+                        // Push to buffer. Skip remaining objects if pixel is solid (they are obscured)
+                        if (pixelStack->push(node->object->_rc, node->object->_ra)) {
+                            node = node->next();
+                            while (node) {
+                                if (node->object->globalBounds->containsX(x)) {
+                                    localx = node->object->globalToLocalX(x);
+                                    localy = node->object->globalToLocalY(y);
+                                    node->object->skipPixel(localx, localy);
+                                }
+                                node = node->next();
+                            }
+                            break;
+                        }
                     }
                     node = node->next();
                 }
+
+                // Draw the pixel stack
+                display->_drawSolid(x, pixelStack->flatten(this->_backgroundColor));
 
                 // Debug the render bounds
                 if (debug && ((y == renderBounds->y) || (y == renderBounds->y2) || (x == renderBounds->x) || (x == renderBounds->x2))) {
@@ -196,6 +208,7 @@ namespace craft {
         }
         display->drawEnd();
 
+        delete pixelStack;
         _recycleList(_renderList);
         _renderList = 0;
         _recycleList(_displayList);

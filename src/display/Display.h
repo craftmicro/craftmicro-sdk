@@ -6,6 +6,9 @@
 
 namespace craft {
 
+    typedef void (*drawFunc)(int x, int y, uint32_t color, int pixelScale, bool hasFramebuffer, void* buffer, int width);
+    typedef void (*blendFunc)(int x, int y, uint32_t color, float_t a, int pixelScale, bool hasFramebuffer, void* buffer, int width);
+
     /**
      * Display base class
      *
@@ -56,6 +59,16 @@ namespace craft {
          * If a framebuffer is provided these functions do not need to be implemented.
          */
         void* framebuffer = nullptr;
+
+        /**
+         * @brief The function used to draw a solid pixel
+         */
+        drawFunc drawPixel = nullptr;
+
+        /**
+         * @brief The function used to blend a pixel
+         */
+        blendFunc blendPixel = nullptr;
 
         /**
          * @brief Called at the start of a frame when drawing to the display
@@ -135,13 +148,21 @@ namespace craft {
         void _lineFlush();
 
         /**
-         * @brief Draw a pixel to the framebuffer
+         * @brief Draw or blend a pixel to the framebuffer
          *
          * @param x The x coordinate
          * @param color The color to draw
          * @param a The alpha value
          */
         void _draw(int x, uint32_t color, float_t a);
+
+        /**
+         * @brief Draw a solid pixel to the framebuffer
+         *
+         * @param x The x coordinate
+         * @param color The color to draw
+         */
+        void _drawSolid(int x, uint32_t color);
 
         /**
          * @brief Draw a pixel to the framebuffer

@@ -2,6 +2,7 @@
 
 #include "display/DisplayList.h"
 #include "display/Display.h"
+#include "display/Pixel.h"
 // Display object types
 #include "display/DisplayObject.h"
 #include "display/Sprite.h"
