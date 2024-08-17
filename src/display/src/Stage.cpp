@@ -22,6 +22,9 @@ namespace craft {
 
     void Stage::render(Display* display) {
         //Serial.println("Stage::render");
+        #if CRAFTMICRO_BENCHMARK
+        uint32_t start = micros();
+        #endif
 
         // Init stage to match display
         _localBounds->setSize(display->_rect.width, display->_rect.height);
@@ -179,7 +182,8 @@ namespace craft {
                             node->object->_ra *= ma;
                         }
 
-                        // Push to buffer. Skip remaining objects if pixel is solid (they are obscured)
+                        // Push pixel to buffer. Skip remaining objects if pixel is solid because
+                        // all objects below are hidden.
                         if (pixelStack->push(node->object->_rc, node->object->_ra)) {
                             node = node->next();
                             while (node) {
@@ -196,13 +200,13 @@ namespace craft {
                     node = node->next();
                 }
 
-                // Draw the pixel stack
-                display->_drawSolid(x, pixelStack->flatten(this->_backgroundColor));
-
                 // Debug the render bounds
                 if (debug && ((y == renderBounds->y) || (y == renderBounds->y2) || (x == renderBounds->x) || (x == renderBounds->x2))) {
-                    display->_draw(x, this->debugColor, 0.5f);
+                    pixelStack->push(this->debugColor, 0.5f);
                 }
+
+                // Draw the pixel stack
+                display->_draw(x, pixelStack->flatten(this->_backgroundColor));
             }
             display->_lineFlush();
         }
@@ -214,6 +218,10 @@ namespace craft {
         _recycleList(_displayList);
         _displayList = 0;
         _dirty = false;
+
+        #if CRAFTMICRO_BENCHMARK
+        Serial.printf("Stage render time: %d\n", micros() - start);
+        #endif
     }
 
     void Stage::_beginRender(DisplayObject* object) {

@@ -1,6 +1,13 @@
 # Craft Micro SDK change log
 
-## v.0.3.0
+## v0.4.0 (WIP)
+
+- Performance improvements (39520)
+  - Implemented pixel stack in render pipeline
+  - Improvements to pixel draw routine
+- Adding missing `skipPixel` method to `Sprite`
+
+## v0.3.0
 
 Craft Micro SDK now supports a user-supplied framebuffer. This can be used with libraries like [GFX Library for Arduino](https://github.com/moononournation/Arduino_GFX) to drive ESP32 displays without graphics RAM, such as the ST7701S. [See an example of this in action](https://github.com/craftmicro/craftmicro-examples/tree/main/ZX2D10GE01R-V4848-PIO).
 

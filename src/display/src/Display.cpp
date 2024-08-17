@@ -18,21 +18,6 @@ namespace craft {
         }
     }
 
-    void blendPixel565(int x, int _y, uint32_t c, float_t a, int pixelScale, bool hasFramebuffer, void* buffer, int width) {
-        uint16_t color = to565(c);
-        uint16_t* bf = (uint16_t*)buffer;
-        x *= pixelScale;
-        int y = hasFramebuffer ? _y : 0;
-        int index = y * width + x;
-        color = blend565a8(color, bf[index], a * 255);
-        for (int py = 0; py < pixelScale; py++) {
-            for (int px = 0; px < pixelScale; px++) {
-                bf[index + px] = color;
-            }
-            index += width;
-        }
-    }
-
     void drawPixel888(int x, int _y, uint32_t color, int pixelScale, bool hasFramebuffer, void* buffer, int width) {
         uint8_t* bf = (uint8_t*)buffer;
         uint8_t r = red(color);
@@ -41,26 +26,6 @@ namespace craft {
         x *= pixelScale;
         int y = hasFramebuffer ? _y : 0;
         int index = (y * width + x) * 3;
-        for (int py = 0; py < pixelScale; py++) {
-            for (int px = 0; px < pixelScale; px++) {
-                bf[index + px + 0] = r;
-                bf[index + px + 1] = g;
-                bf[index + px + 2] = b;
-            }
-            index += width * 3;
-        }
-    }
-
-    void blendPixel888(int x, int _y, uint32_t color, float_t a, int pixelScale, bool hasFramebuffer, void* buffer, int width) {
-        uint8_t* bf = (uint8_t*)buffer;
-        x *= pixelScale;
-        int y = hasFramebuffer ? _y : 0;
-        int index = (y * width + x) * 3;
-        uint32_t bg = (bf[index + 0] << 16) | (bf[index + 1] << 8) | bf[index + 2];
-        color = blend8888(color, bg, a * 255);
-        uint8_t r = red(color);
-        uint8_t g = green(color);
-        uint8_t b = blue(color);
         for (int py = 0; py < pixelScale; py++) {
             for (int px = 0; px < pixelScale; px++) {
                 bf[index + px + 0] = r;
@@ -89,15 +54,13 @@ namespace craft {
         _rect.setSize((int)(width / pixelScale), (int)(height / pixelScale));
         _hasFramebuffer = framebuffer != nullptr;
         if (pixelFormat == PixelFormat::RGB565) {
-            drawPixel = drawPixel565;
-            blendPixel = blendPixel565;
+            _drawFunc = drawPixel565;
             if (!_hasFramebuffer) {
                 framebuffer = new uint16_t[width * pixelScale];
             }
         }
         else if (pixelFormat == PixelFormat::RGB888) {
-            drawPixel = drawPixel888;
-            blendPixel = blendPixel888;
+            _drawFunc = drawPixel888;
             if (!_hasFramebuffer) {
                 framebuffer = new uint8_t[width * pixelScale * 3];
             }
@@ -139,20 +102,8 @@ namespace craft {
         }
     }
 
-    /**
-     * Draw a pixel to the display
-     **/
-    void Display::_draw(int x, uint32_t color, float_t a) {
-        if (a == 1.0f) {
-            drawPixel(x, _y, color, pixelScale, _hasFramebuffer, framebuffer, width);
-        }
-        else if (a > 0.0f) {
-            blendPixel(x, _y, color, a, pixelScale, _hasFramebuffer, framebuffer, width);
-        }
-    }
-
-    void Display::_drawSolid(int x, uint32_t color) {
-        drawPixel(x, _y, color, pixelScale, _hasFramebuffer, framebuffer, width);
+    void Display::_draw(int x, color8888 color) {
+        _drawFunc(x, _y, color, pixelScale, _hasFramebuffer, framebuffer, width);
     }
 
 } // namespace craft

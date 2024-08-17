@@ -115,10 +115,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_linear_gradient.html">LinearGradient</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_line_buffer.html">LineBuffer</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_linked_list.html">LinkedList</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_listener.html">Listener</a></td></tr>
@@ -147,7 +143,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_panel_style.html">PanelStyle</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_pixel.html">Pixel</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_pixel_stack.html">PixelStack</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_ply_sprite.html">PlySprite</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,6 +196,9 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a2c9327a8993924562e501b87a47321bf"><td class="memItemLeft" align="right" valign="top">typedef float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a></td></tr>
 <tr class="separator:a2c9327a8993924562e501b87a47321bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ca0ed60b2abe69d6dc61f5076435140"><td class="memItemLeft" align="right" valign="top"><a id="a7ca0ed60b2abe69d6dc61f5076435140" name="a7ca0ed60b2abe69d6dc61f5076435140"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>drawFunc</b>) (int x, int y, uint32_t color, int pixelScale, bool hasFramebuffer, void *buffer, int width)</td></tr>
+<tr class="separator:a7ca0ed60b2abe69d6dc61f5076435140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa28b2addf7d4c1c425b58c78f7e6b6f"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecraft.html#afa28b2addf7d4c1c425b58c78f7e6b6f">displayObjectCompareFunc</a>) (<a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *, <a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *)</td></tr>
 <tr class="separator:afa28b2addf7d4c1c425b58c78f7e6b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41d7066c3cd652b3f044af73ca112df8"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcraft_1_1_bitmap_s.html">craft::BitmapS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecraft.html#a41d7066c3cd652b3f044af73ca112df8">BitmapData</a></td></tr>
@@ -278,11 +277,6 @@ Enumerations</h2></td></tr>
 <tr class="memitem:a171b19903f4667ff426a0594a74d845a"><td class="memItemLeft" align="right" valign="top"><a id="a171b19903f4667ff426a0594a74d845a" name="a171b19903f4667ff426a0594a74d845a"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>LightType</b> { <b>Directional</b>
  }</td></tr>
 <tr class="separator:a171b19903f4667ff426a0594a74d845a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34351d7ee96576a55ab2132646fa3148"><td class="memItemLeft" align="right" valign="top"><a id="a34351d7ee96576a55ab2132646fa3148" name="a34351d7ee96576a55ab2132646fa3148"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecraft.html#a34351d7ee96576a55ab2132646fa3148">LineBufferHeight</a> { <b>fullFramebuffer</b> = 0
-, <b>singleLine</b> = 1
- }</td></tr>
-<tr class="memdesc:a34351d7ee96576a55ab2132646fa3148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Two most common line buffer heights. <br /></td></tr>
-<tr class="separator:a34351d7ee96576a55ab2132646fa3148"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a349a76d5c2b0e174b065b8d5152d9e26"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecraft.html#a349a76d5c2b0e174b065b8d5152d9e26">Event</a> { <br />
 &#160;&#160;<b>input_next</b> = 1
 , <b>input_previous</b> = 2
@@ -432,6 +426,12 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a156442b985e3673b0f2ef0414ee89a38"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>swap</b> (T &amp;a, T &amp;b)</td></tr>
 <tr class="memdesc:a156442b985e3673b0f2ef0414ee89a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap two values. <br /></td></tr>
 <tr class="separator:a156442b985e3673b0f2ef0414ee89a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82c48fe76542a8f3af3e49afe7aa5b81"><td class="memItemLeft" align="right" valign="top"><a id="a82c48fe76542a8f3af3e49afe7aa5b81" name="a82c48fe76542a8f3af3e49afe7aa5b81"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>drawPixel565</b> (int x, int _y, uint32_t c, int pixelScale, bool hasFramebuffer, void *buffer, int width)</td></tr>
+<tr class="separator:a82c48fe76542a8f3af3e49afe7aa5b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f6c8b06afdf8186196f40560e465865"><td class="memItemLeft" align="right" valign="top"><a id="a1f6c8b06afdf8186196f40560e465865" name="a1f6c8b06afdf8186196f40560e465865"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>drawPixel888</b> (int x, int _y, uint32_t color, int pixelScale, bool hasFramebuffer, void *buffer, int width)</td></tr>
+<tr class="separator:a1f6c8b06afdf8186196f40560e465865"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d50019c252a4dd5b45b22666377bf9d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecraft.html#a8d50019c252a4dd5b45b22666377bf9d">compareDisplayObjectByPosition</a> (<a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *a, <a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *b)</td></tr>
 <tr class="separator:a8d50019c252a4dd5b45b22666377bf9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac59fe58d62faf732bb530c4d95c465a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecraft.html#ac59fe58d62faf732bb530c4d95c465a4">compareDisplayObjectByDepth</a> (<a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *a, <a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *b)</td></tr>
@@ -1213,7 +1213,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>get2asARGB</b> (uint8
   </tr>
 </table>
 </div><div class="memdoc">
-<p ><a class="el" href="classcraft_1_1_pixel.html">Pixel</a> formats </p>
+<p >Pixel formats </p>
 
 </div>
 </div>

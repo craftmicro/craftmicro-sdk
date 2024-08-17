@@ -52,12 +52,8 @@ $(function() {
 <li>_alphaMX&#160;:&#160;<a class="el" href="classcraft_1_1_font.html#a7238fde2ac6988ab7d106475bc8ee5c3">craft::Font</a></li>
 <li>_animate&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#a0448eefcbe8bf865596228637ad6890a">craft::DisplayObject</a></li>
 <li>_backgroundColor&#160;:&#160;<a class="el" href="classcraft_1_1_stage.html#a3ae222acb25b32fbb0f7c7472af866c4">craft::Stage</a></li>
-<li>_backIndex&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#a4588dcbaf98088ba3acac5c1d3e28c73">craft::LineBuffer</a></li>
 <li>_bg&#160;:&#160;<a class="el" href="classcraft_1_1_window.html#aa4c1b60a8191f013319a865da2dea896">craft::Window</a></li>
 <li>_bpp&#160;:&#160;<a class="el" href="classcraft_1_1_font.html#a5bcea4e1b72b1b76b2d83c2b5370bfe2">craft::Font</a></li>
-<li>_bufferHeight&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#a63921da4530df9f9e156535389c246a0">craft::LineBuffer</a></li>
-<li>_bufferWidth&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#afac9f8422caab0d0e7b1e375dbad0a01">craft::LineBuffer</a></li>
-<li>_data&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#ac4f999b8ad3c6418ec35ebe530c1a3c0">craft::LineBuffer</a></li>
 <li>_dataOffset&#160;:&#160;<a class="el" href="classcraft_1_1_sprite.html#a986dd16d6c560d1f12526c20339d6f76">craft::Sprite</a></li>
 <li>_dataStep&#160;:&#160;<a class="el" href="classcraft_1_1_sprite.html#a989573eb21d596ffd4f282e2b0a16fe4">craft::Sprite</a></li>
 <li>_deltaOffset&#160;:&#160;<a class="el" href="classcraft_1_1_font.html#a2b94c7ae46ddd6a9d03ec056c9891590">craft::Font</a></li>
@@ -65,14 +61,14 @@ $(function() {
 <li>_dirtyBounds&#160;:&#160;<a class="el" href="classcraft_1_1_stage.html#ad26da6b5459762df89e4fc17f4cadb30">craft::Stage</a></li>
 <li>_displayList&#160;:&#160;<a class="el" href="classcraft_1_1_stage.html#a6bf15acfffa56b1d70893064f6714b7a">craft::Stage</a></li>
 <li>_displayListDepth&#160;:&#160;<a class="el" href="classcraft_1_1_stage.html#a9a505b8308fb2cacc77a275df5a3ad10">craft::Stage</a></li>
+<li>_drawFunc&#160;:&#160;<a class="el" href="classcraft_1_1_display.html#ae958558fc57cbffeb7040f514de747d8">craft::Display</a></li>
 <li>_font&#160;:&#160;<a class="el" href="classcraft_1_1_font.html#a189759920aed2083fc4e457fb4e8ee07">craft::Font</a></li>
-<li>_frontIndex&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#afad9e3c19abbf5fd1fd6eeb8a22ebc66">craft::LineBuffer</a></li>
 <li>_getPixelAs8888&#160;:&#160;<a class="el" href="classcraft_1_1_sprite.html#a4acfda31fc4660abba03aac46c9d5db1">craft::Sprite</a></li>
+<li>_hasFramebuffer&#160;:&#160;<a class="el" href="classcraft_1_1_display.html#a99e4b00aaaeac67da4a549d6c8959858">craft::Display</a></li>
 <li>_hasMask&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#a585e4ddd6882bf8d87aa0a9afc8d4b2a">craft::DisplayObject</a></li>
 <li>_icon&#160;:&#160;<a class="el" href="classcraft_1_1_widget.html#a5475a21b95afa06f8010e6eab8552724">craft::Widget</a></li>
 <li>_items&#160;:&#160;<a class="el" href="classcraft_1_1_menu.html#aab2b9b621993c262ddf7291895688c55">craft::Menu</a></li>
 <li>_label&#160;:&#160;<a class="el" href="classcraft_1_1_widget.html#ae9b5d4f145dffd2efa4367e45e7be974">craft::Widget</a></li>
-<li>_lineBuffer&#160;:&#160;<a class="el" href="classcraft_1_1_stage.html#a55ae1c640f64fe397be4a54f7e7b75a5">craft::Stage</a></li>
 <li>_localBounds&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#ab8667c4b5dbe5c84d894d8213e0f07ef">craft::DisplayObject</a></li>
 <li>_mask&#160;:&#160;<a class="el" href="classcraft_1_1_font.html#a5acd6e745266a371191d721107c723b2">craft::Font</a></li>
 <li>_messenger&#160;:&#160;<a class="el" href="classcraft_1_1_input.html#a41e438ded6d829d7441254285917b8f7">craft::Input</a></li>
@@ -90,10 +86,12 @@ $(function() {
 <li>_prev&#160;:&#160;<a class="el" href="classcraft_1_1_linked_list.html#ac094ad9c323496f74eb944136e7d8f24">craft::LinkedList&lt; T &gt;</a></li>
 <li>_ra&#160;:&#160;<a class="el" href="classcraft_1_1_i_drawable.html#afd5eea134e8ab81a8617e6e5346e9c60">craft::IDrawable</a></li>
 <li>_rc&#160;:&#160;<a class="el" href="classcraft_1_1_i_drawable.html#a0242e6eabe5f1b7d8bc48a8c9392ed7a">craft::IDrawable</a></li>
+<li>_rect&#160;:&#160;<a class="el" href="classcraft_1_1_display.html#abbe821e088982c2ca9a916ba30864de2">craft::Display</a></li>
 <li>_renderDeltaMicrosMax&#160;:&#160;<a class="el" href="classcraft_1_1_app.html#a861613a0422ba85ccf6532126bdc9481">craft::App</a></li>
 <li>_renderList&#160;:&#160;<a class="el" href="classcraft_1_1_stage.html#a08d0816e90d9056b5c7f5a57c91eb240">craft::Stage</a></li>
 <li>_reverse&#160;:&#160;<a class="el" href="classcraft_1_1_gradient.html#afbaaa78bb2c69625d4d37885f7b910e0">craft::Gradient</a></li>
 <li>_rotation&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#abb6192190e5f2adfcde0eb3d8be21ad4">craft::DisplayObject</a></li>
+<li>_scaledRenderBounds&#160;:&#160;<a class="el" href="classcraft_1_1_stage.html#afbd3ef6a40046cbdf36e18486c3450f0">craft::Stage</a></li>
 <li>_spaceWidth&#160;:&#160;<a class="el" href="classcraft_1_1_font.html#ae06cf2092e6add8d0a27392855e8dbed">craft::Font</a></li>
 <li>_stops&#160;:&#160;<a class="el" href="classcraft_1_1_gradient.html#ac387f61c2201ed7699f0bfe6c2603c51">craft::Gradient</a></li>
 <li>_style&#160;:&#160;<a class="el" href="classcraft_1_1_widget.html#a96498a5f639f94b67e3dca100b8af11a">craft::Widget</a></li>
@@ -102,9 +100,9 @@ $(function() {
 <li>_title&#160;:&#160;<a class="el" href="classcraft_1_1_widget.html#a40c14efa932dcdb18201c59ed459f778">craft::Widget</a></li>
 <li>_transform&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#ab924b34462b450accf83d535a2419fcd">craft::DisplayObject</a></li>
 <li>_visible&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#aeecf14fbdf699cda44d75bfe9edc6735">craft::DisplayObject</a></li>
+<li>_w&#160;:&#160;<a class="el" href="classcraft_1_1_display.html#aa7e2531061e5cbb9abb51ab5fe49e677">craft::Display</a></li>
 <li>_x&#160;:&#160;<a class="el" href="classcraft_1_1_display.html#a4ae5692d871fa7523a72f895e563fe30">craft::Display</a></li>
-<li>_y&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#a2ba945b23e35fa147a0bb8ed25f7cf00">craft::LineBuffer</a></li>
-<li>_yOffset&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#ab1a947ad2ff35bff48594ffa23c9a4f3">craft::LineBuffer</a></li>
+<li>_y&#160;:&#160;<a class="el" href="classcraft_1_1_display.html#ab7b48b1ef3dc8b0acd222d7320711e90">craft::Display</a></li>
 </ul>
 
 
@@ -120,7 +118,6 @@ $(function() {
 <li>blendMode&#160;:&#160;<a class="el" href="classcraft_1_1_sprite.html#a383197033faa13bcccac72de04384fc5">craft::Sprite</a></li>
 <li>borders&#160;:&#160;<a class="el" href="classcraft_1_1_box.html#a5485400b125662c11e613359ab50bb84">craft::Box</a></li>
 <li>bounds&#160;:&#160;<a class="el" href="classcraft_1_1_glyph_info.html#a0237e37ec4942af64adef1b9c3ad7037">craft::GlyphInfo</a></li>
-<li>buffer&#160;:&#160;<a class="el" href="classcraft_1_1_app.html#a30b02e7f4cd8b9dac7ad164e50d4017d">craft::App</a></li>
 </ul>
 
 
@@ -142,13 +139,14 @@ $(function() {
 <li>debugColor&#160;:&#160;<a class="el" href="classcraft_1_1_stage.html#a9ba3608907905bdc494c6008c0e82426">craft::Stage</a></li>
 <li>depth&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#a946b3d0485c5f41c975aa24394291c01">craft::DisplayObject</a></li>
 <li>direction&#160;:&#160;<a class="el" href="classcraft_1_1_light.html#ad00946cc5ce75d6753d7385e3f671698">craft::Light</a></li>
-<li>display&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#a2bcd376a6a382131a5b946eb9c5c5971">craft::LineBuffer</a></li>
+<li>display&#160;:&#160;<a class="el" href="classcraft_1_1_app.html#a18b6e857003bddde0e8d15b75e118300">craft::App</a></li>
 </ul>
 
 
 <h3><a id="index_f" name="index_f"></a>- f -</h3><ul>
 <li>filters&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#acbf44905cd6c094b41b6ca948c134ff7">craft::DisplayObject</a></li>
 <li>font&#160;:&#160;<a class="el" href="classcraft_1_1_style.html#ac0bf097a4f7ff8da993402d3bc132749">craft::Style</a></li>
+<li>framebuffer&#160;:&#160;<a class="el" href="classcraft_1_1_display.html#ac438cdbe247bc7ab583e4b287a3e4795">craft::Display</a></li>
 </ul>
 
 
@@ -174,7 +172,6 @@ $(function() {
 
 <h3><a id="index_l" name="index_l"></a>- l -</h3><ul>
 <li>light&#160;:&#160;<a class="el" href="classcraft_1_1_bump_filter.html#a7be326419285dba52f1f0811f0bc217e">craft::BumpFilter</a></li>
-<li>lineBufferHeight&#160;:&#160;<a class="el" href="classcraft_1_1_display.html#aeef56a811b5b5161d082e8c8eb078052">craft::Display</a></li>
 <li>lineRepeat&#160;:&#160;<a class="el" href="classcraft_1_1_glyph_info.html#a1827db1c41f070a41866dc3ba85124d6">craft::GlyphInfo</a></li>
 </ul>
 
@@ -183,7 +180,6 @@ $(function() {
 <li>m&#160;:&#160;<a class="el" href="classcraft_1_1_vector2_f.html#a8fec7fad0a32f43fd52d197c9be653a2">craft::Vector2F</a></li>
 <li>map&#160;:&#160;<a class="el" href="classcraft_1_1_bump_filter.html#a571bb1d6d1d1353a2b0580e1ac060abf">craft::BumpFilter</a></li>
 <li>mask&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#a8b0c864f95feb6ea962b60be4ed1ef62">craft::DisplayObject</a></li>
-<li>maxRegion&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#a28ddebb09b8ec407ad179c6b89ffda4d">craft::LineBuffer</a></li>
 <li>menu&#160;:&#160;<a class="el" href="classcraft_1_1_window.html#afe9ef305653d6ec1494888fb6af8f39f">craft::Window</a></li>
 <li>messenger&#160;:&#160;<a class="el" href="classcraft_1_1_app.html#a9726ac2965251749ef438fba393da38a">craft::App</a>, <a class="el" href="classcraft_1_1_display_object.html#a8b2ead4b5b7c741232c6d0f9ebd13bf4">craft::DisplayObject</a></li>
 </ul>
@@ -209,14 +205,12 @@ $(function() {
 <h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
 <li>ra&#160;:&#160;<a class="el" href="classcraft_1_1_gradient.html#a74b25dda6abd42b84e72ab7e1975077f">craft::Gradient</a></li>
 <li>rc&#160;:&#160;<a class="el" href="classcraft_1_1_gradient.html#ab56137e8ab182292a82eb5523cc6152c">craft::Gradient</a></li>
-<li>region&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#abbbd294ae90f2ede21e2bb004b544e92">craft::LineBuffer</a></li>
 <li>renderBounds&#160;:&#160;<a class="el" href="classcraft_1_1_display_object.html#a9db726ee365dfcb0a2835919b4bb24ec">craft::DisplayObject</a></li>
 <li>renderStarted&#160;:&#160;<a class="el" href="classcraft_1_1_glyph_info.html#ae56b0c1b1a551678fcf40f3a16fe4d45">craft::GlyphInfo</a></li>
 </ul>
 
 
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
-<li>scaledRegion&#160;:&#160;<a class="el" href="classcraft_1_1_line_buffer.html#a5ad5b384e6f1e7174bf63f9fe3257fe0">craft::LineBuffer</a></li>
 <li>screenColor&#160;:&#160;<a class="el" href="classcraft_1_1_style.html#a6f214ed79b6bd129c7f85cacbb35636f">craft::Style</a></li>
 <li>size&#160;:&#160;<a class="el" href="classcraft_1_1_border.html#a7422c7fd77f8040445c03ec377a2ba7c">craft::Border</a></li>
 <li>smoothing&#160;:&#160;<a class="el" href="classcraft_1_1_sprite.html#a55675c74ed554dcf338cf8d03e03d4ec">craft::Sprite</a></li>
