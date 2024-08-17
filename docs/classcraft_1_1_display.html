@@ -60,19 +60,22 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8d2eb6d0a1af702eb8abdd81e4dcba0f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a8d2eb6d0a1af702eb8abdd81e4dcba0f">beginDrawing</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> &amp;rect)</td></tr>
-<tr class="memdesc:a8d2eb6d0a1af702eb8abdd81e4dcba0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to begin drawing a new frame.  <a href="classcraft_1_1_display.html#a8d2eb6d0a1af702eb8abdd81e4dcba0f">More...</a><br /></td></tr>
-<tr class="separator:a8d2eb6d0a1af702eb8abdd81e4dcba0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af42a37be49fb332a1a44b3bb21da0032"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af42a37be49fb332a1a44b3bb21da0032">drawPixel565</a> (<a class="el" href="namespacecraft.html#af85ee23e342b19b7641843cf0056471d">color565</a> color)</td></tr>
-<tr class="memdesc:af42a37be49fb332a1a44b3bb21da0032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to draw a single 16bit RGB565 pixel to the display.  <a href="classcraft_1_1_display.html#af42a37be49fb332a1a44b3bb21da0032">More...</a><br /></td></tr>
-<tr class="separator:af42a37be49fb332a1a44b3bb21da0032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a01f280ffd785f803d4d591c26c2d5d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a6a01f280ffd785f803d4d591c26c2d5d">drawPixel888</a> (<a class="el" href="namespacecraft.html#a6aa894cf17dbb4f37159c79d13b2db53">color888</a> color)</td></tr>
-<tr class="memdesc:a6a01f280ffd785f803d4d591c26c2d5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to draw a single 24bit RGB888 pixel to the display.  <a href="classcraft_1_1_display.html#a6a01f280ffd785f803d4d591c26c2d5d">More...</a><br /></td></tr>
-<tr class="separator:a6a01f280ffd785f803d4d591c26c2d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6d5c7c47df476f772a0f48b531435db"><td class="memItemLeft" align="right" valign="top"><a id="ad6d5c7c47df476f772a0f48b531435db" name="ad6d5c7c47df476f772a0f48b531435db"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>endDrawing</b> ()</td></tr>
-<tr class="memdesc:ad6d5c7c47df476f772a0f48b531435db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called to end drawing the current frame. <br /></td></tr>
-<tr class="separator:ad6d5c7c47df476f772a0f48b531435db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b0292ec09fbcc617c9185669446f019"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a5b0292ec09fbcc617c9185669446f019">~Display</a> ()</td></tr>
+<tr class="memdesc:a5b0292ec09fbcc617c9185669446f019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classcraft_1_1_display.html">Display</a> object.  <a href="classcraft_1_1_display.html#a5b0292ec09fbcc617c9185669446f019">More...</a><br /></td></tr>
+<tr class="separator:a5b0292ec09fbcc617c9185669446f019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02c0849eea0690c8d0b65c9c7e3c571d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a02c0849eea0690c8d0b65c9c7e3c571d">drawBegin</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *area)</td></tr>
+<tr class="memdesc:a02c0849eea0690c8d0b65c9c7e3c571d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called at the start of a frame when drawing to the display.  <a href="classcraft_1_1_display.html#a02c0849eea0690c8d0b65c9c7e3c571d">More...</a><br /></td></tr>
+<tr class="separator:a02c0849eea0690c8d0b65c9c7e3c571d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab2978c5037be0448d24f27fc1e73270"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#aab2978c5037be0448d24f27fc1e73270">draw565</a> (uint16_t color)</td></tr>
+<tr class="memdesc:aab2978c5037be0448d24f27fc1e73270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a pixel to the display. Should be implemented if framebuffer is not provided and color mode is RGB565.  <a href="classcraft_1_1_display.html#aab2978c5037be0448d24f27fc1e73270">More...</a><br /></td></tr>
+<tr class="separator:aab2978c5037be0448d24f27fc1e73270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa576486f1b89c0523ac35073455f5b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a5aa576486f1b89c0523ac35073455f5b">draw888</a> (uint32_t color)</td></tr>
+<tr class="memdesc:a5aa576486f1b89c0523ac35073455f5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a pixel to the display. Should be implemented if framebuffer is not provided and color mode is RGB888.  <a href="classcraft_1_1_display.html#a5aa576486f1b89c0523ac35073455f5b">More...</a><br /></td></tr>
+<tr class="separator:a5aa576486f1b89c0523ac35073455f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c7871eea0ed4e90b0c8148c81f7e10c"><td class="memItemLeft" align="right" valign="top"><a id="a2c7871eea0ed4e90b0c8148c81f7e10c" name="a2c7871eea0ed4e90b0c8148c81f7e10c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>drawEnd</b> ()</td></tr>
+<tr class="memdesc:a2c7871eea0ed4e90b0c8148c81f7e10c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called at the end of a frame when drawing to the display. <br /></td></tr>
+<tr class="separator:a2c7871eea0ed4e90b0c8148c81f7e10c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -92,46 +95,100 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = 0</td></t
 int&#160;</td><td class="memItemRight" valign="bottom"><b>pixelScale</b> = 1</td></tr>
 <tr class="memdesc:a230f2ea4e00ad73d8f22377603381276"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount to scale pixels. <br /></td></tr>
 <tr class="separator:a230f2ea4e00ad73d8f22377603381276"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeef56a811b5b5161d082e8c8eb078052"><td class="memItemLeft" align="right" valign="top"><a id="aeef56a811b5b5161d082e8c8eb078052" name="aeef56a811b5b5161d082e8c8eb078052"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>lineBufferHeight</b> = 1</td></tr>
-<tr class="memdesc:aeef56a811b5b5161d082e8c8eb078052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the line buffer in lines (0 for full frame buffer) <br /></td></tr>
-<tr class="separator:aeef56a811b5b5161d082e8c8eb078052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac438cdbe247bc7ab583e4b287a3e4795"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#ac438cdbe247bc7ab583e4b287a3e4795">framebuffer</a> = nullptr</td></tr>
+<tr class="memdesc:ac438cdbe247bc7ab583e4b287a3e4795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the framebuffer.  <a href="classcraft_1_1_display.html#ac438cdbe247bc7ab583e4b287a3e4795">More...</a><br /></td></tr>
+<tr class="separator:ac438cdbe247bc7ab583e4b287a3e4795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a9d08109a79e21201d97265f8a14e0fda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a9d08109a79e21201d97265f8a14e0fda">draw</a> (<a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;buffer, int bufferWidth)</td></tr>
-<tr class="separator:a9d08109a79e21201d97265f8a14e0fda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa11c6b58c458016af72cb9149686016e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#aa11c6b58c458016af72cb9149686016e">draw565</a> (<a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;buffer, int bufferWidth)</td></tr>
-<tr class="separator:aa11c6b58c458016af72cb9149686016e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af263540f912e57c6e8e3badc1d5f0162"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#af263540f912e57c6e8e3badc1d5f0162">draw888</a> (<a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;buffer, int bufferWidth)</td></tr>
-<tr class="separator:af263540f912e57c6e8e3badc1d5f0162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91e3f6166a79ff380665ed031349bb78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a91e3f6166a79ff380665ed031349bb78">_mount</a> ()</td></tr>
+<tr class="memdesc:a91e3f6166a79ff380665ed031349bb78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called automatically once to initialize the display when mounted.  <a href="classcraft_1_1_display.html#a91e3f6166a79ff380665ed031349bb78">More...</a><br /></td></tr>
+<tr class="separator:a91e3f6166a79ff380665ed031349bb78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f1b4190be95e21cdd747ef8841ce452"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display.html#a3f1b4190be95e21cdd747ef8841ce452">_drawBegin</a> (<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *area)</td></tr>
+<tr class="memdesc:a3f1b4190be95e21cdd747ef8841ce452"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when rendering a frame is about to start.  <a href="classcraft_1_1_display.html#a3f1b4190be95e21cdd747ef8841ce452">More...</a><br /></td></tr>
+<tr class="separator:a3f1b4190be95e21cdd747ef8841ce452"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c378140944ddc5d69f5893851c1fafd"><td class="memItemLeft" align="right" valign="top"><a id="a0c378140944ddc5d69f5893851c1fafd" name="a0c378140944ddc5d69f5893851c1fafd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_lineBegin</b> (int y)</td></tr>
+<tr class="memdesc:a0c378140944ddc5d69f5893851c1fafd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when rendering a line is about to start. <br /></td></tr>
+<tr class="separator:a0c378140944ddc5d69f5893851c1fafd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ca4972ebcc09ba63e7ccf59ea901914"><td class="memItemLeft" align="right" valign="top"><a id="a3ca4972ebcc09ba63e7ccf59ea901914" name="a3ca4972ebcc09ba63e7ccf59ea901914"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_lineFlush</b> ()</td></tr>
+<tr class="memdesc:a3ca4972ebcc09ba63e7ccf59ea901914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when rendering a line has ended to flush the line to the display. <br /></td></tr>
+<tr class="separator:a3ca4972ebcc09ba63e7ccf59ea901914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41d317c8ae70825788daa875e2335c41"><td class="memItemLeft" align="right" valign="top"><a id="a41d317c8ae70825788daa875e2335c41" name="a41d317c8ae70825788daa875e2335c41"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_draw</b> (int x, <a class="el" href="namespacecraft.html#a88de2b9cb12c7cdf2001fc1504be98aa">color8888</a> color)</td></tr>
+<tr class="memdesc:a41d317c8ae70825788daa875e2335c41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a pixel to the display. <br /></td></tr>
+<tr class="separator:a41d317c8ae70825788daa875e2335c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:abbe821e088982c2ca9a916ba30864de2"><td class="memItemLeft" align="right" valign="top"><a id="abbe821e088982c2ca9a916ba30864de2" name="abbe821e088982c2ca9a916ba30864de2"></a>
+<a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_rect</b></td></tr>
+<tr class="memdesc:abbe821e088982c2ca9a916ba30864de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The drawable size in scaled pixels. <br /></td></tr>
+<tr class="separator:abbe821e088982c2ca9a916ba30864de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e4b00aaaeac67da4a549d6c8959858"><td class="memItemLeft" align="right" valign="top"><a id="a99e4b00aaaeac67da4a549d6c8959858" name="a99e4b00aaaeac67da4a549d6c8959858"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>_hasFramebuffer</b> = false</td></tr>
+<tr class="memdesc:a99e4b00aaaeac67da4a549d6c8959858"><td class="mdescLeft">&#160;</td><td class="mdescRight">Has a user-provided framebuffer. <br /></td></tr>
+<tr class="separator:a99e4b00aaaeac67da4a549d6c8959858"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ae5692d871fa7523a72f895e563fe30"><td class="memItemLeft" align="right" valign="top"><a id="a4ae5692d871fa7523a72f895e563fe30" name="a4ae5692d871fa7523a72f895e563fe30"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>_x</b> = 0</td></tr>
-<tr class="memdesc:a4ae5692d871fa7523a72f895e563fe30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current screen drawing position. <br /></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_x</b></td></tr>
+<tr class="memdesc:a4ae5692d871fa7523a72f895e563fe30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start x position of the line buffer. <br /></td></tr>
 <tr class="separator:a4ae5692d871fa7523a72f895e563fe30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b48b1ef3dc8b0acd222d7320711e90"><td class="memItemLeft" align="right" valign="top"><a id="ab7b48b1ef3dc8b0acd222d7320711e90" name="ab7b48b1ef3dc8b0acd222d7320711e90"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>_y</b> = 0</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_y</b></td></tr>
+<tr class="memdesc:ab7b48b1ef3dc8b0acd222d7320711e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current line. <br /></td></tr>
 <tr class="separator:ab7b48b1ef3dc8b0acd222d7320711e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e2531061e5cbb9abb51ab5fe49e677"><td class="memItemLeft" align="right" valign="top"><a id="aa7e2531061e5cbb9abb51ab5fe49e677" name="aa7e2531061e5cbb9abb51ab5fe49e677"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_w</b></td></tr>
+<tr class="memdesc:aa7e2531061e5cbb9abb51ab5fe49e677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Width of the current drawing rect. <br /></td></tr>
+<tr class="separator:aa7e2531061e5cbb9abb51ab5fe49e677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae958558fc57cbffeb7040f514de747d8"><td class="memItemLeft" align="right" valign="top"><a id="ae958558fc57cbffeb7040f514de747d8" name="ae958558fc57cbffeb7040f514de747d8"></a>
+drawFunc&#160;</td><td class="memItemRight" valign="bottom"><b>_drawFunc</b></td></tr>
+<tr class="memdesc:ae958558fc57cbffeb7040f514de747d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The draw function to use based on the pixelFormat. <br /></td></tr>
+<tr class="separator:ae958558fc57cbffeb7040f514de747d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a6f03461ff780ebcbde1a80169e78a7b0"><td class="memItemLeft" align="right" valign="top"><a id="a6f03461ff780ebcbde1a80169e78a7b0" name="a6f03461ff780ebcbde1a80169e78a7b0"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td></tr>
-<tr class="separator:a6f03461ff780ebcbde1a80169e78a7b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4097b3e04a4f8ece21f5abe1b10e6323"><td class="memItemLeft" align="right" valign="top"><a id="a4097b3e04a4f8ece21f5abe1b10e6323" name="a4097b3e04a4f8ece21f5abe1b10e6323"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>App</b></td></tr>
+<tr class="separator:a4097b3e04a4f8ece21f5abe1b10e6323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b8dcde326337225efae2cc32b1ef76d"><td class="memItemLeft" align="right" valign="top"><a id="a3b8dcde326337225efae2cc32b1ef76d" name="a3b8dcde326337225efae2cc32b1ef76d"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Stage</b></td></tr>
+<tr class="separator:a3b8dcde326337225efae2cc32b1ef76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p ><a class="el" href="classcraft_1_1_display.html">Display</a> base class</p>
-<p >To use this class, you must subclass it and implement</p><ul>
-<li><a class="el" href="classcraft_1_1_display.html#a8d2eb6d0a1af702eb8abdd81e4dcba0f" title="Called to begin drawing a new frame.">beginDrawing()</a></li>
-<li><a class="el" href="classcraft_1_1_display.html#af42a37be49fb332a1a44b3bb21da0032" title="Called to draw a single 16bit RGB565 pixel to the display.">drawPixel565()</a> or <a class="el" href="classcraft_1_1_display.html#a6a01f280ffd785f803d4d591c26c2d5d" title="Called to draw a single 24bit RGB888 pixel to the display.">drawPixel888()</a></li>
-<li><a class="el" href="classcraft_1_1_display.html#ad6d5c7c47df476f772a0f48b531435db" title="Called to end drawing the current frame.">endDrawing()</a> </li>
+<p >To use this class, you must subclass it and provide all properties:</p><ul>
+<li>pixelFormat</li>
+<li>width</li>
+<li>height</li>
+<li>pixelScale</li>
+<li>framebuffer </li>
 </ul>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8d2eb6d0a1af702eb8abdd81e4dcba0f" name="a8d2eb6d0a1af702eb8abdd81e4dcba0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d2eb6d0a1af702eb8abdd81e4dcba0f">&#9670;&nbsp;</a></span>beginDrawing()</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5b0292ec09fbcc617c9185669446f019" name="a5b0292ec09fbcc617c9185669446f019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0292ec09fbcc617c9185669446f019">&#9670;&nbsp;</a></span>~Display()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">craft::Display::~Display </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy the <a class="el" href="classcraft_1_1_display.html">Display</a> object. </p>
+<p >If a framebuffer is supplied, the user manages it's lifecycle. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3f1b4190be95e21cdd747ef8841ce452" name="a3f1b4190be95e21cdd747ef8841ce452"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f1b4190be95e21cdd747ef8841ce452">&#9670;&nbsp;</a></span>_drawBegin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,33 +197,32 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void craft::Display::beginDrawing </td>
+          <td class="memname">void craft::Display::_drawBegin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> &amp;&#160;</td>
-          <td class="paramname"><em>rect</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *&#160;</td>
+          <td class="paramname"><em>area</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Called to begin drawing a new frame. </p>
-<p >This will be followed by a series of drawPixel() calls, and finally <a class="el" href="classcraft_1_1_display.html#ad6d5c7c47df476f772a0f48b531435db" title="Called to end drawing the current frame.">endDrawing()</a>.</p>
+<p>Called when rendering a frame is about to start. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rect</td><td>The area of the display that will be drawn </td></tr>
+    <tr><td class="paramname">area</td><td>The area of the display to update </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a9d08109a79e21201d97265f8a14e0fda" name="a9d08109a79e21201d97265f8a14e0fda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d08109a79e21201d97265f8a14e0fda">&#9670;&nbsp;</a></span>draw()</h2>
+<a id="a91e3f6166a79ff380665ed031349bb78" name="a91e3f6166a79ff380665ed031349bb78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91e3f6166a79ff380665ed031349bb78">&#9670;&nbsp;</a></span>_mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,21 +231,10 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void craft::Display::draw </td>
+          <td class="memname">void craft::Display::_mount </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bufferWidth</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -198,49 +243,14 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td><
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Update the linebuffer to the display </p>
+
+<p>Called automatically once to initialize the display when mounted. </p>
+<p >Initialise after user-values have been defined </p>
 
 </div>
 </div>
-<a id="aa11c6b58c458016af72cb9149686016e" name="aa11c6b58c458016af72cb9149686016e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa11c6b58c458016af72cb9149686016e">&#9670;&nbsp;</a></span>draw565()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void craft::Display::draw565 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bufferWidth</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Update the linebuffer to the display for 16-bit pixel formats </p>
-
-</div>
-</div>
-<a id="af263540f912e57c6e8e3badc1d5f0162" name="af263540f912e57c6e8e3badc1d5f0162"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af263540f912e57c6e8e3badc1d5f0162">&#9670;&nbsp;</a></span>draw888()</h2>
+<a id="aab2978c5037be0448d24f27fc1e73270" name="aab2978c5037be0448d24f27fc1e73270"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab2978c5037be0448d24f27fc1e73270">&#9670;&nbsp;</a></span>draw565()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,46 +259,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void craft::Display::draw888 </td>
+          <td class="memname">virtual void craft::Display::draw565 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structcraft_1_1_line_buffer_data.html">LineBufferData</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>bufferWidth</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Update the linebuffer to the display </p>
-
-</div>
-</div>
-<a id="af42a37be49fb332a1a44b3bb21da0032" name="af42a37be49fb332a1a44b3bb21da0032"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af42a37be49fb332a1a44b3bb21da0032">&#9670;&nbsp;</a></span>drawPixel565()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void craft::Display::drawPixel565 </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacecraft.html#af85ee23e342b19b7641843cf0056471d">color565</a>&#160;</td>
+          <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>color</em></td><td>)</td>
           <td></td>
         </tr>
@@ -300,18 +273,18 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td><
 </table>
 </div><div class="memdoc">
 
-<p>Called to draw a single 16bit RGB565 pixel to the display. </p>
+<p>Draw a pixel to the display. Should be implemented if framebuffer is not provided and color mode is RGB565. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">color</td><td>The color of the pixel to draw </td></tr>
+    <tr><td class="paramname">color</td><td>The color to draw </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a6a01f280ffd785f803d4d591c26c2d5d" name="a6a01f280ffd785f803d4d591c26c2d5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a01f280ffd785f803d4d591c26c2d5d">&#9670;&nbsp;</a></span>drawPixel888()</h2>
+<a id="a5aa576486f1b89c0523ac35073455f5b" name="a5aa576486f1b89c0523ac35073455f5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aa576486f1b89c0523ac35073455f5b">&#9670;&nbsp;</a></span>draw888()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,9 +293,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void craft::Display::drawPixel888 </td>
+          <td class="memname">virtual void craft::Display::draw888 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacecraft.html#a6aa894cf17dbb4f37159c79d13b2db53">color888</a>&#160;</td>
+          <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>color</em></td><td>)</td>
           <td></td>
         </tr>
@@ -334,13 +307,66 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LineBuffer</b></td><
 </table>
 </div><div class="memdoc">
 
-<p>Called to draw a single 24bit RGB888 pixel to the display. </p>
+<p>Draw a pixel to the display. Should be implemented if framebuffer is not provided and color mode is RGB888. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">color</td><td>The color of the pixel to draw </td></tr>
+    <tr><td class="paramname">color</td><td>The color to draw </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a02c0849eea0690c8d0b65c9c7e3c571d" name="a02c0849eea0690c8d0b65c9c7e3c571d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02c0849eea0690c8d0b65c9c7e3c571d">&#9670;&nbsp;</a></span>drawBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void craft::Display::drawBegin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *&#160;</td>
+          <td class="paramname"><em>area</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called at the start of a frame when drawing to the display. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">area</td><td>The area of the display that will be updated </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac438cdbe247bc7ab583e4b287a3e4795" name="ac438cdbe247bc7ab583e4b287a3e4795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac438cdbe247bc7ab583e4b287a3e4795">&#9670;&nbsp;</a></span>framebuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* craft::Display::framebuffer = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to the framebuffer. </p>
+<p >The framebuffer must be the size of the entire display, and the type must match the pixelFormat property. If pixelFormat is RGB565, the framebuffer must be an array of uint16_t[width * height] If pixelFormat is RGB888, the framebuffer must be an array of uint8_t[width * height * 3]</p>
+<p >If there is no framebuffer, implement drawBegin, drawEnd, and either drawPixel565 or drawPixel888. If a framebuffer is provided these functions do not need to be implemented. </p>
 
 </div>
 </div>

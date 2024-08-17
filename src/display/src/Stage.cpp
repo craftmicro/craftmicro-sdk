@@ -182,7 +182,8 @@ namespace craft {
                             node->object->_ra *= ma;
                         }
 
-                        // Push to buffer. Skip remaining objects if pixel is solid (they are obscured)
+                        // Push pixel to buffer. Skip remaining objects if pixel is solid because
+                        // all objects below are hidden.
                         if (pixelStack->push(node->object->_rc, node->object->_ra)) {
                             node = node->next();
                             while (node) {

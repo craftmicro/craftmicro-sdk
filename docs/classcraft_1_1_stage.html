@@ -77,8 +77,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a17af9669d44de9e897385a5b836854c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57a150b6d82cd806595bf486b2e97c11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#a57a150b6d82cd806595bf486b2e97c11">update</a> (<a class="el" href="namespacecraft.html#a2c9327a8993924562e501b87a47321bf">float_t</a> dt, boolean isRenderUpdate=false) override</td></tr>
 <tr class="separator:a57a150b6d82cd806595bf486b2e97c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e1960016e971a0bad604670ddc515ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#a6e1960016e971a0bad604670ddc515ca">render</a> (<a class="el" href="classcraft_1_1_line_buffer.html">LineBuffer</a> *buffer)</td></tr>
-<tr class="separator:a6e1960016e971a0bad604670ddc515ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601c65620ca2419ed23d901ff536f5d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#a601c65620ca2419ed23d901ff536f5d7">render</a> (<a class="el" href="classcraft_1_1_display.html">Display</a> *display)</td></tr>
+<tr class="separator:a601c65620ca2419ed23d901ff536f5d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a731262b87012e8941496743a888b3efc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#a731262b87012e8941496743a888b3efc">backgroundColor</a> (<a class="el" href="namespacecraft.html#a6aa894cf17dbb4f37159c79d13b2db53">color888</a> bgColor)</td></tr>
 <tr class="separator:a731262b87012e8941496743a888b3efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0df69c435595fc109b2deaf7f741bde5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacecraft.html#a6aa894cf17dbb4f37159c79d13b2db53">color888</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#a0df69c435595fc109b2deaf7f741bde5">backgroundColor</a> ()</td></tr>
@@ -278,9 +278,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>type</b> = 0</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aaa1f750cc6613080c95d8803913a24c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#aaa1f750cc6613080c95d8803913a24c8">_traverse</a> (<a class="el" href="classcraft_1_1_line_buffer.html">LineBuffer</a> *buffer, <a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *child, bool forceDirty, <a class="el" href="classcraft_1_1_matrix.html">Matrix</a> *t, bool isMask)</td></tr>
-<tr class="memdesc:aaa1f750cc6613080c95d8803913a24c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse through display objects and insert into display list.  <a href="classcraft_1_1_stage.html#aaa1f750cc6613080c95d8803913a24c8">More...</a><br /></td></tr>
-<tr class="separator:aaa1f750cc6613080c95d8803913a24c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af65fd576c88a3c142ed7ec8002036fe1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#af65fd576c88a3c142ed7ec8002036fe1">_traverse</a> (<a class="el" href="classcraft_1_1_display.html">Display</a> *display, <a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *child, bool forceDirty, <a class="el" href="classcraft_1_1_matrix.html">Matrix</a> *t, bool isMask)</td></tr>
+<tr class="memdesc:af65fd576c88a3c142ed7ec8002036fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse through display objects and insert into display list.  <a href="classcraft_1_1_stage.html#af65fd576c88a3c142ed7ec8002036fe1">More...</a><br /></td></tr>
+<tr class="separator:af65fd576c88a3c142ed7ec8002036fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad73dffe17c1da6940269d1560def93f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#ad73dffe17c1da6940269d1560def93f9">_recycleList</a> (<a class="el" href="classcraft_1_1_display_list.html">DisplayList</a> *list)</td></tr>
 <tr class="separator:ad73dffe17c1da6940269d1560def93f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbfbe0c5a0e99f0b9dfa897b56eb750a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#abbfbe0c5a0e99f0b9dfa897b56eb750a">_beginRender</a> (<a class="el" href="classcraft_1_1_display_object.html">DisplayObject</a> *object)</td></tr>
@@ -314,8 +314,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a6bf15acfffa56b1d70893064f6714b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d0816e90d9056b5c7f5a57c91eb240"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcraft_1_1_display_list.html">DisplayList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#a08d0816e90d9056b5c7f5a57c91eb240">_renderList</a></td></tr>
 <tr class="separator:a08d0816e90d9056b5c7f5a57c91eb240"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55ae1c640f64fe397be4a54f7e7b75a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcraft_1_1_line_buffer.html">LineBuffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#a55ae1c640f64fe397be4a54f7e7b75a5">_lineBuffer</a></td></tr>
-<tr class="separator:a55ae1c640f64fe397be4a54f7e7b75a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbd3ef6a40046cbdf36e18486c3450f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_stage.html#afbd3ef6a40046cbdf36e18486c3450f0">_scaledRenderBounds</a></td></tr>
+<tr class="separator:afbd3ef6a40046cbdf36e18486c3450f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classcraft_1_1_display_object"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classcraft_1_1_display_object')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classcraft_1_1_display_object.html">craft::DisplayObject</a></td></tr>
 <tr class="memitem:a4ec6821c3578c50da5f814ff1a7d05d6 inherit pro_attribs_classcraft_1_1_display_object"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcraft_1_1_display_object.html#a4ec6821c3578c50da5f814ff1a7d05d6">_dirty</a> = true</td></tr>
 <tr class="separator:a4ec6821c3578c50da5f814ff1a7d05d6 inherit pro_attribs_classcraft_1_1_display_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -555,8 +555,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aaa1f750cc6613080c95d8803913a24c8" name="aaa1f750cc6613080c95d8803913a24c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa1f750cc6613080c95d8803913a24c8">&#9670;&nbsp;</a></span>_traverse()</h2>
+<a id="af65fd576c88a3c142ed7ec8002036fe1" name="af65fd576c88a3c142ed7ec8002036fe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af65fd576c88a3c142ed7ec8002036fe1">&#9670;&nbsp;</a></span>_traverse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -567,8 +567,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void craft::Stage::_traverse </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classcraft_1_1_line_buffer.html">LineBuffer</a> *&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
+          <td class="paramtype"><a class="el" href="classcraft_1_1_display.html">Display</a> *&#160;</td>
+          <td class="paramname"><em>display</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -608,10 +608,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Traverse through display objects and insert into display list. </p>
-<p >Step recursively through all children. Calculate the relative depth of children, and insert into the display list. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">children</td><td>The children to add</td></tr>
-    <tr><td class="paramname">buffer</td><td>The buffer (for accessing display size) </td></tr>
+    <tr><td class="paramname">display</td><td>The display (for accessing display size) </td></tr>
     <tr><td class="paramname">child</td><td>The display object to process </td></tr>
     <tr><td class="paramname">forceDirty</td><td>True to force the child to be redrawn </td></tr>
     <tr><td class="paramname">px</td><td>The x-coordinate </td></tr>
@@ -691,8 +690,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6e1960016e971a0bad604670ddc515ca" name="a6e1960016e971a0bad604670ddc515ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e1960016e971a0bad604670ddc515ca">&#9670;&nbsp;</a></span>render()</h2>
+<a id="a601c65620ca2419ed23d901ff536f5d7" name="a601c65620ca2419ed23d901ff536f5d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a601c65620ca2419ed23d901ff536f5d7">&#9670;&nbsp;</a></span>render()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -700,8 +699,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void craft::Stage::render </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classcraft_1_1_line_buffer.html">LineBuffer</a> *&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classcraft_1_1_display.html">Display</a> *&#160;</td>
+          <td class="paramname"><em>display</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -848,29 +847,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a55ae1c640f64fe397be4a54f7e7b75a5" name="a55ae1c640f64fe397be4a54f7e7b75a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55ae1c640f64fe397be4a54f7e7b75a5">&#9670;&nbsp;</a></span>_lineBuffer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classcraft_1_1_line_buffer.html">LineBuffer</a>* craft::Stage::_lineBuffer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >The line buffer </p>
-
-</div>
-</div>
 <a id="a08d0816e90d9056b5c7f5a57c91eb240" name="a08d0816e90d9056b5c7f5a57c91eb240"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a08d0816e90d9056b5c7f5a57c91eb240">&#9670;&nbsp;</a></span>_renderList</h2>
 
@@ -891,6 +867,29 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p >Ordered list of visible display objects to be rendered on the current scan line. </p>
+
+</div>
+</div>
+<a id="afbd3ef6a40046cbdf36e18486c3450f0" name="afbd3ef6a40046cbdf36e18486c3450f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbd3ef6a40046cbdf36e18486c3450f0">&#9670;&nbsp;</a></span>_scaledRenderBounds</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcraft_1_1_clip_rect.html">ClipRect</a>* craft::Stage::_scaledRenderBounds</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Area of the display that is dirty </p>
 
 </div>
 </div>
