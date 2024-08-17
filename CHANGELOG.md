@@ -2,9 +2,10 @@
 
 ## v0.4.0 (WIP)
 
-- Performance improvements (now 40644)
-  - Implemented pixel stack to render pipeline
+- Performance improvements (39520)
+  - Implemented pixel stack in render pipeline
   - Improvements to pixel draw routine
+- Adding missing `skipPixel` method to `Sprite`
 
 ## v0.3.0
 

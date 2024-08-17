@@ -199,13 +199,13 @@ namespace craft {
                     node = node->next();
                 }
 
-                // Draw the pixel stack
-                display->_drawSolid(x, pixelStack->flatten(this->_backgroundColor));
-
                 // Debug the render bounds
                 if (debug && ((y == renderBounds->y) || (y == renderBounds->y2) || (x == renderBounds->x) || (x == renderBounds->x2))) {
-                    display->_draw(x, this->debugColor, 0.5f);
+                    pixelStack->push(this->debugColor, 0.5f);
                 }
+
+                // Draw the pixel stack
+                display->_draw(x, pixelStack->flatten(this->_backgroundColor));
             }
             display->_lineFlush();
         }
